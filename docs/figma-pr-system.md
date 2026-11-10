@@ -94,7 +94,7 @@ pictures change. `src/lib/pr/styles/sections.css` holds one block per section ty
 | Cards, three across | Rosewood's "What's on" | 4:5 pictures edge to edge with an 80 px gutter; serif title 32 px, text, an outlined button 44 px. |
 | Cards, two across | Rosewood's dining cards | 3:2 pictures inside the margins; capital titles 18 px tracked 0.2 em; a black button. |
 | Overlay (picture panel) | Rosewood's full-bleed panel | The picture across the page, a capital title 44 px, a serif line, a black bar "View gallery" at the foot. |
-| Callout | Four Seasons' boxed banner | A panel inside the margins; the text on the darkened left of the picture. A picture narrower than 900 px (the Vessyl mark on The Frequency Experience, the founder's square portrait) stands whole on the green instead of being enlarged and cut. Below 900 px the picture comes first, on the green, and the text sits under it on paper. |
+| Callout | Four Seasons' boxed banner | A panel inside the margins; the text on the darkened left of the picture. A picture narrower than 900 px (the Vessyl mark on The Frequency Experience, the founder's square portrait) stands whole on the green instead of being enlarged and cut; from 900 px the words and that picture stand side by side as one pair in the middle of the panel (owner, 2026-11-10: they stood at its two ends). Below 900 px the picture comes first, on the green, and the text sits under it on paper. |
 | Gallery | Rosewood's centre-focus carousel | Made of the page's own photographs (none added): a 3:4 slide of 450 px in the middle, neighbours cut by the edges, a thin progress line and two arrows (no counter). Every slide opens the gallery dialog. |
 | Comparison table, topics | Rosewood's capital headings and hairlines | Capital column heads, hairline rows; topics open and close as accordion rows with "+". |
 | Events | Rosewood's event rows | Hairline rows: date in capitals, title in serif, text, action. |
@@ -188,7 +188,12 @@ no text selection) with these additions.
   shows the position, the middle slide starts centred.
 - **Small pictures in callouts** (`markGraphics`). A callout picture narrower than 900 px (the Vessyl mark, the
   founder's square portrait) would be enlarged and cut if it filled the panel: it stands whole (`object-fit: contain`)
-  on the green, to the right of the text, centred on phones.
+  on the green, to the right of the text, centred on phones. Owner, 2026-11-10: the picture used to fill the whole panel,
+  drawn small at its right edge, with the words at the left edge, so the two stood far apart and off the middle. From
+  900 px the panel is now a grid of two columns — the words at most 440 px, the picture at most 420 px, a gap of
+  `clamp(48px, 5vw, 96px)` — centred as one pair (`sections.css`, "A callout with a graphic"). Four callouts carry a
+  graphic: the founder on Home, The Harmonic Hearth and The Recording Studio, and the Vessyl mark on The Frequency
+  Experience. The other nine are photographs across the panel with the words on their darkened left, as before.
 - **Header and booking**: as above.
 - **Hover.** Card titles draw an underline from the left; buttons fill with black or green; colours ease over 0.3 s.
 - **Reduced motion.** No clip plays, nothing settles, the opening does not fade, the words do not rise, carousels

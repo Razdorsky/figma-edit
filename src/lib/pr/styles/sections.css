@@ -130,6 +130,23 @@ body[data-edition="figma-pr"] .current-page {
   & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="media"] { position: absolute; inset: 0; }
   & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="media"]::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(0 0 0 / 0.66), rgb(0 0 0 / 0.32) 48%, rgb(0 0 0 / 0)); pointer-events: none; }
   & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="copy"] { position: relative; z-index: 1; max-width: 520px; padding: 64px 56px; }
+  /* A callout with a graphic (the founder's square portrait, the Vessyl mark; owner, 2026-11-10): the words and the
+     picture stand side by side as one pair in the middle of the panel, a measured gap apart, instead of at the panel's
+     two ends (the picture used to fill the whole panel, drawn small at its right edge). Phones stack them as before. */
+  @media (min-width: 900px) {
+    & > section[data-role="callout"] > [data-part="callout-panel"]:has(> [data-part="media"][data-pr-graphic]) {
+      grid-template-columns: minmax(0, 440px) minmax(0, 420px); justify-content: center; column-gap: clamp(48px, 5vw, 96px); padding: 0 56px;
+    }
+    & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="media"][data-pr-graphic] {
+      position: relative; inset: auto; grid-column: 2; grid-row: 1; align-self: center; overflow: visible;
+    }
+    & > section[data-role="callout"] [data-part="callout-panel"] > [data-part="media"][data-pr-graphic] > img {
+      display: block; width: 100%; height: auto; max-height: 420px; padding: 0; object-fit: contain; object-position: 50% 50%;
+    }
+    & > section[data-role="callout"] [data-part="callout-panel"]:has(> [data-part="media"][data-pr-graphic]) > [data-part="copy"] {
+      grid-column: 1; grid-row: 1; max-width: none; padding: 64px 0;
+    }
+  }
   & > section[data-role="callout"] [data-part="eyebrow"] { color: var(--on-dark); }
   & > section[data-role="callout"] .c-heading { color: var(--on-dark); font-size: 36px; margin-bottom: 16px; }
   & > section[data-role="callout"] [data-part="paragraph"] { color: var(--on-dark); font-size: 18px; }
