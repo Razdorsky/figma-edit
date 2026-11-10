@@ -56,6 +56,7 @@ Blueprint and Enhanced Spanish: `tú`, venue and programme names in English, "el
   same page in the other language (`hreflang`, an `aria-label` that names the current language and the switch). They
   load the page afresh (`data-sveltekit-reload`). The current language is underlined; in Figma PR the utility row's
   2px rule moves from the whole link to the current language. The old notice "This preview is in English…" is gone.
+  (Since 2026-11-10 Figma PR's footer has no EN | ES and no CHECK AVAILABILITY; its header always offers them.)
 - Booking opens Orbe in the reader's language: `/Search/Init/PAS6c/en/` or `/es/` from the header, the menu, the
   footer and the designer's booking buttons on pages 01–06. Figma PR's booking bar opens
   `/Search/SearchAvailability/PAS6c/es/<check-in>/<check-out>/<adults>/0/` on Spanish pages.

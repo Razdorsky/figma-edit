@@ -168,11 +168,12 @@ body[data-edition="figma-pr"] {
   /* ---- Footer ---------------------------------------------------------------------------------------------- */
   & .pr-footer { padding: 72px 0 0; background: var(--paper); color: var(--ink); }
   & .pr-footer .footer-inner { margin: 0 var(--m); }
-  & .pr-footer .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 56px; }
-  & .pr-footer .footer-top .brand img { width: 150px; height: auto; }
-  & .pr-footer .header-actions { display: flex; align-items: center; gap: 28px; }
-  & .pr-footer :is(.language-trigger, .nav-book) { padding: 4px 0; border: 0; border-bottom: 2px solid currentColor; background: none; font: 600 12px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; }
-  & .pr-footer .footer-columns { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 40px; margin: 0; }
+  /* The five columns stand as one block in the middle of the footer, the same distance from both edges of the page
+     (owner, 2026-11-10): each column as wide as its longest line, the gaps growing with the screen. */
+  & .pr-footer .footer-columns {
+    display: grid; grid-template-columns: repeat(5, minmax(0, max-content)); justify-content: center;
+    column-gap: clamp(40px, 12vw - 96px, 136px); row-gap: 40px; margin: 0; /* 40px at 1101px, where the Spanish just fits */
+  }
   & .pr-footer .footer-group h2 { margin: 0 0 20px; font: 600 12px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
   & .pr-footer .footer-group :is(a, button) { display: block; margin: 0 0 10px; padding: 0; border: 0; background: none; text-align: left; font: 300 16px/1.5 var(--text); color: var(--ink); }
   & .pr-footer .footer-group h2 a { font: inherit; letter-spacing: inherit; }
@@ -208,7 +209,7 @@ body[data-edition="figma-pr"] {
   @media (max-width: 1100px) {
     & .pr-nav { gap: 24px; }
     & .pr-mega-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    & .pr-footer .footer-columns { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    & .pr-footer .footer-columns { grid-template-columns: repeat(3, minmax(0, max-content)); column-gap: clamp(40px, 7vw, 88px); }
   }
   /* The menu's language and booking link stand on the right of its top row from 1024px, where they fit beside the
      centred wordmark; below, they stay at the foot of the menu. */
@@ -246,8 +247,7 @@ body[data-edition="figma-pr"] {
     & .pr-menu .menu-columns { grid-template-columns: 1fr; gap: 36px; }
     & .pr-menu .menu-column a { font-size: 22px; }
     & .pr-menu .menu-top { height: 72px; margin-bottom: 32px; }
-    & .pr-footer .footer-columns { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
-    & .pr-footer .footer-top { flex-direction: column; align-items: flex-start; }
+    & .pr-footer .footer-columns { grid-template-columns: repeat(2, minmax(0, max-content)); gap: 32px clamp(24px, 9vw, 48px); }
     & .pr-newsletter .newsletter-form { grid-template-columns: 1fr; }
     & .pr-newsletter h2 { font-size: 28px; }
   }
@@ -261,5 +261,5 @@ body[data-edition="figma-pr"] {
 
 /* Spanish pages (docs/figma-spanish.md): the designer's EN | ES is a link to the page in the other language. The
    utility row's 2px rule moves from the whole link to the current language. */
-body[data-edition="figma-pr"] :is(.pr-utility, .pr-footer) .language-trigger { border-bottom-color: transparent; }
+body[data-edition="figma-pr"] .pr-utility .language-trigger { border-bottom-color: transparent; }
 body[data-edition="figma-pr"] .language-trigger [data-lang-current] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 7px; }

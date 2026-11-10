@@ -158,9 +158,14 @@ Four Seasons' booking bar under the header, in Rosewood's dress (`src/lib/pr/com
   "CHECK AVAILABILITY ↗" on the right, in that order. Below 1024 px those two stay at the foot of the menu (between 900
   and 1023 px they do not fit beside the centred wordmark).
 - **Newsletter** (`Newsletter.svelte`, `.pr-newsletter`): Rosewood's "Stay connected" row.
-- **Footer** (`Footer.svelte`): the frame's columns under capital headings, serif links, the Vessyl symbol in the
-  middle as Rosewood's monogram, the legal line "©The Vessyl 2026 • La Fortuna, Costa Rica" as the frame writes it,
-  and the green band at the foot.
+- **Footer** (`Footer.svelte`): the frame's five columns (Stay, Experiences, The Property, Plan your visit, Contact)
+  under capital headings, serif links, the Vessyl symbol in the middle as Rosewood's monogram, the legal line
+  "©The Vessyl 2026 • La Fortuna, Costa Rica" as the frame writes it, and the green band at the foot. The columns
+  stand as one block in the middle, the same distance from both edges of the page: each column as wide as its longest
+  line, the gaps 40px at 1101px growing to 136px (owner, 2026-11-10); five in a row from 1101px, three below, two on
+  phones. Owner, 2026-11-10: the footer has no wordmark, language switch or CHECK AVAILABILITY any more — the
+  symbol below is its one mark, and the header (on phones the reserve bar at the foot) always offers the language and
+  the booking.
 
 ## Mechanics
 
@@ -194,8 +199,8 @@ One scroll listener drives settling, the opening fade and the header on one anim
 ## Spanish
 
 Every page also exists in Latin American Spanish under `/figma-pr/es/` (owner, 2026-11-10). The dictionary is
-`src/lib/pr/content/es.json`, the helpers `src/lib/pr/i18n.ts`; EN | ES in the utility row and the footer, and the
-globe in the menu, switch to the same page in the other language, and the utility row's 2px rule marks the current
+`src/lib/pr/content/es.json`, the helpers `src/lib/pr/i18n.ts`; EN | ES in the utility row and the globe in the menu
+switch to the same page in the other language, and the utility row's 2px rule marks the current
 language. The booking bar speaks Spanish ("Entrada", "Salida", "Huéspedes", "2 adultos") and opens Orbe's Spanish
 results. How it works, the translation and the checks: `docs/figma-spanish.md`.
 

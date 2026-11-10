@@ -1,8 +1,10 @@
 <script lang="ts">
-  // Figma PR footer (docs/figma-pr-system.md, "Footer"): Rosewood's footer — capital headings over serif links, the
-  // Vessyl symbol in the middle, a small capital legal line and the green band at the foot. Words from the frame.
-  import { bookingPage, pages, route } from '#lib/pr/site.ts';
-  import { tr, msg, other, type Locale } from '#lib/pr/i18n.ts';
+  // Figma PR footer (docs/figma-pr-system.md, "Footer"): Rosewood's footer — the frame's five columns, centred, capital
+  // headings over serif links, the Vessyl symbol in the middle, a small capital legal line and the green band at the
+  // foot. Owner, 2026-11-10: no wordmark, language switch or CHECK AVAILABILITY here — the symbol below is the footer's
+  // one mark, and the header (on phones the reserve bar) always offers the other two.
+  import { pages, route } from '#lib/pr/site.ts';
+  import { tr, msg, type Locale } from '#lib/pr/i18n.ts';
   import symbol from '#lib/pr/assets/symbol.svg?raw';
 
   type Props = {
@@ -12,7 +14,7 @@
     locale?: Locale;
   };
 
-  let { edition, page, base = '', locale = 'en' }: Props = $props();
+  let { edition, base = '', locale = 'en' }: Props = $props();
 
   // Footer labels from the frames; the designer's pages 14–18 supply five of the six destinations.
   const propertyLinks: [string, string | null][] = [
@@ -36,28 +38,12 @@
   const contactLinks = [msg('WhatsApp Contact'), msg('Phone Contact'), msg('Address Info')];
 </script>
 
-{#snippet languageButton()}
-  <!-- The designer's EN | ES: a link to this page in the other language (docs/figma-spanish.md). -->
-  <a class="language-trigger" data-language-trigger data-sveltekit-reload href={route(edition, page.slug, base, other(locale))} hreflang={other(locale)} aria-label={tr(locale, 'Language: English. Switch to Spanish')}>
-    <span><span data-lang-current={locale === 'en' || undefined}>EN</span> | <span data-lang-current={locale === 'es' || undefined}>ES</span></span>
-  </a>
-{/snippet}
-
 {#snippet pending(label: string)}
   <button type="button" data-pending-link={label}>{tr(locale, label)}</button>
 {/snippet}
 
 <footer class="site-footer pr-footer">
   <div class="footer-inner">
-    <div class="footer-top">
-      <a class="brand" href={route(edition, '', base, locale)}>
-        <img src={`${base.replace(/\/$/, '')}/brand/logo-dark.svg`} width="200" height="38" alt="VESSYL" />
-      </a>
-      <div class="header-actions">
-        {@render languageButton()}
-        <a class="nav-book" href={bookingPage(locale)} target="_blank" rel="noopener noreferrer">{tr(locale, 'CHECK AVAILABILITY')}</a>
-      </div>
-    </div>
     <div class="footer-columns">
       <section class="footer-group">
         <h2><a href={route(edition, 'where-you-sleep', base, locale)}>{tr(locale, 'Stay')}</a></h2>
