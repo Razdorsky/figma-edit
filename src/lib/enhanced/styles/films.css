@@ -58,8 +58,8 @@ body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role
   display: block; align-content: start; min-height: 0; padding: 0; background: var(--surface); color: var(--ink);
 }
 body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role]::before { content: none; }
-/* 85svh of scroll open the arch, then 40svh hold the open film before the page moves on (owner, 2026-11-10). */
-body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role].is-opening { height: 225svh; }
+/* 85svh of scroll open the arch, then 20svh hold the open film before the page moves on (owner, 2026-11-10). */
+body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role].is-opening { height: 205svh; }
 body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role] [data-part="arch-stage"] {
   position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter);
   min-height: 100svh; padding-inline: var(--edge); overflow: hidden;

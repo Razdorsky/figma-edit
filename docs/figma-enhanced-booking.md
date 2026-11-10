@@ -90,8 +90,9 @@ them (989 strings).
 - The arch sections (Home, Experiences, The Vessyl Presents; `styles/films.css`): the title and its buttons stand in
   the middle of the arch's height instead of at its foot (the copy takes the arch's own top and foot insets and is
   centred), and the title is black. Phones keep the copy above the arch as before.
-- Once the arch's film is open to the full screen it holds the screen for 40% of a screen's scroll before the page moves
-  on (it was swept away the moment it opened): the block is 225svh — 85svh open the arch, 40svh hold it
+- Once the arch's film is open to the full screen it holds the screen for 20% of a screen's scroll before the page moves
+  on (it was swept away the moment it opened; first 40%, then halved by the owner): the block is 205svh — 85svh open
+  the arch, 20svh hold it
   (`interactions.js`, `updateArch`). The arch's title is 2px smaller than the hero size at every width
   (`calc(var(--t-hero) - 2px)`: 66px at 1440px).
 

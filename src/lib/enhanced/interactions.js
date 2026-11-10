@@ -555,9 +555,9 @@ function warmNext() {
 }
 
 // The arch (/blueprint/ 452c7d0): it opens with the scroll over 85% of a screen, following the page with a short lag
-// (scrub), on screens from 900px and without reduced motion. Then the open film holds the screen for 40% of a screen
+// (scrub), on screens from 900px and without reduced motion. Then the open film holds the screen for 20% of a screen
 // more before the page moves on (owner, 2026-11-10: it was swept away the moment it opened); styles/films.css gives the
-// block the room (225svh).
+// block the room (205svh).
 const arch = {el: null, target: 0, current: 0, frame: 0};
 function setupArch() {
   cancelAnimationFrame(arch.frame);
