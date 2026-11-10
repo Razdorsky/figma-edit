@@ -8,13 +8,20 @@
 #page .phero{height:56vh;position:relative;overflow:hidden}
 #page .phero .shade{background:linear-gradient(to bottom,rgba(10,11,9,.5),
   rgba(10,11,9,.2) 45%,#101109)}
-#page .pbody{padding:0 96px 120px;max-width:1440px;margin:0 auto}
+/* Not in the prototype: the photograph of a page fades in once it has loaded (the engine hides it until then). */
+#pimg{transition:opacity .45s var(--e-std)}
+/* Not in the prototype: position, which lets the text paint over the photograph. The title is pulled 90px up
+   into it, so under a one-line title the paragraph starts inside the photograph's last 12px, and the photograph
+   used to cut the top of its first line. */
+#page .pbody{padding:0 96px 120px;max-width:1440px;margin:0 auto;position:relative}
 #page h2{font-size:46px;line-height:1.1;margin-top:-90px;position:relative;max-width:16ch}
 #page .pbody .lede{margin-top:28px}
 #page .back{position:fixed;top:30px;left:96px;z-index:94;font-size:12px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--dim)}
 #page .back:hover{color:var(--cream)}
-.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;
+/* Not in the prototype: --n. A page may carry three facts where it has no honest fourth; the engine sets the
+   number, and without it the row keeps the prototype's four. */
+.facts{display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));gap:1px;
   background:rgba(245,235,231,.12);margin-top:54px;border:1px solid rgba(245,235,231,.12)}
 .facts div{background:#101109;padding:22px 20px;min-width:0}
 .facts b{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;

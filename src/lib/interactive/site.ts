@@ -10,5 +10,5 @@ export const route=(edition:Edition,slug='',base='')=>`${base.replace(/\/$/,'')}
 export const canvas=(_edition:string='interactive-prototype',_index=0)=>'#111111';
 
 export const base=__SITE_BASE__;
-/** The address of one of the story's photographs, kept in public/interactive/img. */
-export const photo=(name:string)=>`${base}/interactive/img/${name}.jpg`;
+/** The address of a photograph kept in public/interactive/img: a file name, or a bare name for one of the prototype's own .jpg files. */
+export const photo=(name:string)=>`${base}/interactive/img/${/\.\w+$/.test(name)?name:name+'.jpg'}`;

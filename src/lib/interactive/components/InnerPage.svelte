@@ -1,5 +1,6 @@
 <script lang="ts">
-  // The inner page that rises over the story. The engine fills it from its table of pages.
+  // The inner page that rises over the story. The engine fills it from content/pages.json: the photograph, the
+  // title, the paragraph, the facts and the button.
   import {photo} from '#lib/interactive/site.ts';
 </script>
 
@@ -10,6 +11,6 @@
     <h2 id="ptitle">The Frequency Dome</h2>
     <p class="lede" id="plede"></p>
     <div class="facts" id="pfacts"></div>
-    <div style="margin-top:50px"><button class="btn-line solid" data-book="exp">Book a Dome session</button></div>
+    <div style="margin-top:50px"><button class="btn-line solid" id="pcta" data-book="exp">Book a Dome session</button></div>
   </div>
 </div>

@@ -1,0 +1,456 @@
+{
+  "villas": {
+    "from": "prototype",
+    "figma": 3,
+    "title": "The Villas",
+    "photo": "04-plan-villas.jpg",
+    "lede": [
+      "Walls, a door that shuts, the most space and the most shelter when it rains. Every rate includes breakfast, wifi and the run of the property: the pool, the river and the trails."
+    ],
+    "facts": [
+      ["Sleeps", "[x] adults"],
+      ["Bathroom", "Private"],
+      ["View", "[Volcano or forest]"],
+      ["From", "[rate] a night"]
+    ],
+    "cta": {
+      "label": "book this villa",
+      "book": "stay"
+    }
+  },
+  "treehouse": {
+    "from": 4,
+    "title": "The Treehouse",
+    "photo": "page-treehouse.webp",
+    "focus": 50,
+    "lede": ["One unit, built into the canopy. There is not another one.", "You climb [x] steps to reach it and then you are level with the tops of the trees. [What it is built from, how it is anchored, who built it.] The windows are [description], which means the forest is in the room with you: the light, the noise at four in the morning, the smell after rain. People book this one for the view and remember it for the sound."],
+    "facts": [
+      ["Sleeps", "[x] adults, [x] with the extra bed"],
+      ["bathroom", "Private [indoor or outdoor shower]"],
+      ["view", "[Volcano, forest or river, by unit]"],
+      ["rates", "From [rate] a night"]
+    ],
+    "cta": {
+      "label": "Book the Treehouse",
+      "book": "stay"
+    }
+  },
+  "tents": {
+    "from": 5,
+    "title": "Glamping Tents",
+    "photo": "page-tents.webp",
+    "focus": 25,
+    "lede": ["Seven tents, real beds, private bathrooms, and forest on three sides.", "These are canvas, on [platforms], with [bed] inside and a bathroom of your own. Not a tent you crawl into. You stand up, you unpack, and at night the only thing between you and the valley is a wall you can hear through. That is the reason to book one."],
+    "facts": [
+      ["Sleeps", "[x] adults, [x] with the extra bed"],
+      ["bathroom", "Private [indoor or outdoor shower]"],
+      ["view", "[Volcano, forest or river, by unit]"],
+      ["rates", "From [rate] a night"]
+    ],
+    "cta": {
+      "label": "Book a tent",
+      "book": "stay"
+    }
+  },
+  "rates": {
+    "from": 6,
+    "title": "Rates and offers",
+    "photo": "page-rates.webp",
+    "focus": 30,
+    "lede": ["Booking here directly is always the cheapest way to stay, and it is the only way to add an experience or a table at dinner to the same reservation.", "Every rate includes breakfast, wifi and the run of the property. Taxes are shown before you pay. Cancellation terms are on each rate at checkout and written out in full in our policies."],
+    "facts": [
+      ["Stay longer", "Four nights or more [Starting at Rate]"],
+      ["Green season", "May to November [rate] a night"],
+      ["Couples", "From [rate] a night"],
+      ["The Dome, with your room", "[offer]"]
+    ],
+    "cta": {
+      "label": "check availability",
+      "book": "stay"
+    }
+  },
+  "day": {
+    "from": "prototype",
+    "figma": 8,
+    "title": "The Day and the Half Day",
+    "photo": "06-day-pool.jpg",
+    "lede": [
+      "You get the property: the pool, the river, the trails, a lounger nobody will move you off, lunch from the kitchen, and a session in the Dome if you add one. It is the simplest way to see whether you want to come back and sleep here."
+    ],
+    "facts": [
+      ["Half day", "[start] to [end]"],
+      ["Full day", "[start] to [end]"],
+      ["Maximum", "[x] people a day"],
+      ["Cancellation", "Free up to [hours] before"]
+    ],
+    "cta": {
+      "label": "BOOK A DAY HERE",
+      "book": "exp"
+    }
+  },
+  "freq": {
+    "from": "prototype",
+    "figma": 9,
+    "title": "The Frequency Experience",
+    "photo": "01-hero-dome-night.jpg",
+    "lede": [
+      "You lie down on the floor of the Dome. The lights go low. For the next [x] minutes sound moves through the room and through the floor, so the low end arrives in your body before it arrives in your ears. Someone is running it live, watching the room, not pressing play on a file."
+    ],
+    "facts": [
+      ["Price", "[price] a person"],
+      ["Capacity", "[x] at a time"],
+      ["Duration", "[x] minutes"],
+      ["Afterwards", "[x] minutes of tea"]
+    ],
+    "cta": {
+      "label": "book a session",
+      "book": "exp"
+    }
+  },
+  "dark": {
+    "from": 10,
+    "title": "Arenal After Dark",
+    "photo": "page-dark.webp",
+    "focus": 50,
+    "lede": [
+      "You arrive as the light goes. [Inclusion: a walk, a drink, the land at dusk.] You eat what the kitchen cooked that day, at the long table. Then the Dome, lit from inside, and [what happens there that evening]."
+    ],
+    "facts": [
+      ["price", "[Price] a person"],
+      ["when", "[Start] to [end], [days]"],
+      ["included", "Dinner and [inclusions]"],
+      ["transportation", "[Price] return from La Fortuna"]
+    ],
+    "cta": {
+      "label": "book an evening",
+      "book": "exp"
+    }
+  },
+  "two": {
+    "from": 11,
+    "title": "For Two",
+    "photo": "page-two.webp",
+    "focus": 60,
+    "lede": ["A private session in the Dome, just the two of you and whoever is running it. Then dinner, [where and how it is set]. Then [inclusion].", "It is not a spa package and there are no rose petals. It is a few hours where nobody needs anything from you, in a place where the loudest thing is the forest."],
+    "facts": [
+      ["price", "[Price] for two"],
+      ["Dusk", "You arrive as the light goes."],
+      ["Dinner", "Dinner is included."],
+      ["The Dome", "A private session in the Dome, just the two of you."]
+    ],
+    "cta": {
+      "label": "book for two",
+      "book": "exp"
+    }
+  },
+  "horses": {
+    "from": "prototype",
+    "figma": 12,
+    "title": "Horses and the River",
+    "photo": "horses-river.jpg",
+    "lede": [
+      "You ride out from the stables across the property and down toward the river. [Name], who has worked this land for [x] years, rides with you and will tell you what you are looking at if you ask."
+    ],
+    "facts": [
+      ["Riders", "[x] maximum"],
+      ["Duration", "[x] hours"],
+      ["First light", "[time]"],
+      ["Late afternoon", "[time]"]
+    ],
+    "cta": {
+      "label": "book a ride",
+      "book": "exp"
+    }
+  },
+  "presents": {
+    "from": 13,
+    "title": "The Vessyl Presents",
+    "photo": "page-presents.webp",
+    "focus": 30,
+    "lede": [
+      "Musicians, films, talks, and nights that do not have a name yet. The Dome is a good room, so people say yes to playing in it, and the audience is [x] people sitting on the floor rather than four hundred standing in the dark."
+    ],
+    "facts": [
+      ["[Date]", "[Artist or Event]"],
+      ["[Date]", "[Artist or Event]"],
+      ["[Date]", "[Artist or Event]"],
+      ["[Date]", "[Artist or Event]"]
+    ],
+    "cta": {
+      "label": "book",
+      "book": "exp"
+    }
+  },
+  "dome": {
+    "from": "prototype",
+    "figma": 14,
+    "title": "The Frequency Dome",
+    "photo": "08-night-session.jpg",
+    "lede": [
+      "It is a geodesic dome, [x] feet across, built on a platform above the river. Inside there is no furniture. There is a floor you lie down on, a sound system tuned to the shape of the room, and a ceiling that opens. Josh built it first and built the hotel around it."
+    ],
+    "facts": [
+      ["Diameter", "[x] feet across"],
+      ["Acoustics", "George Augspurger"],
+      ["Floor", "Vibro-tactile"],
+      ["Ceiling", "It opens"]
+    ],
+    "cta": {
+      "label": "Book a Dome session",
+      "book": "exp"
+    }
+  },
+  "hearth": {
+    "from": 15,
+    "title": "The Harmonic Hearth",
+    "photo": "page-hearth.webp",
+    "focus": 100,
+    "lede": [
+      "The Hearth is a round room with heated stone in it, a sauna on one side and a cold plunge on the other. Transducers are built into the benches and the structure, so a low note arrives in your back before you hear it. Most of a session is going between the heat and the cold, and most people are quiet in there without being told to be."
+    ],
+    "facts": [
+      ["Sessions", "[x] minutes"],
+      ["What it is used for", "Heat first, then cold, then sound"],
+      ["The plunge", "A minute in it is a long minute"]
+    ],
+    "cta": {
+      "label": "Book a session",
+      "book": "exp"
+    }
+  },
+  "sound": {
+    "from": 16,
+    "title": "Sound and movement",
+    "photo": "page-sound.webp",
+    "focus": 60,
+    "lede": ["This is the full list of sessions on the property. Some run on a schedule, some you book for yourself, and some only happen when a particular facilitator is here.", "The current week's schedule is posted at the Hearth and sent to your room the night you arrive."],
+    "facts": [
+      ["Morning movement", "[x] to [x], daily"],
+      ["Evening sound", "[x], [x] nights a week"],
+      ["Breathwork", "[x] mornings a week"],
+      ["Private sessions", "Booked one to one"]
+    ],
+    "cta": {
+      "label": "Book a session",
+      "book": "exp"
+    }
+  },
+  "studio": {
+    "from": "prototype",
+    "figma": 18,
+    "title": "A working room, not an amenity",
+    "photo": "08-night-session.jpg",
+    "lede": [
+      "There is a studio on the property. It is not a prop. Musicians come here to make records and some of them have. The studio is booked by the day or the week, with or without an engineer, and usually alongside rooms for whoever you bring. The Dome can be used as a live room."
+    ],
+    "facts": [
+      ["Booked by", "the day or the week"],
+      ["Engineer", "with or without"],
+      ["Live room", "the Dome"],
+      ["How", "by email, with a quote back"]
+    ],
+    "cta": {
+      "label": "Email about the studio",
+      "book": "ask"
+    }
+  },
+  "table": {
+    "from": "prototype",
+    "figma": 19,
+    "title": "The table",
+    "photo": "07-evening-table.jpg",
+    "lede": [
+      "There is no menu. There is one dinner, served at one time, at a long table, and what it is depends on what came out of the garden and off the trucks that morning. This is not a gimmick to save money. It is how a kitchen this size, this far up a valley, puts out good food."
+    ],
+    "facts": [
+      ["Dinner", "One sitting, [x]"],
+      ["Seats", "[x] at one table"],
+      ["Courses", "[x], passed"],
+      ["Outside guests", "[x] a person"]
+    ],
+    "cta": {
+      "label": "Reserve a table",
+      "book": "table"
+    }
+  },
+  "rancho": {
+    "from": 20,
+    "title": "El Rancho",
+    "photo": "page-rancho.webp",
+    "focus": 55,
+    "lede": [
+      "El Rancho seats [x] people at a single table under a high open roof. The kitchen is at one end and you can see into it. Dinner is served at [x] and the whole room eats at once."
+    ],
+    "facts": [
+      ["seats", "[x] at a single table"],
+      ["dinner", "Served at [x]"],
+      ["courses", "[x], passed"],
+      ["Outside reservations", "[x] per person"]
+    ],
+    "cta": {
+      "label": "Reserve a table",
+      "book": "table"
+    }
+  },
+  "moloka": {
+    "from": 21,
+    "title": "Moloka",
+    "photo": "page-moloka.webp",
+    "focus": 50,
+    "lede": ["Moloka is the smaller room. [x] seats, [x] nights a week, and the cook does something more deliberate with it than the long table allows.", "It fills up. If you want to eat here, say so when you book your room."],
+    "facts": [
+      ["seats", "[x]"],
+      ["nights", "[x] a week"],
+      ["courses", "[x]"],
+      ["for guests", "[Included or charged separately]"]
+    ],
+    "cta": {
+      "label": "Reserve a table at Moloka",
+      "book": "table"
+    }
+  },
+  "land": {
+    "from": 17,
+    "title": "Horses and the land",
+    "photo": "page-land.webp",
+    "focus": 50,
+    "lede": [
+      "The property runs from the ridge down to the water. Most of it is not built on and will not be. There are [x] miles of trail through it, a swimming hole where the river slows, and [x] horses in the field behind the Hearth."
+    ],
+    "facts": [
+      ["Acres", "[x]"],
+      ["Horses", "[x], and they live here"],
+      ["Trail", "[x] miles, marked"],
+      ["Birds", "[x] species recorded"]
+    ],
+    "cta": {
+      "label": "Book a ride",
+      "book": "exp"
+    }
+  },
+  "buyout": {
+    "from": 22,
+    "title": "Take the whole property",
+    "photo": "page-buyout.webp",
+    "focus": 50,
+    "lede": ["The property holds [x] people across fourteen units. Book all of them and you have the Dome, the Hearth, El Rancho, the horses, the trails and the river to yourselves, with no other guests on site.", "People do this for retreats, for family gatherings, for company offsites, for weddings, and sometimes just because they want the place empty."],
+    "facts": [
+      ["What it costs", "From [x] per night"],
+      ["All fourteen units", "[x] people across the property."],
+      ["The Dome", "With the schedule set by you."],
+      ["The Hearth and El Rancho", "With the kitchen cooking to your plan rather than ours."]
+    ],
+    "cta": {
+      "label": "enquire about a buyout",
+      "book": "ask"
+    }
+  },
+  "retreats": {
+    "from": 23,
+    "title": "Retreats",
+    "photo": "page-retreats.webp",
+    "focus": 75,
+    "lede": [
+      "Facilitators run retreats here because the Dome does something a hotel conference room cannot, and because the property is small enough that the group is not sharing it with strangers."
+    ],
+    "facts": [
+      ["What it costs", "[x] per person per night"],
+      ["The Dome", "For your sessions, on your schedule."],
+      ["Fourteen units", "Sleeping [x]."],
+      ["Airport transfers", "From Liberia or San José, arranged."]
+    ],
+    "cta": {
+      "label": "Enquire about a retreat",
+      "book": "ask"
+    }
+  },
+  "groups": {
+    "from": 24,
+    "title": "Groups and offsites",
+    "photo": "page-groups.webp",
+    "focus": 60,
+    "lede": [
+      "The Hearth seats [x]. The Dome holds [x] sitting on the floor. There is wifi that works, [x] Mbps, and a studio you can record in. There is also no road noise, no lobby, and nowhere for anyone to slip off to, which is either the point or the problem depending on your team."
+    ],
+    "facts": [
+      ["What it costs", "[x] per person per night"],
+      ["the hearth seats", "[x]"],
+      ["the dome holds", "[x] on the floor"],
+      ["typical stay", "Two to four nights"]
+    ],
+    "cta": {
+      "label": "Enquire about a group booking",
+      "book": "ask"
+    }
+  },
+  "weddings": {
+    "from": 25,
+    "title": "Weddings",
+    "photo": "page-weddings.webp",
+    "focus": 55,
+    "lede": ["We host weddings of up to [x] people. The ceremony happens [x]. Dinner is at the long table in El Rancho or set up under the open roof at the Hearth. Everybody who is at the wedding sleeps on the property, which means the party does not end with people getting into cars.", "There is one wedding at a time. The property is yours for the dates you book it."],
+    "facts": [
+      ["What it costs", "From [x]"],
+      ["All fourteen units", "[x] nights."],
+      ["Dinner for [x]", "Planned with the kitchen."],
+      ["A coordinator", "On our side, for the logistics on the property."]
+    ],
+    "cta": {
+      "label": "Enquire about a wedding",
+      "book": "ask"
+    }
+  },
+  "arenal": {
+    "from": 26,
+    "title": "Arenal",
+    "photo": "page-arenal.webp",
+    "focus": 25,
+    "lede": ["The property sits on a ridge above a river outside La Fortuna, in the Arenal area of northern Costa Rica. The volcano is [x] minutes away. The town is [x] minutes down the hill, and it has a bank, a supermarket, a hospital and about forty tour operators.", "You are [x] hours from San José and [x] hours from Liberia."],
+    "facts": [
+      ["the volcano", "[x] minutes"],
+      ["la fortuna", "[x] minutes"],
+      ["liberia (LIR)", "[x] minutes"],
+      ["san josé (sjo)", "[x] minutes"]
+    ],
+    "cta": {
+      "label": "Getting here",
+      "page": "getting"
+    }
+  },
+  "getting": {
+    "from": 27,
+    "title": "Getting here",
+    "photo": "page-getting.webp",
+    "focus": 50,
+    "lede": ["Three hours by car from San José, two and a half from Liberia, or fly Sansa into La Fortuna.", "We will send a driver for [x] each way, up to [x] people and luggage. Book it when you book your room and we will be waiting at arrivals with your name on a sign."],
+    "facts": [
+      ["Transfer from Liberia", "[x] each way"],
+      ["Transfer from San José", "[x] each way"],
+      ["Final access road", "[Paved, gravel or both]"],
+      ["After dark", "Tell us. The last stretch is not lit."]
+    ],
+    "cta": {
+      "label": "Book a transfer",
+      "book": "stay"
+    }
+  },
+  "around": {
+    "from": 28,
+    "title": "Things to do around here",
+    "photo": "page-around.webp",
+    "focus": 70,
+    "lede": [
+      "Most of what people come to Arenal for is within an hour of us. We will book any of it for you at the Hearth, usually with a day of notice, and we are not taking a cut that changes what we recommend."
+    ],
+    "facts": [
+      ["The volcano", "A very large, very symmetrical mountain"],
+      ["Hot springs", "The reason half the hotels exist"],
+      ["Waterfalls, bridges and the lake", "Within an hour of us"],
+      ["Ask us", "We book it for you"]
+    ],
+    "cta": {
+      "label": "Ask us to book any of this",
+      "book": "ask"
+    }
+  }
+}

@@ -34,7 +34,7 @@
     </div>
 
     <div class="grp"><b>The table</b>
-      <div class="it" data-p="table"><div class="n">El Rancho<i>the main room, one sitting, [x] seats at one table</i></div><div class="p">[price] a person</div></div>
+      <div class="it" data-p="rancho"><div class="n">El Rancho<i>the main room, one sitting, [x] seats at one table</i></div><div class="p">[price] a person</div></div>
       <div class="it" data-p="moloka"><div class="n">Moloka<i>the smaller room, [x] seats, [x] nights a week</i></div><div class="p">[price] a person</div></div>
     </div>
 

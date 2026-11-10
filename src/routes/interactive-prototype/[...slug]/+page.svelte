@@ -4,6 +4,7 @@
   import {onMount} from 'svelte';
   import {canvas,photo} from '#lib/interactive/site.ts';
   import {installStory} from '#lib/interactive/interactions.js';
+  import {innerPages} from '#lib/interactive/content/pages.ts';
   import Header from '#lib/interactive/components/Header.svelte';
   import Rail from '#lib/interactive/components/Rail.svelte';
   import Footer from '#lib/interactive/components/Footer.svelte';
@@ -24,7 +25,7 @@
   import Everything from '#lib/interactive/scenes/Everything.svelte';
   import type {PageData} from './$types';
   let {data}: {data:PageData}=$props();
-  onMount(() => installStory({photo}));
+  onMount(() => installStory({photo, pages: innerPages}));
 </script>
 <svelte:head><title>The Vessyl</title><meta name="description" content="The Vessyl in Arenal, Costa Rica"/><meta name="theme-color" content={canvas(data.edition,data.page.index)}/></svelte:head>
 <Header/>

@@ -2,7 +2,12 @@
 
 The owner, 2026-11-10: there is an interactive prototype of the site, a very early one. It becomes part of this repository and of the same workflow as Figma Enhanced and Figma PR, and it will be developed here.
 
-This document describes the edition as it was brought in (step 0, the baseline): what the concept is, every mechanic, what the port changed, and what the prototype itself leaves open. A new or changed mechanic is described here in the same commit.
+This document describes the edition: what the concept is, every mechanic, what the port changed, what each step added, and what is still open. A new or changed mechanic is described here in the same commit.
+
+Steps so far:
+
+- **Step 0, the baseline** (2026-11-10): the prototype brought in as it was. See "What the port changed".
+- **Step 1, the content of the inner pages** (2026-11-10): every inner page filled with a digest of its page in the frozen Figma edition. See "Step 1".
 
 - Address: `/interactive-prototype/` (local preview: http://127.0.0.1:4180/interactive-prototype/).
 - Files: `src/lib/interactive/`, `src/routes/interactive-prototype/`, photographs in `public/interactive/img/`.
@@ -38,6 +43,8 @@ The headings and the introductory texts are the designer's, the same as in the F
 | The engine | `src/lib/interactive/interactions.js` |
 | The eleven scenes | `src/lib/interactive/scenes/` |
 | Chrome, rail, footer, full list, booking panel, inner page, gate, logos | `src/lib/interactive/components/` |
+| The inner pages' content, and its type | `src/lib/interactive/content/pages.json`, `pages.ts` |
+| The check of that content against its sources | `scripts/interactive-strings.mjs` (part of `npm run check`) |
 | Styles | `src/lib/interactive/styles/` |
 | Typefaces | `src/lib/interactive/fonts/` |
 | Page list, canvas colour, photograph addresses | `src/lib/interactive/site.ts`, `site-data.json` |
@@ -138,7 +145,16 @@ A drawer on the right over a blurred veil, titled "Two ways in", with three tabs
 
 ### Inner pages
 
-A full-screen page that rises from below: a photograph, a title, a paragraph, four facts and one button. The engine fills it from a table. Seven pages are written: the Dome, the Day and the Half Day, the table, the Frequency Experience, the Villas, the studio, Horses and the River. The other eighteen keys open the same page as an outline. Back, Escape or the veil send it down again.
+A full-screen page that rises from below: a photograph, a title, a paragraph, a row of facts and one button. Back, Escape or the veil send it down again.
+
+There is one page element. A link carries the page's key in `data-p`, and the engine fills the element from `content/pages.json` each time a page opens:
+
+- the photograph, hidden until it has loaded and then faded in, with `focus` saying which height of it the band keeps;
+- the title, and the paragraph (its strings joined);
+- the facts, four in a row or three (the row's `--n`);
+- the button, with the page's own words. It opens a tab of the booking panel, or another inner page.
+
+There are 25 pages. Seven are the prototype author's own: the Dome, the Day and the Half Day, the table, the Frequency Experience, the Villas, the studio, Horses and the River. Eighteen are digests of the frozen Figma edition's pages, added in step 1. One link has no page, the footer's "When to visit", and opens the prototype's outline.
 
 ### Sound
 
@@ -173,9 +189,75 @@ Left out, because nothing used it:
 
 Kept but not in force: the block at the end of the prototype's stylesheet (see the first open point). It is in `styles/footer.css` as a comment.
 
+## Step 1 — the content of the inner pages (2026-11-10)
+
+The owner: development starts with content. The pages must not be placeholders; the texts, photographs and the rest come from the frozen Figma edition, not from Figma Enhanced or Figma PR. Asked whether to carry the Figma pages whole or as a digest in the prototype's own template, the owner chose the digest.
+
+Before the step, eighteen of the 25 keys opened one outline, and every page's button read "Book a Dome session".
+
+### The rules of a digest
+
+A digest fills the prototype's template and nothing more. Every text in it is a whole string of its Figma page, copied exactly. Nothing is reworded, shortened or joined inside a sentence.
+
+- **Title:** the Figma page's name, as its menu has it.
+- **Paragraph:** one or two strings of the page: its introduction, and a second one where the first alone says too little.
+- **Facts:** a label and a value, each a string of the page. They come from the page's row of facts, from its rate block, or from a section's small heading and heading. Four, or three where the page has no honest fourth (the Hearth).
+- **Button:** the words of the page's own call.
+- **Photograph:** one of the page's photographs.
+- The designer's placeholders stay as they are: `[rate]`, `[price]`, `[x]`, `[Date]`, `[Artist or Event]`.
+
+`scripts/interactive-strings.mjs` holds the digests to this: it fails `npm run check` when a text of a Figma-sourced page is not a string of its Figma page, when a title is not the page's name, when a photograph is missing, when a button leads nowhere, or when a link points at a key that has no page. Because the strings are exact, all of them already have Spanish in the Figma edition's dictionary (`src/lib/content/es.json`).
+
+The author's seven pages keep their text, facts and photograph. Only their button changed: it carries the call of the matching Figma page.
+
+### The pages
+
+| Key | From | Photograph | Button, and what it opens |
+|---|---|---|---|
+| `villas` | author (Figma 03 for the button) | prototype's | book this villa → Stay |
+| `treehouse` | 04 The Treehouse | the page's hero, cut to 4:3 around the house | Book the Treehouse → Stay |
+| `tents` | 05 Glamping Tents | the tent from the room cards (the page's own hero shows the pool house) | Book a tent → Stay |
+| `rates` | 06 Rates and offers | "what every rate includes" | check availability → Stay |
+| `day` | author (08) | prototype's | BOOK A DAY HERE → Experiences |
+| `freq` | author (09) | prototype's | book a session → Experiences |
+| `dark` | 10 Arenal After Dark | "Lit from inside" (the hero is the dinner table) | book an evening → Experiences |
+| `two` | 11 For Two | the page's hero | book for two → Experiences |
+| `horses` | author (12) | prototype's | book a ride → Experiences |
+| `presents` | 13 The Vessyl Presents | the gallery's photograph (the page opens on text) | book → Experiences |
+| `dome` | author (14) | prototype's | Book a Dome session → Experiences |
+| `hearth` | 15 The Harmonic Hearth | the page's hero | Book a session → Experiences |
+| `sound` | 16 Sound and movement | "This week" (the page opens on text) | Book a session → Experiences |
+| `studio` | author (18) | prototype's | Email about the studio → enquiry |
+| `table` | author (19 Eating here) | prototype's | Reserve a table → Table |
+| `rancho` | 20 El Rancho | the gallery's long table, cut to 4:3 (the hero is the pool terrace) | Reserve a table → Table |
+| `moloka` | 21 Moloka | the page's hero | Reserve a table at Moloka → Table |
+| `land` | 17 Horses and the land | the page's hero | Book a ride → Experiences |
+| `buyout` | 22 Take the whole property | the page's hero | enquire about a buyout → enquiry |
+| `retreats` | 23 Retreats | the page's hero | Enquire about a retreat → enquiry |
+| `groups` | 24 Groups and offsites | the page's hero | Enquire about a group booking → enquiry |
+| `weddings` | 25 Weddings | the page's hero | Enquire about a wedding → enquiry |
+| `arenal` | 26 Arenal | the card "Arenal" (the hero repeats the view of the Day page's photograph) | Getting here → the Getting here page |
+| `getting` | 27 Getting here | the page's first photograph, cut to 4:3 (the page opens on text) | Book a transfer → Stay |
+| `around` | 28 Things to do around here | the page's hero | Ask us to book any of this → enquiry |
+
+"Enquiry" is the `ask` target. The booking panel has no enquiry form, so it opens the Experiences tab, as the story's own "Send an enquiry" does (see Open points).
+
+### Photographs
+
+The eighteen photographs are copies of files in `public/media`, which is shared read-only: 1800 px wide, WebP at quality 82, under `public/interactive/img/page-<key>.webp`. They weigh 65–690 KB each, 6.2 MB together, against 18 MB for the originals. Three were cut from upright to 4:3, because the band on the page is wide: the Treehouse, El Rancho, Getting here. A photograph loads when its page is first opened, not with the story.
+
+### What else changed
+
+- **The pages are data.** The engine's own table of pages is gone; `content/pages.json` is passed to `installStory()`.
+- **Each page has its own button.**
+- **El Rancho has its own page.** Its row in the Table scene and in the full list opened the general page about the table; they now open `rancho`. The rail's and the footer's "The table" still open the general page.
+- **Three facts fill the row.** `.facts` takes its number of columns from `--n`.
+- **The photograph waits for itself.** It used to change when the new file arrived, so the picture of the page opened before showed under the new title for a moment.
+- **The paragraph is no longer cut by the photograph.** Under a one-line title its first line starts inside the photograph's last 12 px, and the photograph covered the top of it. This was in the prototype (The Villas, The table); sixteen pages now have one-line titles. `.pbody` is positioned, so the text paints over the photograph.
+
 ## Open points
 
-These are the prototype's own. The baseline keeps them as they are; each is a candidate for a step.
+Most are the prototype's own, kept as they are; each is a candidate for a step.
 
 **Layout**
 
@@ -186,8 +268,12 @@ These are the prototype's own. The baseline keeps them as they are; each is a ca
 
 **Content**
 
-- `EN | ES` does nothing. There is no Spanish.
-- Eighteen of the 25 inner pages are outlines. Every inner page's button reads "Book a Dome session".
+- `EN | ES` does nothing. There is no Spanish. The eighteen digests could take theirs from the Figma dictionary; the story, the lists, the booking panel and the author's seven pages have none.
+- **A digest is a small part of its page.** A Figma page has 27 to 55 texts in four to nine sections; a digest carries about a dozen. Left behind: the tables of amenities, the galleries, the further sections, and the health notes of the Dome, the Frequency Experience and the Hearth, which say who should talk to a doctor first.
+- "When to visit" in the footer has no page: the frames have none. It opens the prototype's outline.
+- The Vessyl Presents shows four cells of `[Date]` and `[Artist or Event]`: the frame's list of events is four rows of placeholders.
+- The studio page shows the Dome's photograph, the same as the Dome page. This is the author's choice; the prototype's own set has a studio photograph, and so does the Figma page.
+- The home page of the Figma edition has two blocks the story does not: the founder, and the journalist's quotation.
 - Rates, prices and numbers are the designer's placeholders (`[rate]`, `[price]`, `[x]`).
 - Footer placeholders: FAQ, Policies, contacts, the newsletter field.
 - There is no video.
@@ -195,7 +281,8 @@ These are the prototype's own. The baseline keeps them as they are; each is a ca
 **Booking**
 
 - The fields are drawn, not live, and the three buttons do nothing. There is no hand-off to the booking partner.
-- "Write about the studio" and "Send an enquiry" open the Experiences tab.
+- "Write about the studio" and "Send an enquiry" open the Experiences tab, and so do the six enquiry buttons of the inner pages: there is no enquiry form.
+- "Book a transfer" on the Getting here page opens the Stay tab, where no transfer can be chosen.
 
 **Details**
 
@@ -209,7 +296,7 @@ These are the prototype's own. The baseline keeps them as they are; each is a ca
 
 **Speed and access**
 
-- All nineteen pictures (4.6 MB of JPEG, fifteen files) load at once, in one size.
+- All nineteen pictures of the story (4.6 MB of JPEG, fifteen files) load at once, in one size. The inner pages' photographs load on opening, also in one size.
 - Two animation loops run all the time.
 - The layers are not dialogs: focus is not moved or held, and the rows of the full list cannot be reached from the keyboard. The logos have no text alternative.
 
@@ -222,6 +309,16 @@ These are the prototype's own. The baseline keeps them as they are; each is a ca
 - The published artifact, on screen at 1440×900: the gate, all eleven scenes and the footer show the same chapter labels, texts, photographs, rail and controls as the edition; the ring is part-filled at rest in both, and a short press leaves the gate closed in both. This is a comparison by eye, not of code.
 - `npm run build:pages -- interactive-prototype` builds a 10 MB artifact in which every reference resolves.
 - Not checked: Safari and Firefox, and the sound by ear.
+
+### Step 1
+
+- `npm run check` passes, with the new check: 25 inner pages, 18 from the Figma edition, 195 strings exact, 26 links resolve. A string changed by one word on purpose made it fail, naming the page.
+- The frozen Figma edition is unchanged (197 files verified); nothing in `public/media` was touched.
+- At 1440×900 all 26 keys were opened in turn: each shows its title, paragraph, facts and button, and its photograph loads. Titles take one or two lines, paragraphs three to six, fact values one or two.
+- Looked at on screen: The Treehouse, Glamping Tents, Rates and offers, Arenal After Dark, For Two, The Vessyl Presents, The Harmonic Hearth, Sound and movement, El Rancho, Take the whole property, Groups and offsites, Weddings, Arenal, Getting here. Each photograph keeps its subject in the band.
+- By hand: El Rancho from the scene and from the list; the rail's "The table"; a page's button into its tab; Arenal's button into Getting here and that page's button into Stay; Escape and × closing everything; the outline for "When to visit"; three facts across the full row on the Hearth. No console errors.
+- The publication artifact is 17 MB, and every photograph it names is in it.
+- Not checked: phone widths (the open point above stands), Safari and Firefox.
 
 ## Publication
 

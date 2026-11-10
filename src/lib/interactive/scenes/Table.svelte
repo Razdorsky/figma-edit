@@ -13,7 +13,7 @@
     <p class="lede">Two rooms, and they are not the same thing. Most dinners happen in one of them.</p>
     <div class="sell">
       <div class="row"><span class="m buy">reserve a table</span>
-        <button class="ttl go" data-p="table">El Rancho</button>
+        <button class="ttl go" data-p="rancho">El Rancho</button>
         <span class="pr">the main room · one sitting · [x] seats · [price] a person</span></div>
       <div class="row"><span class="m buy">reserve a table</span>
         <button class="ttl go" data-p="moloka">Moloka</button>

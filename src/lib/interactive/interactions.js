@@ -8,10 +8,11 @@
 
 /**
  * Starts the story on the page that is already in the document.
- * @param {{photo:(name:string)=>string}} options photo() gives the address of a photograph of the story
+ * @param {{photo:(name:string)=>string, pages:Record<string,import('./content/pages.ts').InnerPage>}} options
+ *   photo() gives the address of a photograph; pages are the inner pages by the key their links carry in data-p
  * @returns {()=>void} stops the loops, the listeners and the sound
  */
-export function installStory({photo}) {
+export function installStory({photo, pages}) {
   const controller=new AbortController(), {signal}=controller;
   let alive=true, frameId=0, breatheId=0;
 
@@ -400,38 +401,32 @@ export function installStory({photo}) {
   document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.t));
   addEventListener('keydown',e=>{ if(e.key==='Escape') closeAll(); },{signal});
 
-  const PAGES={
-    dome:{t:'The Frequency Dome',img:photo('08-night-session'),
-      l:'It is a geodesic dome, [x] feet across, built on a platform above the river. Inside there is no furniture. There is a floor you lie down on, a sound system tuned to the shape of the room, and a ceiling that opens. Josh built it first and built the hotel around it.',
-      f:[['Diameter','[x] feet across'],['Acoustics','George Augspurger'],['Floor','Vibro-tactile'],['Ceiling','It opens']]},
-    day:{t:'The Day and the Half Day',img:photo('06-day-pool'),
-      l:'You get the property: the pool, the river, the trails, a lounger nobody will move you off, lunch from the kitchen, and a session in the Dome if you add one. It is the simplest way to see whether you want to come back and sleep here.',
-      f:[['Half day','[start] to [end]'],['Full day','[start] to [end]'],['Maximum','[x] people a day'],['Cancellation','Free up to [hours] before']]},
-    table:{t:'The table',img:photo('07-evening-table'),
-      l:'There is no menu. There is one dinner, served at one time, at a long table, and what it is depends on what came out of the garden and off the trucks that morning. This is not a gimmick to save money. It is how a kitchen this size, this far up a valley, puts out good food.',
-      f:[['Dinner','One sitting, [x]'],['Seats','[x] at one table'],['Courses','[x], passed'],['Outside guests','[x] a person']]},
-    freq:{t:'The Frequency Experience',img:photo('01-hero-dome-night'),
-      l:'You lie down on the floor of the Dome. The lights go low. For the next [x] minutes sound moves through the room and through the floor, so the low end arrives in your body before it arrives in your ears. Someone is running it live, watching the room, not pressing play on a file.',
-      f:[['Price','[price] a person'],['Capacity','[x] at a time'],['Duration','[x] minutes'],['Afterwards','[x] minutes of tea']]},
-    villas:{t:'The Villas',img:photo('04-plan-villas'),
-      l:'Walls, a door that shuts, the most space and the most shelter when it rains. Every rate includes breakfast, wifi and the run of the property: the pool, the river and the trails.',
-      f:[['Sleeps','[x] adults'],['Bathroom','Private'],['View','[Volcano or forest]'],['From','[rate] a night']]},
-    studio:{t:'A working room, not an amenity',img:photo('08-night-session'),
-      l:'There is a studio on the property. It is not a prop. Musicians come here to make records and some of them have. The studio is booked by the day or the week, with or without an engineer, and usually alongside rooms for whoever you bring. The Dome can be used as a live room.',
-      f:[['Booked by','the day or the week'],['Engineer','with or without'],['Live room','the Dome'],['How','by email, with a quote back']]},
-    horses:{t:'Horses and the River',img:photo('horses-river'),
-      l:'You ride out from the stables across the property and down toward the river. [Name], who has worked this land for [x] years, rides with you and will tell you what you are looking at if you ask.',
-      f:[['Riders','[x] maximum'],['Duration','[x] hours'],['First light','[time]'],['Late afternoon','[time]']]}
-  };
+  /* The inner pages are data, content/pages.json (docs/interactive-prototype.md, "Inner pages").
+     A key that has no page there still opens the prototype's own outline. */
+  const OUTLINE={photo:'02-dome-exterior.jpg',
+    lede:['This page is not built out in the prototype yet. Their own copy goes here; the way in and the way back already work.'],
+    facts:[['Status','outline'],['Copy','from their deck'],['Motion','as on this page'],['Rail','in place']],
+    cta:{label:'Book a Dome session',book:'exp'}};
+  const pimg=document.getElementById('pimg'), pfacts=document.getElementById('pfacts'),
+        pcta=document.getElementById('pcta');
   function openPage(k){
-    const d=PAGES[k]||{t:k.charAt(0).toUpperCase()+k.slice(1),img:photo('02-dome-exterior'),
-      l:'This page is not built out in the prototype yet. Their own copy goes here; the way in and the way back already work.',
-      f:[['Status','outline'],['Copy','from their deck'],['Motion','as on this page'],['Rail','in place']]};
-    document.getElementById('ptitle').textContent=d.t;
-    document.getElementById('plede').textContent=d.l;
-    document.getElementById('pimg').src=d.img;
-    document.getElementById('pfacts').innerHTML=
-      d.f.map(x=>'<div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>').join('');
+    const d=pages[k]||{...OUTLINE,title:k.charAt(0).toUpperCase()+k.slice(1)};
+    document.getElementById('ptitle').textContent=d.title;
+    document.getElementById('plede').textContent=d.lede.join(' ');
+    /* the photograph stays hidden until it has loaded, so the picture of the page opened before
+       never shows under a new title; focus says which height of it the band keeps */
+    const src=photo(d.photo);
+    pimg.style.objectPosition=d.focus==null?'':'50% '+d.focus+'%';
+    if(pimg.getAttribute('src')!==src){ pimg.style.opacity='0';
+      pimg.onload=()=>{ pimg.style.opacity='1'; }; pimg.src=src; }
+    pfacts.style.setProperty('--n',d.facts.length);
+    pfacts.replaceChildren(...d.facts.map(x=>{ const cell=document.createElement('div'),
+      b=document.createElement('b'), s=document.createElement('span');
+      b.textContent=x[0]; s.textContent=x[1]; cell.append(b,s); return cell; }));
+    /* the button carries the page's own words and leads to a tab of the booking panel or to another page */
+    pcta.textContent=d.cta.label;
+    if(d.cta.page){ pcta.dataset.p=d.cta.page; delete pcta.dataset.book; }
+    else { pcta.dataset.book=d.cta.book; delete pcta.dataset.p; }
     page.scrollTop=0; page.classList.add('on'); veil.classList.add('on'); }
   const allPane=document.getElementById('all');
   function openAll(){ allPane.classList.add('on'); veil.classList.add('on'); }
