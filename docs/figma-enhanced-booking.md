@@ -112,4 +112,12 @@ them (989 strings).
   `public/enhanced/photos/dome-level-{800,1200,1600,2016}.webp`, anchored to its top (`object-position: 50% 0%`) so the
   Dome's crown stays on wide screens. The original file is untouched: the frozen Figma edition, Figma PR and the menu
   thumbnails still use it.
+- The drifting gallery (`styles/drift.css`): from 900px the cards stand against the screen's edges; their photographs
+  have square corners at the edge and 4px corners towards the middle (the arrival mask keeps those corners), and the
+  title and text under a left card align with the photograph's right edge, as they align with the left edge under a
+  right card.
+- Headings are black (`--heading-ink: #000` in `styles/tokens.css`) instead of the frames' green: every h1–h3 on light
+  sections, the card titles, the description headings and the comparison rows. The copper accents stay copper (the
+  eyebrows, the fact and rate headings the designer set in copper), headings on photographs stay light, and the green
+  buttons keep their green (`--heading` still colours them).
 

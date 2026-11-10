@@ -7,6 +7,7 @@ body[data-edition="figma-enhanced"] {
   --ink-soft: #57504a;
   --heading: #364830;
   --heading-deep: #1a3013;
+  --heading-ink: #000;          /* every heading (owner, 2026-11-10: black instead of the frames' green; copper eyebrows stay) */
   --accent: #a2551b;            /* copper: eyebrows, fact rules, author names */
   --link: #733a11;              /* the frames' link arrows */
   --accent-on-dark: #d3a079;    /* sand: eyebrows on photographs and dark panels */

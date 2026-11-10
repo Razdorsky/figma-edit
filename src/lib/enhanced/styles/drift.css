@@ -21,18 +21,23 @@
     position: absolute; z-index: 1; top: calc(var(--section) / 2 + var(--y)); width: var(--card);
     transform: translate3d(0, var(--drift, 0px), 0); will-change: transform;
   }
-  body[data-edition="figma-enhanced"] .current-page [data-drift] [data-part="card"][data-side="left"] { left: var(--edge); }
-  body[data-edition="figma-enhanced"] .current-page [data-drift] [data-part="card"][data-side="right"] { right: var(--edge); }
+  /* Owner, 2026-11-10: the cards stand against the screen's edges; their photographs have square corners at the edge
+     and 4px corners towards the middle, and the text under a left card aligns with the photograph's inner (right) edge,
+     as the text under a right card already does with its left edge. */
+  body[data-edition="figma-enhanced"] .current-page [data-drift] [data-part="card"][data-side="left"] { --corners: 0 4px 4px 0; left: 0; }
+  body[data-edition="figma-enhanced"] .current-page [data-drift] [data-part="card"][data-side="right"] { --corners: 4px 0 0 4px; right: 0; }
+  body[data-edition="figma-enhanced"] .current-page [data-drift] [data-part="card"] > [data-part="media"] { border-radius: var(--corners); }
+  body[data-edition="figma-enhanced"] .current-page [data-drift] [data-part="card"][data-side="left"] > :not([data-part="media"]) { align-items: flex-end; text-align: right; }
 }
 /* The arrival (452c7d0's [data-reveal]): armed by the script, so without it the photographs simply show. */
 @media (prefers-reduced-motion: no-preference) {
   body[data-edition="figma-enhanced"] .current-page [data-drift][data-armed] [data-part="card"] > [data-part="media"] {
-    clip-path: inset(7% round var(--r-photo)); transition: clip-path 1.7s cubic-bezier(0.16, 1, 0.3, 1);
+    clip-path: inset(7% round var(--corners, var(--r-photo))); transition: clip-path 1.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
   body[data-edition="figma-enhanced"] .current-page [data-drift][data-armed] [data-part="card"] > [data-part="media"] img {
     transform: scale(1.14); transition: transform 1.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  body[data-edition="figma-enhanced"] .current-page [data-drift][data-armed] [data-part="card"][data-revealed] > [data-part="media"] { clip-path: inset(0 round var(--r-photo)); }
+  body[data-edition="figma-enhanced"] .current-page [data-drift][data-armed] [data-part="card"][data-revealed] > [data-part="media"] { clip-path: inset(0 round var(--corners, var(--r-photo))); }
   body[data-edition="figma-enhanced"] .current-page [data-drift][data-armed] [data-part="card"][data-revealed] > [data-part="media"] img { transform: none; }
   body[data-edition="figma-enhanced"] .current-page [data-drift][data-armed] [data-part="card"][data-revealed]:has(a:hover) > [data-part="media"] img { transform: scale(1.045); }
 }

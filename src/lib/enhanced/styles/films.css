@@ -74,7 +74,7 @@ body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role
   will-change: opacity, transform, filter;
 }
 /* Black, and 2px under the hero size at every width (owner, 2026-11-10). */
-body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role] h1 { max-width: 11em; font-size: calc(var(--t-hero) - 2px); line-height: 1.04; color: #000; }
+body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role] h1 { max-width: 11em; font-size: calc(var(--t-hero) - 2px); line-height: 1.04; color: var(--heading-ink); }
 /* The designer's eyebrow and lede on the text openings that took the arch (Experiences, The Vessyl Presents) keep
    their light-page colours: the photo-hero rules would paint them for a photograph. */
 body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role] [data-part="hero-copy"] [data-part="eyebrow"] { color: var(--accent); }
