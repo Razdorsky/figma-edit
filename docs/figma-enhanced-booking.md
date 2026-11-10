@@ -81,3 +81,13 @@ them (989 strings).
 - axe (WCAG 2.2 AA): no violations at the top of the page, with the bar open, the calendar open and the menu open, at
   1440, 1024 and 800, in both languages.
 - Layout: the 28 pages in both languages at 69 widths in the three engines, against the earlier runs.
+
+## Buttons and the arch sections (owner, 2026-11-10)
+
+- Every control of the edition is rounded 4px, as the designer's CHECK AVAILABILITY in the header: the token
+  `--r-control` in `styles/tokens.css` (it was 12px) — the page buttons, the newsletter field and button, the
+  next-page button, CHECK RATES and the calendar's days. The film's round "Watch the film" pill keeps its shape.
+- The arch sections (Home, Experiences, The Vessyl Presents; `styles/films.css`): the title and its buttons stand in
+  the middle of the arch's height instead of at its foot (the copy takes the arch's own top and foot insets and is
+  centred), and the title is black. Phones keep the copy above the arch as before.
+

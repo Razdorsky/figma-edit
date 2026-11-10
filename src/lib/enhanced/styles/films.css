@@ -64,15 +64,15 @@ body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role
   min-height: 100svh; padding-inline: var(--edge); overflow: hidden;
 }
 body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role].is-opening [data-part="arch-stage"] { position: sticky; top: 0; height: 100svh; min-height: 0; }
-/* The designer's title and actions, left of the arch. They fade, rise and blur away as it opens, so nothing is
-   written over the open film. */
+/* The designer's title and actions, left of the arch, centred on the arch's height (owner, 2026-11-10: they stood at
+   its foot). They fade, rise and blur away as it opens, so nothing is written over the open film. */
 body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role] [data-part="hero-copy"] {
-  position: relative; z-index: 2; grid-column: 1 / span 6; align-self: end; display: flex; flex-direction: column; align-items: flex-start; gap: 32px;
-  padding: calc(var(--header) + 48px) 0 clamp(40px, 9svh, 96px); text-align: left; color: var(--ink);
+  position: relative; z-index: 2; grid-column: 1 / span 6; align-self: center; align-self: safe center; display: flex; flex-direction: column; align-items: flex-start; gap: 32px;
+  padding: calc(var(--header) + 40px) 0 5svh; text-align: left; color: var(--ink); /* the arch's own top and foot insets */
   opacity: calc(1 - var(--open, 0) * 2.4); transform: translateY(calc(var(--open, 0) * -7svh)); filter: blur(calc(var(--open, 0) * 10px));
   will-change: opacity, transform, filter;
 }
-body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role] h1 { max-width: 11em; font-size: var(--t-hero); line-height: 1.04; color: var(--heading); }
+body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role] h1 { max-width: 11em; font-size: var(--t-hero); line-height: 1.04; color: #000; } /* black (owner, 2026-11-10) */
 /* The designer's eyebrow and lede on the text openings that took the arch (Experiences, The Vessyl Presents) keep
    their light-page colours: the photo-hero rules would paint them for a photograph. */
 body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role] [data-part="hero-copy"] [data-part="eyebrow"] { color: var(--accent); }
@@ -110,7 +110,7 @@ body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role
 @media (max-width: 899px) {
   body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role] [data-part="arch-stage"] { display: flex; flex-direction: column; min-height: 0; padding-inline: 0; }
   body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role] [data-part="hero-copy"] {
-    padding: calc(var(--header) + 28px) var(--edge) 28px; gap: 24px; opacity: 1; transform: none; filter: none;
+    align-self: stretch; padding: calc(var(--header) + 28px) var(--edge) 28px; gap: 24px; opacity: 1; transform: none; filter: none;
   }
   body[data-edition="figma-enhanced"] .current-page > [data-hero="arch"][data-role] [data-part="arch"] {
     --al: var(--edge); --ar: var(--edge); --at: 0px; --ab: 0px; --rad: calc(50vw - var(--edge)); --shift: 0px;
