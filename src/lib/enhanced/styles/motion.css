@@ -61,6 +61,12 @@ html[data-vt="next-in"]::view-transition-new(vt-opening-copy) { animation-delay:
 ::view-transition-old(*),
 ::view-transition-new(*) { mix-blend-mode: normal; }
 
+/* A change of language (owner, 2026-11-10; +layout.svelte, "Language"): the words crossfade in place. The page in the
+   new language fades in over the old one, which stays whole, so nothing dims on the way and the pictures, the same in
+   both, stand still. */
+html[data-vt="lang"]::view-transition-old(root) { animation: none; }
+html[data-vt="lang"]::view-transition-new(root) { animation: vt-in 700ms var(--vt-ease) both; }
+
 @keyframes vt-out { to { opacity: 0; } }
 @keyframes vt-in { from { opacity: 0; } }
 @keyframes vt-next-out { 0%, 55% { opacity: 1; } to { opacity: 0; } }

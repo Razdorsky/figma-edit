@@ -101,8 +101,9 @@ function firstClipMoving() {
 function setupClipsFirst() {
   approach?.disconnect();
   clipsGate++;
-  // A navigation inside the site puts the new page through the same as a first load.
-  if (lastPath && lastPath !== location.pathname) window.vessylClips?.page(document.querySelector('.current-page'));
+  // A navigation inside the site puts the new page through the same as a first load; a change of language does not,
+  // since its pictures are the ones already on screen (+layout.svelte, "Language").
+  if (lastPath && lastPath !== location.pathname && document.documentElement.dataset.switching !== 'language') window.vessylClips?.page(document.querySelector('.current-page'));
   lastPath = location.pathname;
   afterFirstClip(() => {
     approach = new IntersectionObserver(entries => {
@@ -535,11 +536,12 @@ function firstPicture(slug, path) {
 }
 function warmPage(href) {
   let url;
-  try {url = new URL(href, location.href);} catch {return;}
-  if (url.origin !== location.origin) return;
+  try {url = new URL(href, location.href);} catch {return [];}
+  if (url.origin !== location.origin) return [];
   const match = url.pathname.match(/\/figma-enhanced\/(.*?)\/?$/);
   const list = match ? heroes[pageSlug(url.pathname)] : null;
-  if (!list) return;
+  if (!list) return [];
+  const decoded = [];
   for (const path of list) {
     if (warmed.has(path)) continue;
     warmed.add(path);
@@ -548,13 +550,62 @@ function warmPage(href) {
     const ready = firstPicture(pageSlug(url.pathname), path);
     if (ready.srcset) {img.sizes = ready.sizes;img.srcset = ready.srcset;}
     img.src = ready.src;
+    decoded.push(img.decode().catch(() => {}));
   }
+  return decoded;
 }
 function warmNext() {
   const link = document.querySelector('.current-page [data-next] a');
   if (!link) return;
   const go = () => warmPage(link.href);
   if ('requestIdleCallback' in window) requestIdleCallback(go, {timeout: 4000}); else setTimeout(go, 2500);
+}
+
+// Warm-up under the opening mark (owner, 2026-11-10): what a visitor reaches first once the mark has left loads and is
+// decoded while it plays — the mega panels' photographs (640px copies) where the header shows the panels, the menu's
+// previews where the menu shows them (from 1180px), and the first picture of the page the next-page block leads to.
+// Films are never fetched ahead. The promise settles when all are decoded; the mark waits for it (at most until 6s).
+function warmSite() {
+  // Low priority, so the page's own first picture and clip come first.
+  const decode = src => {const img = new Image();img.decoding = 'async';img.fetchPriority = 'low';img.src = src;return img.decode().catch(() => {});};
+  const sources = new Set();
+  for (const trigger of document.querySelectorAll('[data-mega-trigger]')) {
+    if (!trigger.getClientRects().length) continue;
+    const panel = document.getElementById(trigger.getAttribute('aria-controls') || '');
+    panel?.querySelectorAll('img[data-src]').forEach(img => sources.add(new URL(img.dataset.src, location.href).href));
+    warmMega(trigger);
+  }
+  if (matchMedia('(min-width: 1180px)').matches) document.querySelectorAll('#site-menu [data-cover]').forEach(el => sources.add(new URL(el.dataset.cover, location.href).href));
+  const link = document.querySelector('.current-page [data-next] a');
+  const next = link ? warmPage(link.href) : [];
+  return Promise.all([...[...sources].map(decode), ...next]);
+}
+// The mark's way out (owner, 2026-11-10). When the page is ready by the time the mark has played, the sheet fades away
+// at once; if the warm-up takes longer, the mark breathes (intro.css: 400ms to 30%, 400ms back) and leaves only at the
+// top of a breath, whole, so nothing jumps. The sheet then fades away over 1.2s, laying the page bare gradually.
+function leaveIntro(mark, ready, played, done) {
+  const root = document.documentElement;
+  let isReady = false, gone = false;
+  ready.then(() => {isReady = true;});
+  const go = () => {
+    if (gone || root.dataset.intro === 'leaving' || root.dataset.intro === 'done') return;
+    gone = true;
+    root.dataset.intro = 'leaving';
+    setTimeout(() => {root.dataset.intro = 'done';done();}, 1200);
+  };
+  played.then(() => {
+    if (root.dataset.intro !== 'on') return;
+    if (isReady) {go();return;}
+    root.dataset.intro = 'waiting';
+    ready.then(() => {
+      const breath = mark?.getAnimations?.().find(animation => animation.animationName === 'site-intro-breathe');
+      if (!breath?.effect) {go();return;}
+      // The breath runs to the end of the one it is in, where the mark is whole, and the mark leaves from there.
+      const timing = breath.effect.getComputedTiming();
+      breath.effect.updateTiming({iterations: (timing.currentIteration ?? 0) + 1});
+      breath.finished.then(go, go);
+    });
+  });
 }
 
 // The arch (/blueprint/ 452c7d0): it opens with the scroll over 85% of a screen, following the page with a short lag
@@ -637,7 +688,18 @@ function markRails() {
   });
 }
 
+// After a change of language the menu's preview keeps its picture and its caption takes the new language (the script
+// writes the caption on hover, so the page's own words do not reach it; +layout.svelte, "Language").
+function retitlePreview() {
+  const figure = document.querySelector('#site-menu .menu-preview');
+  const caption = figure?.querySelector('figcaption');
+  if (!caption) return;
+  const shown = figure.querySelector('.menu-preview-image img:not(.is-leaving)')?.getAttribute('src');
+  const link = shown ? [...document.querySelectorAll('#site-menu .menu-column a[data-cover]')].find(a => a.dataset.cover === shown) : null;
+  caption.textContent = link && shown !== figure.dataset.cover ? link.textContent.trim() : figure.dataset.name || caption.textContent;
+}
 export function enhancePage() {
+  retitlePreview();
   markRails();
   setupFilms();
   setupDrift();
@@ -676,23 +738,21 @@ export function installInteractions() {
 
   if (window.vessylClips) window.vessylClips.app = true;
   if (!reduced.matches) lenis = new Lenis({lerp: 0.09, wheelMultiplier: 0.9, smoothWheel: true, autoRaf: true, stopInertiaOnNavigate: true});
-  // The opening mark (components/Intro.svelte): it leaves when the fonts are in, the page's first picture is decoded and
-  // its first clip moves (speed, stage 2), not before the mark has played and held a moment (2.1s from the start of the
-  // load) and not after 3s; the page scrolls only then.
+  // The opening mark (components/Intro.svelte; owner, 2026-11-10): the site warms up under it, and it leaves once the
+  // page has fully loaded and the warm-up is done (warmSite): the fonts in, the window's load, the page's first picture
+  // decoded and its first clip moving (speed, stage 2), the pictures warmed. Never before the mark has played (2.1s from
+  // the start of the load), and in any case by 6s. The page scrolls only then.
   const root = document.documentElement;
   if (root.dataset.intro === 'on') {
+    // From here this script leads the mark; the head script's own lift at 3.6s is only for a script that never came.
+    root.dataset.introLead = '';
     lenis?.stop();
     const slug = pageSlug(location.pathname);
     const pictures = (heroes[slug] || []).map(path => firstPicture(slug, path).decode().catch(() => {}));
-    const ready = Promise.all([document.fonts?.ready, firstClipMoving(), ...pictures]).catch(() => {});
-    const cap = new Promise(resolve => setTimeout(resolve, Math.max(0, 3000 - performance.now())));
-    Promise.race([ready, cap]).then(() => {
-      setTimeout(() => {
-        // The head script lifts the mark by itself at 3.6s, in case this script came late or not at all.
-        if (root.dataset.intro === 'on') root.dataset.intro = 'leaving';
-        setTimeout(() => {root.dataset.intro = 'done';lenis?.start();}, 800);
-      }, Math.max(0, 2100 - performance.now()));
-    });
+    const loaded = document.readyState === 'complete' ? null : new Promise(resolve => addEventListener('load', resolve, {once: true}));
+    const until = ms => new Promise(resolve => setTimeout(resolve, Math.max(0, ms - performance.now())));
+    const ready = Promise.all([document.fonts?.ready, firstClipMoving(), loaded, ...pictures, warmSite()]).catch(() => {});
+    leaveIntro(document.querySelector('.site-intro-mark'), Promise.race([ready, until(6000)]), until(2100), () => lenis?.start());
   }
   let railFrame = 0, headerFrame = 0;
   addEventListener('resize', () => {cancelAnimationFrame(railFrame);railFrame = requestAnimationFrame(() => {markRails();setupArch();updateDrift();updateRise();updateNext();setupRail();setupChange();updateHeader();});}, {signal});

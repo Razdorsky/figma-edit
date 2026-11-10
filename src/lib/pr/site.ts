@@ -16,6 +16,9 @@ export const route=(edition:Edition,slug='',base='',locale:Locale='en')=>`${base
 /** A route parameter such as "es/villas" split into its language and page slug. */
 export function parseSlug(param=''):{locale:Locale;slug:string}{const clean=param.replace(/^\/|\/$/g,'');return clean==='es'||clean.startsWith('es/')?{locale:'es',slug:clean.slice(3)}:{locale:'en',slug:clean};}
 export function photo(index:number){const aliases=(media.find(p=>p.index===index)?.aliases||{}) as Record<string,string>;return Object.entries(aliases).find(([key,url])=>!/Logo|Wordmark|Symbol|Pattern|Color|Group|Vector/i.test(key)&&!url.endsWith('.svg'))?.[1]||Object.values(aliases).find(u=>!u.endsWith('.svg'))||'';}
+// The same photograph as a light copy (its short side 640px; public/media/pr-thumbs) for the mega panels' cards, which show it
+// at about 200px and are warmed under the opening mark (owner, 2026-11-10: 1.4 MB instead of about 9 MB).
+export function megaPhoto(index:number){return photo(index).replace(/^\/media\//,'/media/pr-thumbs/');}
 export const canvas=(_edition:string,_index:number)=>'#FAFBF5';
 
 export const base=__SITE_BASE__;

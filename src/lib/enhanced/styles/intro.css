@@ -1,17 +1,30 @@
-/* Figma Enhanced — the opening mark on the first visit (components/Intro.svelte). White, as the site's pages, with the
-   mark in the designer's copper; the page loads beneath it. */
+/* Figma Enhanced — the opening mark on every load (components/Intro.svelte). White, as the site's pages, with the mark
+   in black; the page loads and the site warms up beneath it (interactions.js, warmSite and leaveIntro). States of
+   html[data-intro]: on (the mark builds), waiting (the mark has played and breathes while the warm-up finishes),
+   leaving (the sheet fades away from a whole mark), done. */
 body[data-edition="figma-enhanced"] .site-intro { display: none; }
-html:is([data-intro="on"], [data-intro="leaving"]) body[data-edition="figma-enhanced"] .site-intro {
+html:is([data-intro="on"], [data-intro="waiting"], [data-intro="leaving"]) body[data-edition="figma-enhanced"] .site-intro {
   position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; background: #fff; color: #000; /* the mark in black, as Blueprint's opening (owner, 2026-11-10; it was the designer's copper) */
 }
-html[data-intro="on"] { overflow: hidden; }
+html:is([data-intro="on"], [data-intro="waiting"]) { overflow: hidden; }
 body[data-edition="figma-enhanced"] .site-intro-mark { display: grid; justify-items: center; gap: clamp(14px, 1.6vw, 21px); }
 body[data-edition="figma-enhanced"] .site-intro-symbol { width: clamp(80px, 8.5vw, 116px); }
 body[data-edition="figma-enhanced"] .site-intro-word { width: clamp(150px, 16vw, 220px); }
 body[data-edition="figma-enhanced"] .site-intro :is(.site-intro-symbol, .site-intro-word) svg { display: block; width: 100%; height: auto; fill: currentColor; }
 html[data-intro="on"] body[data-edition="figma-enhanced"] .site-intro-symbol { animation: site-intro-rise 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s both; }
 html[data-intro="on"] body[data-edition="figma-enhanced"] .site-intro-word { animation: site-intro-word 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.85s both; }
-html[data-intro="leaving"] body[data-edition="figma-enhanced"] .site-intro { animation: site-intro-lift 0.8s cubic-bezier(0.4, 0, 0.2, 1) both; }
+/* Owner, 2026-11-10: while the warm-up takes longer than the mark, the mark breathes, very slowly and softly — 400ms to
+   30% and 400ms back to whole — and the sheet leaves only from a whole mark (leaveIntro ends the breath at its top). */
+html[data-intro="waiting"] body[data-edition="figma-enhanced"] .site-intro-mark { animation: site-intro-breathe 800ms ease-in-out infinite; }
+/* The sheet fades away over 1.2s, laying the page bare gradually (it was 0.8s with a blur). */
+html[data-intro="leaving"] body[data-edition="figma-enhanced"] .site-intro { animation: site-intro-lift 1.2s cubic-bezier(0.45, 0, 0.25, 1) both; }
 @keyframes site-intro-rise { from { clip-path: inset(100% 0 0 0); opacity: 0.4; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
 @keyframes site-intro-word { from { opacity: 0; filter: blur(8px); } to { opacity: 1; filter: blur(0); } }
-@keyframes site-intro-lift { to { opacity: 0; filter: blur(12px); visibility: hidden; } }
+@keyframes site-intro-breathe { 50% { opacity: 0.3; } }
+@keyframes site-intro-lift { to { opacity: 0; visibility: hidden; } }
+/* With reduced motion the mark appears whole at once (the global rule in shell.css), but the mark still breathes and the
+   sheet still fades: both change only opacity, and a cut would be the jump the owner ruled out. */
+@media (prefers-reduced-motion: reduce) {
+  html[data-intro="waiting"] body[data-edition="figma-enhanced"] .site-intro-mark { animation-duration: 800ms !important; }
+  html[data-intro="leaving"] body[data-edition="figma-enhanced"] .site-intro { animation-duration: 1.2s !important; }
+}

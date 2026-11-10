@@ -208,9 +208,29 @@ results. How it works, the translation and the checks: `docs/figma-spanish.md`.
 
 `src/lib/pr/components/Intro.svelte`, `src/lib/pr/styles/motion.css`, `interactions.js` (owner, 2026-11-10): the
 Vessyl symbol in black builds from the bottom up and the word appears, on the PR paper, as Figma Enhanced and Blueprint
-open. It plays on every load of a page, a reload included, and with reduced motion too. It leaves when the fonts are in
-and the first picture is decoded, not before 2.1s from the start of the load and not after 3s; a head script lifts it at
-3.6s if the controller is late. The page underneath loads meanwhile.
+open. It plays on every load of a page, a reload included, and with reduced motion too; a change of language does not
+reload the page, so it never shows the mark ("Language" below).
+
+Owner, 2026-11-10: the site warms up under the mark, and the mark leaves after the full load. It waits for the fonts,
+the window's `load`, the first picture decoded and the warm-up (`warmSite`): the mega panels' pictures, now light copies
+(`public/media/pr-thumbs/`, the short side 640px, 1.4 MB for the ten photographs instead of about 9 MB at full size;
+`megaPhoto` in `site.ts`), loaded and decoded where the header shows the panels (before, they loaded when a panel
+opened). Never before 2.1s, in any case by 6s. Past 2.1s, while the warm-up runs, the mark breathes very slowly and
+softly — 400ms to 30% and 400ms back (`html[data-intro="waiting"]`) — and when everything is ready the breath it is in
+runs to its end, where the mark is whole, and the sheet leaves from there (`leaveIntro`), fading away over 1.2s (it was
+0.8s with a blur). A head script lifts it at 3.6s only if the page script never came. Measured with the cache off: at
+4 Mbit/s Villas waits from 3.2s, breathes, reaches the 6s limit and leaves with the mark whole.
+
+## Language
+
+Owner, 2026-11-10: EN | ES changes the page's text smoothly, with no reload and no opening mark. The links in the
+utility row and the menu navigate inside the site with `data-sveltekit-reset="false"` (the scroll and the focus stay).
+The page's own words are rebuilt (`{#key data.locale}` in `[...slug]/+page.svelte`); the header, the menu and the footer
+change theirs in place. The block at the top of the screen keeps its exact place (`+layout.svelte`, `keepPlace`,
+`returnToPlace`), an open menu stays open, the pictures on screen are decoded first (at most 350ms), and the page in the
+new language fades in over the old one for 700ms (`motion.css`, `data-vt="lang"`), so the words crossfade while the
+pictures stand still. Checked in Chrome, WebKit and Firefox, from the utility row and from the menu, at the top of a
+page and halfway down.
 
 ## The Dome photograph on Home
 

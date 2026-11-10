@@ -36,8 +36,16 @@ English is the source. The Spanish is a dictionary keyed by the English text: `s
 
 The designer's "EN | ES" in the header, and the globe with "EN" or "ES" in the menu, are links to the
 same page in the other language (since 2026-11-10 the footer has no EN | ES, as on Figma PR) (`hreflang`, an `aria-label` that names the current language and the switch). The
-current language is underlined. The switch loads the page afresh (`data-sveltekit-reload`): some mechanics rebuild
-their words (the text that changes with the photograph, step 2.7), and a fresh page never mixes the two languages.
+current language is underlined. Since 2026-11-10 the switch changes the words in place, with no reload and no opening
+mark (owner: the language changes through a smooth change of the page's text): the links navigate inside the site with
+`data-sveltekit-reset="false"` (SvelteKit 3: the scroll and the focus stay), the page's own words are rebuilt
+(`{#key data.locale}` in `[...slug]/+page.svelte`, because some mechanics lay out their words themselves, such as the
+text that changes with the photograph, step 2.7), and the header, the menu and the footer change theirs in place. The
+block at the top of the screen keeps its exact place (`+layout.svelte`, `keepPlace` and `returnToPlace`), an open menu
+or booking bar stays open, the pictures on screen are decoded first (at most 350ms), and the page in the new language
+fades in over the old one for 700ms (`motion.css`, `data-vt="lang"`), so the words crossfade while the pictures stand
+still. The clips-first gate is not used for a switch, and the menu's preview caption takes the new language too.
+Before, the switch loaded the page afresh (`data-sveltekit-reload`) and so showed the opening mark.
 
 ## Booking
 

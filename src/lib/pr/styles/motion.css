@@ -31,19 +31,34 @@ body[data-edition="figma-pr"] .current-page {
   body[data-edition="figma-pr"] * { transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
 }
 
-/* ---- Opening mark (owner, 2026-11-10; components/Intro.svelte): black on the PR paper, on every page load ---------- */
+/* ---- Opening mark (owner, 2026-11-10; components/Intro.svelte): black on the PR paper, on every page load ----------
+   The site warms up beneath it (interactions.js, warmSite and leaveIntro). States of html[data-intro]: on (the mark
+   builds), waiting (the mark has played and breathes while the warm-up finishes), leaving (the sheet fades away from a
+   whole mark), done. A change of language does not reload the page, so it never shows the mark. */
 body[data-edition="figma-pr"] .pr-intro { display: none; }
-html:is([data-intro="on"], [data-intro="leaving"]) body[data-edition="figma-pr"] .pr-intro {
+html:is([data-intro="on"], [data-intro="waiting"], [data-intro="leaving"]) body[data-edition="figma-pr"] .pr-intro {
   position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; background: #FAFBF5; color: #000;
 }
-html[data-intro="on"]:has(body[data-edition="figma-pr"]) { overflow: hidden; }
+html:is([data-intro="on"], [data-intro="waiting"]):has(body[data-edition="figma-pr"]) { overflow: hidden; }
 body[data-edition="figma-pr"] .pr-intro-mark { display: grid; justify-items: center; gap: clamp(14px, 1.6vw, 21px); }
 body[data-edition="figma-pr"] .pr-intro-symbol { width: clamp(80px, 8.5vw, 116px); }
 body[data-edition="figma-pr"] .pr-intro-word { width: clamp(150px, 16vw, 220px); }
 body[data-edition="figma-pr"] .pr-intro :is(.pr-intro-symbol, .pr-intro-word) svg { display: block; width: 100%; height: auto; fill: currentColor; }
 html[data-intro="on"] body[data-edition="figma-pr"] .pr-intro-symbol { animation: pr-intro-rise 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s both; }
 html[data-intro="on"] body[data-edition="figma-pr"] .pr-intro-word { animation: pr-intro-word 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.85s both; }
-html[data-intro="leaving"] body[data-edition="figma-pr"] .pr-intro { animation: pr-intro-lift 0.8s cubic-bezier(0.4, 0, 0.2, 1) both; }
+/* While the warm-up takes longer than the mark, the mark breathes, very slowly and softly — 400ms to 30% and 400ms back
+   to whole — and the sheet leaves only from a whole mark (leaveIntro ends the breath at its top). */
+html[data-intro="waiting"] body[data-edition="figma-pr"] .pr-intro-mark { animation: pr-intro-breathe 800ms ease-in-out infinite; }
+/* The sheet fades away over 1.2s, laying the page bare gradually (it was 0.8s with a blur). */
+html[data-intro="leaving"] body[data-edition="figma-pr"] .pr-intro { animation: pr-intro-lift 1.2s cubic-bezier(0.45, 0, 0.25, 1) both; }
 @keyframes pr-intro-rise { from { clip-path: inset(100% 0 0 0); opacity: 0.4; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
 @keyframes pr-intro-word { from { opacity: 0; filter: blur(8px); } to { opacity: 1; filter: blur(0); } }
-@keyframes pr-intro-lift { to { opacity: 0; filter: blur(12px); visibility: hidden; } }
+@keyframes pr-intro-breathe { 50% { opacity: 0.3; } }
+@keyframes pr-intro-lift { to { opacity: 0; visibility: hidden; } }
+
+/* ---- Language (owner, 2026-11-10; +layout.svelte, "Language"): the words crossfade in place ----------------------
+   The page in the new language fades in over the old one, which stays whole, so nothing dims on the way and the
+   pictures, the same in both, stand still. */
+html[data-vt="lang"]::view-transition-old(root) { animation: none; }
+html[data-vt="lang"]::view-transition-new(root) { animation: pr-lang-in 700ms cubic-bezier(0.4, 0, 0.2, 1) both; mix-blend-mode: normal; }
+@keyframes pr-lang-in { from { opacity: 0; } }

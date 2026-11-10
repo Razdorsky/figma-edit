@@ -42,7 +42,8 @@ let Content=$derived(components[data.page.index-1]);
 <svelte:head><title>{tr(data.locale,data.page.name)} — The Vessyl</title><meta name="description" content={`${tr(data.locale,data.page.name)} — ${tr(data.locale,'The Vessyl in Arenal, Costa Rica')}`}/><link rel="alternate" hreflang="en" href={route(data.edition,data.page.slug,base,'en')}/><link rel="alternate" hreflang="es" href={route(data.edition,data.page.slug,base,'es')}/><meta name="theme-color" content={canvas(data.edition,data.page.index)}/></svelte:head>
 <a class="skip-link" href="#content">{tr(data.locale,'Skip to content')}</a>
 <Header edition={data.edition} page={data.page} {base} locale={data.locale}/>
-<main class="current-page" id="content" data-page={data.page.slug||'home'} data-index={String(data.page.index).padStart(2,'0')}><Content edition={data.edition} {base} locale={data.locale}/></main>
+<main class="current-page" id="content" data-page={data.page.slug||'home'} data-index={String(data.page.index).padStart(2,'0')}><!-- A change of language rebuilds the page's own words (some mechanics lay their words out themselves); the header,
+menu and footer change theirs in place (owner, 2026-11-10: no reload, no opening mark). -->{#key data.locale}<Content edition={data.edition} {base} locale={data.locale}/>{/key}</main>
 <Footer edition={data.edition} page={data.page} {base} locale={data.locale}/>
 <Menu edition={data.edition} page={data.page} {base} locale={data.locale}/>
 <Gallery locale={data.locale}/>

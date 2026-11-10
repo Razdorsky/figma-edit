@@ -408,7 +408,7 @@ The owner: one of the site's versions opens with the Vessyl logo appearing smoot
 ### Opening mark
 
 - Taken from /blueprint/ 452c7d0 (`src/lib/blueprint/components/Intro.svelte`): the symbol builds from the bottom up as it is drawn, then the word appears out of a blur, then the whole screen lifts away. Here it is white, like the site's pages, with the mark in the designer's copper (`#a2551b`, `public/brand/logo-copper.svg`).
-- It leaves when the page is ready: the fonts are in and the page's first picture is decoded. It never leaves before the mark has played and held a moment (2.1s from the start of the load) and never stays past 3s; if the page script comes late or not at all, the head script lifts it by itself at 3.6s. Scrolling waits for it.
+- It leaves when the page is ready: the fonts are in and the page's first picture is decoded. It never leaves before the mark has played and held a moment (2.1s from the start of the load) and never stays past 3s; if the page script comes late or not at all, the head script lifts it by itself at 3.6s. Scrolling waits for it. (Since 2026-11-10 it waits for the whole load and the warm-up, breathes while it waits, and fades away over 1.2s: "Warm-up under the opening mark" below.)
 - On every load of a page, a reload included, and with reduced motion too (owner, 2026-11-10; until then once per visit, sessionStorage `vessyl:intro`, and never under reduced motion).
 - Built: `components/Intro.svelte`, `styles/intro.css`, the head script in `src/routes/figma-enhanced/+layout.svelte`, and the exit in `interactions.js` (`installInteractions`).
 
@@ -421,6 +421,33 @@ The owner: one of the site's versions opens with the Vessyl logo appearing smoot
 - **The next page:** once the current page has loaded and the browser is idle, the first picture of the page behind the next-page block is fetched (`warmNext`).
 - **No films are prefetched.** Nothing depends on data saver or the connection speed.
 - What came after (clips first, phone versions, photographs in sizes for the screen) is in `docs/figma-enhanced-speed.md`.
+
+### Warm-up under the opening mark (owner, 2026-11-10)
+
+The owner: after the full load the mark fades away smoothly, laying the page bare gradually; the site warms up while
+the mark is on; when the warm-up takes longer than the mark, the logo breathes, very slowly and softly, 400ms to 30% and
+400ms back, and the sheet starts to leave only from a whole mark, so nothing jumps. `interactions.js` (`warmSite`,
+`leaveIntro`), `styles/intro.css`, the head script in `+layout.svelte`.
+
+- **What the mark waits for:** the fonts, the window's `load` (the whole page, not only its first picture), the page's
+  first picture decoded and its first clip moving, and the warm-up: the mega panels' 640px photographs where the header
+  shows the panels (they loaded when a panel was pointed at), the menu's previews from 1180px, where the menu shows them,
+  and the first picture of the page behind the next-page block (it came when the browser was idle). They load at low
+  priority, after the page's own first picture and clip, and are decoded. Films are never fetched ahead.
+- **When:** never before 2.1s (the mark has played); in any case by 6s, so a slow connection never keeps the visitor
+  on a white screen. If everything is ready by 2.1s the sheet leaves at once.
+- **Breathing:** past 2.1s, while the warm-up runs, `html[data-intro="waiting"]` makes the mark breathe (800ms cycles,
+  `ease-in-out`: 100% → 30% → 100%). When everything is ready, the breath it is in runs to its end, where the mark is
+  whole, and the sheet leaves from there.
+- **Leaving:** the sheet fades from 100% to 0 over 1.2s (`cubic-bezier(0.45, 0, 0.25, 1)`); it was 0.8s with a blur.
+  With reduced motion the mark appears whole at once, but it still breathes and the sheet still fades: both change only
+  opacity, and a cut would be the jump the owner ruled out.
+- **The head script** lifts the mark at 3.6s only if the page script never came (the page script marks itself with
+  `data-intro-lead`).
+- **A change of language** no longer reloads the page, so it never shows the mark (`docs/figma-enhanced-spanish.md`).
+- Measured in Chrome with the cache off: on a fast connection the sheet starts to leave at 2.1s with the mark whole, and
+  is gone at 3.3s; at 8 Mbit/s the mark breathes from 2.1s to 4.6s (opacity 1 → 0.31 → 1 every 800ms) and the sheet
+  leaves with the mark whole.
 
 ### Measured (Lighthouse 12, live, 2026-11-09)
 

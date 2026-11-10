@@ -155,6 +155,51 @@ export function enhancePage() {
   });
 }
 
+
+// Warm-up under the opening mark (owner, 2026-11-10): the mega panels' pictures (light copies, public/media/pr-thumbs)
+// load and are decoded while the mark plays, where the header shows the panels; until now they loaded when a panel
+// opened. The promise settles when all are decoded; the mark waits for it (at most until 6s).
+function warmSite() {
+  const jobs = [];
+  for (const group of document.querySelectorAll('.pr-nav-group')) {
+    if (!group.getClientRects().length) continue;
+    group.querySelectorAll('img[data-src]').forEach(img => {
+      img.fetchPriority = 'low';
+      img.src = img.dataset.src;
+      img.removeAttribute('data-src');
+      jobs.push(img.decode().catch(() => {}));
+    });
+  }
+  return Promise.all(jobs);
+}
+// The mark's way out (owner, 2026-11-10). When the page is ready by the time the mark has played, the sheet fades away
+// at once; if the warm-up takes longer, the mark breathes (motion.css: 400ms to 30%, 400ms back) and leaves only at the
+// top of a breath, whole, so nothing jumps. The sheet then fades away over 1.2s, laying the page bare gradually.
+function leaveIntro(mark, ready, played, later) {
+  const root = document.documentElement;
+  let isReady = false, gone = false;
+  ready.then(() => {isReady = true;});
+  const go = () => {
+    if (gone || root.dataset.intro === 'leaving' || root.dataset.intro === 'done') return;
+    gone = true;
+    root.dataset.intro = 'leaving';
+    later(() => {root.dataset.intro = 'done';}, 1200);
+  };
+  played.then(() => {
+    if (root.dataset.intro !== 'on') return;
+    if (isReady) {go();return;}
+    root.dataset.intro = 'waiting';
+    ready.then(() => {
+      const breath = mark?.getAnimations?.().find(animation => animation.animationName === 'pr-intro-breathe');
+      if (!breath?.effect) {go();return;}
+      // The breath runs to the end of the one it is in, where the mark is whole, and the mark leaves from there.
+      const timing = breath.effect.getComputedTiming();
+      breath.effect.updateTiming({iterations: (timing.currentIteration ?? 0) + 1});
+      breath.finished.then(go, go);
+    });
+  });
+}
+
 export function installInteractions() {
   const controller = new AbortController();
   const {signal} = controller;
@@ -168,19 +213,19 @@ export function installInteractions() {
   const gallery = () => document.querySelector('.gallery-dialog');
 
   resetPendingMenu=()=>{clearTimeout(menuCloseTimer);menuCloseTimer=undefined;menu()?.classList.remove('closing');};
-  // Opening mark (components/Intro.svelte): it leaves when the fonts are in and the page's first picture is decoded, not
-  // before the mark has played and held a moment (2.1s from the start of the load) and not after 3s.
+  // Opening mark (components/Intro.svelte; owner, 2026-11-10): the site warms up under it, and it leaves once the page
+  // has fully loaded and the warm-up is done (warmSite): the fonts in, the window's load, the page's first picture
+  // decoded, the mega panels' pictures decoded. Never before the mark has played (2.1s from the start of the load), and
+  // in any case by 6s.
   const root = document.documentElement;
   if (root.dataset.intro === 'on') {
+    // From here this script leads the mark; the head script's own lift at 3.6s is only for a script that never came.
+    root.dataset.introLead = '';
     const first = document.querySelector('.current-page img');
-    const ready = Promise.all([document.fonts?.ready, first?.decode?.().catch(() => {})]).catch(() => {});
-    const cap = new Promise(resolve => setTimeout(resolve, Math.max(0, 3000 - performance.now())));
-    Promise.race([ready, cap]).then(() => {
-      later(() => {
-        if (root.dataset.intro === 'on') root.dataset.intro = 'leaving';
-        later(() => {root.dataset.intro = 'done';}, 800);
-      }, Math.max(0, 2100 - performance.now()));
-    });
+    const loaded = document.readyState === 'complete' ? null : new Promise(resolve => addEventListener('load', resolve, {once: true}));
+    const until = ms => new Promise(resolve => later(resolve, Math.max(0, ms - performance.now())));
+    const ready = Promise.all([document.fonts?.ready, loaded, first?.decode?.().catch(() => {}), warmSite()]).catch(() => {});
+    leaveIntro(document.querySelector('.pr-intro-mark'), Promise.race([ready, until(6000)]), until(2100), later);
   }
   // Owner's request, 2026-11-07: page text cannot be selected or copied (see also figma.css).
   // Form fields stay editable: their text can be selected, copied, cut and pasted.

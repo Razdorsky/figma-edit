@@ -63,9 +63,10 @@
       <img class="logo-dark" src={asset('/brand/logo-dark.svg')} width="210" height="39" alt="" />
     </a>
     <div class="header-actions">
-      <!-- The designer's EN | ES: a link to this page in the other language; the current one is underlined. The page loads
-           afresh, because some mechanics rebuild their words (the text that changes with the photograph). -->
-      <a class="language-trigger" data-language-trigger data-sveltekit-reload href={route(edition, page.slug, base, other(locale))} hreflang={other(locale)} aria-label={tr(locale, 'Language: English. Switch to Spanish')}>
+      <!-- The designer's EN | ES: a link to this page in the other language; the current one is underlined. Since
+           2026-11-10 the words change in place, without the opening mark: the page keeps its place and its focus, and its
+           text crossfades into the other language (+layout.svelte, "Language"). -->
+      <a class="language-trigger" data-language-trigger data-sveltekit-reset="false" href={route(edition, page.slug, base, other(locale))} hreflang={other(locale)} aria-label={tr(locale, 'Language: English. Switch to Spanish')}>
         <span><span data-lang-current={locale === 'en' || undefined}>EN</span> | <span data-lang-current={locale === 'es' || undefined}>ES</span></span>
       </a>
       <button type="button" class="nav-book" data-booking-open bind:this={reserve} aria-expanded={bookingOpen} aria-controls="booking-panel" onclick={() => (bookingOpen = !bookingOpen)}>{tr(locale, 'CHECK AVAILABILITY')}</button>

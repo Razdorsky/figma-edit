@@ -42,8 +42,46 @@
   // browser never fetches two sizes of it.
   const heroSet = $derived((heroPhotos as unknown as Record<string, {sizes: string; set: [string, number][]}>)[parseSlug(page.params.slug).slug]);
   onMount(installInteractions);
+  // Language (owner, 2026-11-10): EN | ES changes the words in place, with no reload and no opening mark. The block at
+  // the top of the screen keeps its place, an open menu or booking bar stays open, and the page crossfades into the other
+  // language (onNavigate below; motion.css, data-vt="lang"). The page's own words are rebuilt ([...slug]/+page.svelte).
+  const languageSwitch = (navigation: {from: {params: Record<string, string> | null} | null; to: {params: Record<string, string> | null} | null}) => {
+    if (!navigation.from?.params || !navigation.to?.params) return false;
+    const from = parseSlug(navigation.from.params.slug ?? ''), to = parseSlug(navigation.to.params.slug ?? '');
+    return from.slug === to.slug && from.locale !== to.locale;
+  };
+  let place: {index: number; top: number} | null = null;
+  const blocks = () => [...document.querySelectorAll<HTMLElement>('.current-page > *')];
+  function keepPlace() {
+    const under = Math.max(0, document.querySelector('[data-header]')?.getBoundingClientRect().bottom ?? 0);
+    const list = blocks();
+    const index = list.findIndex(block => block.getBoundingClientRect().bottom > under);
+    place = index < 0 ? null : {index, top: list[index].getBoundingClientRect().top};
+  }
+  function returnToPlace() {
+    const block = place && blocks()[place.index];
+    if (block && place) window.scrollTo({top: scrollY + block.getBoundingClientRect().top - place.top, behavior: 'instant'});
+    place = null;
+  }
+  // The rebuilt page's pictures on screen are decoded before the crossfade shows it (at most 350ms).
+  async function pictureSettled() {
+    const shown = [...document.querySelectorAll<HTMLImageElement>('.current-page img')].filter(image => {
+      const box = image.getBoundingClientRect();
+      return box.width > 0 && box.bottom > 0 && box.top < innerHeight;
+    });
+    await Promise.race([Promise.all(shown.map(image => image.decode().catch(() => {}))), new Promise(resolve => setTimeout(resolve, 350))]);
+  }
   // Step 2.2: any glide still running stops when a navigation starts (Back right after a wheel included).
-  beforeNavigate(() => {closeOverlays();smooth()?.stop();});
+  beforeNavigate(navigation => {
+    if (languageSwitch(navigation)) {
+      keepPlace();
+      document.documentElement.dataset.switching = 'language';
+      smooth()?.stop();
+      return;
+    }
+    closeOverlays();
+    smooth()?.stop();
+  });
   afterNavigate(() => {
     // Moderate prewarming: SvelteKit fetches a page's data while its link is pointed at.
     document.body.setAttribute('data-sveltekit-preload-data', 'hover');
@@ -56,12 +94,14 @@
     document.body.dataset.page = item?.slug || 'home';
     document.body.dataset.heroTheme = item?.photo ? 'photo' : 'paper';
     document.documentElement.style.setProperty('--canvas', canvas(edition, item?.index || 0));
+    if (place) returnToPlace();
     // Step 2.2: Lenis follows the position SvelteKit chose, so it never scrolls the new page back.
     const lenis = smooth();
     if (lenis && !document.querySelector('dialog[open]')) lenis.start();
     lenis?.resize();
     lenis?.scrollTo(window.scrollY, {immediate: true, force: true});
     enhancePage();
+    delete document.documentElement.dataset.switching;
   });
 
   // Step 2.2 (docs/figma-enhanced-step2.md): the Legacy Blueprint page transition. The page dissolves; when the
@@ -92,6 +132,25 @@
   onNavigate(navigation => {
     activeTransition?.skipTransition();
     const root = document.documentElement;
+    if (languageSwitch(navigation)) {
+      delete root.dataset.vtHeader;
+      if (!document.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches) {delete root.dataset.vt;return;}
+      root.dataset.vt = 'lang';
+      return new Promise<void>(resolveNavigation => {
+        const transition = document.startViewTransition(async () => {
+          resolveNavigation();
+          await navigation.complete;
+          await pictureSettled();
+        });
+        activeTransition = transition;
+        transition.ready.catch(() => {});
+        transition.finished.finally(() => {
+          if (activeTransition !== transition) return;
+          activeTransition = undefined;
+          delete root.dataset.vt;
+        }).catch(() => {});
+      });
+    }
     if (!document.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches || navigation.shallow
       || navigation.from?.url.pathname === navigation.to?.url.pathname) {
       delete root.dataset.vt;
@@ -142,8 +201,10 @@
   {:else if hero}<link rel="preload" href={`${base.replace(/\/$/, '')}${hero}`} as="image" fetchpriority="high" />{/if}
   {@html clipsFirstScript}
   <!-- The opening mark plays on every load of a page, a reload included, and with reduced motion too (owner, 2026-11-10;
-       before, once per visit and never with reduced motion). -->
-  {@html `<script>try{var d=document.documentElement;d.dataset.intro='on';setTimeout(function(){if(d.dataset.intro==='on'){d.dataset.intro='leaving';setTimeout(function(){d.dataset.intro='done'},800)}},3600)}catch(e){}</script>`}
+       before, once per visit and never with reduced motion); a change of language does not reload the page, so it never
+       shows the mark. The page script leads the mark (interactions.js, leaveIntro); this lifts it at 3.6s only if that
+       script never came. -->
+  {@html `<script>try{var d=document.documentElement;d.dataset.intro='on';setTimeout(function(){if(d.dataset.intro==='on'&&!('introLead' in d.dataset)){d.dataset.intro='leaving';setTimeout(function(){d.dataset.intro='done'},1200)}},3600)}catch(e){}</script>`}
 </svelte:head>
 
 <Intro />

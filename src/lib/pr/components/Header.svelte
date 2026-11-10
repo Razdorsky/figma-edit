@@ -4,7 +4,7 @@
   // utility row leaves when the page scrolls down and comes back as soon as it scrolls up (interactions.js); while it is
   // away, the small wordmark opens the navigation row and MENU moves aside for it. The words are the frame's header and
   // menu words. The booking panel is Four Seasons' booking bar: dates and guests open Orbe's results.
-  import { pages, photo, route } from '#lib/pr/site.ts';
+  import { pages, megaPhoto, route } from '#lib/pr/site.ts';
   import Booking from '#lib/pr/components/Booking.svelte';
   import { tr, msg, other, type Locale } from '#lib/pr/i18n.ts';
 
@@ -38,7 +38,7 @@
     </a>
     <!-- The designer's EN | ES, on the right as in the frame's header: a link to this page in the other language; the
          current one is underlined (docs/figma-spanish.md). -->
-    <a class="pr-utility-link pr-utility-lang language-trigger" data-language-trigger data-sveltekit-reload href={route(edition, page.slug, base, other(locale))} hreflang={other(locale)} aria-label={tr(locale, 'Language: English. Switch to Spanish')}><span><span data-lang-current={locale === 'en' || undefined}>EN</span> | <span data-lang-current={locale === 'es' || undefined}>ES</span></span></a>
+    <a class="pr-utility-link pr-utility-lang language-trigger" data-language-trigger data-sveltekit-reset="false" href={route(edition, page.slug, base, other(locale))} hreflang={other(locale)} aria-label={tr(locale, 'Language: English. Switch to Spanish')}><span><span data-lang-current={locale === 'en' || undefined}>EN</span> | <span data-lang-current={locale === 'es' || undefined}>ES</span></span></a>
   </div>
   <div class="pr-nav-row">
     <a class="pr-brand pr-brand-compact" href={route(edition, '', base, locale)} aria-label={tr(locale, 'Vessyl home')}>
@@ -57,7 +57,7 @@
             <div class="pr-mega-cards">
               {#each group.list.slice(1) as item (item.index)}
                 <a class="pr-mega-card" href={route(edition, item.slug, base, locale)}>
-                  <span class="pr-mega-image"><img data-src={asset(photo(item.index))} alt={tr(locale, item.name)} decoding="async" /></span>
+                  <span class="pr-mega-image"><img data-src={asset(megaPhoto(item.index))} alt={tr(locale, item.name)} decoding="async" /></span>
                   <span class="pr-mega-name">{tr(locale, item.name)}</span>
                 </a>
               {/each}
