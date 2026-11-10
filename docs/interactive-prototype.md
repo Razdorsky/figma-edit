@@ -12,7 +12,9 @@ This document describes the edition as it was brought in (step 0, the baseline):
 
 The prototype arrived as a folder named `Vessyl-concept`: one `index.html` of 1,408 lines with its styles and script inside, fifteen photographs, two logos and three font files. No build, no libraries. The archive is kept outside Git in the raw-source bank, `marketing-site/current-website/2026-11-10-interactive-prototype/`, with the owner's messages.
 
-The author's own description of the concept had not been read when this was written. Everything below is taken from the code and from the screen.
+The owner also gave a link to the prototype published as a Claude artifact. It is the same prototype, live, not a written description: there is no text about the concept behind it. It was walked through on screen on 2026-11-10 (see Checks); its source could not be read, so it was not compared with the archive line by line.
+
+Everything below is taken from the archive's code and from the screen.
 
 ## What the concept is
 
@@ -178,6 +180,7 @@ These are the prototype's own. The baseline keeps them as they are; each is a ca
 **Layout**
 
 - **Phones and tablets.** The prototype's last style block (reduced motion, 1100 px, 860 px) sat behind a comment that was never closed, so none of it applies. At 980 px and narrower the rail is hidden and nothing replaces it. On a phone the logo and the top-right controls overlap, and the headline stays at 60 px.
+- **Short windows.** The rail is centred on the screen's height and grows with its open section. With Experiences or The Property open it is 546 px tall, so in a window shorter than about 740 px it runs under the chapter label and the logo (at 700 px it starts 77 px from the top; the label ends at 96 px). With two six-item sections open at once, while one closes and the next opens or while the pointer holds another one open, it is 779 px tall and reaches the logo in any window shorter than about 970 px.
 - **Reduced motion.** Only the timeline's easing respects it.
 - The shared shell's viewport has no `viewport-fit=cover`, so the prototype's safe-area insets are zero.
 
@@ -199,6 +202,7 @@ These are the prototype's own. The baseline keeps them as they are; each is a ca
 - The rail's current section is copper, while the prototype's own rule keeps copper for what can be bought.
 - The first photograph is not dimmed like the others: the light of the gate sets its filter on every frame. The contrast the text scale counts on is not guaranteed there.
 - The gate's ring is about a fifth full before anyone holds: its length is 270 and the script counts from 220.
+- A press on the gate too short to open it still turns the sound on: it plays behind the closed gate, and it stays on if the reader then enters by scrolling, the way that is labelled "without sound".
 - Eleven scenes, ten ticks: the last scene lights none.
 - The introduction of the Place scene is written by the script, so it is not in the page's HTML.
 - Inner pages, the list and the panel have no addresses: a link cannot point at them, and the browser's Back does not close them.
@@ -215,6 +219,7 @@ These are the prototype's own. The baseline keeps them as they are; each is a ca
 - The 56 pages of `/figma/` are the same before and after, apart from the hashed file names and the build number.
 - The edition against the prototype, side by side in one browser at 1440×900: the comparison above; the same chapter label and the same active classes in every scene; the same result for the booking panel and its tabs, the full list, a written inner page and an outline, Escape, the veil, the sound button, three footer links in a row, and a rail click.
 - The gate's hold opens the site with the sound on.
+- The published artifact, on screen at 1440×900: the gate, all eleven scenes and the footer show the same chapter labels, texts, photographs, rail and controls as the edition; the ring is part-filled at rest in both, and a short press leaves the gate closed in both. This is a comparison by eye, not of code.
 - `npm run build:pages -- interactive-prototype` builds a 10 MB artifact in which every reference resolves.
 - Not checked: Safari and Firefox, and the sound by ear.
 
