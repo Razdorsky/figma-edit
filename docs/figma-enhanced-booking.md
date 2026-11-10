@@ -17,8 +17,9 @@ background now; there are two, each in two strengths:
 | 4 | black | white glass, 86% — after 40px of scrolling, over light sections |
 
 The tone follows the section under the header, as before; the 72% at the top replaces the former full transparency
-("twice as transparent" as the 86% glass). Copper words are gone: on white glass the words, the logo
-(`/brand/logo-dark.svg`) and CHECK AVAILABILITY are black; on green glass they stay white, with the beige button.
+("twice as transparent" as the 86% glass). Copper words are gone: on white glass the words and the logo
+(`/brand/logo-dark.svg`) are black and CHECK AVAILABILITY is the designer's green with beige words (owner, 2026-11-10;
+until then black); on green glass they stay white, with the beige button.
 The former dark brown state of an open mega panel is gone too: mega panels, the booking bar and its calendar open in
 the header's glass of the moment, with its words' colour. A 1px hairline runs under the header — dark on white glass,
 light on green glass — and the copper reading-progress line runs on it. The phone gradient over the opening picture
@@ -145,7 +146,7 @@ them (989 strings).
   the middle (each column as wide as its longest line; one row from 1240px, where the Spanish fits with 32px gaps;
   three over two below; two columns on phones). The small wordmark, EN | ES and CHECK AVAILABILITY are gone; the
   Vessyl symbol, without the word, stands in the middle with the legal lines right under it. The footer's space above
-  is half its space below (`--foot-pad`, the section spacing), measured from the foot of the closing photograph, where
+  is half its space below (`--foot-pad`, the section spacing; later the same day `--foot-space`, below), measured from the foot of the closing photograph, where
   its gradient begins (on phones from the newsletter's button, since the form's empty message line takes no room
   there until it has something to say); the closing block adds no space of its own. Linked column headings take the
   headings' size on phones too.
@@ -189,3 +190,30 @@ block takes none, since that block centres its picture in a whole screen and alr
 Checked at 1440px and 390px on all 18 such blocks of the 28 pages: a whole step to every ordinary neighbour (106px and
 64px). A large title block (Hero text only) keeps its own larger top space, as after any block (137px at 1440px).
 
+## The menu, the header's button and the footer's spaces (owner, 2026-11-10)
+
+- **The menu** (`components/Menu.svelte`, `styles/shell-edition.css`, "The menu's top row and height"). The top row
+  follows Figma PR's: the close button on the left, where MENU opened the menu, in a 44px square with 4px corners (it
+  was a circle on the right); the wordmark in the middle; the globe with EN or ES and CHECK AVAILABILITY ↗ on the right
+  from 1024px, where they fit beside the wordmark (below, they stay at the foot of the menu, as before). The button keeps
+  the designer's green fill and beige words wherever it stands, with 4px corners, as wide as its words. The preview
+  photographs have 4px corners (they were 10px). The group headings and the links are 2px smaller at every width (35px
+  and 20px at 1440px). The menu is more compact in height — a lower top row (80px, 72px on phones), less room under it,
+  12px under the headings, 7px above and below each link, and the two rows of groups closer — so the six groups and the
+  preview fit the screen from 1280×720 up (at 1440×900 it took 1,074px before). On phones the single column still
+  scrolls.
+- **The header's CHECK AVAILABILITY** (`styles/header.css`): on white glass it is the designer's green
+  (`--surface-forest`) with beige words, as the menu's, instead of black; on green glass it stays beige, since green
+  would not show there. CHECK RATES and the chosen days of the calendar wear the button's colour, so they turned green
+  with it. An old rule from the Figma edition that made the button black on pages opening on text now takes the
+  header's colour too (`styles/shell-edition.css`).
+- **The footer's spaces** (`styles/system.css`, `--foot-space`): the space between the links and the symbol now equals
+  the space under the legal lines, midway between the former two (7/8 of the section step: 92px at 1440px, 56px on
+  phones; it was 81px and 105px). The space above the columns stays half the space below (46px at 1440px). The last
+  link of a column no longer adds its own space on phones.
+
+Checked: the menu fits the screen at 1280×720, 1366×768, 1440×800, 1440×900, 1536×864, 1920×1080, 2560×1440 and
+1024×768 in both languages, in Chrome, WebKit and Firefox, with the close button on the left, the wordmark exactly in
+the middle and the button unclipped; the footer's three spaces at 9 screen sizes on two pages in both languages; axe
+(WCAG 2.2 AA) with no violations at the top of the page, with the booking bar, the calendar and the menu open, on a page
+opening on a photograph and on one opening on text, at 1440 and 1024, in both languages.

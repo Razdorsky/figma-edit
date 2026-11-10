@@ -24,7 +24,7 @@ body[data-edition="figma-enhanced"] .site-header[data-theme="dark"] {
 }
 body[data-edition="figma-enhanced"] .site-header[data-theme="light"] {
   --glass: rgb(255 255 255 / var(--glass-alpha)); --muted: #57504a; --rule-ink: rgb(0 0 0 / 0.32);
-  --tint: rgb(0 0 0 / 0.06); --solid: #000; --on-solid: #fff;
+  --tint: rgb(0 0 0 / 0.06); --solid: var(--surface-forest); --on-solid: var(--on-dark); /* the designer's green, as the menu's (owner, 2026-11-10; it was black) */
   color: #000;
 }
 /* The glass: always there, its colour following the theme and its strength the scroll. */
@@ -48,7 +48,8 @@ body[data-edition="figma-enhanced"] .site-header .brand { display: grid; }
 body[data-edition="figma-enhanced"] .site-header .brand img { grid-area: 1 / 1; transition: opacity var(--dur-2) var(--ease); }
 body[data-edition="figma-enhanced"] .site-header[data-theme="dark"] .logo-dark,
 body[data-edition="figma-enhanced"] .site-header[data-theme="light"] .logo-light { opacity: 0; }
-/* The designer's booking button: black on white glass, beige on green glass. */
+/* The designer's booking button: green on white glass (owner, 2026-11-10; it was black), beige on green glass, where green
+   would not show. CHECK RATES and the chosen days of the calendar wear the same colour (booking.css). */
 body[data-edition="figma-enhanced"] .site-header .nav-book { background: var(--solid); color: var(--on-solid); transition: background-color var(--dur-2) var(--ease), color var(--dur-2) var(--ease); }
 body[data-edition="figma-enhanced"] .site-header[data-theme="light"] :is(a, button):focus-visible { outline-color: #000; box-shadow: none; }
 

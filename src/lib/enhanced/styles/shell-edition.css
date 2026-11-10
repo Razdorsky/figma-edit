@@ -20,7 +20,7 @@ body[data-edition="figma-enhanced"] .menu-lines { height: 13px; }
 body[data-edition="figma-enhanced"] .header-actions { gap: 20px; }
 body[data-edition="figma-enhanced"] .nav-book { width: 166px; padding: 8px 20px; font: 500 12px/20px var(--font-body); letter-spacing: .24px; text-align: center; }
 body[data-edition="figma-enhanced"][data-hero-theme="paper"] .site-header { color: #000; }
-body[data-edition="figma-enhanced"][data-hero-theme="paper"] .site-header .nav-book { background: #000; color: #fff; }
+body[data-edition="figma-enhanced"][data-hero-theme="paper"] .site-header .nav-book { background: var(--solid); color: var(--on-solid); } /* the header's own colour (header.css; owner, 2026-11-10: green, it was black) */
 @media (min-width: 761px) {
   body[data-edition="figma-enhanced"][data-hero-theme="photo"] .site-header { background: none; }
   body[data-edition="figma-enhanced"] .site-footer { padding: 0; font-size: 18px; line-height: 25px; }
@@ -62,11 +62,11 @@ body[data-edition="figma-enhanced"] .menu-preview { display: none; }
     display: grid; grid-template-columns: minmax(0, 1fr) clamp(220px, 19vw, 380px); align-items: start; gap: 4vw; max-width: 1560px; margin: auto;
   }
   body[data-edition="figma-enhanced"] .menu-body .menu-columns { max-width: none; margin: 0; gap: 3.4vw 3vw; }
-  body[data-edition="figma-enhanced"] .menu-body .menu-column h2 { font-size: clamp(30px, 2.6vw, 50px); }
-  body[data-edition="figma-enhanced"] .menu-body .menu-column a { font-size: clamp(18px, 1.5vw, 24px); }
+  body[data-edition="figma-enhanced"] .menu-body .menu-column h2 { font-size: clamp(28px, 2.6vw - 2px, 48px); } /* 2px smaller (owner, 2026-11-10) */
+  body[data-edition="figma-enhanced"] .menu-body .menu-column a { font-size: clamp(16px, 1.5vw - 2px, 22px); }
   body[data-edition="figma-enhanced"] .site-menu .menu-footer { max-width: 1560px; }
-  body[data-edition="figma-enhanced"] .menu-preview { display: block; position: sticky; top: 132px; margin: 0; }
-  body[data-edition="figma-enhanced"] .menu-preview-image { position: relative; display: block; overflow: hidden; aspect-ratio: 4 / 5; border-radius: var(--r-photo); background: #e9ddd6; }
+  body[data-edition="figma-enhanced"] .menu-preview { display: block; position: sticky; top: calc(var(--menu-top) + var(--menu-after-top)); margin: 0; }
+  body[data-edition="figma-enhanced"] .menu-preview-image { position: relative; display: block; overflow: hidden; aspect-ratio: 4 / 5; border-radius: 4px; background: #e9ddd6; } /* 4px, as the controls (owner, 2026-11-10) */
   body[data-edition="figma-enhanced"] .menu-preview-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 420ms var(--ease), transform 900ms var(--ease); }
   body[data-edition="figma-enhanced"] .menu-preview-image img.is-leaving { opacity: 0; transform: scale(1.03); }
   body[data-edition="figma-enhanced"] .menu-preview-image img.is-coming { opacity: 0; transform: scale(1.06); }
@@ -80,6 +80,48 @@ body[data-edition="figma-enhanced"] .menu-preview { display: none; }
 }
 @media (min-width: 681px) and (max-width: 1100px) {
   body[data-edition="figma-enhanced"] .menu-columns { gap: 4vw; }
+}
+
+/* The menu's top row and height (owner, 2026-11-10), at the level of the component (Menu.svelte):
+   - as on Figma PR, the close button stands on the left, where MENU opened the menu, in a square with 4px corners; the
+     wordmark in the middle; the language and CHECK AVAILABILITY on the right from 1024px, where they fit beside the
+     wordmark (below, they stay at the foot of the menu);
+   - the headings and the links are 2px smaller at every width;
+   - the menu is more compact in height, so that its six groups and the preview fit a laptop's screen (1280×720 and up):
+     a lower top row, less room under it, under the headings, around the links and between the two rows of groups. */
+body[data-edition="figma-enhanced"] .site-menu { --menu-top: 80px; --menu-after-top: clamp(16px, 3svh, 36px); padding-top: 0; padding-bottom: 24px; }
+body[data-edition="figma-enhanced"] .site-menu .menu-top {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 24px;
+  height: var(--menu-top); margin: 0 0 var(--menu-after-top);
+}
+body[data-edition="figma-enhanced"] .site-menu .menu-top .icon-button { grid-column: 1; justify-self: start; width: 44px; height: 44px; border-radius: var(--r-control); }
+body[data-edition="figma-enhanced"] .site-menu .menu-brand { grid-column: 2; display: block; }
+body[data-edition="figma-enhanced"] .site-menu .menu-top img { width: 180px; }
+body[data-edition="figma-enhanced"] .site-menu .menu-actions-top { grid-column: 3; justify-self: end; display: flex; align-items: center; gap: 20px; }
+/* CHECK AVAILABILITY keeps the designer's own fill wherever it stands, top row or foot (before, only the foot's had it),
+   with the controls' 4px corners. */
+body[data-edition="figma-enhanced"] .site-menu .nav-book { background: var(--surface-forest); color: var(--on-dark); border-radius: var(--r-control); transition: background-color var(--dur-2) var(--ease); }
+body[data-edition="figma-enhanced"] .site-menu .nav-book:hover { background: #24351f; }
+body[data-edition="figma-enhanced"] .site-menu .menu-actions-top .nav-book { width: auto; padding: 12px 20px; font-size: 13px; line-height: 20px; white-space: nowrap; }
+body[data-edition="figma-enhanced"] .site-menu .menu-column h2 { margin-bottom: 12px; }
+body[data-edition="figma-enhanced"] .site-menu .menu-column a { padding-block: 7px; }
+body[data-edition="figma-enhanced"] .site-menu .menu-body .menu-columns { row-gap: clamp(24px, 4svh, 44px); }
+body[data-edition="figma-enhanced"] .site-menu .menu-footer { margin-top: 32px; }
+@media (min-width: 1024px) {
+  body[data-edition="figma-enhanced"] .site-menu .menu-footer { display: none; }
+}
+@media (max-width: 1023px) {
+  body[data-edition="figma-enhanced"] .site-menu .menu-actions-top { display: none; }
+}
+@media (max-width: 1179px) {
+  body[data-edition="figma-enhanced"] .site-menu .menu-column h2 { font-size: clamp(30px, 4vw - 2px, 52px); }
+  body[data-edition="figma-enhanced"] .site-menu .menu-column a { font-size: clamp(16px, 2vw - 2px, 22px); }
+  body[data-edition="figma-enhanced"] .site-menu .menu-columns { row-gap: clamp(24px, 4svh, 44px); }
+}
+@media (max-width: 680px) {
+  body[data-edition="figma-enhanced"] .site-menu { --menu-top: 72px; padding-inline: 20px; }
+  body[data-edition="figma-enhanced"] .site-menu .menu-top img { width: 160px; }
+  body[data-edition="figma-enhanced"] .site-menu .menu-column a { font-size: 16px; }
 }
 
 /* Spanish pages (docs/figma-enhanced-spanish.md): the designer's EN | ES is a link to the page in the other language;
