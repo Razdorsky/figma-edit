@@ -1,12 +1,12 @@
 // The designer's six menu groups (components/Menu.svelte) and the photograph that stands for each page in the mega
 // panels and the menu preview (placement map, 2026-11-08). A page is shown by the photograph it opens with; a page
 // that opens on text by the first photograph a reader meets on it. Glamping Tents shares the Villas' opener, so it
-// shows a tent.
+// shows a tent. Where you sleep shows the last frame of its map's film (owner, 2026-11-11), like its next-page door.
 import { pages, type PageMeta } from '#lib/enhanced/site.ts';
 import { msg } from '#lib/enhanced/i18n.ts';
 
 const covers: Record<number, string> = {
-  1: '81536a0be9ccf3efc5a4', 2: '0b6f7938d784334e4a7e', 3: '2b61d0b9909a48665218', 4: '38bd44acd09f7a1caa67',
+  1: '81536a0be9ccf3efc5a4', 2: '7bb7e41047b306320263', 3: '2b61d0b9909a48665218', 4: '38bd44acd09f7a1caa67',
   5: '1cf43cba02fcc0f90ae8', 6: '53aa5ba8e622d63f0ff1', 7: '81f157d1df8ad03594c6', 8: 'f5ec5ec1897cef56ade3',
   9: 'a32b1d05d2deb9142826', 10: '217d8eafeb5342a6cc73', 11: '52f6dfa2f4537874ca20', 12: 'ea5d3eb36b2031e294f0',
   13: 'df44479df6d2cfd7b1f9', 14: 'fe78e39c5c2e5fd2d9bc', 15: '59adbe80393e61e87dcf', 16: 'b4c9be4660b101bab3d7',

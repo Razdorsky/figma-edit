@@ -29,9 +29,11 @@ const coverSizes = (width: number, height: number) => {
 };
 const photo = (src: string, width: number, height: number, position?: string): Media => ({ photo: src, width, height, position, srcset: photoSet(src)?.join(', '), sizes: coverSizes(width, height) });
 
+// Where you sleep (2) shows the owner's last frame of the map's film on that page, the property with the clouds gone
+// (2026-11-11), in place of the designer's aerial screenshot.
 const doors: Record<number, Omit<Door, 'page' | 'name'> & { name?: string }> = {
   1: { name: msg('The Vessyl'), line: msg('A dome, a river and fourteen places to sleep, on 118 acres above Arenal.'), label: msg('Back to the home page'), media: loop('loop-pool') },
-  2: { line: msg('Fourteen units, spread across 118 acres.'), label: msg('See where you will sleep'), media: photo('0b6f7938d784334e4a7e', 2400, 1513) },
+  2: { line: msg('Fourteen units, spread across 118 acres.'), label: msg('See where you will sleep'), media: photo('7bb7e41047b306320263', 1579, 996) },
   3: { line: msg('Six villas, each facing something different, each far enough from the next that you will not hear anyone.'), label: msg('See the villas'), media: photo('2b61d0b9909a48665218', 2400, 1600) },
   7: { line: msg('You do not have to stay here to come here.'), label: msg('See the experiences'), media: loop('loop-experiences') },
   8: { line: msg('Spend the day here without staying the night.'), label: msg('See the day and the half day'), media: loop('loop-rancho-pool') },

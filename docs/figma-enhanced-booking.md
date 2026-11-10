@@ -241,3 +241,25 @@ Checked in Chrome, WebKit and Firefox, at 1440×900 and 390×844: idle until the
 ended at 4.0s on its last frame, the phone file on phones; the names at opacity 0 until 2.0s and 1 at 4.0s; reduced
 motion and a change of language with the still frame and the names shown. axe: no violations on the page.
 
+## The map's last frame elsewhere (owner, 2026-11-11)
+
+The designer's aerial screenshot of the map (`0b6f7938d784334e4a7e`) also stood in two other places in this edition:
+the next-page door at the foot of Home, which leads to Where you sleep (`next.ts`, door 2), and the menu's picture for
+Where you sleep (`navigation.ts`, cover 2: the preview beside the menu's columns and its links' `data-cover`). Both now
+show the owner's last frame of the film, the property with the clouds gone, as a still photograph (from his PNG,
+1579×996, 3.8 MB):
+
+- `public/media/7bb7e41047b306320263.webp` — the whole frame, 1579×996, 344 KB;
+- `public/enhanced/photos/7bb7e41047b306320263-800.webp` and `-1200.webp` — the door's smaller copies, 110 and 225 KB
+  (`photo-widths.json`);
+- `public/media/thumbs/7bb7e41047b306320263.webp` — the menu's 640px picture, 70 KB.
+
+WebP at quality 75, method 6, metadata stripped (`magick <png> -strip [-filter Lanczos -resize <w>x] -quality 75 -define
+webp:method=6 <file>`): side by side at full size with the PNG and with quality 80 and 85 no difference shows, and the
+whole frame weighs what the designer's 2400px screenshot did. The frame is narrower than the 2400px screenshot, so the
+door's largest copy is the frame itself; its proportions are the screenshot's (1.585), so the door's crop is unchanged.
+The screenshot's three smaller copies (`public/enhanced/photos/0b6f7938d784334e4a7e-{800,1200,1600}.webp`) served only
+the door and are removed; the screenshot itself stays in `public/media/` for the frozen /figma/ edition.
+
+Checked at 1440×900 and 390×844, in English and Spanish: the door draws the frame, the menu's preview shows it on
+hovering Where you sleep, and no page of this edition refers to the screenshot any more.
