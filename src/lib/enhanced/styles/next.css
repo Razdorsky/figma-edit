@@ -35,14 +35,15 @@ body[data-edition="figma-enhanced"] .current-page .next-page .next-media {
 body[data-edition="figma-enhanced"] .current-page .next-page .next-media > :is(img, video) {
   position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1200ms var(--ease);
 }
-/* The button stands on the threshold of the arch and arrives as the arch opens. */
+/* The button stands in the middle of the picture (owner, 2026-11-10; before, on the threshold of the arch) and arrives
+   as the arch opens. */
 body[data-edition="figma-enhanced"] .current-page .next-page .next-go {
-  position: absolute; z-index: 1; left: 50%; bottom: clamp(20px, 4svh, 40px);
+  position: absolute; z-index: 1; left: 50%; top: 50%;
   display: inline-flex; align-items: center; gap: 16px; max-width: calc(100% - 32px); min-height: 56px; padding: 8px 8px 8px 24px;
   border: 1px solid rgb(245 235 231 / 0.32); border-radius: var(--r-control);
   background: linear-gradient(135deg, rgb(7 9 8 / 0.58), rgb(7 9 8 / 0.3) 78%); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
   color: var(--on-dark); font: 500 var(--t-button) / 1.25 var(--font-body); letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap;
-  opacity: clamp(0, calc((var(--g) - 0.55) * 3), 1); transform: translate(-50%, calc((1 - var(--g)) * 16px));
+  opacity: clamp(0, calc((var(--g) - 0.55) * 3), 1); transform: translate(-50%, calc(-50% + (1 - var(--g)) * 16px));
   transition: background-color var(--dur-2) var(--ease);
 }
 body[data-edition="figma-enhanced"] .current-page .next-page .next-door:focus-visible .next-go { opacity: 1; }
