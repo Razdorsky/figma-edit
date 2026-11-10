@@ -1,0 +1,22 @@
+/* Interactive Prototype edition — the inner page that rises over the story.
+   The rules are the prototype's own, in its order (docs/interactive-prototype.md). */
+
+/* ─── inner page ────────────────────────────────────────── */
+#page{position:fixed;inset:0;z-index:92;background:#101109;transform:translateY(100%);
+  transition:transform .8s var(--e-std);overflow-y:auto}
+#page.on{transform:none}
+#page .phero{height:56vh;position:relative;overflow:hidden}
+#page .phero .shade{background:linear-gradient(to bottom,rgba(10,11,9,.5),
+  rgba(10,11,9,.2) 45%,#101109)}
+#page .pbody{padding:0 96px 120px;max-width:1440px;margin:0 auto}
+#page h2{font-size:46px;line-height:1.1;margin-top:-90px;position:relative;max-width:16ch}
+#page .pbody .lede{margin-top:28px}
+#page .back{position:fixed;top:30px;left:96px;z-index:94;font-size:12px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dim)}
+#page .back:hover{color:var(--cream)}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;
+  background:rgba(245,235,231,.12);margin-top:54px;border:1px solid rgba(245,235,231,.12)}
+.facts div{background:#101109;padding:22px 20px;min-width:0}
+.facts b{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--dim);font-weight:500}
+.facts span{display:block;font-family:'EB Garamond',serif;font-size:22px;margin-top:9px}

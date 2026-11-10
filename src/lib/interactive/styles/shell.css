@@ -1,0 +1,58 @@
+/* Interactive Prototype edition — the chrome over the story and the rail.
+   The rules are the prototype's own, in its order (docs/interactive-prototype.md). */
+
+/* ─── chrome ────────────────────────────────────────────── */
+#topveil{position:absolute;top:0;left:0;right:0;height:190px;z-index:6;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(10,11,9,.66),rgba(10,11,9,0))}
+.logo{position:fixed;top:calc(30px + env(safe-area-inset-top,0px));
+  left:max(var(--rail),env(safe-area-inset-left,0px));z-index:60;width:134px;color:var(--cream);
+  opacity:0}
+.logo svg{width:100%;height:auto;display:block}
+.chapter{position:fixed;top:calc(80px + env(safe-area-inset-top,0px));
+  left:max(var(--rail),env(safe-area-inset-left,0px));z-index:60;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--faint);overflow:hidden;height:16px;opacity:0}
+.chapter span{display:block;transition:transform .55s var(--e-std),opacity .4s}
+.topright{position:fixed;top:calc(26px + env(safe-area-inset-top,0px));
+  right:max(var(--rail),env(safe-area-inset-right,0px));z-index:60;display:flex;
+  align-items:center;gap:24px;opacity:0}
+.lang,.sound{font-size:12px;letter-spacing:.1em;color:var(--dim);transition:color .2s}
+.lang:hover,.sound:hover{color:var(--cream)}
+.sound.on{color:var(--copper-hot)}
+.book{background:var(--copper);color:var(--ink);font-size:14px;font-weight:500;letter-spacing:.06em;
+  padding:13px 26px;border-radius:var(--r);transition:background .25s,transform .25s}
+.book:hover{background:var(--copper-hot)}
+.book:active{background:var(--copper-press);transform:translateY(1px)}
+.ticks{position:fixed;right:max(var(--rail),env(safe-area-inset-right,0px));
+  bottom:calc(72px + env(safe-area-inset-bottom,0px));z-index:55;display:flex;
+  flex-direction:column;align-items:flex-end;gap:9px;opacity:0}
+.ticks i{display:block;height:1px;width:10px;background:var(--faint);
+  transition:width .5s var(--e-std),background .5s}
+.ticks i.on{width:28px;background:var(--copper)}
+
+/* ─── rail ─────────────────────────────────────────────── */
+#rail{position:fixed;left:max(var(--rail),env(safe-area-inset-left,0px));top:50%;
+  /* --lift raises the rail when the footer comes up from below: the menu stops above it
+     instead of running over it */
+  transform:translateY(calc(-50% - var(--lift,0px)));z-index:58;width:260px;
+  transition:transform .18s linear}
+.rail-i{margin-bottom:11px;opacity:0;transform:translateX(-14px)}
+.rail-a{display:block;font-family:'EB Garamond',serif;font-size:21px;line-height:32px;
+  font-weight:500;color:var(--t55);transition:color .3s,transform .3s var(--e-std),
+  font-size .3s var(--e-std);position:relative;text-align:left;width:100%}
+/* the current section is known by three signs at once: volume, the tick and the open sub-items.
+   The prototype's note says the text does not turn copper here, or copper would stop meaning a purchase;
+   its rule below does turn it copper (docs/interactive-prototype.md, "Open points") */
+.rail-i.cur .rail-a{color:var(--copper);font-size:23px}
+.rail-i.cur .rail-a::before{content:'';position:absolute;left:-18px;top:6px;width:2px;height:24px;
+  background:var(--copper)}
+.rail-a:hover{transform:translateX(7px);color:var(--t100)}
+.rail-sub{max-height:0;overflow:hidden;opacity:0;padding-left:2px;
+  transition:max-height .6s var(--e-std),opacity .4s,margin .4s}
+.rail-i.exp .rail-sub,
+.rail-i:hover .rail-sub{max-height:420px;opacity:1;margin:10px 0 18px}
+.rail-sub button{display:block;font-size:15px;line-height:26px;padding:5px 0;color:var(--t55);
+  transition:color .2s,transform .2s;text-align:left}
+.rail-sub button:hover{color:var(--cream);transform:translateX(5px)}
+.rail-sub button.hit{color:var(--copper)}
+#rail .foot{margin-top:30px;font-size:11px;letter-spacing:.16em;color:var(--t40);
+  opacity:0}

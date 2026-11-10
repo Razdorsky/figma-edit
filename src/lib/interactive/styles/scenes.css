@@ -1,0 +1,33 @@
+/* Interactive Prototype edition — what single scenes add.
+   The rules are the prototype's own, in its order (docs/interactive-prototype.md). */
+
+/* ─── the Threshold scene ───────────────────────────────── */
+#L1 h1{font-size:60px;line-height:1.12;max-width:18ch}
+.mline{display:block;overflow:hidden}
+.mline b{display:block;font-weight:700;transform:translateY(105%)}
+.cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.btn-line{border:1px solid var(--t40);padding:14px 26px;font-size:12px;border-radius:var(--r);
+  color:var(--t85,rgba(245,235,231,.85));
+  letter-spacing:.1em;text-transform:uppercase;transition:background .3s,border-color .3s,color .3s}
+.btn-line:hover{border-color:var(--copper);color:var(--t100);background:rgba(211,160,121,.08)}
+.btn-line:active{background:rgba(115,58,17,.5);border-color:var(--copper-press)}
+/* the scene's main call is filled: one such button to a screen */
+.btn-line.solid{background:var(--copper);border-color:var(--copper);color:var(--ink);font-weight:500}
+.btn-line.solid:hover{background:var(--copper-hot);border-color:var(--copper-hot);color:var(--ink)}
+.halo{position:absolute;inset:0;pointer-events:none;opacity:0;z-index:3;
+  background:radial-gradient(58% 48% at 50% 54%,rgba(255,198,122,.42),
+  rgba(255,170,90,.1) 45%,transparent 72%)}
+#flash{position:fixed;inset:0;z-index:88;background:#f5ebe7;opacity:0;pointer-events:none}
+
+/* ─── the Place scene ───────────────────────────────────── */
+.line span{opacity:.1;transition:opacity .7s var(--e-in)}
+.line.in span{opacity:1}
+.stats{display:flex;gap:64px;margin-top:46px;flex-wrap:wrap}
+.stat b{font-family:'EB Garamond',serif;font-size:46px;font-weight:700;display:block;line-height:1;
+  font-variant-numeric:tabular-nums}
+.stat i{font-style:normal;font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--dim);display:block;margin-top:9px}
+
+/* ─── photographs that replace one another in Stay and Experiences ─── */
+.swap{position:absolute;inset:0;will-change:clip-path;
+  transition:clip-path 1s var(--e-std)}

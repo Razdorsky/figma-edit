@@ -1,0 +1,46 @@
+/* Interactive Prototype edition — typefaces, tokens, reset and type.
+   The rules are the prototype's own, in its order (docs/interactive-prototype.md). */
+
+@font-face{font-family:'EB Garamond';font-weight:500;font-display:swap;
+  src:url(../fonts/EBGaramond-Medium.woff2) format('woff2')}
+@font-face{font-family:'EB Garamond';font-weight:600 900;font-display:swap;
+  src:url(../fonts/EBGaramond-Bold.woff2) format('woff2')}
+@font-face{font-family:'Roboto';font-weight:100 900;font-display:swap;
+  src:url(../fonts/Roboto-Regular.woff2) format('woff2')}
+:root{
+  color-scheme:dark;
+  --ink:#111111; --cream:#f5ebe7;
+  /* copper means "you can buy this". Lighter than the earlier one: 8.2:1 on black */
+  /* two coppers: a muted one for large surfaces and a bright one for accents */
+  --copper:#d3a079; --copper-press:#d57e3d; --copper-hot:#e08b43;
+  /* four volumes of cream, with the contrast each gives on the background */
+  --t100:#f5ebe7;                   /* 16.1:1 — what is being read now */
+  --t72:rgba(245,235,231,.72);      /*  8.6:1 — the second plane       */
+  --t55:rgba(245,235,231,.55);      /*  5.5:1 — quiet but readable     */
+  --t40:rgba(245,235,231,.40);      /*  3.4:1 — frames and ticks only  */
+  --dim:var(--t55); --faint:var(--t40);
+  --r:12px; --r-s:8px;          /* one radius: softer, and the same on every button */
+  --e-std:cubic-bezier(.22,1,.36,1);
+  --e-in:cubic-bezier(.16,1,.3,1);
+  --rail:80px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--cream);font-family:'Roboto',system-ui,sans-serif;
+  font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--copper);color:var(--ink)}
+/* no text pushes its card apart: long strings break, and flex children lose their minimum width */
+*{min-width:0}
+p,div,span,button,a,li,b,i{overflow-wrap:anywhere}
+/* Not in the prototype: the site's shell wraps every page in one more div. The rule above would reach through it
+   to the rail, the footer and the booking panel, which the prototype left at the normal wrap. */
+body>div{overflow-wrap:normal}
+/* keyboard focus: the mock-up had none at all */
+:focus-visible{outline:2px solid var(--copper);outline-offset:3px;border-radius:2px}
+:focus:not(:focus-visible){outline:none}
+h1,h2,h3{font-family:'EB Garamond',Georgia,serif;font-weight:700;letter-spacing:-.012em;
+  text-wrap:balance}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--dim)}
+.lede{font-size:20px;line-height:32px;max-width:58ch;color:rgba(245,235,231,.92)}
+.small{font-size:13px;line-height:20px;color:var(--dim)}

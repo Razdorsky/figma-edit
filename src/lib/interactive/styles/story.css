@@ -1,0 +1,28 @@
+/* Interactive Prototype edition — the one scene.
+   The rules are the prototype's own, in its order (docs/interactive-prototype.md). */
+
+/* One scene for the whole story. Scrolling moves a single timeline and the scenes' windows overlap,
+   so there are no blocks, only one picture flowing into the next. */
+#story{position:relative}
+#world{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--ink)}
+.layer{position:absolute;inset:0;will-change:opacity;pointer-events:none}
+.layer.live{pointer-events:auto}
+.lbg{position:absolute;inset:-9%;will-change:transform,opacity}
+/* the pictures are dimmed to 66%: otherwise the quiet level of text drops below 4.5:1 on a light photograph,
+   and the scale stops working where it is needed most */
+.lbg img{filter:brightness(.66) saturate(.86) contrast(1.04)}
+.shade{position:absolute;inset:0;pointer-events:none}
+.shade.b{background:linear-gradient(to bottom,rgba(10,11,9,.40) 0%,rgba(10,11,9,.05) 30%,
+  rgba(10,11,9,.55) 66%,rgba(10,11,9,.9) 100%)}
+/* the backing under the column of text. Not judged by eye: text at 55% must give 4.5:1
+   on the LIGHTEST picture, not on black */
+.shade.l{background:linear-gradient(to right,rgba(10,11,9,.94) 0%,rgba(10,11,9,.86) 20%,
+  rgba(10,11,9,.66) 38%,rgba(10,11,9,.3) 56%,rgba(10,11,9,.04) 72%,rgba(10,11,9,0) 82%)}
+.shade.v{background:radial-gradient(130% 96% at 50% 46%,transparent 38%,rgba(10,11,9,.6) 100%)}
+.lc{position:absolute;left:400px;right:96px;will-change:transform,opacity}
+.lc.mid{top:50%}
+.lc.low{bottom:140px}
+
+/* the thread: a copper line that runs through the whole story without a break */
+#thread{position:absolute;left:0;top:0;width:1px;background:linear-gradient(to bottom,
+  transparent,rgba(162,85,27,.9),rgba(162,85,27,.15));pointer-events:none;z-index:4}

@@ -1,0 +1,114 @@
+/* Interactive Prototype edition — the three states, the lists of what is sold, the full list and the booking panel.
+   The rules are the prototype's own, in its order (docs/interactive-prototype.md). */
+
+/* ─── the language of three states, the same everywhere ─── */
+.m{display:inline-flex;align-items:baseline;gap:7px;font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;white-space:nowrap;flex:0 0 auto}
+.m::before{content:'';width:5px;height:5px;border-radius:50%;flex:0 0 auto;
+  transform:translateY(-2px)}
+/* the word is quiet in all three; the marker tells them apart: filled, hollow, none */
+.m.buy{color:var(--t55)} .m.buy::before{background:var(--copper-hot);
+  box-shadow:0 0 0 3px rgba(224,139,67,.16)}
+.m.inc{color:var(--t55)}
+.m.inc::before{background:none;box-shadow:inset 0 0 0 1.5px var(--t55);border-radius:50%}
+.m.ask{color:var(--t55);font-style:italic;text-transform:none;letter-spacing:.02em;font-size:12px}
+.m.ask::before{display:none}
+
+.sell{margin-top:22px;display:flex;flex-direction:column;gap:12px}
+.sell .row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.sell .ttl{font-family:'EB Garamond',serif;font-size:21px;color:var(--cream);line-height:1.25}
+/* what can be clicked differs by an underline, not by colour: colour is taken by the price */
+.sell .ttl.go{color:var(--t100);border-bottom:1px solid var(--t40);
+  transition:color .3s,border-color .3s;cursor:pointer}
+.sell .ttl.go:hover{color:var(--t100);border-color:var(--copper)}
+.sell .row:has(.m.buy) .ttl{color:var(--t100)}
+.sell .row:has(.m.inc) .ttl,.sell .row:has(.m.ask) .ttl{color:var(--t72)}
+.sell .pr{font-size:13px;color:var(--t55)}
+.sell .row:has(.m.buy) .pr{color:var(--copper-hot);font-weight:500}
+
+/* ─── choosing a unit with the cursor (the Stay and Experiences scenes) ─── */
+.units{list-style:none;position:relative;margin:18px 0 4px}
+.units.tight li{padding:9px 0}
+.units.tight .t{font-size:28px}
+.units.tight li.on .d{height:22px}
+.units li{margin:0;padding:14px 0;cursor:pointer;will-change:transform,opacity}
+.units .hd{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.units .t{font-family:'EB Garamond',serif;font-weight:700;font-size:36px;line-height:1.1;
+  color:var(--cream);text-shadow:0 2px 34px rgba(8,9,7,.7);text-align:left}
+.units .pr{font-size:13px;color:var(--t45,rgba(245,235,231,.45));transition:color .3s}
+.units li.on .pr{color:var(--copper-hot);font-weight:500}
+.units .d{font-size:13px;line-height:20px;max-width:48ch;color:rgba(245,235,231,.74);
+  overflow:hidden;height:0;opacity:0;margin-top:0;
+  transition:height .5s var(--e-std),opacity .45s,margin-top .5s var(--e-std)}
+.units li.on .d{height:22px;opacity:1;margin-top:8px}
+
+/* the enquiry form in the whole-property scene */
+.ask-form{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.ask-form .box{border:1px solid rgba(245,235,231,.2);padding:12px 16px;font-size:13px;border-radius:var(--r-s);
+  color:rgba(245,235,231,.6);min-width:120px}
+
+/* ─── the layer "everything you can book" ───────────────── */
+#rail #allbtn{display:block;width:100%;margin-top:34px;font-size:12px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--copper-hot);text-align:center;line-height:1.4;
+  border:1px solid var(--copper);border-radius:var(--r);padding:14px 16px;
+  background:rgba(224,139,67,.08);
+  transition:border-color .3s,color .3s,background .3s}
+#rail #allbtn:hover{color:var(--ink);border-color:var(--copper-hot);background:var(--copper-hot)}
+#all{position:fixed;inset:0;z-index:96;background:#0e0f0c;transform:translateY(-100%);
+  transition:transform .8s var(--e-std);overflow-y:auto;
+  padding:86px max(16px,env(safe-area-inset-right,0px)) 80px max(16px,env(safe-area-inset-left,0px))}
+#all.on{transform:none}
+#all .inner{max-width:880px;margin:0 auto}
+#all h3{font-size:34px;margin-bottom:8px}
+#all .grp{margin-top:36px}
+#all .grp>b{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(245,235,231,.42);font-weight:500;padding-bottom:10px;
+  border-bottom:1px solid rgba(245,235,231,.12)}
+#all .it{display:flex;align-items:baseline;justify-content:space-between;gap:18px;
+  padding:14px 0;border-bottom:1px solid rgba(245,235,231,.07);cursor:pointer;
+  transition:padding-left .3s var(--e-std)}
+#all .it:hover{padding-left:10px}
+#all .it .n{font-family:'EB Garamond',serif;font-size:21px;min-width:0}
+#all .it .n i{font-style:normal;font-size:13px;color:rgba(245,235,231,.5);
+  font-family:'Roboto',sans-serif;margin-left:12px}
+#all .it .p{font-size:13px;color:var(--copper);white-space:nowrap}
+#all .it.askit .p{color:var(--t55);font-style:italic}
+#all .it .p{color:var(--copper-hot)}
+#all .close2{position:fixed;top:28px;right:max(24px,env(safe-area-inset-right,0px));
+  font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);z-index:97}
+#all .close2:hover{color:var(--cream)}
+@media (max-width:860px){ #all .it{flex-direction:column;gap:5px}
+  #all .it .n i{display:block;margin:4px 0 0} }
+
+/* ─── booking ───────────────────────────────────────────── */
+#veil{position:fixed;inset:0;background:rgba(8,9,7,.62);backdrop-filter:blur(3px);z-index:90;
+  opacity:0;pointer-events:none;transition:opacity .5s}
+#veil.on{opacity:1;pointer-events:auto}
+#panel{position:fixed;top:0;right:0;bottom:0;width:470px;max-width:min(92vw,470px);background:#171814;
+  z-index:95;transform:translateX(102%);transition:transform .7s var(--e-std);
+  padding:46px 40px;overflow-y:auto;overflow-x:hidden;border-left:1px solid rgba(245,235,231,.08)}
+#panel.on{transform:none}
+#panel h3{font-size:30px;line-height:1.15;margin-bottom:8px}
+.tabs{display:flex;margin:30px 0 26px;border-bottom:1px solid rgba(245,235,231,.14)}
+.tabs button{padding:12px 0;margin-right:30px;font-size:12px;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(245,235,231,.46);border-bottom:1px solid transparent;
+  transition:color .3s,border-color .3s}
+.tabs button.on{color:var(--cream);border-color:var(--copper)}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(245,235,231,.46);margin-bottom:7px}
+.field .box{border:1px solid rgba(245,235,231,.18);padding:14px 16px;font-size:14px;border-radius:var(--r-s);
+  color:rgba(245,235,231,.82)}
+.opt{border:1px solid rgba(245,235,231,.14);padding:16px 18px;margin-bottom:12px;cursor:pointer;border-radius:var(--r);
+  transition:border-color .3s,background .3s}
+.opt:hover{border-color:rgba(245,235,231,.42);background:rgba(245,235,231,.03)}
+.opt .n{font-family:'EB Garamond',serif;font-size:20px;font-weight:600;line-height:1.3}
+/* .m above is the marker of the three states: nowrap and in upper case.
+   Here .m means something else, so what it inherits is reset explicitly */
+.opt .m{display:block;font-size:12.5px;line-height:19px;color:rgba(245,235,231,.56);
+  margin-top:5px;text-transform:none;white-space:normal;letter-spacing:0}
+.opt .p{font-size:12px;color:var(--copper);margin-top:6px}
+#panel .go{width:100%;background:var(--copper);color:var(--ink);padding:16px;font-size:13px;border-radius:var(--r);
+  letter-spacing:.07em;text-transform:uppercase;margin-top:12px}
+.close{position:absolute;top:30px;right:34px;font-size:22px;line-height:1;color:var(--dim)}
+.note{font-size:12px;line-height:19px;color:rgba(245,235,231,.46);margin-top:20px}

@@ -1,0 +1,57 @@
+/* Interactive Prototype edition — the footer, and the parked rules.
+   The rules are the prototype's own, in its order (docs/interactive-prototype.md). */
+
+/* ─── footer ────────────────────────────────────────────── */
+footer{background:#0c0d0b;padding-block:110px 60px;position:relative;z-index:2;
+  padding-left:max(316px,env(safe-area-inset-left,0px));
+  padding-right:max(96px,env(safe-area-inset-right,0px))}
+.fcols{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:28px}
+.fcols h4{font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:500;
+  color:var(--dim);margin-bottom:16px;font-family:'Roboto',sans-serif}
+.fcols a{display:block;font-size:14px;line-height:30px;color:rgba(245,235,231,.74);
+  text-decoration:none;transition:color .2s}
+.fcols a:hover{color:var(--cream)}
+.subrow{border-top:1px solid rgba(245,235,231,.1);margin-top:70px;padding-top:40px;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+.subrow h3{font-size:30px;max-width:14ch}
+.subform{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.subform .box{border-bottom:1px solid rgba(245,235,231,.3);padding:10px 2px;width:240px;
+  font-size:14px;color:rgba(245,235,231,.5)}
+.copy{margin-top:54px;font-size:12px;color:rgba(245,235,231,.36);display:flex;
+  justify-content:space-between;flex-wrap:wrap;gap:20px}
+
+/* Parked, not in force. In the prototype this block sat behind a comment that was never closed, so none of it
+   applied: the hint (its markup is gone), reduced motion, and the widths of 1100px and 860px. It is kept as the
+   starting material for the phone step (docs/interactive-prototype.md, "Open points").
+
+#hint{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));
+  transform:translateX(-50%);z-index:70;font-size:11px;line-height:19px;color:var(--dim);
+  background:rgba(12,13,11,.84);padding:13px 19px;border:1px solid rgba(245,235,231,.12);
+  border-radius:2px;transition:opacity .6s;backdrop-filter:blur(6px);max-width:min(92vw,660px);
+  opacity:0}
+#hint b{color:var(--cream);font-weight:500}
+#hint .k{color:rgba(245,235,231,.36);display:block;margin-top:6px}
+
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+@media (max-width:1100px){
+  .lc{left:272px;right:40px}
+  footer{padding-left:272px;padding-right:40px}
+  #rail{width:168px}
+}
+@media (max-width:860px){
+  :root{--rail:16px}
+  .lc{left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px))}
+  #rail{display:none}
+  footer{padding-left:max(16px,env(safe-area-inset-left,0px));
+    padding-right:max(16px,env(safe-area-inset-right,0px))}
+  #L1 h1{font-size:34px}
+  .idx .t{font-size:27px}.idx li{padding:9px 0}
+  .moment .hh{font-size:40px}.moment p{font-size:16px;line-height:26px}
+  .fcols{grid-template-columns:1fr 1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  #page .pbody{padding:0 16px 80px}#page .back{left:16px}
+  .holdui{right:16px;bottom:116px}
+  .lede{font-size:17px;line-height:28px}
+  #bootlogo{width:160px}
+}
+*/

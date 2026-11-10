@@ -1,0 +1,36 @@
+/* Interactive Prototype edition — the gate, and the widths at which the rail gives way.
+   The rules are the prototype's own, in its order (docs/interactive-prototype.md). */
+
+/* ─── gate: a black screen and the choice of how to enter ─── */
+#gate{position:fixed;inset:0;z-index:130;background:var(--ink);display:grid;
+  place-items:center;text-align:center;transition:opacity 1s var(--e-std)}
+#gate .g-in{display:flex;flex-direction:column;align-items:center;
+  padding:0 max(16px,env(safe-area-inset-left,0px))}
+#gate .g-logo{width:290px;color:var(--cream);opacity:0;transform:scale(1.03);
+  transition:opacity .9s var(--e-std),transform .9s var(--e-std)}
+#gate .g-logo svg{width:100%;height:auto;display:block}
+#gate .g-line{width:0;height:1px;background:var(--copper);margin:34px 0 0;
+  transition:width 1.2s var(--e-std)}
+#gate .g-body{opacity:0;transition:opacity .9s var(--e-std);margin-top:52px;
+  display:flex;flex-direction:column;align-items:center}
+#gate .g-ring{width:96px;height:96px;position:relative;display:block;cursor:pointer;
+  border-radius:50%;transition:transform .4s var(--e-std)}
+#gate .g-ring:hover{transform:scale(1.04)}
+#gate .g-ring svg{transform:rotate(-90deg);display:block;position:absolute;inset:0}
+#gate circle{fill:none;stroke-width:1.3}
+#gate .tr{stroke:rgba(245,235,231,.22)}
+#gate .fr{stroke:var(--copper);stroke-dasharray:270.2;stroke-dashoffset:270.2}
+#gate .g-dot{position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(245,235,231,.75)}
+#gate .g-cap{margin-top:22px;font-size:14px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(245,235,231,.8)}
+#gate .g-sub{margin-top:9px;font-size:15px;line-height:1.5;color:var(--t55)}
+#gate .g-or{margin:32px 0 12px;font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(245,235,231,.25)}
+#gate .g-alt{font-size:15px;color:var(--t72);
+  border-bottom:1px solid rgba(245,235,231,.22);padding-bottom:3px;transition:color .3s,border-color .3s}
+#gate .g-alt:hover{color:var(--cream);border-color:var(--cream)}
+@media (max-width:1180px){.lc{left:360px}}
+@media (max-width:980px){#rail{display:none} .lc{left:max(24px,env(safe-area-inset-left,0px));right:24px}}
+@media (max-width:860px){#gate .g-logo{width:190px}}

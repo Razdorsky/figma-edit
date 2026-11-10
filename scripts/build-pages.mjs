@@ -4,6 +4,7 @@
 //   node scripts/build-pages.mjs figma       -> outputs/github-pages (served at /figma/)
 //   node scripts/build-pages.mjs blueprint   -> outputs/github-pages (served at /blueprint/)
 //   node scripts/build-pages.mjs figma-enhanced -> outputs/github-pages (served at /figma-enhanced/)
+//   node scripts/build-pages.mjs interactive-prototype -> outputs/github-pages (served at /interactive-prototype/)
 //   node scripts/build-pages.mjs blueprint4  -> outputs/github-pages (served at /blueprint4/)
 //
 // The argument is the repository's name. A further copy of the Blueprint edition (blueprint4, …)
@@ -20,16 +21,19 @@ import path from 'node:path';
 
 const target = process.argv[2] || '';
 const edition = /^blueprint\d*$/.test(target) ? 'blueprint' : target;
-if (edition !== 'figma' && edition !== 'blueprint' && edition !== 'figma-enhanced' && edition !== 'figma-pr') {
-  console.error('Usage: node scripts/build-pages.mjs figma|figma-enhanced|figma-pr|blueprint|blueprint<n>');
+if (edition !== 'figma' && edition !== 'blueprint' && edition !== 'figma-enhanced' && edition !== 'figma-pr' && edition !== 'interactive-prototype') {
+  console.error('Usage: node scripts/build-pages.mjs figma|figma-enhanced|figma-pr|interactive-prototype|blueprint|blueprint<n>');
   process.exit(1);
 }
 
 const dist = path.resolve('dist');
 const out = path.resolve('outputs/github-pages');
 // bp holds the Blueprint edition's own photographs and films; enhanced holds files only Figma Enhanced uses (the phone
-// versions of its clips, docs/figma-enhanced-speed.md, stage 3).
-const roots = ['_app', 'media', 'brand', ...(edition === 'blueprint' ? ['bp'] : []), ...(edition === 'figma-enhanced' || edition === 'figma-pr' ? ['enhanced'] : [])];
+// versions of its clips, docs/figma-enhanced-speed.md, stage 3). interactive holds the Interactive Prototype's own
+// photographs; that edition shows nothing from media, so it does not carry the folder (docs/interactive-prototype.md).
+const roots = edition === 'interactive-prototype'
+  ? ['_app', 'brand', 'interactive']
+  : ['_app', 'media', 'brand', ...(edition === 'blueprint' ? ['bp'] : []), ...(edition === 'figma-enhanced' || edition === 'figma-pr' ? ['enhanced'] : [])];
 
 await fs.rm(out, { recursive: true, force: true });
 await fs.mkdir(out, { recursive: true });
@@ -67,10 +71,10 @@ for await (const file of files(out)) {
     const source = await fs.readFile(file, 'utf8');
     const result = moved(source
       // SvelteKit's relative asset paths (../../_app/...) assume the site root.
-      .replace(/(["'(])(?:\.\.\/)+(_app|brand|media|typography|bp|enhanced)\//g, `$1${prefix}/$2/`)
+      .replace(/(["'(])(?:\.\.\/)+(_app|brand|media|typography|bp|enhanced|interactive)\//g, `$1${prefix}/$2/`)
       // Static media and typography written as root paths by the page components, and font
       // preloads, which take their address from the bundler as a root path.
-      .replace(/(["'(,])\/(media|typography|brand|bp|enhanced|_app)\//g, `$1${prefix}/$2/`)
+      .replace(/(["'(,])\/(media|typography|brand|bp|enhanced|interactive|_app)\//g, `$1${prefix}/$2/`)
       // srcset lists: every candidate after a comma and space.
       .replace(/(, )\/(media|bp|enhanced)\//g, `$1${prefix}/$2/`));
     if (result !== source) {
@@ -80,7 +84,7 @@ for await (const file of files(out)) {
   } else if (file.endsWith('.js') && file.includes(`${path.sep}_app${path.sep}`)) {
     const source = await fs.readFile(file, 'utf8');
     // Client-rendered pages build the same root paths at runtime (`${base}/media/...`).
-    const result = moved(source.replace(/(["'`}])\/(media|typography|brand|bp|enhanced)\//g, `$1${prefix}/$2/`));
+    const result = moved(source.replace(/(["'`}])\/(media|typography|brand|bp|enhanced|interactive)\//g, `$1${prefix}/$2/`));
     if (result !== source) {
       await fs.writeFile(file, result);
       js += 1;
