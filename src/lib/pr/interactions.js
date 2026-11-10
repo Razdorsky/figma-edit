@@ -1,5 +1,5 @@
 // Figma PR interactions (docs/figma-pr-system.md, "Mechanics"). The frozen edition's controller (menu, gallery,
-// newsletter, placeholders) with the PR edition's own mechanics: the sticky header, the booking bar, the clips, the
+// newsletter, placeholders) with the PR edition's own mechanics: the sticky header, the clips, the
 // pictures that settle on scroll, the opening that eases off, and the centre-focus gallery carousel.
 // One delegated controller survives SvelteKit page changes. Abort on unmount.
 import es from './content/es.json';
@@ -112,13 +112,26 @@ function setupCarousels() {
   });
 }
 
-// ---- Header: the utility row leaves on scroll and the navigation row stays (CSS sticky); the wordmark joins it.
+// ---- Header (owner, 2026-11-10): scrolling down past the utility row hides it (data-collapsed slides the header up by
+// its height, and the small wordmark opens the navigation row); scrolling up by 20px brings it back anywhere on the page,
+// not only at the top. While a mega panel or the booking bar is open the header keeps its state.
+const headerState = {lastY: 0, peak: 0, collapsed: false};
 function updateHeader() {
   const header = document.querySelector('[data-pr-header]');
   if (!header) return;
   const utility = header.querySelector('.pr-utility');
   const h = utility && getComputedStyle(utility).display !== 'none' ? utility.offsetHeight : 0;
-  header.toggleAttribute('data-stuck', scrollY > h - 1 && h > 0);
+  const y = Math.max(0, scrollY);
+  const busy = header.querySelector('.nav-group[open], [data-booking-open][aria-expanded="true"]');
+  header.toggleAttribute('data-stuck', y > 1);
+  if (!h || y <= h) {headerState.collapsed = false;headerState.peak = y;}
+  else if (!busy) {
+    if (y > headerState.lastY) {headerState.peak = y;headerState.collapsed = true;}
+    else if (headerState.peak - y > 20) headerState.collapsed = false;
+  }
+  if (y > headerState.lastY) headerState.peak = Math.max(headerState.peak, y);
+  headerState.lastY = y;
+  header.toggleAttribute('data-collapsed', headerState.collapsed);
 }
 
 export function enhancePage() {
@@ -253,26 +266,9 @@ export function installInteractions() {
   addEventListener('scroll', () => {if (!scrollFrame) scrollFrame = requestAnimationFrame(() => {scrollFrame = 0;updateSettle();updateHeader();});}, {passive: true, signal});
   addEventListener('resize', () => {updateSettle();updateHeader();}, {passive: true, signal});
   on('visibilitychange', () => document.querySelectorAll('.current-page video[data-loop]').forEach(syncClip));
-  // Booking bar (Four Seasons): the reserve button opens it; dates and guests open Orbe's results for them.
-  const bookingForm = () => document.querySelector('[data-booking]');
-  const toggleBooking = force => {
-    const form = bookingForm(), button = document.querySelector('[data-booking-open]');
-    if (!form || !button) return;
-    const open = force ?? form.hidden;
-    form.hidden = !open; button.setAttribute('aria-expanded', String(open));
-    if (open) {
-      const today = new Date(), iso = d => new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
-      const inField = form.elements.checkin, outField = form.elements.checkout;
-      inField.min = iso(today); outField.min = iso(new Date(today.getTime() + 86400000));
-      if (!inField.value) inField.value = iso(today);
-      if (!outField.value) outField.value = iso(new Date(today.getTime() + 2 * 86400000));
-      inField.focus();
-    }
-  };
   on('click', event => {
     const target = event.target instanceof Element ? event.target : null;
     if (!target) return;
-    if (target.closest('[data-booking-open]')) {toggleBooking();return;}
     const film = target.closest('.pr-film-toggle');
     if (film) {
       const pressed = film.getAttribute('aria-pressed') !== 'true';
@@ -280,7 +276,7 @@ export function installInteractions() {
       film.parentElement.querySelectorAll('video[data-loop]').forEach(syncClip);
     }
   });
-  on('keydown', event => {if (event.key === 'Escape' && !bookingForm()?.hidden) {toggleBooking(false);document.querySelector('[data-booking-open]')?.focus();}});
+  // The booking bar and its calendar live in Booking.svelte.
   // Mega panels load their pictures only when they open.
   on('toggle', event => {const group = event.target;if (group instanceof HTMLDetailsElement && group.open) group.querySelectorAll('img[data-src]').forEach(img => {img.src = img.dataset.src;img.removeAttribute('data-src');});}, {capture: true});
   on('touchstart', event => {if (event.target.closest('.gallery-stage')) touchX = event.changedTouches[0].clientX;}, {passive:true});

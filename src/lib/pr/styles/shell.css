@@ -3,14 +3,16 @@
 body[data-edition="figma-pr"] {
 
   /* ---- Header ------------------------------------------------------------------------------------------------
-     Two tiers on paper above the picture. The whole header is sticky with a negative top equal to the utility row,
-     so the utility row scrolls away and the navigation row stays (Rosewood). */
+     Two tiers on paper above the picture (Rosewood). The header sticks at the top. Scrolling down past the utility
+     row slides the header up by that row's height, so only the navigation row stays; scrolling up by 20px brings the
+     utility row back (interactions.js sets data-collapsed; owner, 2026-11-10). */
   & .pr-header {
-    position: sticky; top: calc(-1 * var(--header-utility)); z-index: 60;
+    position: sticky; top: 0; z-index: 60;
     background: var(--paper); color: var(--ink);
-    transition: box-shadow 0.3s ease-out;
+    transition: transform 0.55s var(--ease-out), box-shadow 0.3s ease-out;
   }
   & .pr-header[data-stuck] { box-shadow: 0 1px 0 var(--rule); }
+  & .pr-header[data-collapsed] { transform: translateY(calc(-1 * var(--header-utility))); }
   & .pr-utility {
     display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: var(--header-utility);
     margin: 0 var(--m); border-bottom: 1px solid var(--rule);
@@ -19,7 +21,8 @@ body[data-edition="figma-pr"] {
     justify-self: start; padding: 4px 0; border: 0; border-bottom: 2px solid currentColor; background: none;
     font: 600 12px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase;
   }
-  & .pr-utility-link:last-child { justify-self: end; }
+  & .pr-utility .pr-brand { grid-column: 2; }
+  & .pr-utility-lang { grid-column: 3; justify-self: end; }
   & .pr-brand img { width: 150px; height: auto; }
   & .pr-nav-row {
     position: relative; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px;
@@ -31,10 +34,17 @@ body[data-edition="figma-pr"] {
   }
   & .menu-lines { display: inline-flex; flex-direction: column; justify-content: space-between; width: 22px; height: 12px; }
   & .menu-lines i { display: block; height: 1px; background: currentColor; }
-  /* Once the utility row has left, the wordmark comes into the navigation row beside the menu button. */
-  & .pr-brand-compact { position: absolute; left: calc(var(--m) + 112px); top: 50%; translate: 0 -50%; opacity: 0; pointer-events: none; transition: opacity 0.3s ease-out; }
-  & .pr-brand-compact img { width: 112px; }
-  & .pr-header[data-stuck] .pr-brand-compact { opacity: 1; pointer-events: auto; }
+  /* While the utility row is away, the small wordmark slides in at the start of the navigation row and MENU moves
+     aside for it; when the row comes back, both return. Hidden, the wordmark is not focusable (visibility). One
+     transform holds both the slide and the vertical centring: the CSS minifier folds a separate translate into it. */
+  & .pr-brand-compact {
+    position: absolute; left: var(--m); top: 50%; opacity: 0; visibility: hidden; transform: translate(-32px, -50%);
+    transition: opacity 0.45s var(--ease-out), transform 0.55s var(--ease-out), visibility 0s linear 0.55s;
+  }
+  & .pr-brand-compact img { width: 104px; }
+  & .pr-header[data-collapsed] .pr-brand-compact { opacity: 1; visibility: visible; transform: translate(0, -50%); transition: opacity 0.45s var(--ease-out) 0.08s, transform 0.55s var(--ease-out), visibility 0s; }
+  & .pr-menu-toggle { transition: transform 0.55s var(--ease-out); }
+  & .pr-header[data-collapsed] .pr-menu-toggle { transform: translateX(132px); }
   & .pr-nav { display: flex; align-items: center; gap: 36px; transition: opacity 0.3s ease-out; }
   & .pr-nav .nav-trigger, & .pr-nav-link {
     display: inline-flex; align-items: center; gap: 8px; padding: 8px 0; list-style: none; cursor: pointer;
@@ -65,18 +75,57 @@ body[data-edition="figma-pr"] {
   & .pr-mega-image img { width: 100%; height: 100%; object-fit: cover; transition: scale 0.8s var(--ease-out); }
   & .pr-mega-card:hover .pr-mega-image img { scale: 1.05; }
 
-  /* Booking bar (Four Seasons): dates and guests, opened by the reserve button. */
+  /* Booking bar (Four Seasons): dates and guests, opened by the reserve button. It lies over the page under the
+     header and unrolls: its height grows from nothing (grid rows 0fr → 1fr) while the fields settle in. */
+  & .pr-booking-panel {
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 1; display: grid; grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+  }
+  & .pr-booking-panel[data-open] { grid-template-rows: 1fr; box-shadow: 0 24px 40px -32px rgb(0 0 0 / 0.35); }
+  & .pr-booking-clip { min-height: 0; overflow: hidden; }
   & .pr-booking {
     display: grid; grid-template-columns: repeat(3, minmax(0, 220px)) auto 1fr; align-items: end; gap: 24px;
     padding: 24px var(--m) 28px; border-top: 1px solid var(--rule); background: var(--paper);
+    opacity: 0; visibility: hidden; transform: translateY(-12px);
+    transition: opacity 0.35s ease-out, transform 0.5s var(--ease-out), visibility 0s linear 0.5s;
   }
-  & .pr-booking[hidden] { display: none; }
+  & .pr-booking-panel[data-open] .pr-booking { opacity: 1; visibility: visible; transform: none; transition: opacity 0.45s ease-out 0.08s, transform 0.5s var(--ease-out), visibility 0s; }
   & .pr-field { display: grid; gap: 8px; }
-  & .pr-field span { font: 600 11px/1 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); }
-  & .pr-field :is(input, select) {
+  & .pr-field-label { font: 600 11px/1 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-2); }
+  & .pr-field :is(select, .pr-date) {
     width: 100%; height: 44px; padding: 0 2px; border: 0; border-bottom: 1px solid var(--rule-strong); border-radius: 0; background: transparent;
-    font: 300 18px/1 var(--text); color: var(--ink); appearance: none;
+    font: 300 18px/1 var(--text); color: var(--ink); appearance: none; text-align: left;
   }
+  & .pr-date { cursor: pointer; transition: border-color 0.3s ease-out; }
+  & .pr-date[data-active] { border-bottom: 2px solid var(--ink); }
+
+  /* The calendar: two months beside each other (one below 900px). The first click is the check-in, the second the
+     check-out; the nights between are lit. */
+  & .pr-calendar {
+    position: absolute; top: 100%; left: var(--m); z-index: 3; padding: 28px 32px 20px;
+    border: 1px solid var(--rule); background: var(--paper); box-shadow: 0 24px 48px -24px rgb(0 0 0 / 0.35);
+    animation: pr-sheet 0.4s var(--ease-out);
+  }
+  & .pr-calendar-months { display: grid; grid-template-columns: repeat(2, 288px); gap: 48px; }
+  & .pr-month-head { position: relative; display: grid; place-items: center; height: 40px; margin-bottom: 12px; }
+  & .pr-month-title { margin: 0; font: 600 12px/1 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; }
+  & .pr-month-step { position: absolute; left: -8px; top: 0; display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; background: none; color: var(--ink); }
+  & .pr-month-step.pr-month-next { left: auto; right: -8px; }
+  & .pr-month-step svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.3; }
+  & .pr-month-step:disabled { opacity: 0.25; cursor: default; }
+  & .pr-days { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  & .pr-days th { padding: 0 0 10px; font: 600 10px/1 var(--caps); font-stretch: 125%; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); }
+  & .pr-days td { padding: 1px 0; text-align: center; }
+  & .pr-day {
+    width: 100%; height: 40px; padding: 0; border: 0; background: none; color: var(--ink);
+    font: 300 17px/1 var(--text); font-variant-numeric: lining-nums tabular-nums; transition: background-color 0.2s ease-out, color 0.2s ease-out;
+  }
+  & .pr-day:not(:disabled, [data-start], [data-end]):hover { background: #e9ebe3; }
+  & .pr-day[data-today] { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+  & .pr-day[data-range] { background: #e9ebe3; }
+  & .pr-day:is([data-start], [data-end]) { background: var(--ink); color: var(--paper); }
+  & .pr-day:disabled { color: var(--ink-2); opacity: 0.32; cursor: default; }
+  & .pr-calendar-foot { min-height: 20px; margin: 14px 0 0; font: italic 300 15px/1.3 var(--text); color: var(--ink-2); }
   & .pr-field select { background: linear-gradient(45deg, transparent 50%, currentColor 50%) right 8px center / 6px 6px no-repeat, transparent; }
   & .pr-booking .pr-button { min-height: 48px; }
   & .pr-booking-note { margin: 0; align-self: center; font: italic 300 15px/1.3 var(--text); color: var(--ink-2); }
@@ -86,10 +135,14 @@ body[data-edition="figma-pr"] {
   & .pr-menu::backdrop { background: rgb(0 0 0 / 0.3); }
   & .pr-menu[open] { animation: pr-fade 0.4s var(--ease-out); }
   & .pr-menu.closing { animation: pr-fade-out 0.3s var(--ease) forwards; }
+  /* The close button on the left, where MENU opened the menu; the wordmark in the middle; from 1024px the language and
+     the booking link on the right (owner, 2026-11-10). */
   & .pr-menu .menu-top { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 96px; margin-bottom: 48px; border-bottom: 1px solid var(--rule); }
-  & .pr-menu .menu-top > a { grid-column: 2; }
+  & .pr-menu .menu-brand { grid-column: 2; }
   & .pr-menu .menu-top img { width: 160px; height: auto; }
-  & .pr-menu .icon-button { grid-column: 3; justify-self: end; display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid var(--rule-strong); border-radius: 0; background: none; }
+  & .pr-menu .icon-button { grid-column: 1; justify-self: start; display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid var(--rule-strong); border-radius: 0; background: none; }
+  & .pr-menu .menu-actions-top { grid-column: 3; justify-self: end; display: flex; align-items: center; gap: 28px; }
+  & .pr-menu .menu-actions-top .nav-book { min-height: 48px; }
   & .pr-menu .icon-button svg { width: 20px; height: 20px; }
   & .pr-menu .menu-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px var(--gap); max-width: 1360px; margin: 0 auto; }
   & .pr-menu .menu-column h2 { margin: 0 0 20px; font: 600 12px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; }
@@ -157,16 +210,34 @@ body[data-edition="figma-pr"] {
     & .pr-mega-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     & .pr-footer .footer-columns { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
+  /* The menu's language and booking link stand on the right of its top row from 1024px, where they fit beside the
+     centred wordmark; below, they stay at the foot of the menu. */
+  @media (min-width: 1024px) {
+    & .pr-menu .menu-footer { display: none; }
+  }
+  @media (max-width: 1023px) {
+    & .pr-menu .menu-actions-top { display: none; }
+  }
   @media (max-width: 899px) {
     & .pr-utility { display: none; }
-    & .pr-header { top: 0; }
+    & .pr-header[data-collapsed] { transform: none; }
     & .pr-nav { display: none; }
-    & .pr-brand-compact { left: 50%; translate: -50% -50%; opacity: 1; pointer-events: auto; }
+    & .pr-brand-compact, & .pr-header[data-collapsed] .pr-brand-compact { left: 50%; opacity: 1; visibility: visible; transform: translate(-50%, -50%); transition: none; }
+    & .pr-brand-compact img { width: 112px; }
+    & .pr-header[data-collapsed] .pr-menu-toggle { transform: none; }
     & .pr-nav-row { padding-right: var(--m); }
     /* The reserve button becomes a bar along the foot of the screen (Rosewood's phone reserve bar). */
     & .pr-reserve { position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; width: 100%; height: 56px; padding: 0 20px; }
-    & .pr-booking { position: fixed; left: 0; right: 0; bottom: 56px; z-index: 70; grid-template-columns: 1fr 1fr; padding: 20px var(--m) 24px; box-shadow: 0 -16px 32px -24px rgb(0 0 0 / 0.4); }
-    & .pr-booking .pr-field:nth-of-type(3), & .pr-booking .pr-button, & .pr-booking-note { grid-column: 1 / -1; }
+    /* On phones the bar is a sheet that rises above the reserve bar; the calendar covers it while dates are chosen. */
+    & .pr-booking-panel { position: fixed; top: auto; bottom: 56px; z-index: 70; }
+    & .pr-booking-panel[data-open] { box-shadow: 0 -16px 32px -24px rgb(0 0 0 / 0.4); }
+    & .pr-booking { grid-template-columns: 1fr 1fr; padding: 20px var(--m) 24px; transform: translateY(12px); }
+    & .pr-booking :is(.pr-field:nth-of-type(3), .pr-button, .pr-booking-note) { grid-column: 1 / -1; }
+    & .pr-calendar { position: fixed; top: auto; left: 0; right: 0; bottom: 56px; max-height: calc(100svh - 56px - var(--header-row)); overflow: auto; padding: 20px var(--m) 16px; border: 0; border-top: 1px solid var(--rule); box-shadow: 0 -16px 32px -24px rgb(0 0 0 / 0.4); }
+    & .pr-calendar-months { grid-template-columns: minmax(0, 1fr); }
+    & .pr-calendar-months .pr-month { max-width: 400px; width: 100%; margin: 0 auto; }
+    & .pr-month-step { left: 0; } & .pr-month-step.pr-month-next { right: 0; }
+    & .pr-day { height: 44px; }
     & .pr-footer { padding-bottom: 56px; }
     & .pr-menu .menu-columns { grid-template-columns: 1fr 1fr; }
     & .pr-newsletter .newsletter-inner { grid-template-columns: 1fr; }
@@ -184,6 +255,9 @@ body[data-edition="figma-pr"] {
 @keyframes pr-sheet { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
 @keyframes pr-fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes pr-fade-out { to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  body[data-edition="figma-pr"] :is(.pr-header, .pr-brand-compact, .pr-menu-toggle, .pr-booking-panel, .pr-booking, .pr-calendar) { transition: none !important; animation: none !important; }
+}
 
 /* Spanish pages (docs/figma-spanish.md): the designer's EN | ES is a link to the page in the other language. The
    utility row's 2px rule moves from the whole link to the current language. */

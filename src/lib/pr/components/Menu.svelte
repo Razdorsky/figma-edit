@@ -14,16 +14,37 @@
   let { edition, page, base = '', locale = 'en' }: Props = $props();
 </script>
 
+<!-- The designer's globe and EN: a link to this page in the other language (docs/figma-spanish.md). -->
+{#snippet language()}
+  <a class="language-trigger" data-language-trigger data-sveltekit-reload href={route(edition, page.slug, base, other(locale))} hreflang={other(locale)} aria-label={tr(locale, 'Language: English. Switch to Spanish')}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <ellipse cx="12" cy="12" rx="4" ry="9" />
+      <path d="M3 12h18M5 7h14M5 17h14" />
+    </svg>
+    <span>{locale === 'es' ? 'ES' : 'EN'}</span>
+  </a>
+{/snippet}
+{#snippet book()}
+  <a class="nav-book" href={bookingPage(locale)} target="_blank" rel="noopener noreferrer">{tr(locale, 'CHECK AVAILABILITY ↗')}</a>
+{/snippet}
+
 <dialog class="site-menu pr-menu" id="site-menu" aria-label={tr(locale, 'Explore The Vessyl')}>
+  <!-- The close button sits where MENU opened the menu, on the left; the wordmark is in the middle as in the header.
+       From 1024px the language and the booking link stand on the right of this row; below, at the foot (owner, 2026-11-10). -->
   <div class="menu-top">
-    <a href={route(edition, '', base, locale)}>
-      <img src={`${base.replace(/\/$/, '')}/brand/logo-dark.svg`} alt="VESSYL" width="220" height="41" />
-    </a>
     <button type="button" class="icon-button" data-menu-close aria-label={tr(locale, 'Close menu')}>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
         <path d="m6 6 12 12M18 6 6 18" />
       </svg>
     </button>
+    <a class="menu-brand" href={route(edition, '', base, locale)}>
+      <img src={`${base.replace(/\/$/, '')}/brand/logo-dark.svg`} alt="VESSYL" width="220" height="41" />
+    </a>
+    <div class="menu-actions menu-actions-top">
+      {@render language()}
+      {@render book()}
+    </div>
   </div>
   <div class="menu-columns">
     <section class="menu-column">
@@ -64,16 +85,8 @@
     </section>
   </div>
   <div class="menu-footer">
-    <a class="nav-book" href={bookingPage(locale)} target="_blank" rel="noopener noreferrer">{tr(locale, 'CHECK AVAILABILITY ↗')}</a>
-    <!-- The designer's globe and EN: a link to this page in the other language (docs/figma-spanish.md). -->
-    <a class="language-trigger" data-language-trigger data-sveltekit-reload href={route(edition, page.slug, base, other(locale))} hreflang={other(locale)} aria-label={tr(locale, 'Language: English. Switch to Spanish')}>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-        <circle cx="12" cy="12" r="9" />
-        <ellipse cx="12" cy="12" rx="4" ry="9" />
-        <path d="M3 12h18M5 7h14M5 17h14" />
-      </svg>
-      <span>{locale === 'es' ? 'ES' : 'EN'}</span>
-    </a>
+    {@render book()}
+    {@render language()}
   </div>
   <div class="preview-toast dialog-toast" role="status" hidden></div>
 </dialog>

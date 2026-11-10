@@ -31,7 +31,7 @@ The mechanism is the one of Figma Enhanced (`docs/figma-enhanced-spanish.md`), w
   The English markup keeps them exactly; in Spanish the element shows the whole sentence and the line wraps to its
   column: `{#if locale === 'es'}{tr(locale, "…")}{:else}<the English markup>{/if}`.
 - `node scripts/spanish-strings.mjs` (part of `npm run check`) lists every English string of each edition (845 in
-  Figma, 858 in Figma PR on 2026-11-10) and fails when a dictionary misses one or keeps one that is no longer used.
+  Figma, 858 in Figma PR on 2026-11-10; 866 once the booking calendar came) and fails when a dictionary misses one or keeps one that is no longer used.
   `--list figma` or `--list figma-pr` prints the strings.
 
 ## Translation

@@ -822,7 +822,6 @@
  "Close gallery": "Cerrar galería",
  "Previous photo": "Foto anterior",
  "Next photo": "Foto siguiente",
- "Choose a check-out date after the check-in date.": "Elige una fecha de salida posterior a la de entrada.",
  "Vessyl home": "Vessyl, inicio",
  "MENU": "MENÚ",
  "Main navigation": "Navegación principal",
@@ -856,5 +855,14 @@
  "This destination is still a placeholder in the supplied design.": "Este destino todavía es provisional en el diseño entregado.",
  "Play the video": "Reproducir el video",
  "The Vessyl in Arenal, Costa Rica": "The Vessyl en Arenal, Costa Rica",
- "Skip to content": "Ir al contenido"
+ "Skip to content": "Ir al contenido",
+ "check-in date": "fecha de entrada",
+ "check-out date": "fecha de salida",
+ "Choose a check-out date.": "Elige una fecha de salida.",
+ "Add date": "Agregar fecha",
+ "CHECK RATES": "VER TARIFAS",
+ "Choose your dates": "Elige tus fechas",
+ "Previous month": "Mes anterior",
+ "Next month": "Mes siguiente",
+ "night": "noche"
 }

@@ -109,34 +109,54 @@ and the reserve button becomes a bar along the foot of the screen; below 600 px 
 ## Header
 
 `src/lib/pr/components/Header.svelte`, `src/lib/pr/styles/shell.css`. Rosewood's tiers on paper:
-- the utility row: the designer's "EN | ES" on the left, a link to the page in the other language (Spanish since
-  2026-11-10, `docs/figma-spanish.md`), the dark wordmark in the middle, an underlined
-  "CHECK AVAILABILITY" link to Orbe on the right;
+- the utility row: the dark wordmark in the middle and, on the right as in the frame's header, the designer's
+  "EN | ES" — a link to the page in the other language (`docs/figma-spanish.md`), the current language marked by a
+  2px rule. Nothing on the left. (Until 2026-11-10 it also had a "CHECK AVAILABILITY" link on the right and EN | ES on
+  the left; the owner had the link removed, since the green button already says it, and the language moved right.)
 - the navigation row: "MENU" with three lines, the Stay and Experiences groups (the frame's two menus) whose panels
-  show the pages as picture cards with an "Overview ↗" link, the "Rates & offers" link, and the reserve button.
+  show the pages as picture cards with an "Overview ↗" link, the "Rates & offers" link, and the green reserve button
+  "CHECK AVAILABILITY".
 
-The header is `position: sticky` with `top` equal to minus the utility row, so scrolling down takes the utility row
-away and leaves the navigation row on the screen. `updateHeader()` sets `data-stuck` once the utility row has gone,
-and the small wordmark then appears in the navigation row next to "MENU". Mega-panel pictures load only when a
-panel opens. Below 900 px the utility row is hidden and the navigation row carries "MENU" and the wordmark.
+Scrolling (owner, 2026-11-10; `updateHeader()` in `interactions.js`). The header sticks at the top. Once the page
+has scrolled past the utility row, scrolling down slides the whole header up by that row's height
+(`data-collapsed`, 0.55 s ease-out), so the navigation row stays alone; scrolling up by 20 px anywhere on the page
+brings the utility row back, so the language is always one gesture away. While the utility row is away, the small
+wordmark slides in from the left at the start of the navigation row and "MENU" moves aside for it by the wordmark's
+width; when the row comes back they return, and the hidden wordmark cannot take focus. A mega panel or the booking bar
+that is open keeps the header as it is. With reduced motion everything changes at once. Mega-panel pictures load only
+when a panel opens. Below 900 px the utility row is hidden; the navigation row carries "MENU" on the left and the
+wordmark in the middle.
 
 ## Booking bar
 
-Four Seasons' booking bar under the header, in Rosewood's dress (`Header.svelte`, form `[data-booking]`).
-- The reserve button ("CHECK AVAILABILITY") opens and closes it (`aria-expanded`); Escape closes it and returns the
-  focus to the button.
-- On opening, the check-in date is today and check-out two nights later, unless the guest has chosen; the earliest
-  dates are today and tomorrow.
+Four Seasons' booking bar under the header, in Rosewood's dress (`src/lib/pr/components/Booking.svelte`).
+- The reserve button ("CHECK AVAILABILITY") opens and closes it (`aria-expanded`). It lies over the page under the
+  header and unrolls: its height grows from nothing (grid rows 0fr → 1fr, 0.5 s) while the fields settle in; closing
+  rolls it back up. Escape closes it and returns the focus to the button; opening a mega panel closes it. Closed, it is
+  `inert`.
+- Dates: one calendar for both (owner, 2026-11-10). "Check in" or "Check out" opens it: two months side by side, one
+  below 900 px. The first click is the check-in, the second the check-out, without opening the calendar again; the
+  nights between are lit and counted ("2 nights" / "2 noches"), and the calendar then closes and the focus moves to
+  Guests. A click on or before the check-in while choosing the check-out starts again from that day. Past days cannot
+  be chosen; the calendar reaches 18 months ahead. Months and weekdays are in the page's language (weeks start on
+  Sunday in English, Monday in Spanish); every day is a button whose label reads the whole date. Arrows move by day
+  and week, Page Up and Page Down by month, Home and End to the week's ends, Escape closes the calendar.
+- On opening, the check-in is today and the check-out two nights later, unless the guest has chosen.
 - Guests: 1 to 4 adults, 2 by default.
-- Submitting checks that check-out is after check-in (otherwise a line under the bar says so) and opens Orbe's results
+- "CHECK RATES" ("VER TARIFAS"; Four Seasons' word, so it no longer repeats the green button) opens Orbe's results
   for those dates and guests in a new tab: `bookingFor()` in `src/lib/pr/site.ts` builds
-  `https://reservations.orbebooking.com/Search/SearchAvailability/PAS6c/en/YYYYMMDD/YYYYMMDD/{adults}/0/`.
-- Below 900 px it opens as a sheet above the reserve bar at the foot of the screen.
+  `https://reservations.orbebooking.com/Search/SearchAvailability/PAS6c/en/YYYYMMDD/YYYYMMDD/{adults}/0/` (`/es/` on
+  Spanish pages). Without a check-out it asks for one and opens the calendar.
+- Below 900 px the bar is a sheet that rises above the reserve bar at the foot of the screen, and the calendar covers
+  it while the dates are chosen.
 
 ## Menu, newsletter, footer
 
 - **Menu** (`Menu.svelte`, `.pr-menu`): the frozen edition's full-screen menu on paper, its words and order unchanged,
-  set in display serif with capital group labels and hairlines.
+  set in display serif with capital group labels and hairlines. Its top row (owner, 2026-11-10): the close button on
+  the left, where "MENU" opened it; the wordmark in the middle; from 1024 px the designer's globe with EN or ES and
+  "CHECK AVAILABILITY ↗" on the right, in that order. Below 1024 px those two stay at the foot of the menu (between 900
+  and 1023 px they do not fit beside the centred wordmark).
 - **Newsletter** (`Newsletter.svelte`, `.pr-newsletter`): Rosewood's "Stay connected" row.
 - **Footer** (`Footer.svelte`): the frame's columns under capital headings, serif links, the Vessyl symbol in the
   middle as Rosewood's monogram, the legal line "©The Vessyl 2026 • La Fortuna, Costa Rica" as the frame writes it,
@@ -194,3 +214,10 @@ Neue Helvetica) are commercial and are not used.
 - Accessibility: axe (WCAG 2.2 AA) on all 28 pages at 1440, 768 and 375.
 - Interactions: opening clip plays and pauses, the header sticks, pictures settle, mega panels open with their
   pictures, the booking bar opens Orbe's results, the menu opens, the carousel moves.
+- Header, menu and booking bar of 2026-11-10, in English and Spanish: in Chromium, WebKit and Firefox the utility row
+  leaves on scrolling down and returns after 20 px up, the small wordmark and MENU trade places without overlapping the
+  navigation at 900–2560 px, the bar unrolls and rolls back, the calendar takes both dates in two clicks and closes,
+  CHECK RATES fills Orbe's address, Escape returns the focus to the reserve button, the menu opens with the focus on
+  the close button; on a phone the sheet and the calendar rise above the reserve bar. axe: no violations with the
+  header collapsed, the bar open, the calendar open and the menu open, at 1440, 1024 and 375. Layout: no issue the
+  pages did not have before, in the three engines.
