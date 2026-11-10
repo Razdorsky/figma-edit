@@ -123,6 +123,16 @@ body[data-edition="figma-enhanced"] .current-page [data-name="Section - 40/60 te
 body[data-edition="figma-enhanced"] .current-page [data-name="Section - 60/40 text image"] > [data-part="media"] { grid-column: 1 / span 7; }
 body[data-edition="figma-enhanced"] .current-page [data-name="Section - 60/40 text image"] > [data-part="copy"] { grid-column: 9 / span 4; }
 body[data-edition="figma-enhanced"] .current-page [data-variant="editorial"] h2 { font-size: var(--t-h2m); line-height: 1.095; }
+/* The photograph runs to the screen's edge on its side, rounded 4px only at its inner corners (owner, 2026-11-10);
+   on phones, where it stands above the copy inside the margins, all four corners are 4px. The photo portals keep their
+   own shapes. The bleed is the section's side margin (--edge), counted in vw because a grid item's percentage margins
+   would measure its column, not the page. */
+body[data-edition="figma-enhanced"] .current-page [data-variant="editorial"] > [data-part="media"]:not([data-portal]) { border-radius: 4px; }
+@media (min-width: 768px) {
+  body[data-edition="figma-enhanced"] .current-page [data-variant="editorial"] > [data-part="media"]:not([data-portal]) { --bleed: max(var(--margin), calc((100vw - var(--max)) / 2)); }
+  body[data-edition="figma-enhanced"] .current-page [data-variant="editorial"][data-layout="copy-first"] > [data-part="media"]:not([data-portal]) { margin-right: calc(-1 * var(--bleed)); border-radius: 4px 0 0 4px; }
+  body[data-edition="figma-enhanced"] .current-page [data-variant="editorial"][data-layout="image-first"] > [data-part="media"]:not([data-portal]) { margin-left: calc(-1 * var(--bleed)); border-radius: 0 4px 4px 0; }
+}
 body[data-edition="figma-enhanced"] .current-page :is([data-name="Section - 40/60 text image"], [data-name="Section - 60/40 text image"]) h2 { font-size: var(--t-h2); line-height: 1.154; }
 
 /* ---- Overlay: a full-width photograph with the frames' translucent brown panel ------------------ */
@@ -133,6 +143,7 @@ body[data-edition="figma-enhanced"] .current-page [data-role="overlay"] {
 body[data-edition="figma-enhanced"] .current-page [data-role="overlay"] > [data-part="media"] { position: absolute; inset: 0; z-index: -1; height: 100%; border-radius: 0; }
 body[data-edition="figma-enhanced"] .current-page [data-role="overlay"] > [data-part="copy"] {
   grid-column: 1 / span 5; grid-row: 1; align-self: stretch; justify-content: center; gap: 40px; padding: var(--panel-pad); background: var(--panel-dark);
+  border-radius: 4px; /* as the controls (owner, 2026-11-10) */
 }
 body[data-edition="figma-enhanced"] .current-page [data-name="Overlay panel rigth"] > [data-part="copy"] { grid-column: 8 / span 5; }
 body[data-edition="figma-enhanced"] .current-page [data-name="Slider with overlay"] > [data-part="copy"] { grid-column: 2 / span 5; }
@@ -193,9 +204,12 @@ body[data-edition="figma-enhanced"] .current-page [data-name="copy block"] p { c
 
 /* ---- Introduction: the fan artwork beside the opening statement -------------------------------- */
 body[data-edition="figma-enhanced"] .current-page [data-role="introduction"] { align-items: center; padding-block: calc(var(--section) * 0.7); }
-body[data-edition="figma-enhanced"] .current-page [data-role="introduction"] > [data-part="artwork"] { grid-column: 1 / span 2; }
-body[data-edition="figma-enhanced"] .current-page [data-role="introduction"] > [data-part="artwork"] img { width: 100%; max-height: 440px; object-fit: contain; }
+/* Owner, 2026-11-10: the symbol a quarter larger and clearer (the designer's file is beige at half opacity, almost lost
+   on white), the prose 1px smaller, and no single word left alone on a last line. */
+body[data-edition="figma-enhanced"] .current-page [data-role="introduction"] > [data-part="artwork"] { grid-column: 1 / span 3; }
+body[data-edition="figma-enhanced"] .current-page [data-role="introduction"] > [data-part="artwork"] img { width: 84%; max-height: 520px; object-fit: contain; filter: brightness(0.8) saturate(1.6); }
 body[data-edition="figma-enhanced"] .current-page [data-role="introduction"] > [data-part="copy"] { grid-column: 4 / span 8; }
+body[data-edition="figma-enhanced"] .current-page [data-role="introduction"] .display-prose { font-size: calc(var(--t-h3) - 1px); text-wrap: pretty; }
 
 /* ---- Quote: centred, with the fan artwork running off the right edge --------------------------- */
 body[data-edition="figma-enhanced"] .current-page [data-role="quote"] { position: relative; isolation: isolate; overflow: clip; justify-items: center; text-align: center; }
@@ -383,11 +397,11 @@ body[data-edition="figma-enhanced"] :is(.footer-top, .footer-columns, .footer-bo
   body[data-edition="figma-enhanced"] .current-page [data-part="card"] > [data-part="copy"] { padding: 22px 24px 24px; }
   body[data-edition="figma-enhanced"] .current-page [data-name="Cards"] > [data-part="copy"] { padding-inline: 0; }
   body[data-edition="figma-enhanced"] .current-page [data-role="introduction"] > [data-part="artwork"] { display: flex; justify-content: center; }
-  body[data-edition="figma-enhanced"] .current-page [data-role="introduction"] > [data-part="artwork"] img { width: 110px; max-height: 180px; }
+  body[data-edition="figma-enhanced"] .current-page [data-role="introduction"] > [data-part="artwork"] img { width: 138px; max-height: 220px; }
   body[data-edition="figma-enhanced"] .current-page [data-role="quote"] > [data-part="artwork"] { right: -120px; width: 300px; height: 320px; opacity: 0.6; }
   body[data-edition="figma-enhanced"] .current-page :is([data-role="overlay"], [data-role="gallery"]) { display: flex; flex-direction: column; align-items: stretch; min-height: 0; padding: 0; }
   body[data-edition="figma-enhanced"] .current-page :is([data-role="overlay"], [data-role="gallery"]) > [data-part="media"] { position: relative; inset: auto; z-index: 0; width: 100%; height: auto; aspect-ratio: 4 / 3; }
-  body[data-edition="figma-enhanced"] .current-page [data-role="overlay"] > [data-part="copy"] { width: 100%; padding: 36px var(--edge) 48px; gap: 24px; background: var(--panel-dark-solid); }
+  body[data-edition="figma-enhanced"] .current-page [data-role="overlay"] > [data-part="copy"] { width: 100%; padding: 36px var(--edge) 48px; gap: 24px; background: var(--panel-dark-solid); border-radius: 0; } /* a full-width band on phones */
   body[data-edition="figma-enhanced"] .current-page [data-name="Slider with overlay"] [data-part="copy"] > p + p { margin-top: 0; }
   /* In overlays the arrows are the section's own, so they sit at the middle of the 4:3 photograph. */
   body[data-edition="figma-enhanced"] .current-page [data-role="overlay"] > :is([data-part="gallery-prev"], [data-part="gallery-next"]) { top: calc(100vw * 0.375); }

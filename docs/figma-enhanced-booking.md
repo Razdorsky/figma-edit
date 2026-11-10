@@ -96,3 +96,15 @@ them (989 strings).
   (`interactions.js`, `updateArch`). The arch's title is 2px smaller than the hero size at every width
   (`calc(var(--t-hero) - 2px)`: 66px at 1440px).
 
+## Panels, split photographs and the introduction (owner, 2026-11-10)
+
+`styles/system.css`, at the level of each component:
+- Overlay (a photograph with the translucent brown panel): the panel is rounded 4px; on phones, where it becomes a
+  full-width band, it keeps square corners.
+- Editorial splits (40/60, 50/50 and 60/40, either side): from 768px the photograph runs to the screen's edge on its
+  side and is rounded 4px only at its inner corners; on phones, above the copy inside the margins, all four corners
+  are 4px. The photo portals (the arch and the bowl) keep their shapes.
+- Introduction (the symbol beside the opening prose): the symbol is about a quarter larger and darker (the designer's
+  file is beige at half opacity; a CSS filter deepens it), the prose is 1px smaller, and `text-wrap: pretty` keeps a
+  single word from ending a paragraph alone.
+
