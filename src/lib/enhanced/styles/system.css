@@ -306,12 +306,16 @@ body[data-edition="figma-enhanced"] .current-page [data-role="topics"] [data-par
 /* ---- Map: full width, the frame's crop of the aerial photograph, labels on their buildings -------- */
 body[data-edition="figma-enhanced"] .current-page [data-role="map"] { position: relative; padding: 0; }
 body[data-edition="figma-enhanced"] .current-page [data-role="map"] > [data-part="media"] { aspect-ratio: 1440 / 870; border-radius: 0; }
-body[data-edition="figma-enhanced"] .current-page [data-role="map"] > [data-part="media"] img { position: absolute; inset: auto; width: 129.64%; height: 147.24%; max-width: none; left: -3.87%; top: -19.01%; object-fit: fill; }
+body[data-edition="figma-enhanced"] .current-page [data-role="map"] > [data-part="media"] :is(img, video) { position: absolute; inset: auto; width: 129.64%; height: 147.24%; max-width: none; left: -3.87%; top: -19.01%; object-fit: fill; }
 body[data-edition="figma-enhanced"] .current-page [data-part="map-key"] { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
 body[data-edition="figma-enhanced"] .current-page [data-part="map-key"] li {
   position: absolute; display: flex; align-items: center; gap: 8px; padding: 5px 10px; border-radius: 104px; background: #fff; box-shadow: 0 4px 2px rgb(26 48 19 / 0.5);
   color: var(--heading); font: 600 var(--t-label) / 1.4286 var(--font-body); white-space: nowrap;
 }
+/* The map's names wait while the clouds part and come in over the film's last two seconds (owner, 2026-11-10;
+   interactions.js, setupReveal sets data-map-key and the fade's length, so it ends with the film). */
+body[data-edition="figma-enhanced"] .current-page [data-role="map"][data-map-key="hidden"] [data-part="map-key"] li { opacity: 0; }
+body[data-edition="figma-enhanced"] .current-page [data-role="map"][data-map-key="shown"] [data-part="map-key"] li { opacity: 1; transition: opacity var(--key-fade, 2s) ease-out; }
 body[data-edition="figma-enhanced"] .current-page [data-part="map-key"] li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
 body[data-edition="figma-enhanced"] .current-page [data-part="map-key"] li:nth-child(1) { left: 68%; top: 17%; }
 body[data-edition="figma-enhanced"] .current-page [data-part="map-key"] li:nth-child(2) { left: 72.4%; top: 60.9%; }

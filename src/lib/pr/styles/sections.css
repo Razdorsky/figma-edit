@@ -221,6 +221,10 @@ body[data-edition="figma-pr"] .current-page {
   & > section[data-role="logos"] [data-part="artwork"] img { width: auto; height: 22px; filter: grayscale(1); opacity: 0.75; }
   & > section[data-role="map"] { margin-top: 72px; }
   & > section[data-role="map"] > [data-part="media"] { aspect-ratio: 1440 / 870; }
+  /* The map's names wait while the clouds part and come in over the film's last two seconds (owner, 2026-11-10;
+     interactions.js, setupReveal sets data-map-key and the fade's length, so it ends with the film). */
+  & > section[data-role="map"][data-map-key="hidden"] [data-part="map-key"] li { opacity: 0; }
+  & > section[data-role="map"][data-map-key="shown"] [data-part="map-key"] li { opacity: 1; transition: opacity var(--key-fade, 2s) ease-out; }
   & > section[data-role="map"] [data-part="map-key"] { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 28px; margin: 28px var(--m) 0; padding: 0; list-style: none; font: 600 11px/1.4 var(--caps); font-stretch: 125%; letter-spacing: 0.2em; text-transform: uppercase; }
 }
 

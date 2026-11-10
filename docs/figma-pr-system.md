@@ -265,3 +265,14 @@ Neue Helvetica) are commercial and are not used.
   the close button; on a phone the sheet and the calendar rise above the reserve bar. axe: no violations with the
   header collapsed, the bar open, the calendar open and the menu open, at 1440, 1024 and 375. Layout: no issue the
   pages did not have before, in the three engines.
+
+## The map's film (owner, 2026-11-10)
+
+On Where you sleep the aerial photograph of the map is the owner's short film of the clouds parting over the property
+(`pages/P02.svelte`; the files in `public/enhanced/clips/map-reveal*`, as on Figma Enhanced, which this edition's build
+already carries). It plays once, silent and without controls, when a third of the block is on screen, and stays on its
+last frame (`interactions.js`, `setupReveal`); it loads only when the block is a screen away. The names under the map
+are hidden for the film's first two seconds and come in over its last two (`sections.css`, `data-map-key`). With reduced
+motion, or after a change of language when the map was already reached, the last frame stands as a still with the
+names. Checked in Chrome, WebKit and Firefox, desktop and phone.
+

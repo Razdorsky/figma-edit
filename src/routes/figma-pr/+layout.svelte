@@ -48,7 +48,7 @@
     await Promise.race([Promise.all(shown.map(image => image.decode().catch(() => {}))), new Promise(resolve => setTimeout(resolve, 350))]);
   }
   beforeNavigate(navigation => {
-    if (languageSwitch(navigation)) keepPlace(); else closeOverlays();
+    if (languageSwitch(navigation)) {keepPlace();document.documentElement.dataset.switching = 'language';} else closeOverlays();
   });
   afterNavigate(() => {
     const edition = 'figma-pr';
@@ -62,6 +62,7 @@
     document.documentElement.style.setProperty('--canvas', canvas(edition, item?.index || 0));
     if (place) returnToPlace();
     enhancePage();
+    delete document.documentElement.dataset.switching;
   });
   let activeTransition: ViewTransition | undefined;
   onNavigate(navigation => {

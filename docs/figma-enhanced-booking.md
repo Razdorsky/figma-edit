@@ -217,3 +217,27 @@ Checked: the menu fits the screen at 1280×720, 1366×768, 1440×800, 1440×900,
 the middle and the button unclipped; the footer's three spaces at 9 screen sizes on two pages in both languages; axe
 (WCAG 2.2 AA) with no violations at the top of the page, with the booking bar, the calendar and the menu open, on a page
 opening on a photograph and on one opening on text, at 1440 and 1024, in both languages.
+
+## The map's film (owner, 2026-11-10)
+
+On Where you sleep the aerial photograph of the map (`pages/P02.svelte`, "Map") is now the owner's short film: the
+clouds part over the property (`public/enhanced/clips/map-reveal.mp4`, 1712×1080, 4s, 1.9 MB; `map-reveal-m.mp4`,
+960×606, 0.7 MB, below 768px; re-encoded from `Vessyl-cloud-reveal-4s-v2.mp4` without sound and with the index at the
+front). The film's last frame is the same place as the photograph, so the frame's crop and the names stay as they were.
+
+- It plays once, silent and without controls, when a third of the block is on screen, and stays on its last frame
+  (`interactions.js`, `setupReveal`; the attribute `data-reveal` keeps it out of the loops' logic). It loads only when
+  the block is a screen away; until then its poster is the first frame, the clouds (`map-reveal-first.webp`).
+- The names on the map are hidden for the film's first two seconds and come in over its last two, the fade timed to
+  end with the film (`data-map-key`, `--key-fade` in `styles/system.css`).
+- With reduced motion the film never plays: its poster becomes its last frame (`map-reveal-last.webp`) and the names
+  stand at once. A change of language that rebuilds a map already reached shows it the same way, so the clouds do not
+  part again.
+- The figure carries the photograph's description (`role="img"`, `aria-label`); the film itself is hidden from
+  assistive technology.
+- The Home next-page block towards Where you sleep and the menu's small preview still show the photograph.
+
+Checked in Chrome, WebKit and Firefox, at 1440×900 and 390×844: idle until the block comes on screen, playing at once,
+ended at 4.0s on its last frame, the phone file on phones; the names at opacity 0 until 2.0s and 1 at 4.0s; reduced
+motion and a change of language with the still frame and the names shown. axe: no violations on the page.
+

@@ -134,8 +134,66 @@ function updateHeader() {
   header.toggleAttribute('data-collapsed', headerState.collapsed);
 }
 
+// The map's film (owner, 2026-11-10; P02, "Map"): the clouds part over the property. It loads when the block is a screen
+// away, plays once — silent, without controls — when a third of it is on screen, and stays on its last frame. The map's
+// names wait while the clouds part and come in over the film's last two seconds, ending with it (data-map-key). With
+// reduced motion, or when a change of language rebuilds a map already reached, it shows its last frame as a still and
+// the names at once.
+let revealNear, revealSeen;
+function setupReveal() {
+  revealNear?.disconnect();
+  revealSeen?.disconnect();
+  const videos = [...document.querySelectorAll('.current-page video[data-reveal]')];
+  if (!videos.length) return;
+  const map = video => video.closest('[data-role="map"]');
+  const still = video => {
+    if (video.dataset.endFrame) video.poster = video.dataset.endFrame;
+    if (map(video)) delete map(video).dataset.mapKey;
+  };
+  // The names come in over the last two seconds, the fade timed to end with the film.
+  const names = video => {
+    const section = map(video);
+    if (!section) return;
+    section.dataset.mapKey = 'hidden';
+    const show = () => {
+      const left = video.duration ? Math.max(0.3, video.duration - video.currentTime) : 2;
+      section.style.setProperty('--key-fade', `${left.toFixed(2)}s`);
+      section.dataset.mapKey = 'shown';
+      video.removeEventListener('timeupdate', near);
+    };
+    const near = () => {if (video.duration && video.currentTime >= video.duration - 2) show();};
+    video.addEventListener('timeupdate', near);
+    video.addEventListener('ended', show, {once: true});
+  };
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {videos.forEach(still);return;}
+  const relang = document.documentElement.dataset.switching === 'language';
+  const fresh = videos.filter(video => {
+    if (relang && video.getBoundingClientRect().top < innerHeight) {still(video);return false;}
+    return true;
+  });
+  revealNear = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      revealNear.unobserve(entry.target);
+      if (entry.target.preload !== 'auto') {entry.target.preload = 'auto';if (!entry.target.dataset.revealing) entry.target.load();}
+    }
+  }, {rootMargin: '100% 0px 100% 0px'});
+  revealSeen = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const video = entry.target;
+      revealSeen.unobserve(video);
+      video.dataset.revealing = '';
+      video.preload = 'auto';
+      video.muted = true;
+      video.play()?.catch?.(() => still(video));
+    }
+  }, {threshold: 0.35});
+  fresh.forEach(video => {names(video);revealNear.observe(video);revealSeen.observe(video);});
+}
 export function enhancePage() {
   setupClips();
+  setupReveal();
   setupCarousels();
   markGraphics();
   setupSettle();
