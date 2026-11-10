@@ -554,8 +554,10 @@ function warmNext() {
   if ('requestIdleCallback' in window) requestIdleCallback(go, {timeout: 4000}); else setTimeout(go, 2500);
 }
 
-// The Home arch (/blueprint/ 452c7d0): it opens with the scroll through its 185svh block, following the page
-// with a short lag (scrub), on screens from 900px and without reduced motion.
+// The arch (/blueprint/ 452c7d0): it opens with the scroll over 85% of a screen, following the page with a short lag
+// (scrub), on screens from 900px and without reduced motion. Then the open film holds the screen for 40% of a screen
+// more before the page moves on (owner, 2026-11-10: it was swept away the moment it opened); styles/films.css gives the
+// block the room (225svh).
 const arch = {el: null, target: 0, current: 0, frame: 0};
 function setupArch() {
   cancelAnimationFrame(arch.frame);
@@ -572,7 +574,7 @@ function updateArch(jump = false) {
   const el = arch.el;
   if (!el?.isConnected || !el.classList.contains('is-opening')) return;
   const box = el.getBoundingClientRect();
-  const span = box.height - innerHeight;
+  const span = Math.min(box.height - innerHeight, innerHeight * 0.85); // the opening; the rest of the block is the hold
   arch.target = span > 0 ? Math.min(1, Math.max(0, -box.top / span)) : 0;
   if (jump) arch.current = arch.target;
   const step = () => {

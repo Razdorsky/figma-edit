@@ -154,7 +154,7 @@ Each feature is studied before it is built, then reviewed by the owner before th
 
 **`/blueprint/` home opening, commit 452c7d0** (owner's reference 2). Code: `src/lib/blueprint/blocks/Hero.svelte`, `styles/blocks.css` 15–35, `motion.ts` 195–205; the clip is `public/bp/video/loop-pool.mp4`.
 - Layout: a large EB Garamond title and actions on the left; on the right a looping film inside an arch the shape of the Dome. The arch starts under the header, and its top is a half circle.
-- The block is 185svh tall and its stage is sticky. As you scroll, the arch's clip opens until the film fills the screen:
+- The block is 185svh tall (225svh since 2026-11-10: 85svh open the arch, then the open film holds the screen for 40svh) and its stage is sticky. As you scroll, the arch's clip opens until the film fills the screen:
   - inset and radius go to zero;
   - the film slides so the subject that sat in the arch's middle ends centred;
   - it settles from 112% to 100%.
@@ -196,7 +196,7 @@ The scripts state that nothing about a place is invented.
 
 - **Home** (`pages/P01.svelte`, `styles/films.css`, `interactions.js` `setupArch`/`updateArch`):
   - The designer's title and two buttons sit left of the arch with `loop-pool`.
-  - From 900px the block is 185svh and its stage sticks. The arch opens with the scroll, following it with a short lag. The copy fades, rises and blurs away. The header turns light past 55%.
+  - From 900px the block is 185svh (225svh since 2026-11-10, with a 40svh hold once open) and its stage sticks. The arch opens with the scroll, following it with a short lag. The copy fades, rises and blurs away. The header turns light past 55%.
   - Below 900px, and with reduced motion, the copy stands above an arch that does not open.
   - The page's header starts copper (`photo: false` for page 01).
 - **The film** (`playFilm`, `filmControls`):
