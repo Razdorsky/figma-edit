@@ -2,7 +2,11 @@
   // Step 2.1 (docs/figma-enhanced-step2.md): the designer's header, floating as on /blueprint/ 452c7d0, with the
   // Legacy Blueprint mega menu. Corrected to the placement map (2026-11-08): every menu group that fits beside MENU
   // gets a trigger and a panel; the menu itself shows each page's photograph (Menu.svelte). Behaviour: interactions.js.
-  import { bookingFor, route } from '#lib/enhanced/site.ts';
+  // 2026-11-10 (docs/figma-enhanced-booking.md): the designer's CHECK AVAILABILITY opens the booking bar with its calendar
+  // under the header, in the mega panels' glass; a mega panel that opens closes it.
+  import { onMount } from 'svelte';
+  import { route } from '#lib/enhanced/site.ts';
+  import Booking from '#lib/enhanced/components/Booking.svelte';
   import { thumb, groups } from '#lib/enhanced/navigation.ts';
   import { tr, other, type Locale } from '#lib/enhanced/i18n.ts';
 
@@ -23,6 +27,19 @@
   // Four of the six groups fit beside MENU at the widest; the rank decides from which width each one shows
   // (header.css). Take the whole property and Plan your visit live in the menu.
   const shown = groups.slice(0, 4);
+
+  let bookingOpen = $state(false);
+  let reserve: HTMLButtonElement | undefined = $state();
+  // The controller (interactions.js) retunes the header when the bar opens or closes.
+  $effect(() => {
+    void bookingOpen;
+    document.dispatchEvent(new CustomEvent('enhanced:booking'));
+  });
+  onMount(() => {
+    const close = () => (bookingOpen = false);
+    document.addEventListener('enhanced:mega-open', close);
+    return () => document.removeEventListener('enhanced:mega-open', close);
+  });
 </script>
 
 <header class="site-header" data-header data-theme={page.photo ? 'dark' : 'light'}>
@@ -51,7 +68,7 @@
       <a class="language-trigger" data-language-trigger data-sveltekit-reload href={route(edition, page.slug, base, other(locale))} hreflang={other(locale)} aria-label={tr(locale, 'Language: English. Switch to Spanish')}>
         <span><span data-lang-current={locale === 'en' || undefined}>EN</span> | <span data-lang-current={locale === 'es' || undefined}>ES</span></span>
       </a>
-      <a class="nav-book" href={bookingFor(locale)} target="_blank" rel="noopener noreferrer">{tr(locale, 'CHECK AVAILABILITY')}</a>
+      <button type="button" class="nav-book" data-booking-open bind:this={reserve} aria-expanded={bookingOpen} aria-controls="booking-panel" onclick={() => (bookingOpen = !bookingOpen)}>{tr(locale, 'CHECK AVAILABILITY')}</button>
     </div>
   </div>
   {#each shown as group (group.id)}
@@ -72,5 +89,6 @@
       {/if}
     </nav>
   {/each}
+  <Booking bind:open={bookingOpen} {locale} onclose={() => reserve?.focus()} />
   <span class="header-progress" aria-hidden="true"></span>
 </header>

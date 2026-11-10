@@ -8,6 +8,8 @@ import type {Locale} from './i18n.ts';
 // Orbe's booking page in the reader's language (owner, 2026-11-09: the Spanish booking page is /es/).
 export const bookingFor=(locale:Locale='en')=>`https://reservations.orbebooking.com/Search/Init/PAS6c/${locale}/`;
 export const booking=bookingFor('en');
+// Orbe opens its results for given dates and guests at this address (docs/figma-enhanced-booking.md).
+export const bookingResults=(checkIn:string,checkOut:string,adults:number,locale:Locale='en')=>`https://reservations.orbebooking.com/Search/SearchAvailability/PAS6c/${locale}/${checkIn.replaceAll('-','')}/${checkOut.replaceAll('-','')}/${adults}/0/`;
 // Spanish pages live under /figma-enhanced/es/ (docs/figma-enhanced-spanish.md).
 export const route=(edition:Edition,slug='',base='',locale:Locale='en')=>`${base.replace(/\/$/,'')}/${edition}/${locale==='es'?'es/':''}${slug?slug+'/':''}`;
 /** A route parameter such as "es/villas" split into its language and page slug. */

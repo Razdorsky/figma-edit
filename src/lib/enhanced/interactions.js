@@ -50,6 +50,7 @@ function openMega(trigger, focusFirst) {
   panel.inert = false;
   trigger.setAttribute('aria-expanded', 'true');
   trigger.closest('[data-header]')?.classList.remove('is-away');
+  document.dispatchEvent(new CustomEvent('enhanced:mega-open')); // the booking bar closes (components/Header.svelte)
   updateHeader();
   if (focusFirst) panel.querySelector('a')?.focus();
 }
@@ -589,7 +590,7 @@ const DARK = '[data-role="photo-hero"], [data-role="overlay"], [data-role="galle
 let lastY = 0;
 let refreshHeader = () => {};
 function toneUnder(header) {
-  if (header.querySelector('[data-mega][data-open="true"]')) return 'dark';
+  if (header.querySelector('[data-mega][data-open="true"], [data-booking-open][aria-expanded="true"]')) return 'dark';
   const y = header.offsetHeight / 2;
   // The last match is the one on top: a rising block covers the photograph it rises over (step 2.5).
   const sections = document.querySelectorAll('.current-page > section, .current-page > [data-drift], .current-page > [data-rise] > :is(section, [data-drift]), .current-page > :is([data-rail], [data-change]) > section, .site-footer');
@@ -607,7 +608,7 @@ function updateHeader() {
   if (!header) return;
   const y = scrollY;
   header.classList.toggle('is-scrolled', y > 40);
-  const busy = document.querySelector('#site-menu[open]') || header.querySelector('[data-mega][data-open="true"]') || header.contains(document.activeElement);
+  const busy = document.querySelector('#site-menu[open]') || header.querySelector('[data-mega][data-open="true"], [data-booking-open][aria-expanded="true"]') || header.contains(document.activeElement);
   if (!busy && y > 320 && y > lastY + 2) header.classList.add('is-away');
   if (busy || y <= 320 || y < lastY - 2) header.classList.remove('is-away');
   lastY = y;
@@ -698,6 +699,8 @@ export function installInteractions() {
   on('timeupdate', event => {if (event.target instanceof HTMLVideoElement && event.target.dataset.end) sceneTime(event.target);}, {capture:true});
   on('ended', event => {if (event.target instanceof HTMLVideoElement && event.target.dataset.end) endScene(event.target.closest('[data-film-box]'));}, {capture:true});
   refreshHeader = () => {lastY = scrollY;document.querySelector('[data-header]')?.classList.remove('is-away');updateHeader();};
+  // The booking bar (components/Booking.svelte) opened or closed: header and bar become one sheet of the panels' glass.
+  on('enhanced:booking', () => updateHeader());
   on('focusin', event => {
     const target = event.target instanceof Element ? event.target : null;
     if (target?.closest('[data-header]')) document.querySelector('[data-header]')?.classList.remove('is-away');

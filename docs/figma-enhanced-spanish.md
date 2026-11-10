@@ -41,7 +41,9 @@ their words (the text that changes with the photograph, step 2.7), and a fresh p
 
 ## Booking
 
-The booking buttons open Orbe in the reader's language: `bookingFor(locale)` in `src/lib/enhanced/site.ts` gives
+Since 2026-11-10 the header's CHECK AVAILABILITY opens the booking bar with its calendar
+(`docs/figma-enhanced-booking.md`), whose CHECK RATES opens Orbe's results in the reader's language. The other booking
+buttons open Orbe in the reader's language: `bookingFor(locale)` in `src/lib/enhanced/site.ts` gives
 `…/Search/Init/PAS6c/en/` or `…/Search/Init/PAS6c/es/` (owner, 2026-11-09). The designer's booking buttons on pages
 01–06 write `…/PAS6c/{locale}/` (corrected 2026-11-10: on the first Spanish publication they still opened `/en/`).
 

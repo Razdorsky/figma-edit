@@ -16,15 +16,23 @@ body[data-edition="figma-enhanced"] .site-header[data-theme="dark"] { color: var
 /* After 40px it gets a background; while you read downwards it steps away, and returns on the way up. */
 body[data-edition="figma-enhanced"] .site-header::before {
   content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; pointer-events: none;
-  background: rgb(255 255 255 / 0.92); border-bottom: 1px solid var(--rule);
+  background: rgb(255 255 255 / 0.92);
   -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
   transition: opacity var(--dur-2) var(--ease), background-color var(--dur-2) var(--ease);
 }
-body[data-edition="figma-enhanced"] .site-header[data-theme="dark"]::before { background: rgb(22 26 17 / 0.86); border-bottom-color: rgb(245 235 231 / 0.08); }
+body[data-edition="figma-enhanced"] .site-header[data-theme="dark"]::before { background: rgb(22 26 17 / 0.86); }
+/* The header's hairline (owner, 2026-11-10): from the top of the page, over the opening picture too, so the header
+   always reads as a band — copper over light sections, light over photographs. The reading-progress line runs on it. */
+body[data-edition="figma-enhanced"] .site-header::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; z-index: 0; height: 1px; pointer-events: none;
+  background: color-mix(in srgb, var(--accent) 28%, transparent); transition: background-color var(--dur-2) var(--ease), opacity var(--dur-2) var(--ease);
+}
+body[data-edition="figma-enhanced"] .site-header[data-theme="dark"]::after { background: color-mix(in srgb, var(--on-dark) 28%, transparent); }
 body[data-edition="figma-enhanced"] .site-header.is-scrolled::before { opacity: 1; }
 body[data-edition="figma-enhanced"] .site-header.is-away { transform: translateY(-101%); }
 /* With a mega panel open, header and panel become one sheet of the frames' dark brown glass. */
-body[data-edition="figma-enhanced"] .site-header:has(.mega[data-open="true"])::before { opacity: 1; background: rgb(38 17 1 / 0.86); border-bottom-color: transparent; }
+body[data-edition="figma-enhanced"] .site-header:has(.mega[data-open="true"])::before { opacity: 1; background: rgb(38 17 1 / 0.86); }
+body[data-edition="figma-enhanced"] .site-header:has(.mega[data-open="true"])::after { opacity: 0; }
 
 /* The logo changes colour without loading: both versions are in the markup. */
 body[data-edition="figma-enhanced"] .site-header .brand { display: grid; }
@@ -39,7 +47,7 @@ body[data-edition="figma-enhanced"] .site-header[data-theme="light"] :is(a, butt
 
 /* The copper reading-progress line. */
 body[data-edition="figma-enhanced"] .header-progress {
-  position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--accent); opacity: 0.9; pointer-events: none;
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; height: 1px; background: var(--accent); opacity: 0.9; pointer-events: none;
   transform: scaleX(var(--progress, 0)); transform-origin: left;
 }
 
