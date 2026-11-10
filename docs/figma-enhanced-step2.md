@@ -273,7 +273,7 @@ The owner found the techniques of 2.1–2.3 placed in single spots. The placemen
 
 - **Where** (placement map): every opening with a photograph, where the description rises over it (21 pages: 03–05, 08–12, 14, 15, 17–26, 28), and Home, where the drifting gallery rises over the photograph of the Dome ("The Dome is the reason this place exists"). The openings that took the Home arch keep it.
 - **Colour**: the rising block's own surface (white for the descriptions and the gallery).
-- **The designer's openings start whole.** The reference panel overlaps its photograph from the start; here that would cover the page's title on load. So `--g` follows how far the block covers the photograph: 0 while it only meets it, 1 once it covers 60%.
+- **The designer's openings start whole.** The reference panel overlaps its photograph from the start; here that would cover the page's title on load. So `--g` follows how far the block covers the photograph: 0 while it only meets it, 1 once it covers 60% — or, since 2026-11-10, three quarters of the block's own height when the block is shorter, so it always reaches the edges (`docs/figma-enhanced-booking.md`).
 - **No line is ever cut.** The description's copy spans the page, so a narrow arch would clip it. The photograph's text dissolves under the rising arch (as on the Home opening), and the block's text appears only as the arch reaches the edges.
 - **Phones** run the same arch; reduced motion keeps the blocks still and square.
 

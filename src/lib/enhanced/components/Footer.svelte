@@ -1,6 +1,10 @@
 <script lang="ts">
-  import { bookingFor, pages, route } from '#lib/enhanced/site.ts';
-  import { tr, msg, other, type Locale } from '#lib/enhanced/i18n.ts';
+  // Figma Enhanced footer: the frame's five columns, centred, and the Vessyl symbol with the legal lines under it.
+  // Owner, 2026-11-10, as on Figma PR: no wordmark, language switch or CHECK AVAILABILITY here — the symbol is the
+  // footer's one mark, and the header always offers the language and the booking.
+  import { pages, route } from '#lib/enhanced/site.ts';
+  import { tr, msg, type Locale } from '#lib/enhanced/i18n.ts';
+  import symbol from '#lib/blueprint/assets/symbol.svg?raw';
 
   type Props = {
     edition: 'figma-enhanced';
@@ -9,7 +13,7 @@
     locale?: Locale;
   };
 
-  let { edition, page, base = '', locale = 'en' }: Props = $props();
+  let { edition, base = '', locale = 'en' }: Props = $props();
 
   // Footer labels from the frames; the designer's pages 14–18 supply five of the six destinations.
   const propertyLinks: [string, string | null][] = [
@@ -33,27 +37,12 @@
   const contactLinks = [msg('WhatsApp Contact'), msg('Phone Contact'), msg('Address Info')];
 </script>
 
-{#snippet languageButton()}
-  <a class="language-trigger" data-language-trigger data-sveltekit-reload href={route(edition, page.slug, base, other(locale))} hreflang={other(locale)} aria-label={tr(locale, 'Language: English. Switch to Spanish')}>
-    <span><span data-lang-current={locale === 'en' || undefined}>EN</span> | <span data-lang-current={locale === 'es' || undefined}>ES</span></span>
-  </a>
-{/snippet}
-
 {#snippet pending(label: string)}
   <button type="button" data-pending-link={label}>{tr(locale, label)}</button>
 {/snippet}
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-top">
-      <a class="brand" href={route(edition, '', base, locale)}>
-        <img src={`${base.replace(/\/$/, '')}/brand/logo-white.svg`} width="200" height="38" alt="VESSYL" />
-      </a>
-      <div class="header-actions">
-        {@render languageButton()}
-        <a class="nav-book" href={bookingFor(locale)} target="_blank" rel="noopener noreferrer">{tr(locale, 'CHECK AVAILABILITY')}</a>
-      </div>
-    </div>
     <div class="footer-columns">
       <section class="footer-group">
         <h2><a href={route(edition, 'where-you-sleep', base, locale)}>{tr(locale, 'Stay')}</a></h2>
@@ -81,6 +70,7 @@
       </section>
     </div>
     <div class="footer-bottom">
+      <span class="footer-symbol" aria-hidden="true">{@html symbol}</span>
       <p>© The Vessyl 2026 • La Fortuna, Costa Rica</p>
       <p>{@render pending(msg('Privacy'))} • {@render pending(msg('Terms & Conditions'))}</p>
     </div>

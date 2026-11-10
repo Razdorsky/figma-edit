@@ -214,7 +214,13 @@ body[data-edition="figma-enhanced"] .current-page [data-role="introduction"] .di
 /* ---- Quote: centred, with the fan artwork running off the right edge --------------------------- */
 body[data-edition="figma-enhanced"] .current-page [data-role="quote"] { position: relative; isolation: isolate; overflow: clip; justify-items: center; text-align: center; }
 body[data-edition="figma-enhanced"] .current-page [data-role="quote"] > [data-part="copy"] { grid-column: 2 / span 10; align-items: center; gap: 20px; max-width: 1080px; }
-body[data-edition="figma-enhanced"] .current-page [data-role="quote"] > [data-part="artwork"] { position: absolute; right: -140px; top: 85px; z-index: -1; width: 470px; height: 500px; pointer-events: none; }
+/* The symbol as in the designer's frame: its right half beyond the screen's edge, whole above and below. It stands in
+   the middle of the block's height and keeps a margin from the top and the foot, at most the frame's 470px
+   (owner, 2026-11-10: it was cut at the foot once the block grew shorter than the frame's). */
+body[data-edition="figma-enhanced"] .current-page [data-role="quote"] > [data-part="artwork"] {
+  position: absolute; right: 0; top: 50%; z-index: -1; height: min(470px, calc(100% - 2 * var(--s7))); aspect-ratio: 1; width: auto;
+  transform: translate(50%, -50%); pointer-events: none;
+}
 body[data-edition="figma-enhanced"] .current-page [data-role="quote"] > [data-part="artwork"] img { width: 100%; height: 100%; object-fit: contain; }
 body[data-edition="figma-enhanced"] .current-page [data-role="quote"] [data-part="attribution"] { margin-top: 40px; }
 body[data-edition="figma-enhanced"] .current-page [data-role="quote"] [data-part="attribution"] p { font-size: var(--t-lede); line-height: 1.4545; }
@@ -345,6 +351,43 @@ body[data-edition="figma-enhanced"] :is(.footer-top, .footer-columns, .footer-bo
 @media (min-width: 681px) and (max-width: 760px) {
   body[data-edition="figma-enhanced"] .footer-columns { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px var(--gutter); }
 }
+/* The footer, as on Figma PR (owner, 2026-11-10): the five columns stand as one block in the middle, the same distance
+   from both edges of the page — each column as wide as its longest line, the gaps growing with the screen — and the
+   Vessyl symbol, without the word, stands in the middle with the legal lines right under it (Footer.svelte). The
+   wordmark, EN | ES and CHECK AVAILABILITY left the footer; the header always offers the last two. The five columns
+   take 849px in English and 941px in Spanish, so they stand in one row from 1240px, where the gaps (a quarter of what
+   is left beside 960px) are at least 32px; below, three columns over two, as on tablets.
+   Its space above is half its space below (--foot-pad), since the footer begins where the closing photograph's
+   gradient ends: the closing block adds no space of its own under the photograph (or under the form, on phones). */
+body[data-edition="figma-enhanced"] .site-footer { --foot-pad: var(--section); padding-block: 0; }
+body[data-edition="figma-enhanced"] .current-page .site-newsletter.newsletter-closing { padding-bottom: 0; }
+body[data-edition="figma-enhanced"] .site-footer .footer-columns {
+  display: grid; grid-template-columns: repeat(5, minmax(0, max-content)); justify-content: center;
+  column-gap: clamp(32px, (100% - 960px) / 4, 136px); row-gap: 40px; margin: 0; padding: calc(var(--foot-pad) / 2) 0 0;
+}
+body[data-edition="figma-enhanced"] .footer-group { flex: none; }
+/* A heading that is a link reads like the others (on phones it took the links' size). */
+body[data-edition="figma-enhanced"] .footer-group h2 a { font: inherit; letter-spacing: inherit; }
+body[data-edition="figma-enhanced"] .site-footer .footer-bottom {
+  display: grid; justify-content: center; justify-items: center; gap: 14px; min-height: 0; margin-top: calc(var(--foot-pad) * 0.75);
+  padding: 0 0 var(--foot-pad); border-top: 0; text-align: center;
+}
+body[data-edition="figma-enhanced"] .site-footer .footer-bottom p { margin: 0; }
+body[data-edition="figma-enhanced"] .footer-symbol { display: block; width: 56px; margin-bottom: 10px; color: inherit; }
+body[data-edition="figma-enhanced"] .footer-symbol svg { display: block; width: 100%; height: auto; fill: currentColor; }
+@media (max-width: 1239px) {
+  body[data-edition="figma-enhanced"] .site-footer .footer-columns { grid-template-columns: repeat(3, minmax(0, max-content)); column-gap: clamp(32px, 7vw - 20px, 88px); }
+}
+@media (max-width: 767px) {
+  /* On phones the form stands under the photograph; its message line (a live region, so it stays rendered) takes
+     room, and the form's row gap, only when it has something to say, so the footer's space above is measured from
+     the button. */
+  body[data-edition="figma-enhanced"] .current-page .newsletter-closing .newsletter-status:empty { position: absolute; min-height: 0; }
+}
+@media (max-width: 680px) {
+  body[data-edition="figma-enhanced"] .site-footer .footer-columns { grid-template-columns: repeat(2, minmax(0, max-content)); gap: 30px 20px; }
+  body[data-edition="figma-enhanced"] .footer-symbol { width: 48px; }
+}
 
 /* ---- Tablet ---------------------------------------------------------------------------------------- */
 @media (max-width: 1023px) {
@@ -398,7 +441,7 @@ body[data-edition="figma-enhanced"] :is(.footer-top, .footer-columns, .footer-bo
   body[data-edition="figma-enhanced"] .current-page [data-name="Cards"] > [data-part="copy"] { padding-inline: 0; }
   body[data-edition="figma-enhanced"] .current-page [data-role="introduction"] > [data-part="artwork"] { display: flex; justify-content: center; }
   body[data-edition="figma-enhanced"] .current-page [data-role="introduction"] > [data-part="artwork"] img { width: 138px; max-height: 220px; }
-  body[data-edition="figma-enhanced"] .current-page [data-role="quote"] > [data-part="artwork"] { right: -120px; width: 300px; height: 320px; opacity: 0.6; }
+  body[data-edition="figma-enhanced"] .current-page [data-role="quote"] > [data-part="artwork"] { height: min(300px, calc(100% - 2 * var(--s5))); opacity: 0.6; }
   body[data-edition="figma-enhanced"] .current-page :is([data-role="overlay"], [data-role="gallery"]) { display: flex; flex-direction: column; align-items: stretch; min-height: 0; padding: 0; }
   body[data-edition="figma-enhanced"] .current-page :is([data-role="overlay"], [data-role="gallery"]) > [data-part="media"] { position: relative; inset: auto; z-index: 0; width: 100%; height: auto; aspect-ratio: 4 / 3; }
   body[data-edition="figma-enhanced"] .current-page [data-role="overlay"] > [data-part="copy"] { width: 100%; padding: 36px var(--edge) 48px; gap: 24px; background: var(--panel-dark-solid); border-radius: 0; } /* a full-width band on phones */

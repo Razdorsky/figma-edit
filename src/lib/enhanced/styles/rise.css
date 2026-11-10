@@ -4,9 +4,10 @@
    arch's edge. The arch has no colour of its own: it is the rising block's own surface. On every opening with a
    photograph the description rises over it; on Home the drifting gallery rises over the photograph of the Dome.
    interactions.js (setupRise, updateRise) sets --g on the pair: 0 while the block only meets the photograph, 1 once it
-   covers 60% of it. The designer's text on the photograph dissolves under the arch, as on the Home opening, and the
-   block's own text appears as the arch reaches the edges, so the narrow arch never cuts a line. Without the script,
-   and with reduced motion, nothing moves: --g stays 1. */
+   covers 60% of it, or three quarters of its own height when it is shorter, so it always reaches the screen's edges.
+   The designer's text on the photograph dissolves under the arch, as on the Home opening, and the block's own text
+   appears as the arch reaches the edges, so the narrow arch never cuts a line. Without the script, and with reduced
+   motion, nothing moves: --g stays 1. */
 body[data-edition="figma-enhanced"] .current-page > [data-rise] { --g: 1; position: relative; }
 body[data-edition="figma-enhanced"] .current-page > [data-rise] > :first-child { position: sticky; top: 0; z-index: 0; }
 body[data-edition="figma-enhanced"] .current-page > [data-rise] > [data-rise-panel] {

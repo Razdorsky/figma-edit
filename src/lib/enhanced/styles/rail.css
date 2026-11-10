@@ -5,8 +5,11 @@
    the cards sideways (interactions.js, setupRail); below it the cards are a row you swipe. Reduced motion keeps the
    designer's grid on the band. */
 body[data-edition="figma-enhanced"] .current-page > [data-rail] { position: relative; }
+/* The pattern is a seamless tile of the designer's fan lattice (direction-forest-tile.svg, one 248-unit period at the
+   former 550px-per-panel scale): the designer's 1440×800 panel repeated doubled the rows at its joins (owner,
+   2026-11-10). The copper and events newsletters use the same tiles (shell.css). */
 body[data-edition="figma-enhanced"] .current-page > [data-rail] > [data-rail-band] {
-  background: var(--surface-forest) url('../../../assets/patterns/direction-forest.svg') center / 550px;
+  background: var(--surface-forest) url('../patterns/direction-forest-tile.svg') center / 95px;
   padding-block: var(--section-band);
 }
 /* The designer's experience cards have no surface of their own: on the band their words take the light ink of the

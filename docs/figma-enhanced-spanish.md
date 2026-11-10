@@ -34,8 +34,8 @@ English is the source. The Spanish is a dictionary keyed by the English text: `s
 
 ## The language switch
 
-The designer's "EN | ES" in the header and the footer, and the globe with "EN" or "ES" in the menu, are links to the
-same page in the other language (`hreflang`, an `aria-label` that names the current language and the switch). The
+The designer's "EN | ES" in the header, and the globe with "EN" or "ES" in the menu, are links to the
+same page in the other language (since 2026-11-10 the footer has no EN | ES, as on Figma PR) (`hreflang`, an `aria-label` that names the current language and the switch). The
 current language is underlined. The switch loads the page afresh (`data-sveltekit-reload`): some mechanics rebuild
 their words (the text that changes with the photograph, step 2.7), and a fresh page never mixes the two languages.
 

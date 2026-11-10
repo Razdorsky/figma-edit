@@ -30,8 +30,8 @@ went with the transparency.
 `components/Header.svelte`.
 
 - The designer's "CHECK AVAILABILITY" in the header is now the button that opens and closes the bar
-  (`aria-expanded`); before, it opened Orbe's search page. The menu's and the footer's CHECK AVAILABILITY still open
-  Orbe directly.
+  (`aria-expanded`); before, it opened Orbe's search page. The menu's CHECK AVAILABILITY still opens Orbe directly
+  (the footer's left the footer on 2026-11-10).
 - The bar lies over the page under the header in the header's glass of the moment (green with white words or white
   with black words, blurred, rounded at the foot like the panels), and unrolls: its height grows from nothing (grid
   rows 0fr → 1fr, 520 ms) while the fields settle in; closing rolls it back up. Closed, the bar is hidden and `inert`.
@@ -128,3 +128,48 @@ them (989 strings).
 - The next-page block (`styles/next.css`): the button stands in the middle of the picture instead of at its foot; it
   still arrives as the arch opens.
 
+## The quote, the closing photograph, the footer, the patterns and the rising blocks (owner, 2026-11-10)
+
+- The quote's symbol (`styles/system.css`, `[data-role="quote"]`) stands as in the designer's frame: its middle on the
+  block's right edge, so its right half runs off the screen, and centred in the block's height, at most the block's
+  height less its top and foot margins, so it is never cut at its top or foot.
+- The closing photograph and the newsletter (`styles/closing.css`): from 768px the photograph's lowest 30% (`--nl-band`)
+  is a vertical gradient that rises from the footer's colour, and the newsletter's words and form stand in it, at its
+  foot, instead of in a band under the picture. The gradient holds the footer's colour over its lower 60% and eases out
+  above, so every line keeps at least three quarters of that colour behind it: the small label keeps 4.5:1 against the
+  brightest light of the photographs (measured on the Dome at night, the candlelit tables and the musician by
+  lamplight). The photograph is `clamp(640px, 80svh, 900px)` tall, enough for the band to hold the words and the form
+  from 768px to 2560px in both languages; between 768 and 1023px the words and the form stand side by side, the field
+  above its button. On phones they stay under the photograph, which they would otherwise cover.
+- The footer (`components/Footer.svelte`, `styles/system.css`), as on Figma PR: the five columns stand as one block in
+  the middle (each column as wide as its longest line; one row from 1240px, where the Spanish fits with 32px gaps;
+  three over two below; two columns on phones). The small wordmark, EN | ES and CHECK AVAILABILITY are gone; the
+  Vessyl symbol, without the word, stands in the middle with the legal lines right under it. The footer's space above
+  is half its space below (`--foot-pad`, the section spacing), measured from the foot of the closing photograph, where
+  its gradient begins (on phones from the newsletter's button, since the form's empty message line takes no room
+  there until it has something to say); the closing block adds no space of its own. Linked column headings take the
+  headings' size on phones too.
+- The pattern bands (the rail on Experiences, the events newsletter, the copper newsletter; `styles/rail.css`,
+  `styles/shell.css`) use seamless tiles: the designer's 1440×800 panel, repeated, doubled the rows of fans at its
+  joins. `src/lib/enhanced/patterns/direction-{forest,copper}-tile.svg` (outside the frozen `src/assets`) hold one 248-unit period of the panel's lattice (one
+  fan, every other row shifted by half), drawn 95px wide — the former 550px-per-panel scale. The designer's panels are
+  untouched; the frozen Figma edition still uses them.
+- The rising blocks (`interactions.js`, `updateRise`): a block reaches the screen's edges once it covers 60% of the
+  photograph, or three quarters of its own height when it is shorter than that. On wide screens a short description
+  (Villas at 1920×1080 and 2560×1440) stopped at 90–93% of the width, a few pixels from the edges.
+
+### Checks
+
+- The newsletter band at 12 screen sizes from 768×1024 to 2560×1440 on five pages in both languages: the words and the
+  form inside the photograph's lowest 30%, the gradient exactly 30%.
+- The footer at 13 widths from 360 to 2560px in both languages: the block's left and right margins equal, no line
+  wrapped. At 9 screen sizes from 360×760 to 2560×1440 on four pages in both languages: the space above exactly half
+  the space below, the symbol and both legal lines centred.
+- Every rising block on the 28 pages reaches the edges at 1440×900, 1920×1080, 2560×1440, 1024×768 and 390×844.
+- The layout check now also reports a decorative picture (the designer's symbols and artwork, the footer's symbol) cut
+  by the block that holds it at its top or foot or at a side inside the screen; it finds none in Chrome, WebKit and
+  Firefox, and finds the quote's symbol when it is made to overflow.
+- axe (WCAG 2.2 AA): no violations on Home, Villas, Eating here, The Vessyl Presents and Experiences at 1440, 1024, 800
+  and 375, in both languages. Over the photographs, where axe cannot judge, the newsletter's lines were measured against
+  the brightest pixels behind them at five screen sizes on four closing photographs: every line meets its ratio
+  (the small label at least 4.7:1).

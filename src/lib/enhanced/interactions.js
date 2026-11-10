@@ -241,8 +241,10 @@ function updateDrift() {
 
 // Step 2.5 (docs/figma-enhanced-step2.md): the arch over a full-screen photograph, as on /blueprint/ 452c7d0. --g on
 // each pair follows how far the rising block covers the photograph it rises over: 0 while it only meets it, 1 once
-// it covers 60%. It follows with the same short lag as the Home arch (the reference's scrub 0.6). Reduced motion
-// leaves the pairs still and square.
+// it covers 60% — or three quarters of the block's own height, when the block is shorter than that, so that it always
+// reaches the edges of the screen (owner, 2026-11-10: on wide screens a short description stopped at 90%). It follows
+// with the same short lag as the Home arch (the reference's scrub 0.6). Reduced motion leaves the pairs still and
+// square.
 const rise = {pairs: [], frame: 0};
 function setupRise() {
   cancelAnimationFrame(rise.frame);
@@ -259,8 +261,9 @@ function updateRise(jump = false) {
   if (!rise.pairs.length) return;
   for (const pair of rise.pairs) {
     const photo = pair.photo.getBoundingClientRect();
-    const covered = photo.bottom - pair.panel.getBoundingClientRect().top;
-    pair.target = Math.min(1, Math.max(0, covered / (photo.height * 0.6)));
+    const panel = pair.panel.getBoundingClientRect();
+    const covered = photo.bottom - panel.top;
+    pair.target = Math.min(1, Math.max(0, covered / Math.min(photo.height * 0.6, panel.height * 0.75)));
     if (jump) pair.g = pair.target;
   }
   const step = () => {

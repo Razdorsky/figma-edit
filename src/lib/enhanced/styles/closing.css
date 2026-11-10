@@ -9,3 +9,36 @@ body[data-edition="figma-enhanced"] .site-footer { background: var(--surface-clo
 body[data-edition="figma-enhanced"] .current-page .newsletter-photo::after {
   background: linear-gradient(to top, var(--surface-closing), color-mix(in srgb, var(--surface-closing) 62%, transparent) var(--header), transparent calc(var(--header) * 2));
 }
+
+/* The subscription stands on the photograph (owner, 2026-11-10): from 768px the photograph's lowest 30% is a vertical
+   gradient that rises from the footer's colour (--nl-band), and the form and its words stand in it, at its foot,
+   instead of in a band below the picture. The gradient holds the footer's colour over its lower 60% and eases out
+   above, so every line has at least three quarters of the footer's colour behind it (the small label keeps 4.5:1 over
+   the brightest light of the photographs) and no edge shows where it ends. The photograph is tall enough for the band
+   to hold them at every width (checked from 768px to 2560px in both languages). On phones, where the words and the
+   form would cover most of the picture, they stay below it. */
+@media (min-width: 768px) {
+  body[data-edition="figma-enhanced"] .current-page .site-newsletter.newsletter-closing {
+    --nl-photo: clamp(640px, 80svh, 900px); --nl-band: calc(var(--nl-photo) * 0.3); grid-template-columns: minmax(0, 1fr);
+  }
+  body[data-edition="figma-enhanced"] .current-page .newsletter-closing > :is(.newsletter-photo, .newsletter-inner) { grid-area: 1 / 1; }
+  body[data-edition="figma-enhanced"] .current-page .newsletter-closing .newsletter-photo { height: var(--nl-photo); }
+  body[data-edition="figma-enhanced"] .current-page .newsletter-closing .newsletter-photo::after {
+    inset: auto 0 0; height: var(--nl-band);
+    background: linear-gradient(to top, var(--surface-closing) 0%, var(--surface-closing) 60%,
+      color-mix(in srgb, var(--surface-closing) 95%, transparent) 68%, color-mix(in srgb, var(--surface-closing) 82%, transparent) 76%,
+      color-mix(in srgb, var(--surface-closing) 60%, transparent) 84%, color-mix(in srgb, var(--surface-closing) 34%, transparent) 91%,
+      color-mix(in srgb, var(--surface-closing) 13%, transparent) 96%, transparent 100%);
+  }
+  body[data-edition="figma-enhanced"] .current-page .newsletter-closing .newsletter-inner {
+    position: relative; z-index: 1; align-self: end; align-content: end; min-height: var(--nl-band); padding-top: 0;
+    padding-bottom: clamp(16px, 2vw, 40px);
+  }
+}
+body[data-edition="figma-enhanced"] .current-page .newsletter-closing .newsletter-inner p { text-wrap: pretty; }
+/* Tablets: the words and the form side by side, the form's field above its button, so both fit the band. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  body[data-edition="figma-enhanced"] .current-page .newsletter-closing .newsletter-inner > div { grid-column: 1 / span 7; }
+  body[data-edition="figma-enhanced"] .current-page .newsletter-closing .newsletter-form { grid-column: 8 / span 5; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  body[data-edition="figma-enhanced"] .current-page .newsletter-closing .newsletter-form button { width: 100%; }
+}
