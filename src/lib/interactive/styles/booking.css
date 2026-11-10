@@ -30,17 +30,21 @@
 .units{list-style:none;position:relative;margin:18px 0 4px}
 .units.tight li{padding:9px 0}
 .units.tight .t{font-size:28px}
-.units.tight li.on .d{height:22px}
+.units.tight li.on .d{height:24px}
 .units li{margin:0;padding:14px 0;cursor:pointer;will-change:transform,opacity}
 .units .hd{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
 .units .t{font-family:'EB Garamond',serif;font-weight:700;font-size:36px;line-height:1.1;
   color:var(--cream);text-shadow:0 2px 34px rgba(8,9,7,.7);text-align:left}
 .units .pr{font-size:13px;color:var(--t45,rgba(245,235,231,.45));transition:color .3s}
 .units li.on .pr{color:var(--copper-hot);font-weight:500}
-.units .d{font-size:13px;line-height:20px;max-width:48ch;color:rgba(245,235,231,.74);
+/* Owner, 2026-11-11: the line under the active title is two pixels larger (13/20 → 15/22, open height 22 → 24).
+   It also lost its measure of 48ch: the row is one line tall, and at that measure six of the nine sentences
+   wrapped and lost their second line ("…the most space and the most"). Without it each fits on its line
+   wherever the rail is shown. */
+.units .d{font-size:15px;line-height:22px;color:rgba(245,235,231,.74);
   overflow:hidden;height:0;opacity:0;margin-top:0;
   transition:height .5s var(--e-std),opacity .45s,margin-top .5s var(--e-std)}
-.units li.on .d{height:22px;opacity:1;margin-top:8px}
+.units li.on .d{height:24px;opacity:1;margin-top:8px}
 
 /* the enquiry form in the whole-property scene */
 .ask-form{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
@@ -48,7 +52,7 @@
   color:rgba(245,235,231,.6);min-width:120px}
 
 /* ─── the layer "everything you can book" ───────────────── */
-#rail #allbtn{display:block;width:100%;margin-top:34px;font-size:12px;letter-spacing:.12em;
+#rail #allbtn{display:block;width:100%;margin-top:34px;font-size:14px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--copper-hot);text-align:center;line-height:1.4;
   border:1px solid var(--copper);border-radius:var(--r);padding:14px 16px;
   background:rgba(224,139,67,.08);

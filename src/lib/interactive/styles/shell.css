@@ -35,14 +35,17 @@
      instead of running over it */
   transform:translateY(calc(-50% - var(--lift,0px)));z-index:58;width:260px;
   transition:transform .18s linear}
+/* Owner, 2026-11-11: all the text of the rail is two pixels larger than in the prototype (sections 21 → 23,
+   the current one 23 → 25, sub-items 15 → 17, the label under it 11 → 13, and its button, in booking.css,
+   12 → 14). The rows keep the prototype's heights, so the rail is no taller than it was. */
 .rail-i{margin-bottom:11px;opacity:0;transform:translateX(-14px)}
-.rail-a{display:block;font-family:'EB Garamond',serif;font-size:21px;line-height:32px;
+.rail-a{display:block;font-family:'EB Garamond',serif;font-size:23px;line-height:32px;
   font-weight:500;color:var(--t55);transition:color .3s,transform .3s var(--e-std),
   font-size .3s var(--e-std);position:relative;text-align:left;width:100%}
 /* the current section is known by three signs at once: volume, the tick and the open sub-items.
    The prototype's note says the text does not turn copper here, or copper would stop meaning a purchase;
    its rule below does turn it copper (docs/interactive-prototype.md, "Open points") */
-.rail-i.cur .rail-a{color:var(--copper);font-size:23px}
+.rail-i.cur .rail-a{color:var(--copper);font-size:25px}
 .rail-i.cur .rail-a::before{content:'';position:absolute;left:-18px;top:6px;width:2px;height:24px;
   background:var(--copper)}
 .rail-a:hover{transform:translateX(7px);color:var(--t100)}
@@ -50,9 +53,9 @@
   transition:max-height .6s var(--e-std),opacity .4s,margin .4s}
 .rail-i.exp .rail-sub,
 .rail-i:hover .rail-sub{max-height:420px;opacity:1;margin:10px 0 18px}
-.rail-sub button{display:block;font-size:15px;line-height:26px;padding:5px 0;color:var(--t55);
+.rail-sub button{display:block;font-size:17px;line-height:26px;padding:5px 0;color:var(--t55);
   transition:color .2s,transform .2s;text-align:left}
 .rail-sub button:hover{color:var(--cream);transform:translateX(5px)}
 .rail-sub button.hit{color:var(--copper)}
-#rail .foot{margin-top:30px;font-size:11px;letter-spacing:.16em;color:var(--t40);
+#rail .foot{margin-top:30px;font-size:13px;letter-spacing:.16em;color:var(--t40);
   opacity:0}

@@ -27,6 +27,14 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--ink);color:var(--cream);font-family:'Roboto',system-ui,sans-serif;
   font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+/* Not in the prototype (owner, 2026-11-11): a layer over the story (an inner page, the full list, the booking
+   panel) stops the story from scrolling; the engine sets the class. The rule is on body because the window takes
+   its overflow from body: set on html, it would make body the scroller and the sticky scene would lose its place.
+   Where a scrollbar takes room, the gutter keeps that room, so nothing shifts when the lock comes and goes.
+   The layers keep their own scrolling to themselves. */
+html.layer-open{scrollbar-gutter:stable}
+html.layer-open body{overflow:hidden}
+#page,#all,#panel{overscroll-behavior:contain}
 img{display:block;width:100%;height:100%;object-fit:cover}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 ::selection{background:var(--copper);color:var(--ink)}

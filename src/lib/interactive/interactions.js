@@ -433,6 +433,14 @@ export function installStory({photo, pages}) {
   document.getElementById('closeall').onclick=()=>{ allPane.classList.remove('on');
     veil.classList.remove('on'); };
   document.getElementById('backbtn').onclick=closeAll;
+  /* Not in the prototype (owner, 2026-11-11): while a layer is open, the story behind it does not scroll.
+     The wheel over an open page ran on into the document once the page reached its end, so the reader
+     came back to another chapter. Whatever opens or closes a layer changes its class; that settles the lock,
+     and styles/base.css does the rest. */
+  const layers=[page,panel,allPane], root=document.documentElement;
+  const lock=()=>root.classList.toggle('layer-open',layers.some(l=>l.classList.contains('on')));
+  const layerWatch=new MutationObserver(lock);
+  layers.forEach(l=>layerWatch.observe(l,{attributes:true,attributeFilter:['class']}));
   /* In the capture phase, ahead of the site's router: a footer link is "#", and the router would otherwise
      scroll the story back to its top behind the page that opens */
   document.addEventListener('click',e=>{
@@ -452,6 +460,7 @@ export function installStory({photo, pages}) {
 
   return () => {
     alive=false; controller.abort();
+    layerWatch.disconnect(); root.classList.remove('layer-open');
     cancelAnimationFrame(frameId); cancelAnimationFrame(breatheId);
     clearTimeout(driftTimer); clearTimeout(noteTimer);
     if(ctx){ ctx.close(); ctx=null; }
