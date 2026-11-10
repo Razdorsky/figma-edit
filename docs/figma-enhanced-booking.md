@@ -120,4 +120,6 @@ them (989 strings).
   sections, the card titles, the description headings and the comparison rows. The copper accents stay copper (the
   eyebrows, the fact and rate headings the designer set in copper), headings on photographs stay light, and the green
   buttons keep their green (`--heading` still colours them).
+- The opening mark (`components/Intro.svelte`, `styles/intro.css`) is black on white, as Blueprint's, instead of the
+  designer's copper.
 

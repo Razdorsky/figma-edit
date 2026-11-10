@@ -204,6 +204,12 @@ switch to the same page in the other language, and the utility row's 2px rule ma
 language. The booking bar speaks Spanish ("Entrada", "Salida", "Huéspedes", "2 adultos") and opens Orbe's Spanish
 results. How it works, the translation and the checks: `docs/figma-spanish.md`.
 
+## The Dome photograph on Home
+
+Both of Home's overlays (the opening of "Take the whole property" and the Dome panel) use Figma Enhanced's levelled copy
+of the Dome photograph (`public/enhanced/photos/dome-level-*.webp`, owner, 2026-11-10): turned 1° back, cut so that
+the Dome stands in the middle of the screen, anchored to its top so the crown stays on wide screens.
+
 ## Fonts licensing
 
 Archivo, Libre Caslon Display and Newsreader are under the SIL Open Font License 1.1 and served from the site

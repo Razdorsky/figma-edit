@@ -2,7 +2,7 @@
    mark in the designer's copper; the page loads beneath it. */
 body[data-edition="figma-enhanced"] .site-intro { display: none; }
 html:is([data-intro="on"], [data-intro="leaving"]) body[data-edition="figma-enhanced"] .site-intro {
-  position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; background: #fff; color: #a2551b;
+  position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; background: #fff; color: #000; /* the mark in black, as Blueprint's opening (owner, 2026-11-10; it was the designer's copper) */
 }
 html[data-intro="on"] { overflow: hidden; }
 body[data-edition="figma-enhanced"] .site-intro-mark { display: grid; justify-items: center; gap: clamp(14px, 1.6vw, 21px); }

@@ -1,5 +1,6 @@
 <script lang="ts">
-  // The first visit opens with the Vessyl mark in the designer's copper (owner, 2026-11-09, from /blueprint/ 452c7d0):
+  // The first visit opens with the Vessyl mark, in black since 2026-11-10 as on Blueprint (owner; before, the designer's
+  // copper; 2026-11-09, from /blueprint/ 452c7d0):
   // the symbol builds from the bottom up, as it is drawn (the dome, then the volcano, then the light), then the word
   // appears. It leaves as soon as the page is ready (fonts loaded and the first picture decoded), never before the mark
   // has played and never later than about three seconds from the start; once per visit, and never under reduced motion
