@@ -107,4 +107,9 @@ them (989 strings).
 - Introduction (the symbol beside the opening prose): the symbol is about a quarter larger and darker (the designer's
   file is beige at half opacity; a CSS filter deepens it), the prose is 1px smaller, and `text-wrap: pretty` keeps a
   single word from ending a paragraph alone.
+- The Dome photograph of Home's two overlays (`81536a0be9ccf3efc5a4`) leaned about 1° (its verticals ran to the right at
+  the top). A levelled copy — turned 1° back and cut so that the Dome stands in the middle — is in
+  `public/enhanced/photos/dome-level-{800,1200,1600,2016}.webp`, anchored to its top (`object-position: 50% 0%`) so the
+  Dome's crown stays on wide screens. The original file is untouched: the frozen Figma edition, Figma PR and the menu
+  thumbnails still use it.
 
