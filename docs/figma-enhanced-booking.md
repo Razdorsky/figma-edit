@@ -122,8 +122,8 @@ them (989 strings).
   buttons keep their green (`--heading` still colours them).
 - The opening mark (`components/Intro.svelte`, `styles/intro.css`) is black on white, as Blueprint's, instead of the
   designer's copper.
-- The drifting cards are a little wider, towards the middle: `--card: min(27.5vw, 50svh)` instead of `min(24vw, 44svh)`
-  (396px instead of 346px at 1440px). They keep their places, so the square photographs close the vertical gaps by as
+- The drifting cards are wider, towards the middle, in two steps: `--card: min(30vw, 55svh)` (first 27.5vw / 50svh) instead of `min(24vw, 44svh)`
+  (432px instead of 346px at 1440px). They keep their places, so the square photographs close the vertical gaps by as
   much as they widen. Their captions keep the page's margin from the screen's edge.
 - The next-page block (`styles/next.css`): the button stands in the middle of the picture instead of at its foot; it
   still arrives as the arch opens.

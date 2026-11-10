@@ -5,7 +5,7 @@
    title, text. Behaviour: interactions.js (setupDrift, updateDrift). Below 900px the run keeps the designer's grid. */
 @media (min-width: 900px) {
   body[data-edition="figma-enhanced"] .current-page [data-drift] {
-    --card: min(27.5vw, 50svh); /* owner, 2026-11-10: a little wider towards the middle (it was 24vw / 44svh); the cards keep
+    --card: min(30vw, 55svh); /* owner, 2026-11-10: wider towards the middle in two steps (24vw / 44svh, then 27.5vw); the cards keep
        their places, so the square photographs close the vertical gaps by as much as they widen */
     position: relative; display: grid; min-height: calc(var(--run) + var(--section)); padding-block: calc(var(--section) / 2);
     background: var(--surface);
