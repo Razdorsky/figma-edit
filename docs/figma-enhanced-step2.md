@@ -409,7 +409,7 @@ The owner: one of the site's versions opens with the Vessyl logo appearing smoot
 
 - Taken from /blueprint/ 452c7d0 (`src/lib/blueprint/components/Intro.svelte`): the symbol builds from the bottom up as it is drawn, then the word appears out of a blur, then the whole screen lifts away. Here it is white, like the site's pages, with the mark in the designer's copper (`#a2551b`, `public/brand/logo-copper.svg`).
 - It leaves when the page is ready: the fonts are in and the page's first picture is decoded. It never leaves before the mark has played and held a moment (2.1s from the start of the load) and never stays past 3s; if the page script comes late or not at all, the head script lifts it by itself at 3.6s. Scrolling waits for it.
-- Once per visit (sessionStorage `vessyl:intro`, set as soon as it shows), and never under reduced motion.
+- On every load of a page, a reload included, and with reduced motion too (owner, 2026-11-10; until then once per visit, sessionStorage `vessyl:intro`, and never under reduced motion).
 - Built: `components/Intro.svelte`, `styles/intro.css`, the head script in `src/routes/figma-enhanced/+layout.svelte`, and the exit in `interactions.js` (`installInteractions`).
 
 ### Moderate prewarming

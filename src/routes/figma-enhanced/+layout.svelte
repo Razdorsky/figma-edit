@@ -141,7 +141,9 @@
   {#if hero && heroSet && hero.startsWith('/media/')}<link rel="preload" href={`${base.replace(/\/$/, '')}${hero}`} imagesrcset={heroSet.set.map(([path, width]) => `${base.replace(/\/$/, '')}${path} ${width}w`).join(', ')} imagesizes={heroSet.sizes} as="image" fetchpriority="high" />
   {:else if hero}<link rel="preload" href={`${base.replace(/\/$/, '')}${hero}`} as="image" fetchpriority="high" />{/if}
   {@html clipsFirstScript}
-  {@html `<script>try{if(!sessionStorage.getItem('vessyl:intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var d=document.documentElement;d.dataset.intro='on';sessionStorage.setItem('vessyl:intro','1');setTimeout(function(){if(d.dataset.intro==='on'){d.dataset.intro='leaving';setTimeout(function(){d.dataset.intro='done'},800)}},3600)}}catch(e){}</script>`}
+  <!-- The opening mark plays on every load of a page, a reload included, and with reduced motion too (owner, 2026-11-10;
+       before, once per visit and never with reduced motion). -->
+  {@html `<script>try{var d=document.documentElement;d.dataset.intro='on';setTimeout(function(){if(d.dataset.intro==='on'){d.dataset.intro='leaving';setTimeout(function(){d.dataset.intro='done'},800)}},3600)}catch(e){}</script>`}
 </svelte:head>
 
 <Intro />
