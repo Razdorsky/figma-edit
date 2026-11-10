@@ -6,6 +6,7 @@
   import {page} from '$app/state';
   import {canvas, pages, parseSlug} from '#lib/pr/site.ts';
   import {installInteractions, enhancePage, closeOverlays} from '#lib/pr/interactions.js';
+  import Intro from '#lib/pr/components/Intro.svelte';
   import '#lib/pr/styles/base.css';
   import '#lib/pr/styles/shell.css';
   import '#lib/pr/styles/sections.css';
@@ -46,7 +47,12 @@
   <link rel="preload" href={caps} as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href={display} as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href={text} as="font" type="font/woff2" crossorigin="anonymous" />
+  <!-- The opening mark plays on every load of a page, a reload included, and with reduced motion too (owner, 2026-11-10).
+       The head script lifts it by itself at 3.6s, in case the controller came late or not at all. -->
+  {@html `<script>try{var d=document.documentElement;d.dataset.intro='on';setTimeout(function(){if(d.dataset.intro==='on'){d.dataset.intro='leaving';setTimeout(function(){d.dataset.intro='done'},800)}},3600)}catch(e){}</script>`}
 </svelte:head>
+
+<Intro />
 
 {@render children()}
 <div class="preview-toast" role="status" hidden></div>

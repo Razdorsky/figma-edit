@@ -168,6 +168,20 @@ export function installInteractions() {
   const gallery = () => document.querySelector('.gallery-dialog');
 
   resetPendingMenu=()=>{clearTimeout(menuCloseTimer);menuCloseTimer=undefined;menu()?.classList.remove('closing');};
+  // Opening mark (components/Intro.svelte): it leaves when the fonts are in and the page's first picture is decoded, not
+  // before the mark has played and held a moment (2.1s from the start of the load) and not after 3s.
+  const root = document.documentElement;
+  if (root.dataset.intro === 'on') {
+    const first = document.querySelector('.current-page img');
+    const ready = Promise.all([document.fonts?.ready, first?.decode?.().catch(() => {})]).catch(() => {});
+    const cap = new Promise(resolve => setTimeout(resolve, Math.max(0, 3000 - performance.now())));
+    Promise.race([ready, cap]).then(() => {
+      later(() => {
+        if (root.dataset.intro === 'on') root.dataset.intro = 'leaving';
+        later(() => {root.dataset.intro = 'done';}, 800);
+      }, Math.max(0, 2100 - performance.now()));
+    });
+  }
   // Owner's request, 2026-11-07: page text cannot be selected or copied (see also figma.css).
   // Form fields stay editable: their text can be selected, copied, cut and pasted.
   const editable = target => target instanceof Element && !!target.closest('input, textarea, [contenteditable=""], [contenteditable="true"]');

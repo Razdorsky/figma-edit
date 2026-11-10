@@ -204,6 +204,14 @@ switch to the same page in the other language, and the utility row's 2px rule ma
 language. The booking bar speaks Spanish ("Entrada", "Salida", "Huéspedes", "2 adultos") and opens Orbe's Spanish
 results. How it works, the translation and the checks: `docs/figma-spanish.md`.
 
+## Opening mark
+
+`src/lib/pr/components/Intro.svelte`, `src/lib/pr/styles/motion.css`, `interactions.js` (owner, 2026-11-10): the
+Vessyl symbol in black builds from the bottom up and the word appears, on the PR paper, as Figma Enhanced and Blueprint
+open. It plays on every load of a page, a reload included, and with reduced motion too. It leaves when the fonts are in
+and the first picture is decoded, not before 2.1s from the start of the load and not after 3s; a head script lifts it at
+3.6s if the controller is late. The page underneath loads meanwhile.
+
 ## The Dome photograph on Home
 
 Both of Home's overlays (the opening of "Take the whole property" and the Dome panel) use Figma Enhanced's levelled copy

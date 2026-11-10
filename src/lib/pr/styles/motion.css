@@ -30,3 +30,20 @@ body[data-edition="figma-pr"] .current-page {
   }
   body[data-edition="figma-pr"] * { transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
 }
+
+/* ---- Opening mark (owner, 2026-11-10; components/Intro.svelte): black on the PR paper, on every page load ---------- */
+body[data-edition="figma-pr"] .pr-intro { display: none; }
+html:is([data-intro="on"], [data-intro="leaving"]) body[data-edition="figma-pr"] .pr-intro {
+  position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; background: #FAFBF5; color: #000;
+}
+html[data-intro="on"]:has(body[data-edition="figma-pr"]) { overflow: hidden; }
+body[data-edition="figma-pr"] .pr-intro-mark { display: grid; justify-items: center; gap: clamp(14px, 1.6vw, 21px); }
+body[data-edition="figma-pr"] .pr-intro-symbol { width: clamp(80px, 8.5vw, 116px); }
+body[data-edition="figma-pr"] .pr-intro-word { width: clamp(150px, 16vw, 220px); }
+body[data-edition="figma-pr"] .pr-intro :is(.pr-intro-symbol, .pr-intro-word) svg { display: block; width: 100%; height: auto; fill: currentColor; }
+html[data-intro="on"] body[data-edition="figma-pr"] .pr-intro-symbol { animation: pr-intro-rise 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s both; }
+html[data-intro="on"] body[data-edition="figma-pr"] .pr-intro-word { animation: pr-intro-word 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.85s both; }
+html[data-intro="leaving"] body[data-edition="figma-pr"] .pr-intro { animation: pr-intro-lift 0.8s cubic-bezier(0.4, 0, 0.2, 1) both; }
+@keyframes pr-intro-rise { from { clip-path: inset(100% 0 0 0); opacity: 0.4; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
+@keyframes pr-intro-word { from { opacity: 0; filter: blur(8px); } to { opacity: 1; filter: blur(0); } }
+@keyframes pr-intro-lift { to { opacity: 0; filter: blur(12px); visibility: hidden; } }
