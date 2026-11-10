@@ -5,7 +5,8 @@
    title, text. Behaviour: interactions.js (setupDrift, updateDrift). Below 900px the run keeps the designer's grid. */
 @media (min-width: 900px) {
   body[data-edition="figma-enhanced"] .current-page [data-drift] {
-    --card: min(24vw, 44svh);
+    --card: min(27.5vw, 50svh); /* owner, 2026-11-10: a little wider towards the middle (it was 24vw / 44svh); the cards keep
+       their places, so the square photographs close the vertical gaps by as much as they widen */
     position: relative; display: grid; min-height: calc(var(--run) + var(--section)); padding-block: calc(var(--section) / 2);
     background: var(--surface);
   }
@@ -28,6 +29,9 @@
   body[data-edition="figma-enhanced"] .current-page [data-drift] [data-part="card"][data-side="right"] { --corners: 4px 0 0 4px; right: 0; }
   body[data-edition="figma-enhanced"] .current-page [data-drift] [data-part="card"] > [data-part="media"] { border-radius: var(--corners); }
   body[data-edition="figma-enhanced"] .current-page [data-drift] [data-part="card"][data-side="left"] > :not([data-part="media"]) { align-items: flex-end; text-align: right; }
+  /* The captions keep the page's margin from the screen's edge, so a long line never touches it. */
+  body[data-edition="figma-enhanced"] .current-page [data-drift] [data-part="card"][data-side="left"] > :not([data-part="media"]) { padding-left: var(--margin); }
+  body[data-edition="figma-enhanced"] .current-page [data-drift] [data-part="card"][data-side="right"] > :not([data-part="media"]) { padding-right: var(--margin); }
 }
 /* The arrival (452c7d0's [data-reveal]): armed by the script, so without it the photographs simply show. */
 @media (prefers-reduced-motion: no-preference) {
