@@ -4,7 +4,8 @@ name: Validate and deploy Vessyl Current
 # Razdorsky/figma serves https://razdorsky.github.io/figma/ and
 # Razdorsky/blueprint serves https://razdorsky.github.io/blueprint/;
 # Razdorsky/figma-enhanced serves https://razdorsky.github.io/figma-enhanced/;
-# Razdorsky/figma-pr serves https://razdorsky.github.io/figma-pr/.
+# Razdorsky/figma-pr serves https://razdorsky.github.io/figma-pr/;
+# Razdorsky/interactive-prototype serves https://razdorsky.github.io/interactive-prototype/.
 # The repository name selects the edition and its address.
 
 on:

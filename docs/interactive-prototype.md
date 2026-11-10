@@ -12,7 +12,8 @@ Steps so far:
 
 - Address: `/interactive-prototype/` (local preview: http://127.0.0.1:4180/interactive-prototype/).
 - Files: `src/lib/interactive/`, `src/routes/interactive-prototype/`, photographs in `public/interactive/img/`.
-- English only. Not published.
+- English only.
+- Published at https://razdorsky.github.io/interactive-prototype/ (repository `Razdorsky/interactive-prototype`), first on 2026-11-11. See "Publication".
 
 ## Where it came from
 
@@ -356,4 +357,18 @@ Most are the prototype's own, kept as they are; each is a candidate for a step.
 
 ## Publication
 
-Not published. Like the other editions it would be a repository of its own, `Razdorsky/interactive-prototype`, served at `https://razdorsky.github.io/interactive-prototype/`; `scripts/build-pages.mjs` already prepares its artifact, with `_app`, `brand` and `interactive` only. Create the repository and push only when the owner asks.
+The owner asked for publication on 2026-11-11. Like the other editions it has a repository of its own, `Razdorsky/interactive-prototype`, public, which receives the same `main` and serves https://razdorsky.github.io/interactive-prototype/ through GitHub Pages. `.github/workflows/pages.yml` builds every edition, runs `npm run check`, and deploys the one named after the repository; `scripts/build-pages.mjs` prepares its artifact with `_app`, `brand` and `interactive` only (17 MB).
+
+To publish a later state, on the owner's request only:
+
+```sh
+git push interactive-prototype HEAD:main
+```
+
+Before the first publication:
+
+- A clean copy of the commit, with its own dependencies, was built and checked the way the workflow does it: build, `npm run check`, `build:pages`.
+- The artifact was served under `/interactive-prototype/` and opened at 1440×900: the gate, the story's nineteen pictures, the typefaces, and the inner pages with their photographs all load from under the prefix.
+- One request fails there: SvelteKit's version check asks for `/_app/version.json` at the site's root, not under the prefix, and gets 404. It is harmless (the check answers "no new version"), and the other published editions do the same.
+
+What a visitor meets is what "Open points" lists. First of all: there is no phone layout yet, and the booking panel is drawn, not live.

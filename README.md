@@ -17,7 +17,7 @@ Published like the legacy Blueprint (https://razdorsky.github.io/vessyl-website-
 - Blueprint edition: **https://razdorsky.github.io/blueprint/** — repository `Razdorsky/blueprint`
 - Figma Enhanced edition: **https://razdorsky.github.io/figma-enhanced/** — repository `Razdorsky/figma-enhanced`
 - Figma PR edition: **https://razdorsky.github.io/figma-pr/** — repository `Razdorsky/figma-pr`
-- Interactive Prototype edition: not published. `npm run build:pages -- interactive-prototype` already prepares its artifact; a repository `Razdorsky/interactive-prototype` is created only when the owner asks.
+- Interactive Prototype edition: **https://razdorsky.github.io/interactive-prototype/** — repository `Razdorsky/interactive-prototype`
 
 ## Local preview
 
