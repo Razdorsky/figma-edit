@@ -399,7 +399,14 @@ export function installStory({photo, pages}) {
   document.getElementById('closep').onclick=closeAll;
   veil.onclick=closeAll;
   document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>setTab(b.dataset.t));
-  addEventListener('keydown',e=>{ if(e.key==='Escape') closeAll(); },{signal});
+  /* Not in the prototype (owner, 2026-11-11): a page opened from the full list rises over it, and Back or
+     Escape takes the reader back to the list, at the row they left. Everywhere else they close everything,
+     as in the prototype. */
+  function closePage(){
+    if(page.classList.contains('on') && allPane.classList.contains('on') && !panel.classList.contains('on'))
+      page.classList.remove('on');
+    else closeAll(); }
+  addEventListener('keydown',e=>{ if(e.key==='Escape') closePage(); },{signal});
 
   /* The inner pages are data, content/pages.json (docs/interactive-prototype.md, "Inner pages").
      A key that has no page there still opens the prototype's own outline. */
@@ -432,7 +439,7 @@ export function installStory({photo, pages}) {
   function openAll(){ allPane.classList.add('on'); veil.classList.add('on'); }
   document.getElementById('closeall').onclick=()=>{ allPane.classList.remove('on');
     veil.classList.remove('on'); };
-  document.getElementById('backbtn').onclick=closeAll;
+  document.getElementById('backbtn').onclick=closePage;
   /* Not in the prototype (owner, 2026-11-11): while a layer is open, the story behind it does not scroll.
      The wheel over an open page ran on into the document once the page reached its end, so the reader
      came back to another chapter. Whatever opens or closes a layer changes its class; that settles the lock,

@@ -8,7 +8,7 @@ Steps so far:
 
 - **Step 0, the baseline** (2026-11-10): the prototype brought in as it was. See "What the port changed".
 - **Step 1, the content of the inner pages** (2026-11-10): every inner page filled with a digest of its page in the frozen Figma edition. See "Step 1".
-- **The owner's corrections** (2026-11-11): larger text in the rail and under the lists' titles, and no scrolling of the story behind an open layer. See "The owner's corrections".
+- **The owner's corrections** (2026-11-11): larger text in the rail and under the lists' titles, no scrolling of the story behind an open layer, and a page that opens over the full list. See "The owner's corrections".
 
 - Address: `/interactive-prototype/` (local preview: http://127.0.0.1:4180/interactive-prototype/).
 - Files: `src/lib/interactive/`, `src/routes/interactive-prototype/`, photographs in `public/interactive/img/`.
@@ -139,7 +139,7 @@ The rules behind it are written in the styles: copper is kept for what can be bo
 
 ### "What you can book here"
 
-A full-screen list that comes down from the top. Seven groups and 26 rows: Stay, Experiences, Sessions on the property, The table, Getting here, The studio, The whole property. The last two are on request. Each row opens its inner page, but under the list, where it cannot be seen (see Open points). It is opened from the rail, from the first scene and from the last.
+A full-screen list that comes down from the top. Seven groups and 26 rows: Stay, Experiences, Sessions on the property, The table, Getting here, The studio, The whole property. The last two are on request. Each row opens its inner page over the list, and Back or Escape on that page returns to the list at the same row. It is opened from the rail, from the first scene and from the last, and closed with "close ✕" or Escape.
 
 ### The booking panel
 
@@ -147,7 +147,7 @@ A drawer on the right over a blurred veil, titled "Two ways in", with three tabs
 
 ### Inner pages
 
-A full-screen page that rises from below: a photograph, a title, a paragraph, a row of facts and one button. Back, Escape or the veil send it down again.
+A full-screen page that rises from below: a photograph, a title, a paragraph, a row of facts and one button. Back or Escape send it down again: to the story, or to the full list when the page was opened from it.
 
 There is one page element. A link carries the page's key in `data-p`, and the engine fills the element from `content/pages.json` each time a page opens:
 
@@ -161,6 +161,12 @@ There are 25 pages. Seven are the prototype author's own: the Dome, the Day and 
 ### Layers and the story behind them
 
 Three layers open over the story: an inner page, the full list and the booking panel. While any of them is open, the story does not scroll: not with the wheel, not with a touch, not with Space or Page Down. A layer scrolls its own content and keeps that scrolling to itself. When the last layer closes, the story is where it was left.
+
+The layers lie in one order, from the story up: the veil (`z-index` 90), the full list (91), the inner page (92), the booking panel (95). So a page opened from the list covers the list, and the panel opened from a page covers the page.
+
+- Back and Escape on a page that lies over the list take away the page only; the list is as it was left.
+- On a page opened from anywhere else they close everything, as in the prototype.
+- Closing the booking panel (×, the veil, Escape) closes everything under it too, as in the prototype.
 
 The engine watches the three layers' classes and sets `layer-open` on `<html>`; `styles/base.css` then hides the window's overflow. The rule is on `body`, because the window takes its overflow from `body`: on `html` it would turn `body` into the scroller, and the scene, which is sticky, would lose its place. Where a scrollbar takes room, `scrollbar-gutter` keeps that room, so nothing shifts when the lock comes and goes.
 
@@ -265,11 +271,12 @@ The eighteen photographs are copies of files in `public/media`, which is shared 
 
 ## The owner's corrections (2026-11-11)
 
-The owner looked at the edition and named three things.
+The owner looked at the edition and named three things; the fourth was found while checking them.
 
 - **The rail's text was too small.** All of it is two pixels larger: sections 21 → 23, the current section 23 → 25, sub-items 15 → 17, the button "What you can book" 12 → 14, the label "Arenal · Costa Rica" 11 → 13. The rows keep their heights, so the rail grew only with its button and label, by 6 px. Every label still takes one line.
 - **The text under the lists' titles was too small.** The description of the active row in Stay and in Experiences is 15 px in a 22 px line (it was 13 in 20). Looking at it showed a defect of the prototype: the row is one line tall, the measure was 48ch, and six of the nine sentences wrapped and lost their second line. "Walls, a door that shuts, the most space and the most shelter when it rains." ended at "the most". The measure is gone; the longest sentence is 491 px wide, and the column is never narrower than 525 px while the rail is shown.
 - **The story scrolled behind an open page.** With The Villas open, the wheel ran on into the document once the page reached its end (its own scroll is 53 px at 1440×900), and the reader came back to another chapter. The story is now held while a layer is open. See "Layers and the story behind them".
+- **A row of the full list opened its page under the list.** The list lay above the inner page (`z-index` 96 over 92), so a click on a row seemed to do nothing, and the page showed only when the list was closed. Offered two ways, a page over the list or a list that closes, the owner asked for the better one. The page now rises over the list (the list is at 91), and Back or Escape returns to the list at the row that was clicked, so the reader can go through several rows without opening the list again.
 
 ## Open points
 
@@ -279,7 +286,6 @@ Most are the prototype's own, kept as they are; each is a candidate for a step.
 
 - **Phones and tablets.** The prototype's last style block (reduced motion, 1100 px, 860 px) sat behind a comment that was never closed, so none of it applies. At 980 px and narrower the rail is hidden and nothing replaces it. On a phone the logo and the top-right controls overlap, and the headline stays at 60 px.
 - **Short windows.** The rail is centred on the screen's height and grows with its open section. With Experiences or The Property open it is 552 px tall, so in a window shorter than about 745 px it runs under the chapter label and the logo (at 720 px it starts 84 px from the top; the label ends at 96 px). With two six-item sections open at once, while one closes and the next opens or while the pointer holds another one open, it is 785 px tall and reaches the logo in any window shorter than about 980 px.
-- **A row of the full list opens its page under the list.** The list is above the inner page (`z-index` 96 over 92), so a click on a row seems to do nothing; the page shows when the list is closed. This is the prototype's. Either the page rises over the list and Back returns to the list, or the list closes as the page opens: the owner's choice.
 - **Reduced motion.** Only the timeline's easing respects it.
 - The shared shell's viewport has no `viewport-fit=cover`, so the prototype's safe-area insets are zero.
 
@@ -300,6 +306,7 @@ Most are the prototype's own, kept as they are; each is a candidate for a step.
 - The fields are drawn, not live, and the three buttons do nothing. There is no hand-off to the booking partner.
 - "Write about the studio" and "Send an enquiry" open the Experiences tab, and so do the six enquiry buttons of the inner pages: there is no enquiry form.
 - "Book a transfer" on the Getting here page opens the Stay tab, where no transfer can be chosen.
+- Closing the booking panel closes the page it was opened from, and the list under that page: the reader is back in the story, not on the page.
 
 **Details**
 
@@ -344,6 +351,7 @@ Most are the prototype's own, kept as they are; each is a candidate for a step.
 - After the change, at 1440×900: with The Villas open, forty turns down, twenty up, Page Down and Space leave the story where it was, while the page scrolls its own 53 px; after Back the story scrolls again. The same with the booking panel open (wheel over the veil and over the panel) and with the full list open (scrolled to its end and on). The scene stays in place behind the panel. No console errors.
 - The rail in Stay, Experiences and The Property: every label on one line, the widest 195 px of 260.
 - The nine descriptions each take one line; looked at in Stay and in Experiences, at 1440×900 and at 1280×720.
+- The full list, scrolled 700 px down: a click on Moloka raises its page over the list; Back returns to the list at the same 700 px; a second row and Escape do the same; a second Escape closes the list. A page's button opens the booking panel over the page. A page opened from the rail still closes to the story with Back and with Escape. The story stays held and in place through all of it.
 - Not checked: a platform whose scrollbar takes room (the gutter rule is for it), touch, Safari and Firefox.
 
 ## Publication
