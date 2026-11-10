@@ -60,7 +60,7 @@
     </div>
     <a class="brand" href={route(edition, '', base, locale)} aria-label={tr(locale, 'Vessyl home')}>
       <img class="logo-light" src={asset('/brand/logo-white.svg')} width="210" height="39" alt="" />
-      <img class="logo-copper" src={asset('/brand/logo-copper.svg')} width="210" height="39" alt="" />
+      <img class="logo-dark" src={asset('/brand/logo-dark.svg')} width="210" height="39" alt="" />
     </a>
     <div class="header-actions">
       <!-- The designer's EN | ES: a link to this page in the other language; the current one is underlined. The page loads

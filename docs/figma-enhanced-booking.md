@@ -1,22 +1,28 @@
-# Figma Enhanced: the header's hairline and the booking bar
+# Figma Enhanced: header colours, hairline and the booking bar
 
 The owner, 2026-11-10, after the same changes on Figma PR: the header needs its line from the top of the page, and the
 date bar is needed on Figma Enhanced too, in Figma Enhanced's own style. The mechanics are those of Figma PR's bar
 (`docs/figma-pr-system.md`, "Booking bar"), in this edition's files and dress; the two editions share no code.
 
-## The header's hairline
+## Header colours (owner, 2026-11-10)
 
-`src/lib/enhanced/styles/header.css` (`.site-header::after`). Before, the floating header had no line at the top of a
-page — it lay on the opening picture with no background — and got a background and a pale border only after 40px of
-scrolling. Now a 1px line runs under the header from the first moment, the full width of the screen, so the header
-always reads as a band:
+`src/lib/enhanced/styles/header.css`, `interactions.js` (`updateHeader`, `toneUnder`). The header always has a
+background now; there are two, each in two strengths:
 
-- copper at 28% (`--accent`) over light sections, light at 28% (`--on-dark`) over photographs and dark sections; it
-  follows the header's tone as the page scrolls;
-- the copper reading-progress line runs on top of it;
-- with a mega panel or the booking bar open, header and panel are one sheet of glass, and the line goes.
+| | Words and logo | Background |
+|---|---|---|
+| 1 | white | dark green glass, 72% (`rgb(22 26 17 / 0.72)`) — at the top of a page, over a photograph or a film |
+| 2 | white | dark green glass, 86% — after 40px of scrolling, over photographs, films and dark sections |
+| 3 | black | white glass, 72% (`rgb(255 255 255 / 0.72)`) — at the top of a page that opens on text |
+| 4 | black | white glass, 86% — after 40px of scrolling, over light sections |
 
-The old border of the scrolled background was removed, so the line is never doubled.
+The tone follows the section under the header, as before; the 72% at the top replaces the former full transparency
+("twice as transparent" as the 86% glass). Copper words are gone: on white glass the words, the logo
+(`/brand/logo-dark.svg`) and CHECK AVAILABILITY are black; on green glass they stay white, with the beige button.
+The former dark brown state of an open mega panel is gone too: mega panels, the booking bar and its calendar open in
+the header's glass of the moment, with its words' colour. A 1px hairline runs under the header — dark on white glass,
+light on green glass — and the copper reading-progress line runs on it. The phone gradient over the opening picture
+went with the transparency.
 
 ## The booking bar
 
@@ -26,15 +32,14 @@ The old border of the scrolled background was removed, so the line is never doub
 - The designer's "CHECK AVAILABILITY" in the header is now the button that opens and closes the bar
   (`aria-expanded`); before, it opened Orbe's search page. The menu's and the footer's CHECK AVAILABILITY still open
   Orbe directly.
-- The bar lies over the page under the header in the mega panels' dark brown glass (`rgb(38 17 1 / 0.86)`, blurred,
-  rounded at the foot like the panels), and unrolls: its height grows from nothing (grid rows 0fr → 1fr, 520 ms) while
-  the fields settle in; closing rolls it back up. Header and bar become one sheet: the header takes its dark tone
-  (light logo and words, beige button) while the bar is open. Closed, the bar is hidden and `inert`.
+- The bar lies over the page under the header in the header's glass of the moment (green with white words or white
+  with black words, blurred, rounded at the foot like the panels), and unrolls: its height grows from nothing (grid
+  rows 0fr → 1fr, 520 ms) while the fields settle in; closing rolls it back up. Closed, the bar is hidden and `inert`.
 - Escape closes it and returns the focus to the button; opening a mega panel closes it (`enhanced:mega-open`); while
   it is open the header does not step away on scrolling (`interactions.js`, `updateHeader`).
-- Fields: sand capitals for "CHECK IN", "CHECK OUT", "GUESTS" (`--accent-on-dark`, the frames' eyebrow tracking) over
-  values in EB Garamond on a light hairline; guests 1 to 4 adults, 2 by default.
-- "CHECK RATES" ("VER TARIFAS") in the beige the header's button wears on glass opens Orbe's results for the dates and
+- Fields: muted capitals for "CHECK IN", "CHECK OUT", "GUESTS" (the frames' eyebrow tracking) over values in EB
+  Garamond on a hairline; guests 1 to 4 adults, 2 by default.
+- "CHECK RATES" ("VER TARIFAS"), the same button as the header's CHECK AVAILABILITY in that glass, opens Orbe's results for the dates and
   guests in a new tab: `bookingResults()` in `src/lib/enhanced/site.ts` builds
   `https://reservations.orbebooking.com/Search/SearchAvailability/PAS6c/en/YYYYMMDD/YYYYMMDD/{adults}/0/` (`/es/` on
   Spanish pages). Without a check-out it asks for one and opens the calendar.
@@ -42,13 +47,12 @@ The old border of the scrolled background was removed, so the line is never doub
 
 ## The calendar
 
-One calendar for both dates, in the same glass, rounded like the panels, under the bar on the left.
+One calendar for both dates, in the header's glass, rounded like the panels, under the bar on the left.
 
 - "Check in" or "Check out" opens it: two months side by side. The first click is the check-in, the second the
   check-out, without opening the calendar again; the calendar then closes and the focus moves to Guests. A click on or
   before the check-in while choosing the check-out starts again from that day.
-- The two chosen days are beige with dark figures (the buttons' beige), the nights between a band of lighter glass,
-  today underlined in sand; while choosing the check-out the band follows the pointer. The nights are counted under
+- The two chosen days wear the buttons' colour, the nights between a tinted band, today underlined; while choosing the check-out the band follows the pointer. The nights are counted under
   the months ("2 nights" / "2 noches").
 - Past days cannot be chosen; the calendar reaches 18 months ahead.
 - Months and weekdays are in the page's language; weeks start on Sunday in English and on Monday in Spanish. Every

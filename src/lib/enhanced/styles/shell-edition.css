@@ -19,8 +19,8 @@ body[data-edition="figma-enhanced"] :where(h1, h2, h3) { text-wrap: pretty; }
 body[data-edition="figma-enhanced"] .menu-lines { height: 13px; }
 body[data-edition="figma-enhanced"] .header-actions { gap: 20px; }
 body[data-edition="figma-enhanced"] .nav-book { width: 166px; padding: 8px 20px; font: 500 12px/20px var(--font-body); letter-spacing: .24px; text-align: center; }
-body[data-edition="figma-enhanced"][data-hero-theme="paper"] .site-header { color: var(--figma-copper); }
-body[data-edition="figma-enhanced"][data-hero-theme="paper"] .site-header .nav-book { background: var(--figma-copper); color: #fff; }
+body[data-edition="figma-enhanced"][data-hero-theme="paper"] .site-header { color: #000; }
+body[data-edition="figma-enhanced"][data-hero-theme="paper"] .site-header .nav-book { background: #000; color: #fff; }
 @media (min-width: 761px) {
   body[data-edition="figma-enhanced"][data-hero-theme="photo"] .site-header { background: none; }
   body[data-edition="figma-enhanced"] .site-footer { padding: 0; font-size: 18px; line-height: 25px; }

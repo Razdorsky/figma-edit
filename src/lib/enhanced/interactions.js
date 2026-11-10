@@ -590,7 +590,8 @@ const DARK = '[data-role="photo-hero"], [data-role="overlay"], [data-role="galle
 let lastY = 0;
 let refreshHeader = () => {};
 function toneUnder(header) {
-  if (header.querySelector('[data-mega][data-open="true"], [data-booking-open][aria-expanded="true"]')) return 'dark';
+  // An open mega panel or booking bar keeps the header's colour of the moment; the panel takes the same glass.
+  if (header.querySelector('[data-mega][data-open="true"], [data-booking-open][aria-expanded="true"]')) return header.dataset.theme || 'light';
   const y = header.offsetHeight / 2;
   // The last match is the one on top: a rising block covers the photograph it rises over (step 2.5).
   const sections = document.querySelectorAll('.current-page > section, .current-page > [data-drift], .current-page > [data-rise] > :is(section, [data-drift]), .current-page > :is([data-rail], [data-change]) > section, .site-footer');
