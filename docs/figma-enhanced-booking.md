@@ -173,3 +173,19 @@ them (989 strings).
   and 375, in both languages. Over the photographs, where axe cannot judge, the newsletter's lines were measured against
   the brightest pixels behind them at five screen sizes on four closing photographs: every line meets its ratio
   (the small label at least 4.7:1).
+
+## Full-width photographs keep the page's rhythm (owner, 2026-11-10)
+
+`styles/system.css`, "Full-width photographs keep the page's rhythm". Every block brings half the section step
+(`--section / 2`, 53px at 1440px) above and below its content, so two blocks stand a whole step apart (106px). The
+overlays (the Dome photographs with the brown panel), the galleries and the map fill their block to the edges, so their
+own half went under the picture and their neighbours stood only half a step from them (53px, 32px on phones). They now
+bring that half as an outer margin, so the words of the blocks around them stand a whole step from the picture, as
+everywhere else. They still touch the designer's beige bands (Villas, Treehouse, Glamping Tents), other full-width
+photographs and the page's ends (a gallery that closes a page runs into the footer); the foot of the Home photograph
+that the drifting gallery rises over keeps no margin (step 2.5); and the gallery under the Frequency Dome's pinned change
+block takes none, since that block centres its picture in a whole screen and already leaves more than a step.
+
+Checked at 1440px and 390px on all 18 such blocks of the 28 pages: a whole step to every ordinary neighbour (106px and
+64px). A large title block (Hero text only) keeps its own larger top space, as after any block (137px at 1440px).
+

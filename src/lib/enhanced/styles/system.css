@@ -152,6 +152,23 @@ body[data-edition="figma-enhanced"] .current-page [data-name="Slider with overla
 body[data-edition="figma-enhanced"] .current-page [data-role="overlay"] [data-part="eyebrow"] { color: var(--accent-on-dark); }
 body[data-edition="figma-enhanced"] .current-page [data-name="Slider with overlay"] [data-part="copy"] > p + p { margin-top: -20px; }
 
+/* ---- Full-width photographs keep the page's rhythm (owner, 2026-11-10) --------------------------------
+   Every block brings half the step (--section / 2) above and below its content, so two blocks stand a whole step
+   apart. A full-width photograph (the overlays, the galleries, the map) fills its block to the edges, so its own half
+   went under the picture and its neighbours stood only half a step from it. It brings its half as an outer margin
+   instead — except where it meets the designer's beige bands, another full-width photograph or the page's ends,
+   which it touches, at the foot of a photograph that the next block rises over (step 2.5), and under the pinned
+   change block, which centres its picture in a whole screen and leaves more than a step below it. */
+body[data-edition="figma-enhanced"] .current-page > :is([data-role="overlay"], [data-role="gallery"], [data-role="map"]),
+body[data-edition="figma-enhanced"] .current-page > [data-rise]:has(> :first-child:where([data-role="overlay"], [data-role="gallery"], [data-role="map"])) {
+  margin-top: calc(var(--section) / 2); /* :where keeps this no heavier than the exceptions below, as the build joins the two selectors */
+}
+body[data-edition="figma-enhanced"] .current-page > :is([data-role="overlay"], [data-role="gallery"], [data-role="map"]) { margin-bottom: calc(var(--section) / 2); }
+body[data-edition="figma-enhanced"] .current-page > :is([data-tone="beige"], [data-role="photo-hero"], [data-role="overlay"], [data-role="gallery"], [data-role="map"], [data-change]) + :is([data-role="overlay"], [data-role="gallery"], [data-role="map"], [data-rise]),
+body[data-edition="figma-enhanced"] .current-page > :is([data-role="overlay"], [data-role="gallery"], [data-role="map"], [data-rise]):first-child { margin-top: 0; }
+body[data-edition="figma-enhanced"] .current-page > :is([data-role="overlay"], [data-role="gallery"], [data-role="map"]):has(+ :is([data-tone="beige"], [data-role="photo-hero"], [data-role="overlay"], [data-role="gallery"], [data-role="map"], .newsletter-closing)),
+body[data-edition="figma-enhanced"] .current-page > :is([data-role="overlay"], [data-role="gallery"], [data-role="map"]):last-child { margin-bottom: 0; }
+
 /* ---- Gallery: a full-width photograph with the frames' arrows ----------------------------------- */
 body[data-edition="figma-enhanced"] .current-page [data-role="gallery"] { position: relative; isolation: isolate; min-height: clamp(420px, 48.6vw, 1000px); padding: 0; background: var(--panel-dark-solid); }
 body[data-edition="figma-enhanced"] .current-page [data-role="gallery"] > [data-part="media"] { position: absolute; inset: 0; z-index: -1; height: 100%; border-radius: 0; }
