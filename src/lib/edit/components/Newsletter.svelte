@@ -28,7 +28,7 @@
     </div>
     <form class="newsletter-form" onsubmit={submit}>
       <label class="sr-only" for="newsletter-email">{tr(locale, 'Email address')}</label>
-      <input id="newsletter-email" type="email" autocomplete="email" placeholder="ronnie@aave.com" required />
+      <input id="newsletter-email" type="email" autocomplete="email" placeholder={tr(locale, '[Email address]')} required />
       <button type="submit">{tr(locale, 'KEEP ME POSTED')}</button>
       <p class="newsletter-status" aria-live="polite">{status}</p>
     </form>

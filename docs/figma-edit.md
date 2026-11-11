@@ -72,6 +72,18 @@ glossary: `tú`, placeholders in Spanish, the property's names in English).
 - Getting here: San José by road and its transfer price; the transfer's own line "Up to [x] people. Book it with your
   room."
 
+**Found in the review of step 1** (2026-11-11, the same rules):
+- Newsletter: the email field's placeholder is the brief's "[Email address]" in place of the frames' "ronnie@aave.com".
+- Footer: "© The Vessyl 2026 • Arenal, Costa Rica" (the brief: "The Vessyl, Arenal, Costa Rica") in place of La Fortuna.
+- The Day and the Half Day: the prices are a person ("Half day [price] a person – Full day [price] a person", and
+  "[Price] a person" on both cards).
+- The Frequency Experience: "[x] people at a time, no more" and "[x] minutes of tea, which most people use".
+- El Rancho: "El Rancho takes outside reservations for dinner." in the outside reservations line.
+
+The review compared every visible line, link and alt text of all 28 pages, in both languages, between `/figma/` and
+`/figma-edit/` (every difference is one of the changes above), compared `/figma-edit/` with the brief again, and
+checked each page's title, description and address against the brief's table (all 28 match).
+
 **Not done in this step** (they need graphics, new blocks or pages, or data): the hero video on Home; the nine missing
 pages (When to come, About, Josh Stanley, The people here, Press, Gallery, FAQ, Contact, Policies) and so the links to
 them; the extra booking buttons (footer, Rates and offers); "Who has worked here" on the studio page; the two missing

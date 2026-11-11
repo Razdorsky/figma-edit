@@ -93,7 +93,7 @@
       </section>
     </div>
     <div class="footer-bottom">
-      <p>© The Vessyl 2026 • La Fortuna, Costa Rica</p>
+      <p>© The Vessyl 2026 • Arenal, Costa Rica</p>
       <p>{@render pending(msg('Privacy'))} • {@render pending(msg('Terms & Conditions'))}</p>
     </div>
   </div>
