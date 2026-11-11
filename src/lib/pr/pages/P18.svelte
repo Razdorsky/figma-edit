@@ -26,5 +26,8 @@
 <section data-name="Callout" data-node-id="862:15975" data-role="callout"><div data-part="callout-panel"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/475782777018244eff8a.webp" alt={tr(locale, "Josh Stanley")} loading="lazy" decoding="async" width="800" height="800"></figure><div data-part="copy"><p data-node-id="I862:15975;748:405" data-part="eyebrow">{tr(locale, "Tell us what you are making")}</p>
 <p data-node-id="I862:15975;748:406" data-part="paragraph">{tr(locale, "The studio is booked by the day or the week, with or without an engineer, and usually alongside rooms for whoever you bring. Rates depend on how long you are here and how many people are coming, so email us and tell us what you are making.")}</p>
 <div data-part="actions"><button data-name="CTA" data-node-id="I862:15975;748:407" class="current-action" data-part="action" type="button" data-pending-link="" aria-label={tr(locale, "Booking it — destination not supplied")}>{tr(locale, "Booking it")}</button></div></div></div></section>
+<section data-name="Hero text only" data-role="text-hero"><div data-part="copy"><p data-part="eyebrow">{tr(locale, "Credits")}</p>
+<h2 class="c-heading" data-part="heading">{tr(locale, "Who has worked here")}</h2>
+<p data-part="paragraph" class="current-lede">{tr(locale, "TO SUPPLY: artist and project credits, confirmed by the property, with each artist's permission.")}</p></div></section>
 <Newsletter pageIndex={18} {locale} />
 

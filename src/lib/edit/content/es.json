@@ -190,7 +190,6 @@
  "OFFER": "OFERTA",
  "Four nights or more, [offer]. Seven nights or more, [offer].": "Cuatro noches o más, [oferta]. Siete noches o más, [oferta].",
  "The land takes a day to get used to, and most people say the third day is when they stop checking their phone.": "Acostumbrarse a la finca toma un día, y la mayoría dice que al tercer día deja de revisar el celular.",
- "check availability": "ver disponibilidad",
  "Green season": "Temporada verde",
  "May to November, [offer]": "De mayo a noviembre, [oferta]",
  "It rains in the afternoon and stops. The river runs full, everything is loud and growing, and there are far fewer people in the valley.": "Llueve por la tarde y luego para. El río baja caudaloso, todo hace ruido y crece, y hay mucha menos gente en el valle.",
@@ -913,5 +912,11 @@
  "Getting Here | The Vessyl, Arenal Costa Rica": "Cómo llegar | The Vessyl, Arenal, Costa Rica",
  "Things to Do in Arenal | The Vessyl, Costa Rica": "Qué hacer en Arenal | The Vessyl, Costa Rica",
  "What is worth your time near La Fortuna, what is a tourist trap, and how long each one takes from the property.": "Qué vale la pena cerca de La Fortuna, qué es una trampa para turistas y cuánto tiempo toma cada cosa desde la propiedad.",
- "Skip to content": "Ir al contenido"
+ "Skip to content": "Ir al contenido",
+ "Credits": "Créditos",
+ "Who has worked here": "Quién ha trabajado aquí",
+ "TO SUPPLY: artist and project credits, confirmed by the property, with each artist's permission.": "POR CONFIRMAR: créditos de artistas y proyectos, confirmados por la propiedad, con el permiso de cada artista.",
+ "The trails, the river and the horses.": "Los senderos, el río y los caballos.",
+ "Someone on our side": "Alguien de nuestro equipo",
+ "Who runs the logistics so you do not have to.": "Que se encarga de la logística para que tú no tengas que hacerlo."
 }

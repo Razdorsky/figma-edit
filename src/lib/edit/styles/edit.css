@@ -1046,3 +1046,22 @@ body[data-edition="figma-edit"] .language-trigger [data-lang-current] { text-dec
   html[lang="es"] body[data-edition="figma-edit"] .footer-columns { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 24px; }
 }
 
+
+/* Take the whole property (owner, 2026-11-11; docs/figma-edit.md): the brief's five buyout items as one grid, three
+   across and then two wider ones; the second row's pictures keep the first row's height. One column on phones. */
+body[data-edition="figma-edit"] .current-page [data-layout="three-two"] > [data-part="card-grid"] { --g: 45px; container-type: inline-size; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--g); }
+body[data-edition="figma-edit"] .current-page [data-layout="three-two"] [data-part="card"] { grid-column: span 2; }
+body[data-edition="figma-edit"] .current-page [data-layout="three-two"] [data-part="card"]:nth-child(n + 4) { grid-column: span 3; }
+body[data-edition="figma-edit"] .current-page [data-layout="three-two"] [data-part="card"]:nth-child(n + 4) > [data-part="media"] { aspect-ratio: auto; height: calc((100cqw - 2 * var(--g)) / 3 * 251 / 400); }
+@media (max-width: 1100px) {
+  body[data-edition="figma-edit"] .current-page [data-layout="three-two"] > [data-part="card-grid"] { --g: 24px; }
+}
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page [data-name^="Card Grid"][data-layout="three-two"] > [data-part="card-grid"] { --g: 31px; grid-template-columns: repeat(6, minmax(0, 1fr)); justify-content: normal; gap: 45px var(--g); }
+}
+@media (max-width: 760px) {
+  body[data-edition="figma-edit"] .current-page [data-layout="three-two"] > [data-part="card-grid"] { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  body[data-edition="figma-edit"] .current-page [data-layout="three-two"] [data-part="card"],
+  body[data-edition="figma-edit"] .current-page [data-layout="three-two"] [data-part="card"]:nth-child(n + 4) { grid-column: auto; }
+  body[data-edition="figma-edit"] .current-page [data-layout="three-two"] [data-part="card"]:nth-child(n + 4) > [data-part="media"] { aspect-ratio: 400 / 251; height: auto; }
+}

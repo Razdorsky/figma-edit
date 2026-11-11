@@ -301,3 +301,19 @@ on; `site-data.json`, the pages' links and the components' routes). The 19 forme
 are prerendered as permanent redirects to the new ones (`formerSlugs` in `site.ts`, the page route's `entries` and
 `load`), so links already shared keep working; GitHub Pages serves them as a page that moves on at once
 (`<meta http-equiv="refresh">` with a script).
+
+## Content brief, part 2: what words alone could not do (owner, 2026-11-11)
+
+Done in Figma Edit, Figma Enhanced and Figma PR alike, with the designer's own blocks (`docs/figma-edit.md`):
+
+- **The booking engine in the brief's three places** (the header, the hero on Home, the foot of the places to stay and
+  the experiences). Rates and offers: the five offers lose their "Check availability" (with the header they made four
+  on one screen), and the one button the brief puts on the page closes "What every rate includes". The Villas, the
+  Treehouse and the Glamping Tents end, before the other rooms, on the designer's closing block (as on the
+  experiences): "From [rate] a night" and the page's own booking button.
+- **Take the whole property: the brief's five buyout items.** The designer's three cards and two more, "The land —
+  The trails, the river and the horses." (horses on the trail, from Horses and the land) and "Someone on our side — Who
+  runs the logistics so you do not have to." (a member of the team at the Hearth, framed at 50% 38%). One grid, three 4:5 cards across and then two wider ones whose pictures keep the first row's height (`data-layout="three-two"`, `styles/sections.css`); one column below 900px.
+- **The recording studio: "Who has worked here"**, the brief's last section, in the designer's text block (eyebrow
+  "Credits", the brief's heading, and the line "TO SUPPLY: artist and project credits, confirmed by the property, with
+  each artist's permission.", as the Weddings page shows its paperwork until the property supplies it).

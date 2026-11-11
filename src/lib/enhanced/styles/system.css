@@ -500,3 +500,12 @@ body[data-edition="figma-enhanced"] .footer-symbol svg { display: block; width: 
   body[data-edition="figma-enhanced"] .current-page .newsletter-events .newsletter-inner > div { flex: none; }
   body[data-edition="figma-enhanced"] .current-page .newsletter-events .newsletter-form input { width: 100%; }
 }
+
+/* Take the whole property (owner, 2026-11-11; docs/figma-edit.md): the brief's five buyout items. From 900px they pass
+   along the edges (drift: 0/45/90/135/180svh of a 240svh run, depths 1.2/0.8/1.2/0.8/1.2); from 768 to 899px two across
+   with the fifth across both columns, its picture as tall as the others'. */
+@media (min-width: 768px) and (max-width: 899px) {
+  body[data-edition="figma-enhanced"] .current-page [data-layout="three-two"] > [data-part="card-grid"] { container-type: inline-size; }
+  body[data-edition="figma-enhanced"] .current-page [data-layout="three-two"] [data-part="card"]:nth-child(5) { grid-column: 1 / -1; }
+  body[data-edition="figma-enhanced"] .current-page [data-layout="three-two"] [data-part="card"]:nth-child(5) > [data-part="media"] { aspect-ratio: auto; height: calc((100cqw - clamp(24px, 3.13vw, 56px)) / 2 * 251 / 400); }
+}

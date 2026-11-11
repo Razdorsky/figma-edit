@@ -63,7 +63,6 @@
       </a>
       <div class="header-actions">
         {@render languageButton()}
-        <a class="nav-book" href={bookingFor(locale)} target="_blank" rel="noopener noreferrer">{tr(locale, 'CHECK AVAILABILITY')}</a>
       </div>
     </div>
     <div class="footer-columns">
