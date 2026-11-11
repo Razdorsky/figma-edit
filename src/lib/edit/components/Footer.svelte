@@ -30,8 +30,9 @@
     [msg('FAQ'), null],
     [msg('Policies'), null]
   ];
-  // The designer's contact lines, and the brief's reservations address written the same way.
-  const contactLinks = [msg('WhatsApp Contact'), msg('Phone Contact'), msg('Reservations Email'), msg('Address Info')];
+  // The designer's contact lines, and the brief's reservations address, which the designer did not fill in, as the
+  // brief's placeholder.
+  const contactLinks = [msg('WhatsApp Contact'), msg('Phone Contact'), msg('[Reservations email]'), msg('Address Info')];
 </script>
 
 {#snippet languageButton()}

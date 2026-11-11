@@ -18,7 +18,7 @@
 <section data-name="3 col info" data-node-id="803:3070" data-role="facts"><div data-part="facts"><div data-part="fact"><h3 data-node-id="803:3033" class="c-heading" data-part="heading">{tr(locale, "Dusk")}</h3>
 <p data-node-id="803:3036" data-part="paragraph" class="current-lede">{tr(locale, "You arrive as the light goes.")}</p></div><div data-part="fact"><h3 data-node-id="803:3052" class="c-heading" data-part="heading">{tr(locale, "Dinner")}</h3>
 <p data-node-id="803:3053" data-part="paragraph" class="current-lede">{tr(locale, "Dinner is included.")}</p></div><div data-part="fact"><h3 data-node-id="803:3055" class="c-heading" data-part="heading">{tr(locale, "The Dome")}</h3>
-<p data-node-id="803:3056" data-part="paragraph" class="current-lede">{tr(locale, "A private session in the Dome, just the two of you.")}</p></div></div></section>
+<p data-node-id="803:3056" data-part="paragraph" class="current-lede">{tr(locale, "A private session in the Dome, just the two of you and whoever is running it.")}</p></div></div></section>
 <section data-name="Section - 50/50 image text" data-node-id="814:7329" data-role="split" data-layout="image-first" data-variant="editorial"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/c9f36f747db728e9734c.webp" alt={tr(locale, "For Two")} loading="lazy" decoding="async" width="1600" height="2400"></figure>
 <div data-part="copy"><p data-node-id="I814:7329;750:1885;748:551" data-part="eyebrow">{tr(locale, "just for two")}</p>
 <h2 data-node-id="I814:7329;750:1885;748:552" class="c-heading" data-part="heading">{#if locale === 'es'}{tr(locale, "A private session in the Dome")}{:else}A private session{' '}<br data-frame-break>in the Dome{/if}</h2>

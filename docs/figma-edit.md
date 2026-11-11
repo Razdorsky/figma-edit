@@ -87,14 +87,23 @@ numbers, hours, terms); they replace what the design states as a fact, not a fin
 So the email field keeps an example address rather than "[Email address]", and the Home quote stays as the designer
 wrote it (Robert Patterson, Journalist), as in `/figma/`.
 
-**Designer's words restored** (owner, 2026-11-11: the brief is a guide, and the designer may already have filled things
-in). Where step 1 had put the brief's placeholder in place of something the designer had written, or cut it, the
-designer's text is back: the bathrooms "Private, indoors" on Where you sleep; wifi "Throughout" and the rate line "[x]
-night minimum in high season. Breakfast included, taxes shown at checkout." on the treehouse and tents pages (and the
-treehouse's "[x] night in high season"); For Two's three facts (Dusk, Dinner, The Dome) and its second paragraph; "and
-it can be tracked in" on the studio page (the brief's own description says "a dome you can track in"); the footer's
-contact lines; the newsletter's "Best time to visit us". Facts among them that the brief leaves open (the bathrooms,
-the wifi, arrival at dusk) are for the property to confirm, not for a placeholder.
+**Which words win** (owner, 2026-11-11): the brief's text takes priority over the designer's text, but what the designer
+put in place of a placeholder takes priority over the brief's empty square brackets. So:
+- the designer's fills of the brief's brackets stay: the email field's example, the bathrooms "Private, indoors" on Where
+  you sleep, wifi "Throughout" on the treehouse and tents pages, For Two's "Dusk — You arrive as the light goes" and
+  "Dinner is included"; facts among them (the bathrooms, the wifi, arrival at dusk) are for the property to confirm;
+- the brief's text replaces the designer's where both have one: the treehouse's and the tents' rate lines ("[x] night
+  minimum. Breakfast included." and "Breakfast included."), the treehouse's minimum stay "[x] nights", For Two's Dome
+  fact "A private session in the Dome, just the two of you and whoever is running it.", and the replacements listed
+  above (the Dome button, the Hearth's labels, the newsletter button, the logo);
+- the designer's own words where the brief has none stay (labels, headings, the newsletter's "Best time to visit us",
+  the footer's WhatsApp Contact, Phone Contact and Address Info, the Home quote, "and it can be tracked in" on the studio
+  page, which the brief's own description supports);
+- what neither filled in is the brief's placeholder: the reservations email in the footer, "[Reservations email]".
+
+One exception is left for the owner: on Groups and offsites the brief says "Minimums as above", which on the website
+points at nothing (the minimums are on the Retreats page); the designer wrote "Minimums as for buyouts", and that stays
+until decided.
 
 **Not done in this step** (they need graphics, new blocks or pages, or data): the hero video on Home; the nine missing
 pages (When to come, About, Josh Stanley, The people here, Press, Gallery, FAQ, Contact, Policies) and so the links to
