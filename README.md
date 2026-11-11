@@ -7,6 +7,7 @@ Five independent editions of the Vessyl website:
 
 - `/figma-enhanced/` — the Figma edition improved step by step: started on 2026-11-07 as an exact copy of `/figma/` (`src/lib/enhanced/`, `src/routes/figma-enhanced/`) and grows its own design system and features. Plan: [docs/figma-enhanced-plan.md](docs/figma-enhanced-plan.md); the design system from step 1: [docs/figma-enhanced-system.md](docs/figma-enhanced-system.md). In English and Latin American Spanish (`/figma-enhanced/es/…`, 2026-11-10): [docs/figma-enhanced-spanish.md](docs/figma-enhanced-spanish.md). The header's line and the booking bar with its calendar: [docs/figma-enhanced-booking.md](docs/figma-enhanced-booking.md).
 - `/figma-pr/` — the Figma edition for the PR team (owner, 2026-11-10): a copy of `/figma/` (`src/lib/pr/`, `src/routes/figma-pr/`) converted into the design system of the references the PR team chose (Rosewood Mayakoba, with Four Seasons Bangkok's motion and booking bar), with the designer's texts and the clips chosen for Figma Enhanced. See [docs/figma-pr-system.md](docs/figma-pr-system.md). In English and Latin American Spanish (`/figma-pr/es/…`, 2026-11-10): [docs/figma-spanish.md](docs/figma-spanish.md).
+- `/figma-edit/` — a copy of the frozen `/figma/` (owner, 2026-11-11; `src/lib/edit/`, `src/routes/figma-edit/`) brought in line with the agency's content brief without changing the design or the order of the blocks: texts, links, title tags, meta descriptions and the brief's page addresses. See [docs/figma-edit.md](docs/figma-edit.md).
 - `/interactive-prototype/` — the one-scene concept of the site (owner, 2026-11-10): an early interactive prototype brought into the repository as it was received (`src/lib/interactive/`, `src/routes/interactive-prototype/`, photographs in `public/interactive/`) and developed here step by step. The whole site is one story on one scroll, with a rail in place of a menu and everything that can be booked gathered in one list and one panel. Its 25 inner pages carry a digest of the frozen Figma edition's pages: texts copied exactly, checked by `scripts/interactive-strings.mjs` in `npm run check`. English only. The concept, every mechanic, what the port changed, each step and the open points: [docs/interactive-prototype.md](docs/interactive-prototype.md).
 
 This project is separate from `vessyl-website-blueprint` and `vessyl-website`.
@@ -17,6 +18,7 @@ Published like the legacy Blueprint (https://razdorsky.github.io/vessyl-website-
 - Blueprint edition: **https://razdorsky.github.io/blueprint/** — repository `Razdorsky/blueprint`
 - Figma Enhanced edition: **https://razdorsky.github.io/figma-enhanced/** — repository `Razdorsky/figma-enhanced`
 - Figma PR edition: **https://razdorsky.github.io/figma-pr/** — repository `Razdorsky/figma-pr`
+- Figma Edit edition: **https://razdorsky.github.io/figma-edit/** — repository `Razdorsky/figma-edit`
 - Interactive Prototype edition: **https://razdorsky.github.io/interactive-prototype/** — repository `Razdorsky/interactive-prototype`
 
 ## Local preview
