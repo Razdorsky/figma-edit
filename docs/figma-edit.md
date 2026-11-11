@@ -108,3 +108,9 @@ the website points at nothing (the minimums are on the Retreats page); the desig
 pages (When to come, About, Josh Stanley, The people here, Press, Gallery, FAQ, Contact, Policies) and so the links to
 them; the extra booking buttons (footer, Rates and offers); "Who has worked here" on the studio page; the two missing
 buyout items; links for the booking, enquiry and email buttons and for the press logos, which need addresses.
+
+## Carried over to Figma Enhanced and Figma PR (owner, 2026-11-11)
+
+The corrections above, with their Spanish, are in Figma Enhanced and Figma PR too (`docs/figma-enhanced-booking.md` and
+`docs/figma-pr-system.md`, "Content from the agency's brief"). Those editions keep their own page addresses.
+

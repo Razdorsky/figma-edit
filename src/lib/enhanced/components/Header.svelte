@@ -58,7 +58,7 @@
         {/each}
       </nav>
     </div>
-    <a class="brand" href={route(edition, '', base, locale)} aria-label={tr(locale, 'Vessyl home')}>
+    <a class="brand" href={route(edition, '', base, locale)} aria-label={tr(locale, 'The Vessyl home')}>
       <img class="logo-light" src={asset('/brand/logo-white.svg')} width="210" height="39" alt="" />
       <img class="logo-dark" src={asset('/brand/logo-dark.svg')} width="210" height="39" alt="" />
     </a>

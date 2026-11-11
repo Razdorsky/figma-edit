@@ -44,7 +44,7 @@
       </svg>
     </button>
     <a class="menu-brand" href={route(edition, '', base, locale)}>
-      <img src={`${base.replace(/\/$/, '')}/brand/logo-dark.svg`} alt="VESSYL" width="220" height="41" />
+      <img src={`${base.replace(/\/$/, '')}/brand/logo-dark.svg`} alt="The Vessyl" width="220" height="41" />
     </a>
     <div class="menu-actions menu-actions-top">
       {@render language()}

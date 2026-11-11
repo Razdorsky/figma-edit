@@ -33,16 +33,16 @@
 
 <header class="site-header pr-header" data-pr-header>
   <div class="pr-utility">
-    <a class="pr-brand" href={route(edition, '', base, locale)} aria-label={tr(locale, 'Vessyl home')}>
-      <img src={asset('/brand/logo-dark.svg')} width="210" height="39" alt="VESSYL" />
+    <a class="pr-brand" href={route(edition, '', base, locale)} aria-label={tr(locale, 'The Vessyl home')}>
+      <img src={asset('/brand/logo-dark.svg')} width="210" height="39" alt="The Vessyl" />
     </a>
     <!-- The designer's EN | ES, on the right as in the frame's header: a link to this page in the other language; the
          current one is underlined (docs/figma-spanish.md). -->
     <a class="pr-utility-link pr-utility-lang language-trigger" data-language-trigger data-sveltekit-reset="false" href={route(edition, page.slug, base, other(locale))} hreflang={other(locale)} aria-label={tr(locale, 'Language: English. Switch to Spanish')}><span><span data-lang-current={locale === 'en' || undefined}>EN</span> | <span data-lang-current={locale === 'es' || undefined}>ES</span></span></a>
   </div>
   <div class="pr-nav-row">
-    <a class="pr-brand pr-brand-compact" href={route(edition, '', base, locale)} aria-label={tr(locale, 'Vessyl home')}>
-      <img src={asset('/brand/logo-dark.svg')} width="150" height="28" alt="VESSYL" />
+    <a class="pr-brand pr-brand-compact" href={route(edition, '', base, locale)} aria-label={tr(locale, 'The Vessyl home')}>
+      <img src={asset('/brand/logo-dark.svg')} width="150" height="28" alt="The Vessyl" />
     </a>
     <button type="button" class="pr-menu-toggle menu-toggle" data-menu-open aria-expanded="false" aria-haspopup="dialog" aria-controls="site-menu">
       <span class="menu-lines" aria-hidden="true"><i></i><i></i><i></i></span>

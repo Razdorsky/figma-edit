@@ -263,3 +263,25 @@ the door and are removed; the screenshot itself stays in `public/media/` for the
 
 Checked at 1440×900 and 390×844, in English and Spanish: the door draws the frame, the menu's preview shows it on
 hovering Where you sleep, and no page of this edition refers to the screenshot any more.
+
+## Content from the agency's brief (owner, 2026-11-11)
+
+The text corrections made in Figma Edit against the agency's content brief (*The Vessyl — website content*, Wunderlich
+Kaplan Communications, 3 October 2026) are carried over here, word for word and with the same Spanish
+(`content/es.json`): see `docs/figma-edit.md` for the list and the rule (the brief's text takes priority over the
+designer's; what the designer put in place of a placeholder takes priority over the brief's empty brackets). Nothing in
+the design or the order of the blocks changes.
+
+- Every page: the brief's title tag and meta description (`meta.ts`, used by the page route).
+- Components: the logo's link is "The Vessyl home" (and alt "The Vessyl" where the logo carries one); the newsletter's
+  button "Keep me posted" ("Avísenme") and the example address "you@example.com" ("nombre@ejemplo.com"); in the footer,
+  The Dome among the experiences and "[Reservations email]" among the contact lines.
+- Pages: the Dome button on Home; the other rooms' rate and "See the villa" on the places to stay; the treehouse's and
+  the tents' placeholder facts and rate lines; the offers on Rates and offers; lengths and prices on the experience
+  cards; prices a person on the Day and the Half Day; "no more" and "which most people use" on the Frequency Experience;
+  For Two's hours and Dome fact; the minimum age on Horses and the River; the Hearth's labels; "Private movement or
+  breath session"; El Rancho's outside reservations; "See El Rancho" on Moloka; "Download the retreat pack"; Arenal's
+  "What is on this page" and airports in hours; San José by road and its transfer on Getting here.
+
+This edition keeps its own page addresses: Figma Edit's addresses from the brief (`/stay/villas/` and so on) are not
+carried over.

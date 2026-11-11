@@ -18,10 +18,11 @@
 <p data-node-id="I965:7507;756:1493" data-part="paragraph">{tr(locale, "Up to [x] people and luggage. Book it with your room.")}</p>
 <div data-part="actions"><button data-name="CTA" data-node-id="I965:7507;756:1490" class="current-action" data-part="action" type="button" data-pending-link="" aria-label={tr(locale, "Book a transfer — destination not supplied")}>{tr(locale, "Book a transfer")}</button></div></div></section>
 <section data-name="Description and info 60/40" data-node-id="965:7508" data-role="split" data-layout="copy-first" data-variant="description"><div data-part="copy"><p data-node-id="I965:7508;756:1501" data-part="eyebrow">{tr(locale, "From San José (SJO)")}</p>
+<p data-part="paragraph" class="current-lede">{tr(locale, "[x] hours by road. Transfer is [x] each way.")}</p>
 <p data-node-id="I965:7508;756:1467" data-part="paragraph" class="current-lede">{tr(locale, "There are also small planes into La Fortuna from San José, [x] minutes, [x] per person, with [x] flights a day in high season. From the airstrip to us is [x] minutes and we will collect you for [x].")}</p></div>
 <div data-part="rate"><p data-node-id="I965:7508;756:1469" data-part="eyebrow">{tr(locale, "Transfer from San José")}</p>
 <h2 data-node-id="I965:7508;756:1470" class="c-heading" data-part="heading">{tr(locale, "[x] each way")}</h2>
-<p data-node-id="I965:7508;756:1493" data-part="paragraph">{tr(locale, "[x] minutes, [x] per person, [x] flights a day in high season. Airstrip pickup [x].")}</p>
+<p data-node-id="I965:7508;756:1493" data-part="paragraph">{tr(locale, "Up to [x] people. Book it with your room.")}</p>
 <div data-part="actions"><button data-name="CTA" data-node-id="I965:7508;756:1490" class="current-action" data-part="action" type="button" data-pending-link="" aria-label={tr(locale, "Book a transfer — destination not supplied")}>{tr(locale, "Book a transfer")}</button></div></div></section>
 <section data-name="Section - 50/50 image text" data-node-id="965:7509" data-role="split" data-layout="image-first" data-variant="editorial"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/bc1c3e7f217cc52b0c86.webp" alt={tr(locale, "A golf cart on the gravel track through the forest")} loading="lazy" decoding="async" width="1854" height="2400"></figure>
 <div data-part="copy"><p data-node-id="" data-part="eyebrow">{tr(locale, "Driving yourself")}</p>

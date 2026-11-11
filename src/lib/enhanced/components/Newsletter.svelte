@@ -66,13 +66,13 @@
         name="email"
         type="email"
         autocomplete="email"
-        placeholder="ronnie@aave.com"
+        placeholder={tr(locale, 'you@example.com')}
         required
         aria-invalid={formState === 'error' ? 'true' : undefined}
         aria-describedby="newsletter-status"
         oninput={edit}
       />
-      <button type="submit">{tr(locale, 'SUBSCRIBE')}</button>
+      <button type="submit">{tr(locale, 'KEEP ME POSTED')}</button>
       <p id="newsletter-status" class="newsletter-status" aria-live="polite">{status}</p>
     </form>
   </div>

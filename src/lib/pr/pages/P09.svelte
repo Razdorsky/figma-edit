@@ -16,9 +16,9 @@
 <div data-part="actions"><button data-name="CTA" data-node-id="I814:7299;756:1490" class="current-action" data-part="action" type="button" data-pending-link="" aria-label={tr(locale, "book a session — destination not supplied")}>{tr(locale, "book a session")}</button></div></div></section>
 <section data-name="included" data-node-id="814:7300" data-role="facts"><div data-part="facts"><div data-part="fact"><p data-node-id="I814:7300;804:3094" data-part="eyebrow">{tr(locale, "sessions")}</p>
 <p data-node-id="I814:7300;804:3095" data-part="paragraph">{tr(locale, "[days and times]")}</p></div><div data-part="fact"><p data-node-id="I814:7300;804:3161" data-part="eyebrow">{tr(locale, "capacity")}</p>
-<p data-node-id="I814:7300;804:3162" data-part="paragraph">{tr(locale, "[x] people at a time")}</p></div><div data-part="fact"><p data-node-id="I814:7300;804:3164" data-part="eyebrow">{tr(locale, "duration")}</p>
+<p data-node-id="I814:7300;804:3162" data-part="paragraph">{tr(locale, "[x] people at a time, no more")}</p></div><div data-part="fact"><p data-node-id="I814:7300;804:3164" data-part="eyebrow">{tr(locale, "duration")}</p>
 <p data-node-id="I814:7300;804:3165" data-part="paragraph">{tr(locale, "[x] minutes door to door")}</p></div><div data-part="fact"><p data-node-id="I814:7300;804:3167" data-part="eyebrow">{tr(locale, "Afterwards")}</p>
-<p data-node-id="I814:7300;804:3168" data-part="paragraph">{tr(locale, "[x] minutes of tea")}</p></div></div></section>
+<p data-node-id="I814:7300;804:3168" data-part="paragraph">{tr(locale, "[x] minutes of tea, which most people use")}</p></div></div></section>
 <section data-name="Section - 50/50 text image" data-node-id="814:7301" data-role="split" data-layout="copy-first" data-variant="editorial"><div data-part="copy"><p data-node-id="I814:7301;748:575;748:551" data-part="eyebrow">{tr(locale, "The lights go low.")}</p>
 <h2 data-node-id="I814:7301;748:575;748:552" class="c-heading" data-part="heading">{tr(locale, "Into the Dome")}</h2>
 <p data-part="paragraph">{tr(locale, "You keep your clothes on. There is water, and there are blankets, and you can leave at any point without explaining yourself. Nobody will talk to you about your chakras.")}</p>

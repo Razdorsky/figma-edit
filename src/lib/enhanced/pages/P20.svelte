@@ -14,7 +14,7 @@
 <p data-part="paragraph" class="current-lede">{tr(locale, "[x] courses, brought out together and passed. The food is Costa Rican at its base, with whatever the garden is producing on top of it. Fish comes up from the coast [x] times a week. Beef and pork are from [x]. Most of the vegetables and all of the herbs come from the garden behind the Hearth, which you can walk through.")}</p></div>
 <div data-part="rate"><p data-node-id="I884:8333;756:1469" data-part="eyebrow">{tr(locale, "Outside reservations")}</p>
 <h2 data-node-id="I884:8333;756:1470" class="c-heading" data-part="heading">{tr(locale, "[x] per person")}</h2>
-<p data-node-id="I884:8333;756:1493" data-part="paragraph">{tr(locale, "Drinks not included. One sitting, limited seats, so book ahead.")}</p>
+<p data-node-id="I884:8333;756:1493" data-part="paragraph">{tr(locale, "Drinks not included. El Rancho takes outside reservations for dinner. One sitting, limited seats, so book ahead.")}</p>
 <div data-part="actions"><button data-name="CTA" data-node-id="I884:8333;756:1490" class="current-action" data-part="action" type="button" data-pending-link="" aria-label={tr(locale, "Reserve a table — destination not supplied")}>{tr(locale, "Reserve a table")}</button></div></div></section></div>
 <section data-name="included" data-node-id="884:8334" data-role="facts"><div data-part="facts"><div data-part="fact"><p data-part="eyebrow">{tr(locale, "seats")}</p>
 <p data-part="paragraph">{tr(locale, "[x] at a single table")}</p></div><div data-part="fact"><p data-part="eyebrow">{tr(locale, "dinner")}</p>

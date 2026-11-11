@@ -35,7 +35,9 @@
     [msg('FAQ'), null],
     [msg('Policies'), null]
   ];
-  const contactLinks = [msg('WhatsApp Contact'), msg('Phone Contact'), msg('Address Info')];
+  // The designer's contact lines, and the brief's reservations address, which the designer did not fill in, as the brief's
+  // placeholder (docs/figma-edit.md).
+  const contactLinks = [msg('WhatsApp Contact'), msg('Phone Contact'), msg('[Reservations email]'), msg('Address Info')];
 </script>
 
 {#snippet pending(label: string)}
@@ -56,6 +58,7 @@
         {#each pages.slice(7, 13) as item (item.index)}
           <a href={route(edition, item.slug, base, locale)}>{tr(locale, item.name)}</a>
         {/each}
+        <a href={route(edition, 'the-frequency-dome', base, locale)}>{tr(locale, 'The Dome')}</a>
       </section>
       <section class="footer-group">
         <h2>{tr(locale, 'The Property')}</h2>
