@@ -273,8 +273,8 @@ export function installInteractions() {
   resetPendingMenu=()=>{clearTimeout(menuCloseTimer);menuCloseTimer=undefined;menu()?.classList.remove('closing');};
   // Opening mark (components/Intro.svelte; owner, 2026-11-10): the site warms up under it, and it leaves once the page
   // has fully loaded and the warm-up is done (warmSite): the fonts in, the window's load, the page's first picture
-  // decoded, the mega panels' pictures decoded. Never before the mark has played (2.1s from the start of the load), and
-  // in any case by 6s.
+  // decoded, the first screen's clip able to play on, the mega panels' pictures decoded. Never before the mark has
+  // played (2.1s from the start of the load), and in any case by 6s.
   const root = document.documentElement;
   if (root.dataset.intro === 'on') {
     // From here this script leads the mark; the head script's own lift at 3.6s is only for a script that never came.
@@ -282,7 +282,11 @@ export function installInteractions() {
     const first = document.querySelector('.current-page img');
     const loaded = document.readyState === 'complete' ? null : new Promise(resolve => addEventListener('load', resolve, {once: true}));
     const until = ms => new Promise(resolve => later(resolve, Math.max(0, ms - performance.now())));
-    const ready = Promise.all([document.fonts?.ready, loaded, first?.decode?.().catch(() => {}), warmSite()]).catch(() => {});
+    // The clip of the first screen (Home's film since 2026-11-11, owner) streams under the mark: it loads from the
+    // start (preload="auto") and the mark waits until enough of it has arrived to play on without stopping.
+    const clip = [...document.querySelectorAll('.current-page video[data-loop]')].find(video => video.getBoundingClientRect().top < innerHeight);
+    const flowing = clip && clip.readyState < 4 ? new Promise(resolve => {for (const name of ['canplaythrough', 'error']) clip.addEventListener(name, resolve, {once: true});}) : null;
+    const ready = Promise.all([document.fonts?.ready, loaded, first?.decode?.().catch(() => {}), flowing, warmSite()]).catch(() => {});
     leaveIntro(document.querySelector('.pr-intro-mark'), Promise.race([ready, until(6000)]), until(2100), later);
   }
   // Owner's request, 2026-11-07: page text cannot be selected or copied (see also figma.css).

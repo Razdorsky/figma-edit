@@ -24,10 +24,10 @@
         {#if 'loop' in media}
           <!-- Speed, stage 2: the clip's first frame as a lazy picture beneath it, so it waits with the other pictures
                below the first screen (clips-first.js); the clip loads on approach (interactions.js, setupClipsFirst). -->
-          <img data-clip-frame src={`${base}/bp/video/${media.loop}.webp`} alt="" loading="lazy" decoding="async" />
+          <img data-clip-frame src={`${base}${media.poster ?? `/bp/video/${media.loop}.webp`}`} alt="" loading="lazy" decoding="async" />
           <video data-loop muted loop playsinline preload="none" aria-hidden="true" tabindex="-1">
             <source media="(max-width: 767px)" src={`${base}${media.mobile}`} type="video/mp4" />
-            <source src={`${base}/bp/video/${media.loop}.mp4`} type="video/mp4" />
+            <source src={`${base}${media.src ?? `/bp/video/${media.loop}.mp4`}`} type="video/mp4" />
           </video>
         {:else}
           <img src={`${base}/media/${media.photo}.webp`} srcset={media.srcset?.split(', ').map(part => `${base}${part}`).join(', ')} sizes={media.sizes} alt="" loading="lazy" decoding="async" width={media.width} height={media.height} style={media.position ? `object-position: ${media.position}` : undefined} />

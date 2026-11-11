@@ -305,3 +305,33 @@ Done in Figma Edit, Figma Enhanced and Figma PR alike, with the designer's own b
 - **The recording studio: "Who has worked here"**, the brief's last section, in the designer's text block (eyebrow
   "Credits", the brief's heading, and the line "TO SUPPLY: artist and project credits, confirmed by the property, with
   each artist's permission.", as the Weddings page shows its paperwork until the property supplies it).
+
+## Home's film (owner, 2026-11-11)
+
+Home's opening clip is the owner's film of the property (`vessyl-home.mp4` on the Desktop, 61s, 1920×1080, 25 fps, with
+sound, 51 MB), in place of the pool clip (`/bp/video/loop-pool`). Made the way this edition's clips are (speed, stage 3):
+no sound track, H.264 High, `+faststart` so it plays while it loads, a key frame every 2s; for large screens 1920×1080,
+x264 `-preset slow -crf 25 -maxrate 4500k` (28.8 MB), for phones (up to 767px) 1280×720, `-crf 27 -maxrate 2200k`
+(12.5 MB); its first frame `vessyl-home.webp` (1920×1080) is the poster. The files are in `public/enhanced/clips/`
+(`vessyl-home.mp4`, `vessyl-home-m.mp4`, `vessyl-home.webp`), published with Figma Enhanced and Figma PR only (Blueprint
+publishes all of `public/bp/`, so the film is not put there).
+
+- `pages/P01.svelte`: the opening's `<video data-film>` with the two sources and the poster; "Watch the film" still opens
+  the brand film with sound.
+- Warm-up under the opening mark: the film streams from the first moment. The head script (`clips-first.js`) starts the
+  first screen's clip as soon as it can play, and the mark waits for it to be moving (`firstClipMoving`, at most 6s);
+  `heroes.json` gives Home's first picture as the film's first frame, decoded under the mark. Measured on Home at 1440
+  and 390, fast and on an 8 Mbit/s line: the film is asked for within 0.1s, and is playing (0.5–2s in) when the mark
+  leaves.
+- The next-page block that leads home (`next.ts`, door 1) shows the same film: `clip('vessyl-home')` gives a clip in
+  `/enhanced/clips/` with its own source and first frame (`components/Next.svelte` takes `src` and `poster` when a clip
+  has them, `/bp/video/<name>` otherwise).
+
+
+## Horses and the land: the three cards' photographs (owner, 2026-11-11)
+
+The frames gave Horses and the land's three cards (Groundwork, Trail ride, Short ride) the photographs of Sound and
+movement's three cards (a massage, headphones on a cushion in the Dome, a group stretching in the Dome), a copying slip.
+Each now shows a horse photograph from the property: Groundwork a woman standing with a white horse in the river
+(`ea5d3eb36b2031e294f0`), Trail ride a saddled horse on a forest trail (`bb39a8510ce86bcd65fd`), Short ride two riders on
+their horses in the shallow river (`55161e7692315fc7eac4`). Their copies for the screen's size are in `public/enhanced/photos/` (800, 1200, 1600), and their descriptions are written for this edition.

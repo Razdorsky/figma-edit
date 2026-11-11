@@ -8,13 +8,16 @@ import { msg } from '#lib/enhanced/i18n.ts';
 import { pages, type PageMeta } from '#lib/enhanced/site.ts';
 import photoWidths from '#lib/enhanced/photo-widths.json';
 
-type Media = { loop: string; mobile: string } | { photo: string; width: number; height: number; position?: string; srcset?: string; sizes: string };
+type Media = { loop: string; mobile: string; src?: string; poster?: string } | { photo: string; width: number; height: number; position?: string; srcset?: string; sizes: string };
 export type Door = { page: PageMeta; name: string; line: string; label: string; media: Media };
 
 // Every clip has a phone version (speed, stage 3, docs/figma-enhanced-speed.md): the ones cut for Blueprint sit beside
 // their clips in /bp/video/, the fifteen made for this edition in /enhanced/clips/.
 const enhancedPhone = new Set(['loop-benches', 'loop-dome', 'loop-halter', 'loop-handpan', 'loop-hearth', 'loop-plunge', 'loop-poolview', 'loop-river', 'loop-saddle', 'loop-stars', 'loop-studio', 'loop-swim', 'loop-tuning', 'loop-violin', 'loop-yoga']);
 const loop = (name: string): Media => ({ loop: name, mobile: enhancedPhone.has(name) ? `/enhanced/clips/${name}-m.mp4` : `/bp/video/${name}-m.mp4` });
+// Home's opening film since 2026-11-11 (owner): its own clip in /enhanced/clips/, shared with Figma PR, with its phone
+// version and first frame (docs/figma-enhanced-booking.md, "Home's film").
+const clip = (name: string): Media => ({ loop: name, mobile: `/enhanced/clips/${name}-m.mp4`, src: `/enhanced/clips/${name}.mp4`, poster: `/enhanced/clips/${name}.webp` });
 // position: the subject's place in the photograph, as that page crops it (focus.css).
 // Speed, stage 4: the photograph in sizes for the screen (public/enhanced/photos/, listed in photo-widths.json). The
 // frame (next.css) is 89% of the screen wide, at most 1680px, and 64svh tall below 900px, min(78svh, 56vw) above; the
@@ -32,7 +35,7 @@ const photo = (src: string, width: number, height: number, position?: string): M
 // Where you sleep (2) shows the owner's last frame of the map's film on that page, the property with the clouds gone
 // (2026-11-11), in place of the designer's aerial screenshot.
 const doors: Record<number, Omit<Door, 'page' | 'name'> & { name?: string }> = {
-  1: { name: msg('The Vessyl'), line: msg('A dome, a river and fourteen places to sleep, on 118 acres above Arenal.'), label: msg('Back to the home page'), media: loop('loop-pool') },
+  1: { name: msg('The Vessyl'), line: msg('A dome, a river and fourteen places to sleep, on 118 acres above Arenal.'), label: msg('Back to the home page'), media: clip('vessyl-home') },
   2: { line: msg('Fourteen units, spread across 118 acres.'), label: msg('See where you will sleep'), media: photo('7bb7e41047b306320263', 1579, 996) },
   3: { line: msg('Six villas, each facing something different, each far enough from the next that you will not hear anyone.'), label: msg('See the villas'), media: photo('2b61d0b9909a48665218', 2400, 1600) },
   7: { line: msg('You do not have to stay here to come here.'), label: msg('See the experiences'), media: loop('loop-experiences') },

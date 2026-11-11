@@ -317,3 +317,21 @@ Done in Figma Edit, Figma Enhanced and Figma PR alike, with the designer's own b
 - **The recording studio: "Who has worked here"**, the brief's last section, in the designer's text block (eyebrow
   "Credits", the brief's heading, and the line "TO SUPPLY: artist and project credits, confirmed by the property, with
   each artist's permission.", as the Weddings page shows its paperwork until the property supplies it).
+
+## Home's film (owner, 2026-11-11)
+
+Home's opening clip is the owner's film of the property, the same files as Figma Enhanced's (`public/enhanced/clips/
+vessyl-home.mp4`, `vessyl-home-m.mp4` for phones, first frame `vessyl-home.webp`; how they were made:
+`docs/figma-enhanced-booking.md`, "Home's film"), in place of the pool clip. It streams under the opening mark: the video
+loads from the start (`preload="auto"`), and the mark now also waits until enough of the first screen's clip has arrived
+to play on without stopping (`canplaythrough`, `interactions.js`; at most 6s, as before). Measured on Home at 1440 and
+390, fast and on an 8 Mbit/s line: the film is asked for within 0.1s and is playing (1–2s in) when the mark leaves.
+
+
+## Horses and the land: the three cards' photographs (owner, 2026-11-11)
+
+The frames gave Horses and the land's three cards (Groundwork, Trail ride, Short ride) the photographs of Sound and
+movement's three cards (a massage, headphones on a cushion in the Dome, a group stretching in the Dome), a copying slip.
+Each now shows a horse photograph from the property: Groundwork a woman standing with a white horse in the river
+(`ea5d3eb36b2031e294f0`), Trail ride a saddled horse on a forest trail (`bb39a8510ce86bcd65fd`), Short ride two riders on
+their horses in the shallow river (`55161e7692315fc7eac4`).

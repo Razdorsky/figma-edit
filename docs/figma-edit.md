@@ -130,3 +130,11 @@ Done in Figma Edit, Figma Enhanced and Figma PR alike, with the designer's own b
 - **The recording studio: "Who has worked here"**, the brief's last section, in the designer's text block (eyebrow
   "Credits", the brief's heading, and the line "TO SUPPLY: artist and project credits, confirmed by the property, with
   each artist's permission.", as the Weddings page shows its paperwork until the property supplies it).
+
+## Horses and the land: the three cards' photographs (owner, 2026-11-11)
+
+The frames gave Horses and the land's three cards (Groundwork, Trail ride, Short ride) the photographs of Sound and
+movement's three cards (a massage, headphones on a cushion in the Dome, a group stretching in the Dome), a copying slip.
+Each now shows a horse photograph from the property: Groundwork a woman standing with a white horse in the river
+(`ea5d3eb36b2031e294f0`), Trail ride a saddled horse on a forest trail (`bb39a8510ce86bcd65fd`), Short ride two riders on
+their horses in the shallow river (`55161e7692315fc7eac4`). Home's film (Figma Enhanced and Figma PR) is not used here, on the owner's word.
