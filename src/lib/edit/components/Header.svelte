@@ -57,7 +57,7 @@
     </button>
     <a class="brand" href={route(edition, '', base, locale)} aria-label={tr(locale, 'The Vessyl home')}>
       <img
-        src={asset(`/brand/${page.photo || edition === 'blueprint' ? 'logo-white.svg' : 'logo-copper.svg'}`)}
+        src={asset(`/brand/${page.photo ? 'logo-white.svg' : 'logo-copper.svg'}`)}
         width="210"
         height="39"
         alt="The Vessyl"
