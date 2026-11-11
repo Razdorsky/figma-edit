@@ -21,8 +21,8 @@ import path from 'node:path';
 
 const target = process.argv[2] || '';
 const edition = /^blueprint\d*$/.test(target) ? 'blueprint' : target;
-if (edition !== 'figma' && edition !== 'blueprint' && edition !== 'figma-enhanced' && edition !== 'figma-pr' && edition !== 'interactive-prototype') {
-  console.error('Usage: node scripts/build-pages.mjs figma|figma-enhanced|figma-pr|interactive-prototype|blueprint|blueprint<n>');
+if (edition !== 'figma' && edition !== 'blueprint' && edition !== 'figma-enhanced' && edition !== 'figma-pr' && edition !== 'figma-edit' && edition !== 'interactive-prototype') {
+  console.error('Usage: node scripts/build-pages.mjs figma|figma-enhanced|figma-pr|figma-edit|interactive-prototype|blueprint|blueprint<n>');
   process.exit(1);
 }
 

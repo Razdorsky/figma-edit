@@ -1,4 +1,4 @@
-// Every English string the Figma, Figma Enhanced and Figma PR editions show, for their Spanish dictionaries and the
+// Every English string the Figma, Figma Enhanced, Figma PR and Figma Edit editions show, for their Spanish dictionaries and the
 // coverage check (docs/figma-spanish.md, docs/figma-enhanced-spanish.md).
 //   node scripts/spanish-strings.mjs                    -> fails if a dictionary misses a string or keeps a stale one
 //   node scripts/spanish-strings.mjs --list <edition>   -> prints that edition's strings as JSON, in page order
@@ -26,6 +26,12 @@ const editions = {
     dirs: ['src/lib/pr', 'src/routes/figma-pr'],
     files: [],
     dictionary: 'src/lib/pr/content/es.json'
+  },
+  'figma-edit': {
+    pages: 'src/lib/edit/site-data.json',
+    dirs: ['src/lib/edit', 'src/routes/figma-edit'],
+    files: [],
+    dictionary: 'src/lib/edit/content/es.json'
   }
 };
 

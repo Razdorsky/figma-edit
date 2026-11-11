@@ -150,7 +150,7 @@
   "src/assets/patterns/fans.svg": "c29ee82df551dba191ee23164601c7c1c52ffad116d24878788f5b2d585cf02a",
   "src/data/media.json": "e9871f8ca527ed6e5648dbb8625375b4aa96b3d075b76ea80ebd5f04d96834bf",
   "src/figma.css": "720efbaae9d4cc71c24a08c9b27dcbe567581c0db6b4a304cd96a00beb096d9e",
-  "src/hooks.server.ts": "f367f5686b37148d8da3a5941fb9a354adeb858ae9d6ab6655d1499ae2ee0bc4",
+  "src/hooks.server.ts": "f50fc6197f409b4097d2255248a8adcbffdba0195330ad57491bc6c4a2f2b561",
   "src/lib/components/Footer.svelte": "194b8875d3c76154edeed239b3d7110b2634622de40cc12ee494fae96019ef45",
   "src/lib/components/Gallery.svelte": "93ee3b59c313e26232dff41f61a7a5c5cdaf9d4e9922ff74349535bd10925161",
   "src/lib/components/Header.svelte": "da22941892f95bee0d01ce9884a991b228fbc47a05ac181f650237de608465cb",

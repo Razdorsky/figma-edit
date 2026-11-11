@@ -1,0 +1,1048 @@
+/* Figma Edit: the frozen Figma edition's styles (a copy of src/figma.css; its base styles are styles/shared.css) for body[data-edition="figma-edit"]; docs/figma-edit.md. */
+/* Typefaces: by the owner's decision of 2026-11-07, headings are set in EB Garamond (SIL OFL 1.1, licence
+   beside the files) instead of the frames' Telugu MN Regular. Text stays in the frames' Roboto: Light 300
+   here, Regular, Medium, SemiBold and Bold from src/shared.css. The frames use no italics. */
+@font-face{font-family:Roboto;src:url('../fonts/roboto-300.woff2') format('woff2');font-weight:300;font-display:swap}
+@font-face{font-family:'EB Garamond';src:url('../fonts/eb-garamond-latin-wght-normal.woff2') format('woff2-variations');font-weight:400 800;font-style:normal;font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'EB Garamond';src:url('../fonts/eb-garamond-latin-ext-wght-normal.woff2') format('woff2-variations');font-weight:400 800;font-style:normal;font-display:swap;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+/* Faithful Website 2.0 edition. Every rule is scoped to this edition.
+   The common shell and the Blueprint edition own their separate styles. */
+/* Owner's request, 2026-11-07: page text cannot be selected (and src/lib/interactions.js blocks copy
+   and cut). Form fields stay selectable. -webkit-touch-callout hides the iOS long-press copy menu. */
+body[data-edition="figma-edit"] { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+body[data-edition="figma-edit"] :is(input, textarea) { -webkit-user-select: text; user-select: text; -webkit-touch-callout: default; }
+body[data-edition="figma-edit"] {
+  --font-display: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --figma-paper: #fff;
+  --figma-ink: #262626;
+  --figma-copper: #a2551b;
+  --figma-green: #364830;
+  --figma-beige: #f5ebe7;
+  background: var(--figma-paper);
+  color: var(--figma-ink);
+}
+
+body[data-edition="figma-edit"] .current-page {
+  width: 100%;
+  margin: 0;
+  background: var(--figma-paper);
+  overflow-wrap: break-word;
+}
+
+body[data-edition="figma-edit"] .current-page *,
+body[data-edition="figma-edit"] .current-page *::before,
+body[data-edition="figma-edit"] .current-page *::after { box-sizing: border-box; }
+
+body[data-edition="figma-edit"] .current-page :where(section, div, article, figure, dl) { min-width: 0; }
+body[data-edition="figma-edit"] .current-page :where(h1, h2, h3, p, figure, dl, dd) { margin: 0; }
+body[data-edition="figma-edit"] .current-page :where(p, dd, td) { font: 400 18px/30px var(--font-body); }
+body[data-edition="figma-edit"] .current-page :where(h1, h2, h3) { font-family: var(--font-display); font-weight: 400; }
+/* EB Garamond sets narrower than the frames' Telugu MN, so a heading can end on one word; avoid that. */
+body[data-edition="figma-edit"] :where(h1, h2, h3) { text-wrap: pretty; }
+/* Fact labels sit on one line in the frames. At their 4.48px tracking the browser also spaces out the
+   last letter, which Figma does not, so "LA FORTUNA" in Arenal's 127px column would wrap. From 1366px
+   labels do not wrap; below that the columns are too narrow, and labels wrap. */
+@media (min-width: 1366px) {
+  body[data-edition="figma-edit"] .current-page [data-role="facts"] [data-part="fact"] > p:first-child { white-space: nowrap; }
+}
+body[data-edition="figma-edit"] .current-page h1 { font-size: 52px; line-height: 60px; }
+body[data-edition="figma-edit"] .current-page h2 { font-size: 52px; line-height: 60px; }
+body[data-edition="figma-edit"] .current-page h3 { font-size: 32px; line-height: 1.4; }
+body[data-edition="figma-edit"] .current-page img { display: block; max-width: 100%; }
+body[data-edition="figma-edit"] .current-page [data-part="copy"] { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+body[data-edition="figma-edit"] .current-page [data-part="eyebrow"] {
+  color: var(--figma-copper);
+  font: 600 14px/20px var(--font-body);
+  letter-spacing: 4.48px;
+  text-transform: uppercase;
+}
+body[data-edition="figma-edit"] .current-page .current-lede { font-size: 22px; line-height: 32px; }
+body[data-edition="figma-edit"] .current-page [data-part="highlight"] { color: var(--figma-green); font-size: 20px; line-height: 24px; font-weight: 600; }
+body[data-edition="figma-edit"] .current-page [data-tone="beige"] { background: var(--figma-beige); }
+body[data-edition="figma-edit"] .current-page [data-part="media"] { position: relative; width: 100%; aspect-ratio: 16 / 10; }
+body[data-edition="figma-edit"] .current-page [data-part="media"] > img { width: 100%; height: 100%; object-fit: cover; }
+
+body[data-edition="figma-edit"] .current-page .current-action {
+  display: inline-flex;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 48px;
+  padding: 14px 24px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: var(--figma-green);
+  color: var(--figma-beige);
+  font: 500 16px/20px var(--font-body);
+  letter-spacing: .32px;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+}
+body[data-edition="figma-edit"] .current-page .current-action:hover { background: #24351f; }
+body[data-edition="figma-edit"] .current-page .current-action[data-name^="Link arrow button"] {
+  min-height: 36px;
+  padding: 8px 0;
+  background: transparent;
+  color: #733a11;
+}
+body[data-edition="figma-edit"] .current-page .current-action[data-name^="Link arrow button"]::after {
+  content: "";
+  flex: 0 0 12px;
+  width: 12px;
+  height: 12px;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 10 10 2M2 2h8v8' fill='none' stroke='black' stroke-width='1.3'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+body[data-edition="figma-edit"] .current-page :where(a, button):focus-visible { outline: 2px solid #a2551b; outline-offset: 5px; }
+body[data-edition="figma-edit"] .current-page [data-part="actions"] { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+body[data-edition="figma-edit"] .current-page [data-role="photo-hero"] {
+  position: relative;
+  display: grid;
+  align-items: end;
+  min-height: 700px;
+  isolation: isolate;
+  background: #262626;
+  color: #f5ebe7;
+}
+body[data-edition="figma-edit"] .current-page [data-part="hero-image"] { position: absolute; inset: 0; z-index: -2; }
+body[data-edition="figma-edit"] .current-page [data-part="hero-image"] img { width: 100%; height: 100%; object-fit: cover; }
+body[data-edition="figma-edit"] .current-page [data-role="photo-hero"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgb(0 0 0 / .8), rgb(0 0 0 / 0));
+}
+body[data-edition="figma-edit"] .current-page [data-part="hero-copy"] {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: 180px 100px 100px;
+}
+body[data-edition="figma-edit"] .current-page [data-part="hero-copy"] h1 { width: 540px; max-width: 100%; }
+body[data-edition="figma-edit"] .current-page [data-part="hero-copy"] p:not([data-part="eyebrow"]) { width: 574px; max-width: 100%; }
+body[data-edition="figma-edit"] .current-page [data-part="hero-copy"] [data-part="eyebrow"] { color: #d3a079; }
+body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"] { min-height: 860px; align-items: center; }
+body[data-edition="figma-edit"] .current-page[data-index="01"] [data-part="hero-copy"] { align-items: center; text-align: center; padding: 160px 100px 100px; gap: 40px; }
+body[data-edition="figma-edit"] .current-page[data-index="01"] [data-part="hero-copy"] h1 { width: 1144px; font-size: 60px; line-height: 64px; }
+body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"]::before { background: rgb(0 0 0 / .5); }
+
+body[data-edition="figma-edit"] .current-page [data-role="text-hero"] {
+  padding: 100px max(55px, calc((100vw - 1080px) / 2)) 54px;
+  text-align: center;
+}
+body[data-edition="figma-edit"] .current-page [data-role="text-hero"] > [data-part="copy"] { align-items: center; gap: 20px; }
+body[data-edition="figma-edit"] .current-page [data-role="text-hero"] :where(h1, h2) { max-width: 1080px; color: var(--figma-green); }
+body[data-edition="figma-edit"] .current-page [data-role="text-hero"] .current-lede { max-width: 1080px; }
+
+body[data-edition="figma-edit"] .current-page [data-role="split"] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 67px;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: 80px 55px;
+}
+body[data-edition="figma-edit"] .current-page [data-role="split"] > [data-part="copy"] { gap: 40px; }
+body[data-edition="figma-edit"] .current-page [data-role="split"] > [data-part="media"] { aspect-ratio: 603 / 638; border-radius: 10px; overflow: hidden; }
+body[data-edition="figma-edit"] .current-page [data-name="Section - 40/60 text image"] { grid-template-columns: minmax(0, 544fr) minmax(0, 662fr); }
+body[data-edition="figma-edit"] .current-page [data-name="Section - 60/40 text image"] { grid-template-columns: minmax(0, 662fr) minmax(0, 544fr); }
+body[data-edition="figma-edit"] .current-page [data-variant="description"] {
+  grid-template-columns: minmax(0, 724fr) minmax(0, 497fr);
+  align-items: start;
+  padding: 80px 100px;
+  gap: 40px;
+}
+body[data-edition="figma-edit"] .current-page [data-part="rate"] { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; border-radius: 10px; padding: 35px; background: var(--figma-beige); }
+body[data-edition="figma-edit"] .current-page [data-part="rate"] h2 { font-size: 28px; line-height: 38px; }
+body[data-edition="figma-edit"] .current-page [data-variant="description"] > [data-part="copy"] h2 { font-size: 32px; line-height: 1.4; }
+
+body[data-edition="figma-edit"] .current-page [data-role="cards"] { padding: 0 55px 45px; }
+body[data-edition="figma-edit"] .current-page [data-part="card-grid"] { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; gap: 45px; max-width: 1330px; margin-inline: auto; }
+body[data-edition="figma-edit"] .current-page [data-columns="2"] > [data-part="card-grid"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+body[data-edition="figma-edit"] .current-page [data-part="card"] { display: flex; flex-direction: column; min-width: 0; border-radius: 10px; background: #fff; }
+body[data-edition="figma-edit"] .current-page [data-part="card"] > [data-part="media"] { aspect-ratio: 400 / 251; overflow: hidden; border-radius: 10px 10px 0 0; }
+body[data-edition="figma-edit"] .current-page [data-columns="2"] [data-part="card"] > [data-part="media"] { aspect-ratio: 622 / 251; }
+body[data-edition="figma-edit"] .current-page [data-part="card"] > [data-part="copy"] { flex: 1; padding: 20px 30px 24px; gap: 10px; }
+body[data-edition="figma-edit"] .current-page [data-part="card"] h3 { color: var(--figma-green); }
+body[data-edition="figma-edit"] .current-page [data-part="card"] h3 a { color: inherit; text-decoration: none; }
+body[data-edition="figma-edit"] .current-page [data-part="card"] h3 a:hover { text-decoration: underline; text-underline-offset: .15em; text-decoration-thickness: 1px; }
+body[data-edition="figma-edit"] .current-page [data-part="card"] .current-action { margin-top: auto; }
+body[data-edition="figma-edit"] .current-page [data-part="card"] [data-part="actions"] { margin-top: auto; }
+body[data-edition="figma-edit"] .current-page [data-name="Room Card"],
+body[data-edition="figma-edit"] .current-page [data-name="50 card"] { box-shadow: 0 4px 10px rgb(49 21 0 / .2); }
+body[data-edition="figma-edit"] .current-page [data-name="Cards"] > [data-part="media"] { aspect-ratio: 424 / 320; border-radius: 10px; }
+body[data-edition="figma-edit"] .current-page [data-name="Cards"] > [data-part="copy"] { padding: 16px 8px 0; }
+
+body[data-edition="figma-edit"] .current-page :where([data-role="copy"], [data-role="quote"]) { padding: 80px 100px; text-align: center; }
+body[data-edition="figma-edit"] .current-page :where([data-role="copy"], [data-role="quote"]) > [data-part="copy"] { align-items: center; max-width: 1080px; margin-inline: auto; gap: 30px; }
+body[data-edition="figma-edit"] .current-page [data-role="copy"]:has(> [data-part="copy"] > [data-part="eyebrow"]:only-child) { padding-block: 80px; }
+body[data-edition="figma-edit"] .current-page [data-role="quote"] h2 { font-size: 36px; line-height: 46px; }
+body[data-edition="figma-edit"] .current-page [data-role="quote"] p:not([data-part="eyebrow"]) { font-size: 16px; line-height: 24px; }
+body[data-edition="figma-edit"] .current-page [data-role="quote"] [data-part="copy"] { gap: 20px; }
+
+body[data-edition="figma-edit"] .current-page [data-role="introduction"] { display: grid; grid-template-columns: minmax(0, 240px) minmax(0, 1fr); align-items: center; gap: 114px; padding: 150px max(55px, calc((100vw - 1259px) / 2)); }
+body[data-edition="figma-edit"] .current-page [data-role="introduction"] [data-part="artwork"] img { max-height: 440px; width: 240px; object-fit: contain; }
+body[data-edition="figma-edit"] .current-page .display-prose { font: 400 32px/1.4 var(--font-display); }
+body[data-edition="figma-edit"] .current-page [data-role="logos"] { padding: 35px 55px; }
+body[data-edition="figma-edit"] .current-page [data-role="logos"] [data-part="artwork"] { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 36px; max-width: 1330px; margin-inline: auto; }
+body[data-edition="figma-edit"] .current-page [data-role="logos"] img { width: 100px; max-width: 13%; max-height: 38px; object-fit: contain; }
+
+body[data-edition="figma-edit"] .current-page :where([data-role="overlay"], [data-role="gallery"]) { position: relative; display: flex; align-items: center; min-height: 800px; padding: 55px; isolation: isolate; background: #261101; color: #fff; }
+body[data-edition="figma-edit"] .current-page :where([data-role="overlay"], [data-role="gallery"]) > [data-part="media"] { position: absolute; inset: 0; z-index: -1; height: 100%; aspect-ratio: auto; }
+body[data-edition="figma-edit"] .current-page [data-role="overlay"] > [data-part="copy"] { width: 598px; max-width: 100%; padding: 50px; background: rgb(38 17 1 / .8); gap: 40px; }
+body[data-edition="figma-edit"] .current-page [data-name="Overlay panel rigth"] > [data-part="copy"] { margin-left: auto; }
+body[data-edition="figma-edit"] .current-page [data-role="overlay"] [data-part="eyebrow"] { color: #d3a079; }
+body[data-edition="figma-edit"] .current-page [data-role="overlay"] .current-action[data-name^="Link arrow button"] { color: #f5ebe7; }
+body[data-edition="figma-edit"] .current-page [data-role="gallery"] { min-height: 700px; }
+body[data-edition="figma-edit"] .current-page [data-part="gallery-open"] { position: absolute; right: 28px; bottom: 24px; padding: 12px 18px; border: 1px solid rgb(255 255 255 / .65); border-radius: 4px; background: rgb(38 17 1 / .6); color: #fff; font: 500 14px/20px var(--font-body); cursor: pointer; }
+
+body[data-edition="figma-edit"] .current-page :where([data-role="facts"], [data-role="amenities"]) { padding: 0 100px 80px; }
+body[data-edition="figma-edit"] .current-page [data-part="facts"] { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: start; gap: 40px; }
+body[data-edition="figma-edit"] .current-page [data-role="facts"] [data-part="fact"] { padding-top: 14px; border-top: 4px solid var(--figma-copper); }
+body[data-edition="figma-edit"] .current-page [data-role="facts"] [data-part="fact"] > :first-child { margin-bottom: 10px; }
+body[data-edition="figma-edit"] .current-page [data-role="facts"] [data-part="fact"] > p:first-child { color: var(--figma-copper); font-size: 14px; line-height: 20px; font-weight: 600; letter-spacing: 4.48px; text-transform: uppercase; }
+body[data-edition="figma-edit"] .current-page [data-role="facts"] h3 { color: var(--figma-copper); font-size: 28px; line-height: 38px; }
+body[data-edition="figma-edit"] .current-page [data-name="3 col info"] [data-part="facts"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+body[data-edition="figma-edit"] .current-page [data-name="included"] [data-part="facts"]:has(> :nth-child(4):last-child) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+body[data-edition="figma-edit"] .current-page [data-role="amenities"] [data-part="facts"] { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 35px; }
+body[data-edition="figma-edit"] .current-page [data-role="amenities"] dt { margin-bottom: 10px; }
+
+body[data-edition="figma-edit"] .current-page [data-role="comparison"] { padding: 80px 55px; }
+body[data-edition="figma-edit"] .current-page [data-part="table-scroll"] { max-width: 1330px; margin-inline: auto; }
+body[data-edition="figma-edit"] .current-page table { border-collapse: collapse; width: 100%; table-layout: fixed; text-align: left; }
+body[data-edition="figma-edit"] .current-page th { color: var(--figma-copper); padding: 15px 25px; border-bottom: 2px solid #dabfb6; font: 600 14px/20px var(--font-body); letter-spacing: 3px; text-transform: uppercase; }
+body[data-edition="figma-edit"] .current-page td { padding: 15px 25px; border-bottom: 1px solid #f5ebe7; vertical-align: middle; }
+body[data-edition="figma-edit"] .current-page td:first-child { font: 400 28px/38px var(--font-display); }
+body[data-edition="figma-edit"] .current-page th:nth-child(1) { width: 20%; }
+body[data-edition="figma-edit"] .current-page th:nth-child(2) { width: 14%; }
+body[data-edition="figma-edit"] .current-page th:nth-child(3) { width: 23%; }
+body[data-edition="figma-edit"] .current-page [data-role="map"] { position: relative; }
+body[data-edition="figma-edit"] .current-page [data-role="map"] [data-part="media"] { aspect-ratio: 1440 / 870; }
+body[data-edition="figma-edit"] .current-page [data-part="map-key"] { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; }
+body[data-edition="figma-edit"] .current-page [data-part="map-key"] li { position: absolute; padding: 5px 10px; border-radius: 104px; background: white; box-shadow: 0 4px 2px rgb(26 48 19 / .5); font: 400 13px/19px var(--font-body); }
+body[data-edition="figma-edit"] .current-page [data-part="map-key"] li:nth-child(1) { left: 68%; top: 17%; }
+body[data-edition="figma-edit"] .current-page [data-part="map-key"] li:nth-child(2) { left: 72.4%; top: 60.9%; }
+body[data-edition="figma-edit"] .current-page [data-part="map-key"] li:nth-child(3) { left: 62.5%; top: 47%; }
+body[data-edition="figma-edit"] .current-page [data-part="map-key"] li:nth-child(4) { left: 43.2%; top: 44.3%; }
+body[data-edition="figma-edit"] .current-page [data-part="map-key"] li:nth-child(5) { left: 56.3%; top: 80.2%; }
+body[data-edition="figma-edit"] .current-page [data-part="map-key"] li:nth-child(6) { left: 39.2%; top: 17.7%; }
+body[data-edition="figma-edit"] .current-page [data-part="map-key"] li:nth-child(7) { left: 19.9%; top: 54.7%; }
+
+body[data-edition="figma-edit"] .current-page [data-role="callout"] { padding: 80px max(55px, calc((100vw - 1150px) / 2)); background: #fff; }
+body[data-edition="figma-edit"] .current-page [data-part="callout-panel"] { display: flex; align-items: center; gap: 40px; width: 100%; padding: 55px; border-radius: 10px; background: var(--figma-beige); }
+body[data-edition="figma-edit"] .current-page [data-role="callout"] [data-part="copy"] { flex: 1 1 auto; max-width: 1000px; align-items: flex-start; text-align: left; }
+body[data-edition="figma-edit"] .current-page [data-role="callout"] h2 { font-size: 36px; line-height: 46px; }
+body[data-edition="figma-edit"] .current-page [data-role="callout"] [data-part="media"] { flex: 0 0 180px; aspect-ratio: 180 / 216; overflow: hidden; border-radius: 4px; }
+body[data-edition="figma-edit"] .current-page [data-role="callout"] [data-part="artwork"] { width: 130px; flex: 0 0 130px; }
+body[data-edition="figma-edit"] .current-page [data-role="callout"] [data-part="artwork"] img { width: 100%; }
+
+body[data-edition="figma-edit"] .current-page [data-role="events"] { padding: 30px 55px 80px; max-width: 1440px; margin-inline: auto; }
+body[data-edition="figma-edit"] .current-page [data-role="events"] > h2 { margin-bottom: 40px; font-size: 32px; line-height: 1.4; text-align: center; }
+body[data-edition="figma-edit"] .current-page [data-part="event"] { display: grid; grid-template-columns: .7fr 1.2fr 1.5fr 1fr auto; align-items: center; gap: 24px; padding: 24px; border-top: 1px solid #d3a079; }
+body[data-edition="figma-edit"] .current-page [data-part="event"] > :first-child { font-weight: 700; }
+
+@media (min-width: 1441px) {
+  body[data-edition="figma-edit"] .current-page [data-role="cards"] { padding-inline: max(55px, calc((100vw - 1330px) / 2)); }
+}
+
+@media (max-width: 1100px) {
+  body[data-edition="figma-edit"] .current-page :is([data-role="split"], [data-role="callout"]) { padding-inline: 40px; gap: 40px; }
+  body[data-edition="figma-edit"] .current-page :is([data-role="facts"], [data-role="amenities"]) { padding-inline: 40px; }
+  body[data-edition="figma-edit"] .current-page [data-part="hero-copy"] { padding-inline: 55px; }
+  body[data-edition="figma-edit"] .current-page [data-part="card-grid"] { gap: 24px; }
+  body[data-edition="figma-edit"] .current-page [data-role="cards"] { padding-inline: 40px; }
+  body[data-edition="figma-edit"] .current-page [data-part="card"] > [data-part="copy"] { padding-inline: 20px; }
+  body[data-edition="figma-edit"] .current-page [data-role="introduction"] { gap: 60px; padding: 100px 55px; grid-template-columns: 160px minmax(0, 1fr); }
+  body[data-edition="figma-edit"] .current-page [data-role="introduction"] [data-part="artwork"] img { width: 160px; }
+  body[data-edition="figma-edit"] .current-page [data-part="facts"] { gap: 24px; }
+  body[data-edition="figma-edit"] .current-page :is(h1, h2) { font-size: 44px; line-height: 52px; }
+  body[data-edition="figma-edit"] .current-page [data-part="event"] { grid-template-columns: .7fr 1fr 1.2fr; }
+}
+
+@media(min-width:761px) and (max-width:1100px){body[data-edition="figma-edit"] .current-page[data-index="01"] [data-part="hero-copy"] h1{font-size:44px;line-height:52px}}
+
+@media (max-width: 760px) {
+  body[data-edition="figma-edit"] .current-page h1 { font-size: 38px; line-height: 46px; }
+  body[data-edition="figma-edit"] .current-page h2 { font-size: 36px; line-height: 44px; }
+  body[data-edition="figma-edit"] .current-page h3 { font-size: 28px; line-height: 36px; }
+  body[data-edition="figma-edit"] .current-page :where(p, dd, td) { font-size: 17px; line-height: 28px; }
+  body[data-edition="figma-edit"] .current-page .current-lede { font-size: 19px; line-height: 29px; }
+  body[data-edition="figma-edit"] .current-page [data-part="eyebrow"] { font-size: 12px; line-height: 20px; letter-spacing: 2.8px; }
+  body[data-edition="figma-edit"] .current-page [data-role="photo-hero"] { min-height: 680px; min-height: max(640px, 85svh); }
+  body[data-edition="figma-edit"] .current-page [data-part="hero-copy"] { padding: 160px 16px 60px; gap: 20px; }
+  body[data-edition="figma-edit"] .current-page [data-part="hero-copy"] :where(h1, p) { width: 100%; }
+  body[data-edition="figma-edit"] .current-page [data-role="photo-hero"]::before { background: linear-gradient(90deg, rgb(0 0 0 / .65), rgb(0 0 0 / .1)), linear-gradient(0deg, rgb(0 0 0 / .38), transparent 80%); }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"] { min-height: 780px; min-height: max(720px, 94svh); }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] [data-part="hero-copy"] { padding: 160px 16px 60px; gap: 28px; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] [data-part="hero-copy"] h1 { font-size: 39px; line-height: 47px; }
+  body[data-edition="figma-edit"] .current-page [data-role="text-hero"] { padding: 72px 16px 44px; }
+  body[data-edition="figma-edit"] .current-page [data-role="text-hero"] [data-part="copy"] { gap: 20px; }
+  body[data-edition="figma-edit"] .current-page [data-role="split"] { grid-template-columns: minmax(0, 1fr); gap: 36px; padding: 56px 16px; }
+  body[data-edition="figma-edit"] .current-page [data-role="split"] > [data-part="copy"] { gap: 24px; }
+  body[data-edition="figma-edit"] .current-page [data-role="split"] > [data-part="media"] { aspect-ratio: 4 / 3; }
+  body[data-edition="figma-edit"] .current-page [data-variant="description"] { gap: 32px; }
+  body[data-edition="figma-edit"] .current-page [data-part="rate"] { padding: 28px 24px; width: 100%; }
+  body[data-edition="figma-edit"] .current-page [data-variant="description"] > [data-part="copy"] h2 { font-size: 28px; }
+  body[data-edition="figma-edit"] .current-page [data-role="cards"] { padding: 0 16px 36px; }
+  body[data-edition="figma-edit"] .current-page [data-part="card-grid"],
+  body[data-edition="figma-edit"] .current-page [data-columns="2"] > [data-part="card-grid"] { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  body[data-edition="figma-edit"] .current-page [data-part="card"] > [data-part="media"],
+  body[data-edition="figma-edit"] .current-page [data-columns="2"] [data-part="card"] > [data-part="media"] { aspect-ratio: 16 / 10; }
+  body[data-edition="figma-edit"] .current-page [data-part="card"] > [data-part="copy"] { padding: 22px 24px 24px; }
+  body[data-edition="figma-edit"] .current-page [data-name="Cards"] > [data-part="copy"] { padding-inline: 0; }
+  body[data-edition="figma-edit"] .current-page :where([data-role="copy"], [data-role="quote"]) { padding: 56px 16px; }
+  body[data-edition="figma-edit"] .current-page [data-role="copy"]:has(> [data-part="copy"] > [data-part="eyebrow"]:only-child) { padding-block: 44px; }
+  body[data-edition="figma-edit"] .current-page [data-role="quote"] h2 { font-size: 28px; line-height: 38px; }
+  body[data-edition="figma-edit"] .current-page [data-role="introduction"] { grid-template-columns: minmax(0, 1fr); gap: 40px; padding: 64px 16px; }
+  body[data-edition="figma-edit"] .current-page [data-role="introduction"] [data-part="artwork"] { display: flex; justify-content: center; }
+  body[data-edition="figma-edit"] .current-page [data-role="introduction"] [data-part="artwork"] img { width: 110px; max-height: 180px; }
+  body[data-edition="figma-edit"] .current-page .display-prose { font-size: 25px; line-height: 1.45; }
+  body[data-edition="figma-edit"] .current-page [data-role="logos"] { padding: 36px 16px; }
+  body[data-edition="figma-edit"] .current-page [data-role="logos"] [data-part="artwork"] { justify-content: center; gap: 30px 32px; }
+  body[data-edition="figma-edit"] .current-page [data-role="logos"] img { width: 100px; max-width: 25%; max-height: 34px; }
+  body[data-edition="figma-edit"] .current-page :where([data-role="overlay"], [data-role="gallery"]) { display: flex; flex-direction: column; align-items: stretch; min-height: 0; padding: 0; }
+  body[data-edition="figma-edit"] .current-page :where([data-role="overlay"], [data-role="gallery"]) > [data-part="media"] { position: relative; inset: auto; width: 100%; height: auto; aspect-ratio: 4 / 3; z-index: 0; }
+  body[data-edition="figma-edit"] .current-page [data-role="overlay"] > [data-part="copy"] { width: 100%; padding: 36px 16px 48px; gap: 24px; background: #261101; margin: 0; }
+  body[data-edition="figma-edit"] .current-page [data-role="overlay"][data-gallery] { padding-bottom: 64px; }
+  body[data-edition="figma-edit"] .current-page [data-part="gallery-open"] { right: 16px; bottom: 16px; }
+  body[data-edition="figma-edit"] .current-page :where([data-role="facts"], [data-role="amenities"]) { padding: 0 16px 56px; }
+  body[data-edition="figma-edit"] .current-page [data-part="facts"],
+  body[data-edition="figma-edit"] .current-page [data-name="3 col info"] [data-part="facts"],
+  body[data-edition="figma-edit"] .current-page [data-name="included"] [data-part="facts"]:has(> :nth-child(4):last-child),
+  body[data-edition="figma-edit"] .current-page [data-role="amenities"] [data-part="facts"] { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; }
+  body[data-edition="figma-edit"] .current-page [data-role="facts"] h3 { font-size: 25px; line-height: 34px; }
+  body[data-edition="figma-edit"] .current-page [data-role="comparison"] { padding: 44px 16px; }
+  body[data-edition="figma-edit"] .current-page table { display: block; table-layout: auto; }
+  body[data-edition="figma-edit"] .current-page thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  body[data-edition="figma-edit"] .current-page :where(tbody, tr) { display: block; width: 100%; }
+  body[data-edition="figma-edit"] .current-page tr { padding: 20px 0; border-top: 1px solid #dabfb6; }
+  body[data-edition="figma-edit"] .current-page td { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 16px; border: 0; padding: 8px 0; width: 100%; }
+  body[data-edition="figma-edit"] .current-page td::before { content: attr(data-label); color: var(--figma-copper); font: 600 11px/20px var(--font-body); letter-spacing: 1px; text-transform: uppercase; }
+  body[data-edition="figma-edit"] .current-page td:first-child { font-size: 26px; line-height: 34px; }
+  body[data-edition="figma-edit"] .current-page [data-part="map-key"] { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 20px 16px; }
+  body[data-edition="figma-edit"] .current-page [data-part="map-key"] li { position: static; border-radius: 4px; background: #f5ebe7; box-shadow: none; padding: 8px 10px; font-size: 12px; }
+  body[data-edition="figma-edit"] .current-page [data-role="callout"] { padding: 56px 16px; }
+  body[data-edition="figma-edit"] .current-page [data-part="callout-panel"] { flex-direction: column; align-items: flex-start; gap: 28px; padding: 28px 24px; }
+  body[data-edition="figma-edit"] .current-page [data-role="callout"] h2 { font-size: 28px; line-height: 38px; }
+  body[data-edition="figma-edit"] .current-page [data-role="callout"] [data-part="media"] { flex: none; width: min(100%, 180px); }
+  body[data-edition="figma-edit"] .current-page [data-role="events"] { padding: 0 16px 56px; }
+  body[data-edition="figma-edit"] .current-page [data-part="event"] { grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 24px 0; }
+  body[data-edition="figma-edit"] .current-page [data-part="event"] .current-action { margin-top: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-edition="figma-edit"] .current-page .current-action { transition: none; }
+}
+
+body[data-edition="figma-edit"] .current-page [data-role="quote"]{position:relative;isolation:isolate;overflow:clip}
+body[data-edition="figma-edit"] .current-page [data-role="quote"] [data-part="copy"] .display-prose{font-size:32px;line-height:1.4}
+body[data-edition="figma-edit"] .current-page [data-role="quote"] > [data-part="artwork"]{position:absolute;right:-140px;top:85px;width:470px;height:500px;z-index:-1;pointer-events:none}
+body[data-edition="figma-edit"] .current-page [data-role="quote"] > [data-part="artwork"] img{width:100%;height:100%;object-fit:contain}
+body[data-edition="figma-edit"] .current-page [data-role="quote"] [data-part="attribution"]{margin-top:40px}
+body[data-edition="figma-edit"] .current-page [data-role="quote"] [data-part="attribution"] p{font:400 22px/32px var(--font-body);margin:0}
+body[data-edition="figma-edit"] .current-page [data-role="quote"] [data-part="author-name"]{color:#a2551b;margin-bottom:10px}
+@media(max-width:760px){body[data-edition="figma-edit"] .current-page [data-role="quote"] [data-part="copy"] .display-prose{font-size:25px}}
+
+@media(max-width:760px){body[data-edition="figma-edit"] .current-page [data-role="gallery"]{min-height:0}}
+
+/* Website 2.0 fidelity pass, 2026-11-02. Values come from the archived
+   get_design_context code of the 13 frames and the shared library.
+   Colours and type apply at every width; frame geometry starts at 1101px. */
+body[data-edition="figma-edit"] .current-page :where(h1, h2, h3) { color: var(--figma-green); }
+body[data-edition="figma-edit"] .current-page [data-role="photo-hero"] h1 { color: var(--figma-beige); }
+body[data-edition="figma-edit"] .current-page [data-role="photo-hero"] .current-lede { color: #fff; }
+body[data-edition="figma-edit"] .current-page [data-role="overlay"] h2 { color: var(--figma-beige); }
+body[data-edition="figma-edit"] .current-page [data-part="rate"] h2,
+body[data-edition="figma-edit"] .current-page [data-name="Description and info 50/50"] > [data-part="copy"] h2 { color: var(--figma-ink); }
+body[data-edition="figma-edit"] .current-page [data-name="Description and info 50/50"] > [data-part="copy"] h2 { font-size: 28px; line-height: 38px; }
+body[data-edition="figma-edit"] .current-page [data-role="text-hero"] .current-lede,
+body[data-edition="figma-edit"] .current-page [data-name="copy block"] p { color: #1a3013; }
+body[data-edition="figma-edit"] .current-page [data-role="introduction"] .display-prose,
+body[data-edition="figma-edit"] .current-page [data-role="quote"] .display-prose { color: var(--figma-green); }
+body[data-edition="figma-edit"] .current-page [data-role="quote"] [data-part="attribution"] p:not([data-part="author-name"]) { color: var(--figma-green); }
+body[data-edition="figma-edit"] .current-page [data-role="events"] > h2 { color: var(--figma-copper); }
+body[data-edition="figma-edit"] .current-page [data-part="actions"] { gap: 4px; }
+
+/* Link arrow: Figma draws a 10px rotated corner, which reads as a chevron. */
+body[data-edition="figma-edit"] .current-page .current-action[data-name^="Link arrow button"] { gap: 5px; }
+body[data-edition="figma-edit"] .current-page .current-action[data-name^="Link arrow button"]::after {
+  flex-basis: 14px;
+  width: 14px;
+  height: 14px;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4.5 2 9.5 7l-5 5' fill='none' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E");
+}
+body[data-edition="figma-edit"] .current-page :is([data-role="split"], [data-role="copy"], [data-role="overlay"]) .current-action[data-name="Link arrow button"] { min-height: 48px; padding: 14px 24px; }
+body[data-edition="figma-edit"] .current-page .current-action[data-name="Link arrow button no margin"] { min-height: 48px; padding: 14px 0; color: var(--figma-green); }
+body[data-edition="figma-edit"] .current-page [data-part="card"] .current-action[data-name^="Link arrow button"] { padding: 8px 0; }
+
+/* Cards: room cards, half cards, offers and experience tiles. */
+body[data-edition="figma-edit"] .current-page [data-name="Room Card"] { border-radius: 11px; box-shadow: 0 0 10px rgb(49 21 0 / .2); }
+body[data-edition="figma-edit"] .current-page [data-name="50 card"] { border-radius: 11px; }
+body[data-edition="figma-edit"] .current-page [data-name="Room Card"] > [data-part="copy"] { padding: 20px; gap: 16px; }
+body[data-edition="figma-edit"] .current-page [data-name="50 card"] > [data-part="copy"] { padding: 20px 30px; gap: 10px; }
+body[data-edition="figma-edit"] .current-page [data-part="card"]:has(> [data-part="copy"] > p:first-child + h3) { position: relative; overflow: hidden; box-shadow: 0 4px 10px rgb(49 21 0 / .2); }
+body[data-edition="figma-edit"] .current-page [data-part="card"]:has(> [data-part="copy"] > p:first-child + h3) :is(h3, [data-part="highlight"]) { color: #733a11; }
+body[data-edition="figma-edit"] .current-page [data-part="card"] > [data-part="copy"] > p:first-child:has(+ h3) {
+  position: absolute;
+  top: 14px;
+  left: -17px;
+  z-index: 1;
+  width: 162px;
+  margin: 0;
+  background: #d57e3d;
+  color: #fff;
+  font: 700 18.7px/28.5px var(--font-body); /* WCAG large text: white on #d57e3d is 3.05:1 */
+  text-align: center;
+  transform: rotate(-30deg);
+  pointer-events: none;
+}
+body[data-edition="figma-edit"] .current-page [data-name="Cards"] > [data-part="media"] { aspect-ratio: 1; }
+body[data-edition="figma-edit"] .current-page [data-name="Cards"] > [data-part="copy"] { padding: 15px 0 0; gap: 0; }
+body[data-edition="figma-edit"] .current-page [data-name="Cards"] h3 { color: #1a3013; font-size: 26px; line-height: 38px; }
+body[data-edition="figma-edit"] .current-page [data-name="Cards"] p { font-size: 18px; line-height: 24px; }
+
+/* Facts rows: "included" uses a 2px rule and light values; "3 col info" keeps 4px. */
+body[data-edition="figma-edit"] .current-page [data-name="included"] [data-part="fact"] { border-top-width: 2px; padding-top: 20px; }
+body[data-edition="figma-edit"] .current-page [data-name="included"] [data-part="fact"] > :first-child { margin-bottom: 10px; letter-spacing: 4.48px; }
+body[data-edition="figma-edit"] .current-page [data-name="included"] [data-part="fact"] > :not(:first-child) { color: var(--figma-green); font-size: 20px; line-height: 24px; font-weight: 300; }
+body[data-edition="figma-edit"] .current-page [data-name="3 col info"] [data-part="fact"] { padding-top: 20px; }
+body[data-edition="figma-edit"] .current-page [data-name="3 col info"] [data-part="fact"] > :first-child { margin-bottom: 0; font-size: 32px; line-height: 1.4; }
+body[data-edition="figma-edit"] .current-page [data-name="3 col info"] [data-part="fact"] > :not(:first-child) { color: var(--figma-green); font-size: 22px; line-height: 32px; }
+
+/* Map key pills: white capsule, dark dot, 14px semibold green label. */
+body[data-edition="figma-edit"] .current-page [data-part="map-key"] li { display: flex; align-items: center; gap: 10px; color: var(--figma-green); }
+body[data-edition="figma-edit"] .current-page [data-part="map-key"] li::before { content: ""; flex: 0 0 11px; width: 11px; height: 11px; border-radius: 50%; background: #262626; }
+
+/* Gallery controls drawn as the frame's thin chevrons; the dots mark the slider. */
+body[data-edition="figma-edit"] .current-page :is([data-part="gallery-prev"], [data-part="gallery-next"]) {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #fff;
+  translate: 0 -50%;
+  cursor: pointer;
+}
+body[data-edition="figma-edit"] .current-page :is([data-part="gallery-prev"], [data-part="gallery-next"])::before {
+  content: "";
+  width: 41px;
+  height: 41px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  rotate: 45deg;
+  translate: 8px 0;
+}
+body[data-edition="figma-edit"] .current-page [data-part="gallery-next"]::before { rotate: -135deg; translate: -8px 0; }
+body[data-edition="figma-edit"] .current-page [data-part="gallery-prev"] { left: 40px; }
+body[data-edition="figma-edit"] .current-page [data-part="gallery-next"] { right: 40px; }
+body[data-edition="figma-edit"] .current-page [data-role="gallery"] [data-part="gallery-prev"] { left: 25px; top: 402px; }
+body[data-edition="figma-edit"] .current-page [data-role="gallery"] [data-part="gallery-next"] { right: 25px; top: 402px; }
+body[data-edition="figma-edit"] .current-page [data-part="gallery-dots"] { position: absolute; left: 50%; bottom: 20px; z-index: 2; display: flex; gap: 5px; translate: -50% 0; pointer-events: none; }
+body[data-edition="figma-edit"] .current-page [data-part="gallery-dots"] i { width: 11px; height: 11px; border: 1px solid #fff; border-radius: 50%; }
+body[data-edition="figma-edit"] .current-page [data-part="gallery-dots"] i:first-child { background: #fff; }
+
+/* Shared shell, Figma edition: 96px menu, EN | ES, 166px CTA, newsletter and footer. */
+body[data-edition="figma-edit"] .menu-lines { height: 13px; }
+body[data-edition="figma-edit"] .header-actions { gap: 20px; }
+body[data-edition="figma-edit"] .nav-book { width: 166px; padding: 8px 20px; font: 500 12px/20px var(--font-body); letter-spacing: .24px; text-align: center; }
+body[data-edition="figma-edit"][data-hero-theme="paper"] .site-header { color: var(--figma-copper); }
+body[data-edition="figma-edit"][data-hero-theme="paper"] .site-header .nav-book { background: var(--figma-copper); color: #fff; }
+body[data-edition="figma-edit"] .site-newsletter .newsletter-eyebrow { color: #dabfb6; font: 600 14px/20px var(--font-body); letter-spacing: 4.48px; margin: 0 0 20px; }
+body[data-edition="figma-edit"] .current-page .site-newsletter h2 { color: #fff; font-size: 36px; line-height: 46px; margin: 0; }
+body[data-edition="figma-edit"] .current-page .site-newsletter p:not(.newsletter-eyebrow, .newsletter-status) { color: #fff; }
+body[data-edition="figma-edit"] .newsletter-form input { padding: 14px 24px; font: 600 16px/24px var(--font-body); }
+body[data-edition="figma-edit"] .newsletter-form input::placeholder { color: #ced2d8; opacity: 1; }
+body[data-edition="figma-edit"] .newsletter-form button { padding: 14px 24px; background: var(--figma-green); color: #fff; font: 500 16px/20px var(--font-body); letter-spacing: .32px; }
+body[data-edition="figma-edit"] .newsletter-events .newsletter-form button { background: var(--figma-beige); color: #121310; }
+
+@media (min-width: 761px) {
+  body[data-edition="figma-edit"][data-hero-theme="photo"] .site-header { background: none; }
+  body[data-edition="figma-edit"] .site-footer { padding: 0; font-size: 18px; line-height: 25px; }
+  body[data-edition="figma-edit"] .footer-inner { max-width: 1440px; }
+  body[data-edition="figma-edit"] .footer-top { min-height: 120px; margin: 0; padding: 30px 55px; }
+  body[data-edition="figma-edit"] .footer-top .brand img { width: 166px; }
+  body[data-edition="figma-edit"] .footer-columns { display: flex; justify-content: flex-end; gap: 40px; margin: 0; padding: 60px 0; }
+  body[data-edition="figma-edit"] .footer-group { flex: 0 1 210px; min-width: 0; }
+  body[data-edition="figma-edit"] .footer-group:first-child { flex-basis: 160px; }
+  body[data-edition="figma-edit"] .footer-group h2 { margin: 0 0 22px; color: #d3a079; font: 600 14px/20px var(--font-body); letter-spacing: 4.48px; }
+  body[data-edition="figma-edit"] .footer-group > :is(a, button) { margin: 0 0 25px; font-size: 18px; line-height: 25px; opacity: 1; }
+  body[data-edition="figma-edit"] .footer-group h2 a { font: inherit; }
+  body[data-edition="figma-edit"] .footer-group > :last-child { margin-bottom: 0; }
+  body[data-edition="figma-edit"] .footer-bottom { min-height: 100px; align-items: center; padding: 0 55px; border-top: 0; font-size: 14px; line-height: 20px; }
+}
+
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .site-header .header-inner { padding-inline: 55px; }
+
+  body[data-edition="figma-edit"] .site-newsletter { display: flex; align-items: center; min-height: 300px; padding: 0 140px; }
+  body[data-edition="figma-edit"] .newsletter-inner { display: flex; justify-content: space-between; align-items: center; gap: 40px; width: 100%; max-width: none; }
+  body[data-edition="figma-edit"] .newsletter-inner > div { flex: 0 1 544px; }
+  body[data-edition="figma-edit"] .newsletter-form { position: relative; display: flex; gap: 20px; flex: 0 0 auto; }
+  body[data-edition="figma-edit"] .newsletter-form input { width: 366px; height: 48px; }
+  body[data-edition="figma-edit"] .newsletter-status { position: absolute; top: 100%; left: 0; margin-top: 8px; }
+  body[data-edition="figma-edit"] .current-page .newsletter-events { margin: 0 55px; border-radius: 10px; overflow: hidden; }
+
+  /* Openings */
+  body[data-edition="figma-edit"] .current-page[data-index="01"] [data-part="hero-copy"] { min-height: 860px; justify-content: center; padding: 96px 148px; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"] [data-part="actions"] { gap: 2px; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"] .current-action { min-height: 60px; padding: 20px 30px; border-radius: 0; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"] .current-action:first-child { border-radius: 8px 0 0 8px; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"] .current-action:last-child { border-radius: 0 8px 8px 0; }
+  body[data-edition="figma-edit"] .current-page [data-role="text-hero"] { display: flex; flex-direction: column; justify-content: center; min-height: 268px; padding: 0 180px; }
+  body[data-edition="figma-edit"] .current-page [data-role="text-hero"]:first-child { min-height: 546px; padding-top: 196px; }
+  body[data-edition="figma-edit"] .current-page[data-index="06"] [data-role="text-hero"]:first-child { min-height: 504px; }
+  body[data-edition="figma-edit"] .current-page[data-index="07"] [data-role="text-hero"]:first-child { min-height: 452px; }
+  body[data-edition="figma-edit"] .current-page[data-index="07"] [data-role="text-hero"]:not(:first-child) { min-height: 314px; }
+  body[data-edition="figma-edit"] .current-page[data-index="13"] [data-role="text-hero"]:first-child { min-height: 544px; }
+
+  /* Symbol + Text: the right half of the symbol sits on the left edge. */
+  body[data-edition="figma-edit"] .current-page [data-role="introduction"] { grid-template-columns: 235px minmax(0, 905px); column-gap: clamp(60px, 10.42vw, 150px); min-height: 800px; padding: 0 clamp(55px, 10.49vw, 151px) 0 0; }
+  body[data-edition="figma-edit"] .current-page [data-role="introduction"] [data-part="artwork"] { width: 235px; height: 470px; overflow: hidden; }
+  body[data-edition="figma-edit"] .current-page [data-role="introduction"] [data-part="artwork"] img { width: 470px; max-width: none; height: 470px; max-height: none; margin-left: -235px; }
+  body[data-edition="figma-edit"] .current-page [data-role="introduction"] [data-part="copy"] { gap: 44.8px; }
+
+  /* Editorial splits */
+  body[data-edition="figma-edit"] .current-page [data-role="split"][data-variant="editorial"] { min-height: 800px; padding-block: 0; }
+  body[data-edition="figma-edit"] .current-page [data-name="Section - 40/60 text image"] { grid-template-columns: minmax(0, 496fr) minmax(0, 767fr); }
+  body[data-edition="figma-edit"] .current-page [data-name="Section - 60/40 text image"] { grid-template-columns: minmax(0, 767fr) minmax(0, 496fr); }
+  body[data-edition="figma-edit"] .current-page :is([data-name="Section - 40/60 text image"], [data-name="Section - 60/40 text image"]) > [data-part="media"] { aspect-ratio: 767 / 512; }
+  body[data-edition="figma-edit"] .current-page [data-name="Section - 50/50 text image"] { grid-template-columns: minmax(0, 496fr) minmax(0, 541fr); }
+  body[data-edition="figma-edit"] .current-page [data-name="Section - 50/50 image text"] { grid-template-columns: minmax(0, 541fr) minmax(0, 496fr); }
+  body[data-edition="figma-edit"] .current-page :is([data-name="Section - 50/50 text image"], [data-name="Section - 50/50 image text"]) { padding-inline: max(55px, calc((100% - 1104px) / 2)); }
+  body[data-edition="figma-edit"] .current-page :is([data-name="Section - 50/50 text image"], [data-name="Section - 50/50 image text"]) > [data-part="media"] { aspect-ratio: 541 / 644; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] [data-name="Section - 50/50 text image"] { min-height: 900px; }
+  body[data-edition="figma-edit"] .current-page[data-index="12"] [data-name="Section - 50/50 image text"] { min-height: 690px; }
+  body[data-edition="figma-edit"] .current-page :is([data-role="split"][data-variant="editorial"], [data-role="overlay"]) [data-part="copy"] > p:not([data-part="eyebrow"]):has(+ [data-part="actions"]) { margin-bottom: 30px; }
+
+  /* Description rows */
+  body[data-edition="figma-edit"] .current-page [data-name="Description and info 60/40"] { gap: 19px; }
+  body[data-edition="figma-edit"] .current-page [data-name="Description and info 60/40"] > [data-part="copy"] { gap: 40px; }
+  body[data-edition="figma-edit"] .current-page [data-name="Description and info 60/40"] > [data-part="copy"] .current-lede { max-width: 666px; color: var(--figma-ink); }
+  body[data-edition="figma-edit"] .current-page [data-name="Description and info 50/50"] { grid-template-columns: minmax(0, 538fr) minmax(0, 608fr); gap: 92px; }
+  body[data-edition="figma-edit"] .current-page [data-name="Description and info 50/50"] > [data-part="copy"] { gap: 40px; }
+
+  /* Overlay panels and the slider */
+  body[data-edition="figma-edit"] .current-page [data-role="overlay"] { min-height: 800px; padding: 55px; }
+  body[data-edition="figma-edit"] .current-page [data-role="overlay"] > [data-part="copy"] { justify-content: center; min-height: 690px; padding: 10px 50px; }
+  body[data-edition="figma-edit"] .current-page [data-name="Slider with overlay"] { padding-left: 114px; }
+  body[data-edition="figma-edit"] .current-page [data-name="Slider with overlay"] [data-part="copy"] > p + p { margin-top: 20px; }
+
+  /* Collections */
+  body[data-edition="figma-edit"] .current-page [data-name="Price and offers"] [data-part="card-grid"] { grid-template-columns: repeat(3, minmax(0, 400px)); justify-content: center; max-width: none; }
+  body[data-edition="figma-edit"] .current-page [data-name="Price and offers"] [data-part="card"] { min-height: 540px; }
+  body[data-edition="figma-edit"] .current-page [data-name="Price and offers"] [data-part="card"] > [data-part="media"] { aspect-ratio: 400 / 250; }
+  body[data-edition="figma-edit"] .current-page [data-columns="2"] > [data-part="card-grid"] { grid-template-columns: repeat(2, minmax(0, 623px)); justify-content: center; max-width: none; }
+  body[data-edition="figma-edit"] .current-page [data-name="50 card"] { min-height: 540px; }
+  body[data-edition="figma-edit"] .current-page [data-name="2 Rooms cards"][data-tone="beige"] { min-height: 635px; }
+  body[data-edition="figma-edit"] .current-page [data-name^="Card Grid"] { padding: 10px 0 0; }
+  body[data-edition="figma-edit"] .current-page [data-name^="Card Grid"] [data-part="card-grid"] { grid-template-columns: repeat(3, minmax(0, 400px)); justify-content: space-between; gap: 0; max-width: 1262px; }
+  body[data-edition="figma-edit"] .current-page [data-name="copy block"] { display: flex; flex-direction: column; justify-content: center; min-height: 244px; padding: 0 180px; }
+  body[data-edition="figma-edit"] .current-page [data-name="copy block"] > [data-part="copy"] { gap: 20px; }
+  body[data-edition="figma-edit"] .current-page[data-index="07"] [data-name="copy block"] { min-height: 192px; }
+
+  /* Heading title, quote and callout */
+  body[data-edition="figma-edit"] .current-page [data-name="Heading title"] { padding: 80px 194px; }
+  body[data-edition="figma-edit"] .current-page [data-name="Heading title"] h2 { font-size: 36px; line-height: 46px; }
+  body[data-edition="figma-edit"] .current-page[data-index="13"] [data-name="Heading title"] h2 { font-size: 28px; line-height: 38px; }
+  body[data-edition="figma-edit"] .current-page [data-role="quote"] { display: flex; flex-direction: column; justify-content: center; min-height: 670px; padding: 0 167px; }
+  body[data-edition="figma-edit"] .current-page [data-role="quote"] [data-part="copy"] { gap: 60px; max-width: none; }
+  body[data-edition="figma-edit"] .current-page [data-role="quote"] [data-part="attribution"] { margin-top: 0; }
+  body[data-edition="figma-edit"] .current-page [data-role="quote"] > [data-part="artwork"] { top: 100px; right: -235px; width: 470px; height: 470px; }
+  body[data-edition="figma-edit"] .current-page [data-role="callout"] { display: flex; align-items: center; min-height: 445px; padding: 0 145px; }
+  body[data-edition="figma-edit"] .current-page[data-index="06"] [data-role="callout"] { min-height: 474px; }
+  body[data-edition="figma-edit"] .current-page[data-index="09"] [data-role="callout"] { min-height: 461px; }
+
+  /* Facts, amenities, comparison, map, events */
+  body[data-edition="figma-edit"] .current-page [data-name="included"] { padding: 0 115px; }
+  body[data-edition="figma-edit"] .current-page [data-name="included"] [data-part="facts"] { display: flex; justify-content: space-between; gap: 24px; }
+  body[data-edition="figma-edit"] .current-page [data-name="included"] [data-part="fact"] { flex: 0 1 217px; min-height: 96px; }
+  body[data-edition="figma-edit"] .current-page [data-name="3 col info"] { padding: 0 115px; }
+  body[data-edition="figma-edit"] .current-page [data-name="3 col info"] [data-part="facts"] { grid-template-columns: repeat(3, minmax(0, 370px)); justify-content: space-between; gap: 0; }
+  body[data-edition="figma-edit"] .current-page [data-name="3 col info"] [data-part="fact"] { min-height: 130px; }
+  body[data-edition="figma-edit"] .current-page [data-role="amenities"] { padding: 15px 52px 95px 100px; }
+  body[data-edition="figma-edit"] .current-page [data-role="amenities"] [data-part="facts"] { grid-template-columns: repeat(4, minmax(0, 275px)); justify-content: space-between; gap: 50px 0; }
+  body[data-edition="figma-edit"] .current-page [data-role="comparison"] table { table-layout: fixed; }
+  body[data-edition="figma-edit"] .current-page [data-role="comparison"] th { padding: 10px 0; letter-spacing: 4.48px; }
+  body[data-edition="figma-edit"] .current-page [data-role="comparison"] td { padding: 15px 0; }
+  body[data-edition="figma-edit"] .current-page [data-role="comparison"] :is(th, td):first-child { padding-left: 50px; }
+  body[data-edition="figma-edit"] .current-page [data-role="comparison"] th:nth-child(1) { width: 275px; }
+  body[data-edition="figma-edit"] .current-page [data-role="comparison"] th:nth-child(2) { width: 185px; }
+  body[data-edition="figma-edit"] .current-page [data-role="comparison"] th:nth-child(3) { width: 267px; }
+  body[data-edition="figma-edit"] .current-page [data-role="comparison"] th:nth-child(4) { width: auto; }
+  body[data-edition="figma-edit"] .current-page [data-role="comparison"] td:first-child { font-size: 20px; line-height: 38px; }
+  body[data-edition="figma-edit"] .current-page [data-role="comparison"] tr:last-child td { border-bottom: 0; }
+  body[data-edition="figma-edit"] .current-page [data-role="map"] { padding-top: 70px; }
+  body[data-edition="figma-edit"] .current-page [data-role="map"] [data-part="media"] { aspect-ratio: 1440 / 800; }
+  body[data-edition="figma-edit"] .current-page [data-part="map-key"] li { height: 29px; padding: 0 10px; border-radius: 104px; box-shadow: none; filter: drop-shadow(0 4px 2px rgb(26 48 19 / .5)); font: 600 14px/20px var(--font-body); }
+  body[data-edition="figma-edit"] .current-page [data-role="events"] { min-height: 551px; padding: 0 55px 94px; }
+  body[data-edition="figma-edit"] .current-page [data-role="events"] > h2 { margin-bottom: 40px; text-align: left; }
+  body[data-edition="figma-edit"] .current-page [data-part="event"] { grid-template-columns: 123fr 319fr 491fr 230fr auto; gap: 0; min-height: 93px; padding: 15px 50px; }
+  body[data-edition="figma-edit"] .current-page [data-part="event"] > :nth-child(2) { font-weight: 600; }
+}
+
+/* Second fidelity pass: text measures, fact widths, slider chevrons, pattern scale, photo framing. */
+body[data-edition="figma-edit"] .current-page [data-role="photo-hero"] [data-part="hero-image"] { overflow: hidden; }
+body[data-edition="figma-edit"] .current-page:is([data-index="03"], [data-index="05"]) [data-part="hero-image"] img { object-position: 50% 0; }
+body[data-edition="figma-edit"] .current-page[data-index="04"] [data-part="hero-image"] img { object-position: 50% 75.3%; }
+body[data-edition="figma-edit"] .current-page[data-index="10"] [data-part="hero-image"] img { object-position: 50% 36.4%; }
+body[data-edition="figma-edit"] .current-page[data-index="11"] [data-part="hero-image"] img { object-position: 50% 100%; }
+body[data-edition="figma-edit"] .current-page [data-role="quote"] .display-prose + .display-prose { margin-top: -20px; }
+body[data-edition="figma-edit"] .current-page [data-role="callout"] [data-part="copy"] > :not([data-part="eyebrow"], [data-part="actions"]) { max-width: 714px; }
+body[data-edition="figma-edit"] .current-page[data-index="06"] [data-role="callout"] p[data-part="paragraph"] { color: var(--figma-green); font-size: 22px; line-height: 32px; }
+body[data-edition="figma-edit"] .current-page [data-name="50 card"] > [data-part="copy"] { padding-bottom: 32px; }
+body[data-edition="figma-edit"] .current-page [data-part="term"] { display: block; color: var(--figma-ink); font: 400 28px/38px var(--font-display); }
+body[data-edition="figma-edit"] .current-page [data-name="Slider with overlay"] :is([data-part="gallery-prev"], [data-part="gallery-next"]) { color: #311500; }
+body[data-edition="figma-edit"] .current-page [data-part="gallery-dots"] i { display: block; }
+body[data-edition="figma-edit"] .site-newsletter { background-size: 1440px auto; background-position: 50% 0; }
+
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page [data-role="quote"] .display-prose + .display-prose { margin-top: -60px; }
+  body[data-edition="figma-edit"] .current-page [data-part="gallery-prev"] { left: 30px; }
+  body[data-edition="figma-edit"] .current-page [data-name="included"] [data-part="fact"]:last-child { flex-basis: 304px; }
+  body[data-edition="figma-edit"] .current-page [data-name="included"] [data-part="fact"]:nth-child(2):nth-last-child(4) { flex-basis: 127px; }
+  body[data-edition="figma-edit"] .current-page[data-index="08"] [data-name="Description and info 60/40"] > [data-part="copy"] { gap: 32px; }
+  body[data-edition="figma-edit"] .current-page[data-index="08"] [data-name="Description and info 60/40"] > [data-part="copy"] > [data-part="eyebrow"] { margin-bottom: 8px; }
+  body[data-edition="figma-edit"] .current-page[data-index="08"] [data-name="Description and info 60/40"] > [data-part="copy"] > p:not([data-part="eyebrow"]) { max-width: 666px; color: var(--figma-ink); font-size: 22px; line-height: 32px; }
+
+  /* Photo framing generated from the frames' image-fill crops (tools/crops.py, scratch only). */
+  body[data-edition="figma-edit"] .current-page[data-index="01"] > :nth-child(1) img[src$="/e8e1d1c262ffea471760.webp"] { position: absolute; inset: auto; width: 113.85%; height: auto; min-width: 0; max-width: none; left: -6.93%; top: 0.00%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] > :nth-child(4) img[src$="/81536a0be9ccf3efc5a4.webp"] { position: absolute; inset: auto; width: 120.10%; height: auto; min-width: 0; max-width: none; left: -18.16%; top: -0.04%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] > :nth-child(6) img[src$="/81f157d1df8ad03594c6.webp"] { position: absolute; inset: auto; width: 100.00%; height: auto; min-width: 0; max-width: none; left: 0.00%; top: -16.69%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] > :nth-child(7) img[src$="/bfa86c72291543bb877a.webp"] { position: absolute; inset: auto; width: 324.35%; height: auto; min-width: 0; max-width: none; left: -166.69%; top: -43.16%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] > :nth-child(7) img[src$="/ff4ec2454b6182720297.webp"] { position: absolute; inset: auto; width: 136.52%; height: auto; min-width: 0; max-width: none; left: -22.77%; top: -2.29%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] > :nth-child(9) img[src$="/d0b94379dbbf70b5d921.webp"] { position: absolute; inset: auto; width: 150.29%; height: auto; min-width: 0; max-width: none; left: -16.91%; top: -55.42%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] > :nth-child(10) img[src$="/81536a0be9ccf3efc5a4.webp"] { position: absolute; inset: auto; width: 120.10%; height: auto; min-width: 0; max-width: none; left: -18.16%; top: -0.04%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] > :nth-child(11) img[src$="/9772fed083830cf825f9.webp"] { position: absolute; inset: auto; width: 100.05%; height: auto; min-width: 0; max-width: none; left: -0.02%; top: -26.10%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="03"] > :nth-child(6) img[src$="/38bd44acd09f7a1caa67.webp"] { position: absolute; inset: auto; width: 100.00%; height: auto; min-width: 0; max-width: none; left: 0.00%; top: -165.41%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="04"] > :nth-child(6) img[src$="/fdd181b05dbb6040950f.webp"] { position: absolute; inset: auto; width: 100.00%; height: auto; min-width: 0; max-width: none; left: 0.00%; top: -32.61%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="05"] > :nth-child(4) img[src$="/ee15d395b3c7cb628797.webp"] { position: absolute; inset: auto; width: 100.00%; height: auto; min-width: 0; max-width: none; left: 0.00%; top: -23.92%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="05"] > :nth-child(6) img[src$="/38bd44acd09f7a1caa67.webp"] { position: absolute; inset: auto; width: 100.00%; height: auto; min-width: 0; max-width: none; left: 0.00%; top: -165.41%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="05"] > :nth-child(6) img[src$="/fdd181b05dbb6040950f.webp"] { position: absolute; inset: auto; width: 100.00%; height: auto; min-width: 0; max-width: none; left: 0.00%; top: -32.61%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="06"] > :nth-child(2) img[src$="/38bd44acd09f7a1caa67.webp"] { position: absolute; inset: auto; width: 100.00%; height: auto; min-width: 0; max-width: none; left: 0.13%; top: -89.81%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="06"] > :nth-child(3) [data-part="card"]:nth-child(1) img[src$="/0ef67cbaf17027aee6cb.webp"] { position: absolute; inset: auto; width: 104.79%; height: auto; min-width: 0; max-width: none; left: -2.21%; top: -46.03%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="06"] > :nth-child(3) [data-part="card"]:nth-child(2) img[src$="/0ef67cbaf17027aee6cb.webp"] { position: absolute; inset: auto; width: 104.79%; height: auto; min-width: 0; max-width: none; left: -2.21%; top: -46.03%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="07"] > :nth-child(2) img[src$="/81f157d1df8ad03594c6.webp"] { position: absolute; inset: auto; width: 100.00%; height: auto; min-width: 0; max-width: none; left: 0.00%; top: -16.69%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="07"] > :nth-child(3) img[src$="/bfa86c72291543bb877a.webp"] { position: absolute; inset: auto; width: 324.35%; height: auto; min-width: 0; max-width: none; left: -166.69%; top: -43.16%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="07"] > :nth-child(3) img[src$="/ff4ec2454b6182720297.webp"] { position: absolute; inset: auto; width: 136.52%; height: auto; min-width: 0; max-width: none; left: -22.77%; top: -2.29%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="08"] > :nth-child(6) img[src$="/5d6a60bd75812dff113a.webp"] { position: absolute; inset: auto; width: 100.20%; height: auto; min-width: 0; max-width: none; left: 0.08%; top: -58.96%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="08"] > :nth-child(6) img[src$="/f5ec5ec1897cef56ade3.webp"] { position: absolute; inset: auto; width: 104.92%; height: auto; min-width: 0; max-width: none; left: -2.43%; top: -121.91%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="09"] > :nth-child(5) img[src$="/74d24d2bc43b341ebc91.webp"] { position: absolute; inset: auto; width: 191.70%; height: auto; min-width: 0; max-width: none; left: -45.85%; top: 10.65%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="10"] > :nth-child(4) img[src$="/46c02cfc7ce0c5cd9c65.webp"] { position: absolute; inset: auto; width: 219.48%; height: auto; min-width: 0; max-width: none; left: -47.65%; top: 0.00%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="11"] > :nth-child(4) img[src$="/c9f36f747db728e9734c.webp"] { position: absolute; inset: auto; width: 100.05%; height: auto; min-width: 0; max-width: none; left: -0.02%; top: -9.02%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="12"] > :nth-child(4) img[src$="/bb39a8510ce86bcd65fd.webp"] { position: absolute; inset: auto; width: 211.62%; height: auto; min-width: 0; max-width: none; left: -40.49%; top: 0.06%; min-width: 100%; min-height: 100%; object-fit: cover; }
+  body[data-edition="figma-edit"] .current-page[data-index="12"] > :nth-child(6) img[src$="/55161e7692315fc7eac4.webp"] { position: absolute; inset: auto; width: 100.00%; height: auto; min-width: 0; max-width: none; left: 0.00%; top: -96.57%; min-width: 100%; min-height: 100%; object-fit: cover; }
+}
+body[data-edition="figma-edit"] .current-page :is([data-role="overlay"], [data-role="gallery"]) > [data-part="media"] { overflow: hidden; }
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page [data-name="included"] { min-height: 100px; }
+  body[data-edition="figma-edit"] .current-page[data-index="08"] [data-name="included"] { min-height: 182px; }
+  body[data-edition="figma-edit"] .current-page[data-index="12"] [data-name="included"] { min-height: 178px; }
+  body[data-edition="figma-edit"] .current-page[data-index="09"] [data-part="rate"] p[data-part="paragraph"] { margin-bottom: 30px; }
+}
+body[data-edition="figma-edit"] .current-page [data-role="text-hero"] [data-part="copy"] > p:not([data-part="eyebrow"]) { max-width: 1080px; color: #1a3013; font-size: 22px; line-height: 32px; }
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page [data-name="Price and offers"] img[src$="/38bd44acd09f7a1caa67.webp"] { position: absolute; inset: auto; width: 100%; height: auto; max-width: none; left: .13%; top: -89.81%; min-width: 100%; min-height: 100%; object-fit: cover; }
+}
+@media (max-width: 760px) {
+  body[data-edition="figma-edit"] .current-page [data-role="text-hero"] [data-part="copy"] > p:not([data-part="eyebrow"]) { font-size: 19px; line-height: 29px; }
+}
+
+@media (min-width: 681px) {
+  body[data-edition="figma-edit"] .site-header .brand img { width: 166px; }
+  body[data-edition="figma-edit"] .menu-toggle { font-size: 13px; line-height: 20px; letter-spacing: .26px; }
+  body[data-edition="figma-edit"] .language-trigger { padding: 0; font: 600 16px/24px var(--font-body); }
+}
+@media (max-width: 680px) {
+  body[data-edition="figma-edit"] .language-trigger { font-weight: 600; }
+}
+@media (max-width: 760px) {
+  body[data-edition="figma-edit"] .current-page :is([data-role="overlay"], [data-role="gallery"]) :is([data-part="gallery-prev"], [data-part="gallery-next"]) { top: 37.5vw; width: 44px; height: 44px; color: #fff; }
+  body[data-edition="figma-edit"] .current-page :is([data-part="gallery-prev"], [data-part="gallery-next"])::before { width: 22px; height: 22px; translate: 4px 0; }
+  body[data-edition="figma-edit"] .current-page [data-part="gallery-next"]::before { translate: -4px 0; }
+  body[data-edition="figma-edit"] .current-page :is([data-role="overlay"], [data-role="gallery"]) [data-part="gallery-prev"] { left: 8px; }
+  body[data-edition="figma-edit"] .current-page :is([data-role="overlay"], [data-role="gallery"]) [data-part="gallery-next"] { right: 8px; }
+  body[data-edition="figma-edit"] .current-page [data-part="gallery-dots"] { bottom: 12px; }
+}
+
+/* Mobile and tablet pass, 2026-11-02. The frames are 1440px only; these rules keep the
+   desktop fidelity work from leaking into narrower layouts. */
+body[data-edition="figma-edit"] .current-page[data-index="09"] [data-role="callout"] img[src$="/74d24d2bc43b341ebc91.webp"] { position: absolute; inset: auto; width: 191.7%; height: auto; max-width: none; min-width: 100%; min-height: 100%; left: -45.85%; top: 10.65%; object-fit: cover; }
+body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"] [data-part="actions"] { justify-content: center; gap: 2px; }
+body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"] .current-action { border-radius: 0; }
+body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"] .current-action:first-child { border-radius: 8px 0 0 8px; }
+body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"] .current-action:last-child { border-radius: 0 8px 8px 0; }
+
+@media (max-width: 1100px) {
+  /* Frame line breaks belong to the 1440 measure only. */
+  body[data-edition="figma-edit"] .current-page br[data-frame-break] { display: none; }
+  body[data-edition="figma-edit"] .current-page [data-role="text-hero"]:first-child { padding-top: 156px; }
+}
+
+@media (max-width: 760px) {
+  body[data-edition="figma-edit"] .current-page [data-role="text-hero"]:first-child { padding-top: 128px; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"] [data-part="actions"] { flex-direction: column; align-items: stretch; width: min(100%, 320px); }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"] .current-action { width: 100%; max-width: none; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"] .current-action:first-child { border-radius: 8px 8px 0 0; }
+  body[data-edition="figma-edit"] .current-page[data-index="01"] [data-role="photo-hero"] .current-action:last-child { border-radius: 0 0 8px 8px; }
+
+  /* The 1100px rule uses :is(), which outranks the earlier :where() mobile gutter. */
+  body[data-edition="figma-edit"] .current-page :is([data-role="facts"], [data-role="amenities"]) { padding-inline: 16px; }
+  body[data-edition="figma-edit"] .current-page [data-role="facts"] [data-part="fact"] > p:first-child,
+  body[data-edition="figma-edit"] .current-page [data-name="included"] [data-part="fact"] > :first-child { font-size: 12px; letter-spacing: 2px; }
+  body[data-edition="figma-edit"] .current-page [data-name="included"] [data-part="fact"] > :not(:first-child) { font-size: 18px; line-height: 24px; }
+  body[data-edition="figma-edit"] .current-page [data-name="3 col info"] [data-part="facts"] { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  body[data-edition="figma-edit"] .current-page [data-name="3 col info"] [data-part="fact"] > :first-child { font-size: 28px; line-height: 36px; letter-spacing: 0; }
+  body[data-edition="figma-edit"] .current-page [data-name="3 col info"] [data-part="fact"] > :not(:first-child) { font-size: 19px; line-height: 29px; }
+
+  body[data-edition="figma-edit"] .current-page [data-name="Heading title"] h2 { font-size: 28px; line-height: 36px; }
+  body[data-edition="figma-edit"] .current-page[data-index="13"] [data-name="Heading title"] h2 { font-size: 24px; line-height: 32px; }
+  body[data-edition="figma-edit"] .current-page[data-index="06"] [data-role="callout"] p[data-part="paragraph"] { font-size: 19px; line-height: 29px; }
+}
+
+/* Tablet: the 1440 footer and newsletter geometry only fits from 1101px. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  body[data-edition="figma-edit"] .footer-top { padding-inline: 40px; }
+  body[data-edition="figma-edit"] .footer-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 32px; padding: 48px 40px 56px; }
+  body[data-edition="figma-edit"] .footer-group { flex: none; }
+  body[data-edition="figma-edit"] .footer-bottom { padding-inline: 40px; }
+  body[data-edition="figma-edit"] .site-newsletter { padding: 64px 40px; }
+  body[data-edition="figma-edit"] .newsletter-inner { grid-template-columns: minmax(0, 1fr); gap: 28px; max-width: 688px; margin: 0; }
+  body[data-edition="figma-edit"] .newsletter-form { grid-template-columns: minmax(0, 1fr) auto; max-width: 560px; }
+  body[data-edition="figma-edit"] .current-page .newsletter-events { margin: 0; }
+}
+
+/* Designer update, 2026-11-02 (file lI5gmyztqh4RGBA1bLo1KV): the copy-block heading in the
+   50/50 sections and the Home overlay panels is now Heading-3xl, Telugu MN 42/46.
+   40/60, 60/40 and the slider panels keep 52/60. */
+body[data-edition="figma-edit"] .current-page :is([data-name="Section - 50/50 text image"], [data-name="Section - 50/50 image text"], [data-name="Overlay panel"], [data-name="Overlay panel rigth"]) h2 { font-size: 42px; line-height: 46px; }
+@media (max-width: 1100px) {
+  body[data-edition="figma-edit"] .current-page :is([data-name="Section - 50/50 text image"], [data-name="Section - 50/50 image text"], [data-name="Overlay panel"], [data-name="Overlay panel rigth"]) h2 { font-size: 38px; line-height: 44px; }
+}
+@media (max-width: 760px) {
+  body[data-edition="figma-edit"] .current-page :is([data-name="Section - 50/50 text image"], [data-name="Section - 50/50 image text"], [data-name="Overlay panel"], [data-name="Overlay panel rigth"]) h2 { font-size: 32px; line-height: 38px; }
+}
+
+/* Body blocks in these copy blocks end with an empty 30px line in the frames (all except For Two
+   "The loudest thing"); stacked paragraphs are separated by one empty line (30px), not the 40px gap. */
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page :is([data-node-id="814:7301"], [data-node-id="814:7320"], [data-node-id="814:7329"], [data-node-id="814:7310"]) [data-part="copy"] > p:last-child { margin-bottom: 30px; }
+  body[data-edition="figma-edit"] .current-page [data-name^="Section - 50/50"] [data-part="copy"] > p[data-part="paragraph"] + p[data-part="paragraph"] { margin-top: -10px; }
+}
+
+/* Designer update, 2026-11-02 — property pages 14–18 (The Frequency Dome, The Harmonic Hearth,
+   Sound and movement, Horses and the land, The recording studio). Section variants follow the
+   frames; text values are the archived get_design_context of each frame. */
+body[data-edition="figma-edit"] .menu-columns { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+body[data-edition="figma-edit"] .current-page [data-role="callout"] [data-part="copy"] > p[data-part="paragraph"] { color: var(--figma-green); }
+body[data-edition="figma-edit"] .current-page [data-node-id="862:15988"] h2 { font-size: 28px; line-height: 38px; }
+body[data-edition="figma-edit"] .current-page [data-node-id="862:15982"] h2 { font-size: 42px; line-height: 46px; }
+@media (max-width: 680px) {
+  body[data-edition="figma-edit"] .menu-columns { grid-template-columns: minmax(0, 1fr); }
+}
+@media (min-width: 681px) and (max-width: 1100px) {
+  body[data-edition="figma-edit"] .menu-columns { gap: 4vw; }
+}
+
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page [data-role="callout"] [data-part="copy"] { gap: 30px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="862:15941"] { min-height: 718px; }
+  body[data-edition="figma-edit"] .current-page :is([data-node-id="862:15984"], [data-node-id="862:15962"], [data-node-id="862:15975"]) { min-height: 440px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="862:15988"] { min-height: 492px; }
+
+  /* Hero text only: heights per instance; the Sound and movement opening matches page 06. */
+  body[data-edition="figma-edit"] .current-page[data-index="16"] [data-role="text-hero"]:first-child { min-height: 504px; }
+  body[data-edition="figma-edit"] .current-page :is([data-node-id="862:15938"], [data-node-id="862:15948"]) { min-height: 242px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="862:15972"] { min-height: 241px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="862:15960"] { min-height: 341px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="862:15985"] { min-height: 354px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="862:15982"] { min-height: 173px; padding-top: 87px; text-align: left; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="862:15982"] > [data-part="copy"] { align-items: flex-start; }
+
+  /* Description rows with two paragraphs: one empty 32px line between them, not the 40px gap. */
+  body[data-edition="figma-edit"] .current-page [data-name="Description and info 60/40"] > [data-part="copy"] > p.current-lede + p.current-lede { margin-top: -8px; }
+
+  /* included and 3 col info variants */
+  body[data-edition="figma-edit"] .current-page [data-node-id="862:15959"] { min-height: 137px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="862:15949"] { min-height: 227px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="862:15939"] { min-height: 386px; }
+
+  /* 50/50 bodies without the trailing empty line in the frames. */
+  body[data-edition="figma-edit"] .current-page :is([data-node-id="862:15937"], [data-node-id="862:15950"], [data-node-id="862:15963"], [data-node-id="862:15964"], [data-node-id="862:15974"])[data-variant="editorial"] [data-part="copy"] > p:not([data-part="eyebrow"]):has(+ [data-part="actions"]) { margin-bottom: 0; }
+}
+
+@media (max-width: 760px) {
+  body[data-edition="figma-edit"] .current-page [data-node-id="862:15982"] h2 { font-size: 32px; line-height: 38px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="862:15988"] h2 { font-size: 24px; line-height: 32px; }
+}
+
+/* Photo framing for pages 14–18 (generated from the frames' crop rectangles). */
+body[data-edition="figma-edit"] .current-page[data-index="14"] img[src$="/7625b812d3c4d8a8132d.webp"] { object-position: 50.0% 44.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="15"] img[src$="/59adbe80393e61e87dcf.webp"] { object-position: 50.0% 0.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="15"] img[src$="/38d41a06235457c76910.webp"] { object-position: 72.6% 50.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="15"] img[src$="/a1e1165521f4e39862e7.webp"] { object-position: 50.0% 100.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="15"] img[src$="/475782777018244eff8a.webp"] { object-position: 50.0% 50.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="16"] img[src$="/fe6639645d8031229a08.webp"] { object-position: 36.8% 50.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="16"] img[src$="/95056a50d5469f2216f5.webp"] { object-position: 50.0% 50.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="17"] img[src$="/fd2dd896fcf8cdc9c5d5.webp"] { object-position: 50.0% 56.6%; }
+body[data-edition="figma-edit"] .current-page[data-index="17"] img[src$="/fe6639645d8031229a08.webp"] { object-position: 36.8% 50.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="17"] img[src$="/2d6cd4f369c0c94cdc29.webp"] { object-position: 69.9% 50.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="17"] img[src$="/a93767addb691181b87a.webp"] { object-position: 48.0% 50.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="18"] img[src$="/7bdd0284db793a2b6023.webp"] { object-position: 50.0% 46.6%; }
+body[data-edition="figma-edit"] .current-page[data-index="18"] img[src$="/83827942c44678a4b546.webp"] { object-position: 50.0% 21.4%; }
+body[data-edition="figma-edit"] .current-page[data-index="18"] img[src$="/475782777018244eff8a.webp"] { object-position: 50.0% 50.0%; }
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page[data-index="14"] img[src$="/7625b812d3c4d8a8132d.webp"] { position: absolute; inset: auto; width: 100.05%; height: 126.1%; max-width: none; left: -0.02%; top: -11.5%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="15"] img[src$="/59adbe80393e61e87dcf.webp"] { position: absolute; inset: auto; width: 100.72%; height: 138.15%; max-width: none; left: -0.42%; top: -0.01%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="15"] img[src$="/38d41a06235457c76910.webp"] { position: absolute; inset: auto; width: 178.54%; height: 100%; max-width: none; left: -57.01%; top: 0%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="15"] img[src$="/a1e1165521f4e39862e7.webp"] { position: absolute; inset: auto; width: 144.11%; height: 166.98%; max-width: none; left: -31%; top: -59.43%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="15"] img[src$="/475782777018244eff8a.webp"] { position: absolute; inset: auto; width: 141.58%; height: 117.77%; max-width: none; left: -20.79%; top: -10.36%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="16"] img[src$="/fe6639645d8031229a08.webp"] { position: absolute; inset: auto; width: 208.24%; height: 138.84%; max-width: none; left: -44.99%; top: -19.34%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="16"] img[src$="/95056a50d5469f2216f5.webp"] { position: absolute; inset: auto; width: 100.05%; height: 126.1%; max-width: none; left: -0.02%; top: -13.05%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="17"] img[src$="/fe6639645d8031229a08.webp"] { position: absolute; inset: auto; width: 208.24%; height: 138.84%; max-width: none; left: -44.99%; top: -19.34%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="17"] img[src$="/2d6cd4f369c0c94cdc29.webp"] { position: absolute; inset: auto; width: 211.62%; height: 100%; max-width: none; left: -77.99%; top: 0%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="17"] img[src$="/a93767addb691181b87a.webp"] { position: absolute; inset: auto; width: 410.3%; height: 229.81%; max-width: none; left: -151.55%; top: -57.14%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="18"] img[src$="/7bdd0284db793a2b6023.webp"] { position: absolute; inset: auto; width: 146.11%; height: 534.22%; max-width: none; left: -23.06%; top: -203.97%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="18"] img[src$="/83827942c44678a4b546.webp"] { position: absolute; inset: auto; width: 100.05%; height: 126.1%; max-width: none; left: -0.02%; top: -5.6%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="18"] img[src$="/475782777018244eff8a.webp"] { position: absolute; inset: auto; width: 141.58%; height: 117.77%; max-width: none; left: -20.79%; top: -10.36%; object-fit: fill; }
+}
+
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page:is([data-index="14"], [data-index="15"], [data-index="16"], [data-index="17"], [data-index="18"]) [data-name^="Section - 50/50"] { min-height: 900px; }
+}
+@media (min-width: 1200px) {
+  /* Figma keeps a combo button on one row even when it is wider than the 496px copy block;
+     below 1200px the narrower column would push it past the viewport, so it wraps there. */
+  body[data-edition="figma-edit"] .current-page [data-variant="editorial"] [data-part="actions"] { flex-wrap: nowrap; }
+  body[data-edition="figma-edit"] .current-page [data-variant="editorial"] [data-part="actions"] > * { flex-shrink: 0; }
+}
+
+/* Designer update, 2026-11-04 (file RmyMB2Jd9AuxZ6XRkjqtCm) — pages 19–24 (Eating here, El Rancho,
+   Moloka, Take the whole property, Retreats, Groups and offsites). Section variants follow the
+   frames; text values are the archived get_design_context of each frame. */
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page:is([data-index="19"], [data-index="20"], [data-index="21"], [data-index="22"], [data-index="23"], [data-index="24"]) [data-name^="Section - 50/50"] { min-height: 900px; }
+
+  /* Hero text only: heights per instance. */
+  body[data-edition="figma-edit"] .current-page [data-node-id="882:8111"] { min-height: 239px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="882:8114"] { min-height: 333px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:8734"] { min-height: 226px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:8738"] { min-height: 234px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:8990"] { min-height: 302px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:8995"] { min-height: 295px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:9227"] { min-height: 286px; }
+
+  /* Card grids, callouts, included, 3 col info, gallery and table variants. */
+  body[data-edition="figma-edit"] .current-page [data-node-id="882:8112"] { min-height: 558px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:8739"] { min-height: 582px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:9228"] { min-height: 524px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="882:8113"] { min-height: 547px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:8736"] { min-height: 430px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:8333"] { min-height: 516px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:8333"] [data-part="rate"] > p[data-part="paragraph"] { margin-bottom: 60px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:9226"] { min-height: 152px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:8991"] { min-height: 195px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:8992"] { min-height: 213px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:8993"] { min-height: 696px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:8996"] { min-height: 231px; padding-bottom: 45px; }
+  body[data-edition="figma-edit"] .current-page [data-name="2 Rooms cards"][data-tone="white"] { padding-top: 0; }
+}
+
+/* Photo framing for pages 19–24 (generated from the frames' crop rectangles). */
+body[data-edition="figma-edit"] .current-page[data-index="19"] img[src$="/7ba65499fa40075f896d.webp"] { object-position: 0.0% 50.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="19"] img[src$="/f7101a7eeba11a40b98b.webp"] { object-position: 39.5% 50.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="19"] img[src$="/ccb8ccfbee5fdb416fc6.webp"] { object-position: 50.0% 58.4%; }
+body[data-edition="figma-edit"] .current-page[data-index="19"] img[src$="/09cc93d75115d2f71e88.webp"] { object-position: 50.0% 63.2%; }
+body[data-edition="figma-edit"] .current-page[data-index="20"] img[src$="/f5ec5ec1897cef56ade3.webp"] { object-position: 50.0% 55.4%; }
+body[data-edition="figma-edit"] .current-page[data-index="20"] img[src$="/066ec7071e7864c3e801.webp"] { object-position: 50.0% 50.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="20"] img[src$="/8fcbf81c59ccd93340e9.webp"] { object-position: 50.0% 36.9%; }
+body[data-edition="figma-edit"] .current-page[data-index="21"] img[src$="/9203238de1f599aa3053.webp"] { object-position: 50.0% 30.4%; }
+body[data-edition="figma-edit"] .current-page[data-index="21"] img[src$="/9772fed083830cf825f9.webp"] { object-position: 50.0% 100.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="21"] img[src$="/3e390fdd0c298aaed49e.webp"] { object-position: 50.0% 100.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="22"] img[src$="/11358b370ad895b42644.webp"] { object-position: 50.0% 56.6%; }
+body[data-edition="figma-edit"] .current-page[data-index="22"] img[src$="/61ff1c47f37719166a70.webp"] { object-position: 0.0% 50.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="22"] img[src$="/9772fed083830cf825f9.webp"] { object-position: 50.0% 100.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="22"] img[src$="/72884796e0c3334ec3ef.webp"] { object-position: 50.0% 75.8%; }
+body[data-edition="figma-edit"] .current-page[data-index="23"] img[src$="/d9f40ebd73fab0a92370.webp"] { object-position: 50.0% 98.6%; }
+body[data-edition="figma-edit"] .current-page[data-index="23"] img[src$="/9772fed083830cf825f9.webp"] { object-position: 50.0% 100.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="24"] img[src$="/698de65973782acf1018.webp"] { object-position: 50.0% 49.9%; }
+body[data-edition="figma-edit"] .current-page[data-index="24"] img[src$="/fb2fb92538ca4c2ce0c1.webp"] { object-position: 41.0% 50.0%; }
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page[data-index="19"] img[src$="/7ba65499fa40075f896d.webp"] { position: absolute; inset: auto; width: 165.56%; height: 100%; max-width: none; left: -0.03%; top: 0%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="19"] img[src$="/f7101a7eeba11a40b98b.webp"] { position: absolute; inset: auto; width: 149.98%; height: 100%; max-width: none; left: -19.74%; top: 0%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="19"] img[src$="/ccb8ccfbee5fdb416fc6.webp"] { position: absolute; inset: auto; width: 100%; height: 185.86%; max-width: none; left: 0%; top: -50.1%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="19"] img[src$="/09cc93d75115d2f71e88.webp"] { position: absolute; inset: auto; width: 100%; height: 370.99%; max-width: none; left: 0%; top: -171.35%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="20"] img[src$="/f5ec5ec1897cef56ade3.webp"] { position: absolute; inset: auto; width: 100%; height: 274.29%; max-width: none; left: 0%; top: -96.57%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="20"] img[src$="/066ec7071e7864c3e801.webp"] { position: absolute; inset: auto; width: 100.05%; height: 126.1%; max-width: none; left: -0.02%; top: -13.05%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="20"] img[src$="/8fcbf81c59ccd93340e9.webp"] { position: absolute; inset: auto; width: 100%; height: 274.67%; max-width: none; left: 0%; top: -64.48%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="21"] img[src$="/9203238de1f599aa3053.webp"] { position: absolute; inset: auto; width: 100.72%; height: 138.15%; max-width: none; left: -0.42%; top: -11.72%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="21"] img[src$="/9772fed083830cf825f9.webp"] { position: absolute; inset: auto; width: 100.05%; height: 126.1%; max-width: none; left: -0.02%; top: -26.1%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="22"] img[src$="/61ff1c47f37719166a70.webp"] { position: absolute; inset: auto; width: 133.33%; height: 100%; max-width: none; left: -0.01%; top: -0.09%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="22"] img[src$="/9772fed083830cf825f9.webp"] { position: absolute; inset: auto; width: 100.05%; height: 126.1%; max-width: none; left: -0.02%; top: -26.1%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="22"] img[src$="/72884796e0c3334ec3ef.webp"] { position: absolute; inset: auto; width: 100%; height: 133.29%; max-width: none; left: 0%; top: -25.23%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="23"] img[src$="/d9f40ebd73fab0a92370.webp"] { position: absolute; inset: auto; width: 100.72%; height: 138.15%; max-width: none; left: -0.42%; top: -38.15%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="23"] img[src$="/9772fed083830cf825f9.webp"] { position: absolute; inset: auto; width: 100.05%; height: 126.1%; max-width: none; left: -0.02%; top: -26.1%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="24"] img[src$="/fb2fb92538ca4c2ce0c1.webp"] { position: absolute; inset: auto; width: 277.58%; height: 156.14%; max-width: none; left: -77.89%; top: -28.14%; object-fit: fill; }
+}
+
+/* Deep QA against the current file, 2026-11-04: what the 1440px frames draw and the build did not. */
+@media (min-width: 1101px) {
+  /* Paragraph gaps: one empty line in the Treehouse and Glamping overlays and in For Two's description. */
+  body[data-edition="figma-edit"] .current-page :is([data-node-id="814:7260"], [data-node-id="814:7270"]) [data-part="copy"] > p + p { margin-top: -10px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="814:7327"] > [data-part="copy"] > p[data-part="paragraph"] { max-width: 666px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="814:7327"] > [data-part="copy"] > p[data-part="paragraph"] + p[data-part="paragraph"] { margin-top: -10px; }
+
+  /* Figma wraps these lines a few pixels before the browser does; the widths reproduce its breaks. */
+  body[data-edition="figma-edit"] .current-page [data-node-id="857:15228"] [data-part="copy"] > p[data-part="paragraph"] { max-width: 492px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="754:598"] { max-width: 538px; }
+  body[data-edition="figma-edit"] .current-page [data-part="hero-copy"] p[data-node-id="I814:7247;756:1067"] { width: 570px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="862:15947"] > [data-part="copy"] > p.current-lede { max-width: 662px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="862:15963"] [data-part="copy"] > p[data-part="paragraph"] { max-width: 492px; }
+
+  /* Groups and offsites: the 50/50 body has no trailing empty line before its button. */
+  body[data-edition="figma-edit"] .current-page [data-node-id="884:9229"][data-variant="editorial"] [data-part="copy"] > p:not([data-part="eyebrow"]):has(+ [data-part="actions"]) { margin-bottom: 0; }
+
+  /* The property map uses the frame's crop of the aerial photograph, so the pins sit on their buildings. */
+  body[data-edition="figma-edit"] .current-page [data-role="map"] [data-part="media"] { position: relative; overflow: hidden; }
+  body[data-edition="figma-edit"] .current-page [data-role="map"] [data-part="media"] img { position: absolute; inset: auto; width: 129.64%; height: 147.24%; max-width: none; left: -3.87%; top: -19.01%; object-fit: fill; }
+
+  /* Event and retreat rows keep the frame's column widths and give way only where the row is narrower. */
+  body[data-edition="figma-edit"] .current-page [data-part="event"] { grid-template-columns: minmax(0, 123px) minmax(0, 319px) minmax(0, 491px) minmax(0, 230px) max-content; }
+}
+@media (min-width: 1440px) {
+  /* As in the frames, the button runs into the row's right padding rather than squeezing the columns. */
+  body[data-edition="figma-edit"] .current-page [data-part="event"] { grid-template-columns: 123px 319px 491px 230px max-content; }
+  /* The events newsletter copy keeps its 544px and the form runs 15px into the padding, as in the frame. */
+  body[data-edition="figma-edit"] .current-page .newsletter-events .newsletter-inner { gap: 0; }
+  body[data-edition="figma-edit"] .current-page .newsletter-events .newsletter-inner > div { flex: 0 0 544px; }
+}
+
+/* Press logos keep the frames' relative sizes at every width; the desktop strip uses them exactly. */
+body[data-edition="figma-edit"] .current-page [data-role="logos"] img:nth-child(1) { width: 100px; height: 23px; }
+body[data-edition="figma-edit"] .current-page [data-role="logos"] img:nth-child(2) { width: 100px; height: 28.777px; }
+body[data-edition="figma-edit"] .current-page [data-role="logos"] img:nth-child(3) { width: 119px; height: 20px; }
+body[data-edition="figma-edit"] .current-page [data-role="logos"] img:nth-child(4) { width: 61px; height: 26px; }
+body[data-edition="figma-edit"] .current-page [data-role="logos"] img:nth-child(5) { width: 100px; height: 23px; }
+body[data-edition="figma-edit"] .current-page [data-role="logos"] img:nth-child(6) { width: 100px; height: 15px; }
+body[data-edition="figma-edit"] .current-page [data-role="logos"] img:nth-child(7) { width: 88px; height: 37.081px; }
+body[data-edition="figma-edit"] .current-page [data-role="logos"] img:nth-child(8) { width: 70px; height: 35.792px; }
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page [data-role="logos"] [data-part="artwork"] { flex-wrap: nowrap; gap: 0; max-width: 1330px; }
+  body[data-edition="figma-edit"] .current-page [data-role="logos"] img { max-width: none; max-height: none; object-fit: contain; }
+}
+@media (max-width: 1100px) {
+  body[data-edition="figma-edit"] .current-page [data-role="logos"] img { max-height: none; object-fit: contain; }
+}
+@media (min-width: 681px) and (max-width: 1100px) {
+  /* Tablet: one row, each logo scaled down from its frame size. */
+  body[data-edition="figma-edit"] .current-page [data-role="logos"] [data-part="artwork"] { flex-wrap: nowrap; justify-content: space-between; gap: 16px; }
+  body[data-edition="figma-edit"] .current-page [data-role="logos"] img { max-width: 11%; min-width: 0; }
+}
+
+/* Designer update, 2026-11-05 (file Scz6tT11lH8yDhtz20EGXj) — pages 25 Weddings and 26 Arenal. */
+/* The Rooms Comparison master as an accordion of topics (Weddings "The paperwork"). */
+body[data-edition="figma-edit"] .current-page [data-role="topics"] { padding: 56px 16px; }
+body[data-edition="figma-edit"] .current-page [data-role="topics"] [data-part="topics"] { list-style: none; margin: 0 auto; padding: 0; max-width: 1328px; }
+body[data-edition="figma-edit"] .current-page [data-role="topics"] [data-part="topics"]::before { content: ""; display: block; height: 42px; border-bottom: 2px solid #dabfb6; border-radius: 10px 10px 0 0; }
+body[data-edition="figma-edit"] .current-page [data-role="topics"] li { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 15px 16px; border-bottom: 1px solid #f5ebe7; color: #262626; }
+body[data-edition="figma-edit"] .current-page [data-role="topics"] li:last-child { border-bottom: 0; }
+body[data-edition="figma-edit"] .current-page [data-role="topics"] h3 { margin: 0; font-size: 20px; line-height: 38px; color: #262626; }
+body[data-edition="figma-edit"] .current-page [data-role="topics"] [data-part="expand"] { flex: none; min-width: 44px; min-height: 38px; padding: 0; border: 0; background: none; color: #262626; font: 400 28px/38px var(--font-display); text-align: right; }
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page [data-role="topics"] { padding: 80px 55px; }
+  body[data-edition="figma-edit"] .current-page [data-role="topics"] li { padding: 15px 126px 15px 50px; }
+  body[data-edition="figma-edit"] .current-page:is([data-index="25"], [data-index="26"]) [data-name^="Section - 50/50"] { min-height: 900px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="944:7527"] { min-height: 370px; }
+  body[data-edition="figma-edit"] .current-page :is([data-node-id="944:7532"], [data-node-id="944:7748"]) { min-height: 450px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="944:7746"] { min-height: 148px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="944:7749"] { min-height: 612px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="944:7745"] { min-height: 576px; }
+  /* Arenal's rate card keeps the frame's four empty lines after its text. */
+  body[data-edition="figma-edit"] .current-page [data-node-id="944:7745"] [data-part="rate"] > p[data-part="paragraph"] { margin-bottom: 120px; }
+}
+
+/* Photo framing for pages 25–26 (generated from the frames' crop rectangles). */
+body[data-edition="figma-edit"] .current-page[data-index="25"] img[src$="/c52099090a2b2ca82d49.webp"] { object-position: 50.0% 34.1%; }
+body[data-edition="figma-edit"] .current-page[data-index="25"] img[src$="/eba6f9c7897a9601a45f.webp"] { object-position: 50.0% 81.3%; }
+body[data-edition="figma-edit"] .current-page[data-index="25"] img[src$="/d75bc426cf9e80910e69.webp"] { object-position: 50.0% 53.4%; }
+body[data-edition="figma-edit"] .current-page[data-index="26"] img[src$="/21ac2d49d2ab56699e04.webp"] { object-position: 50.0% 30.2%; }
+body[data-edition="figma-edit"] .current-page[data-index="26"] img[src$="/86c4e0468e78057c7107.webp"] { object-position: 50.0% 12.2%; }
+body[data-edition="figma-edit"] .current-page[data-index="26"] img[src$="/bc1c3e7f217cc52b0c86.webp"] { object-position: 50.0% 50.1%; }
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page[data-index="25"] img[src$="/c52099090a2b2ca82d49.webp"] { position: absolute; inset: auto; width: 109.86%; height: 150.69%; max-width: none; left: -0.42%; top: -18.83%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="25"] img[src$="/d75bc426cf9e80910e69.webp"] { position: absolute; inset: auto; width: 100%; height: 366.22%; max-width: none; left: 0%; top: -142.25%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="26"] img[src$="/86c4e0468e78057c7107.webp"] { position: absolute; inset: auto; width: 100%; height: 115.88%; max-width: none; left: 0%; top: -1.94%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="26"] img[src$="/bc1c3e7f217cc52b0c86.webp"] { position: absolute; inset: auto; width: 100%; height: 133.29%; max-width: none; left: 0%; top: -16.69%; object-fit: fill; }
+}
+
+/* Designer update, 2026-11-07 (file EpZtYw0Tb4P4N714QcXfDM) — pages 27 Getting here and
+   28 Things to do around here. Frames 01–26 and the library are unchanged in value. */
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page:is([data-index="27"], [data-index="28"]) [data-name^="Section - 50/50"] { min-height: 900px; }
+  /* Hero text only: the Getting here opening is 248px under the 96px menu, its content 2px above centre as in the frame. */
+  body[data-edition="figma-edit"] .current-page[data-index="27"] [data-role="text-hero"]:first-child { min-height: 344px; padding-top: 194px; margin-bottom: -2px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="965:7511"] { min-height: 408px; padding-top: 100px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="965:7718"] { min-height: 216px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="965:7719"] { min-height: 644px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="965:7720"] { min-height: 612px; }
+  /* The Liberia rate card keeps the frame's two empty lines after its text. */
+  body[data-edition="figma-edit"] .current-page [data-node-id="965:7507"] [data-part="rate"] > p[data-part="paragraph"] { margin-bottom: 60px; }
+  /* The address: one empty line between the address and the GPS line. */
+  body[data-edition="figma-edit"] .current-page [data-node-id="965:7513"] [data-part="copy"] > p[data-part="paragraph"] + p[data-part="paragraph"] { margin-top: -10px; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="965:7513"][data-variant="editorial"] [data-part="copy"] > p:not([data-part="eyebrow"]):has(+ [data-part="actions"]) { margin-bottom: 0; }
+  body[data-edition="figma-edit"] .current-page [data-node-id="965:7721"] { min-height: 430px; }
+  /* The early-arrival value takes three lines; the frame clips the third ("the trails") at its
+     100px height, the site shows it and the row is 24px taller. */
+}
+
+/* Photo framing for pages 27–28 (generated from the frames' crop rectangles). */
+body[data-edition="figma-edit"] .current-page[data-index="27"] img[src$="/bc1c3e7f217cc52b0c86.webp"] { object-position: 50.0% 100.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="27"] img[src$="/11358b370ad895b42644.webp"] { object-position: 50.0% 50.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="28"] img[src$="/9772fed083830cf825f9.webp"] { object-position: 50.0% 100.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="28"] img[src$="/50ec394cef65e5d3d539.webp"] { object-position: 50.0% 100.0%; }
+body[data-edition="figma-edit"] .current-page[data-index="28"] img[src$="/96aad99ec0ad155dbaa5.webp"] { object-position: 50.0% 100.0%; }
+@media (min-width: 1101px) {
+  body[data-edition="figma-edit"] .current-page[data-index="28"] img[src$="/9772fed083830cf825f9.webp"] { position: absolute; inset: auto; width: 100.05%; height: 126.1%; max-width: none; left: -0.02%; top: -26.1%; object-fit: fill; }
+  body[data-edition="figma-edit"] .current-page[data-index="28"] img[src$="/96aad99ec0ad155dbaa5.webp"] { position: absolute; inset: auto; width: 140%; height: 155.56%; max-width: none; left: -37.78%; top: -37.96%; object-fit: fill; }
+  /* Hot springs: the frame stretches this portrait photo to 135.28% × 170.5%; the site keeps its
+     proportions at the same width and the same centre (70.7% down the photo). */
+  body[data-edition="figma-edit"] .current-page[data-index="28"] img[src$="/50ec394cef65e5d3d539.webp"] { position: absolute; inset: auto; width: 135.28%; height: 202.03%; max-width: none; left: -0.02%; top: -92.8%; object-fit: fill; }
+}
+
+/* Spanish pages (docs/figma-spanish.md): the designer's EN | ES is a link to the page in the other language; the
+   current language is underlined. */
+body[data-edition="figma-edit"] .language-trigger [data-lang-current] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+
+/* Spanish pages only (docs/figma-spanish.md): Spanish words are longer than the English the frames were measured for,
+   so three one-line rules of the English layout give way. The English pages are untouched. */
+@media (min-width: 1366px) {
+  /* Fact labels ("CAPACIDAD DEL HEARTH") wrap in their columns instead of running into the next one. */
+  html[lang="es"] body[data-edition="figma-edit"] .current-page [data-role="facts"] [data-part="fact"] > p:first-child { white-space: normal; }
+}
+@media (min-width: 1200px) {
+  /* A pair of buttons that no longer fits the 496px copy block puts the second one on the next row. */
+  html[lang="es"] body[data-edition="figma-edit"] .current-page [data-variant="editorial"] [data-part="actions"] { flex-wrap: wrap; }
+}
+@media (min-width: 681px) and (max-width: 760px) {
+  /* The footer's five columns are too narrow for "EXPERIENCIAS" and "LA PROPIEDAD"; three columns, as on tablets. */
+  html[lang="es"] body[data-edition="figma-edit"] .footer-columns { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 24px; }
+}
+
