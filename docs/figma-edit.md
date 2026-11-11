@@ -101,9 +101,8 @@ put in place of a placeholder takes priority over the brief's empty square brack
   page, which the brief's own description supports);
 - what neither filled in is the brief's placeholder: the reservations email in the footer, "[Reservations email]".
 
-One exception is left for the owner: on Groups and offsites the brief says "Minimums as above", which on the website
-points at nothing (the minimums are on the Retreats page); the designer wrote "Minimums as for buyouts", and that stays
-until decided.
+One exception, decided by the owner (2026-11-11): on Groups and offsites the brief says "Minimums as above", which on
+the website points at nothing (the minimums are on the Retreats page); the designer's "Minimums as for buyouts" stays.
 
 **Not done in this step** (they need graphics, new blocks or pages, or data): the hero video on Home; the nine missing
 pages (When to come, About, Josh Stanley, The people here, Press, Gallery, FAQ, Contact, Policies) and so the links to
