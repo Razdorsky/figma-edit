@@ -15,7 +15,7 @@
 <dialog class="site-menu" id="site-menu" aria-label={tr(locale, 'Explore The Vessyl')}>
   <div class="menu-top">
     <a href={route(edition, '', base, locale)}>
-      <img src={`${base.replace(/\/$/, '')}/brand/logo-dark.svg`} alt="VESSYL" width="220" height="41" />
+      <img src={`${base.replace(/\/$/, '')}/brand/logo-dark.svg`} alt="The Vessyl" width="220" height="41" />
     </a>
     <button type="button" class="icon-button" data-menu-close aria-label={tr(locale, 'Close menu')}>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">

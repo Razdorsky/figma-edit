@@ -24,3 +24,55 @@ list, so its fingerprint in `scripts/figma-freeze.json` was refreshed; that chan
 
 Checked once against `/figma/`: the same markup on all 56 pages (both languages, edition names and build hashes aside)
 and the same pixels on full-page screenshots at 1440 and 390 px.
+
+## Corrections from the content brief (step 1)
+
+Only what the words, links and metadata can fix: no block is added, removed or moved, no style changes. Each item is
+an English change in `src/lib/edit/` and its Spanish in `content/es.json` (es-LA, the Figma edition's dictionary as
+glossary: `tú`, placeholders in Spanish, the property's names in English).
+
+**Every page**
+- Title tag and meta description from the brief's table (`meta.ts`, used by `routes/figma-edit/[...slug]/+page.svelte`),
+  in place of "Page — The Vessyl" and one templated description.
+- The brief's addresses: `/stay/`, `/stay/villas/`, `/stay/treehouse/`, `/stay/glamping/`, `/offers/`,
+  `/experiences/day-pass/`, `/experiences/couples/`, `/experiences/horseback-river-ride/`, `/vessyl-presents/`,
+  `/frequency-dome/`, `/harmonic-hearth/`, `/recording-studio/`, `/dining/`, `/dining/el-rancho/`, `/dining/moloka/`,
+  `/buyouts/`, `/groups/`, `/arenal/getting-here/`, `/arenal/things-to-do/`; the other nine kept their names
+  (`site-data.json`, the page links and the components' routes). Spanish under `/figma-edit/es/…` the same way.
+- The logo is "The Vessyl" (alt text, and "The Vessyl home" for its link).
+- Newsletter: the label "Newsletter" in place of "Best time to visit us", the button "Keep me posted" (Spanish "Avísenme",
+  short enough for the phone layout).
+- Footer: The Dome added to Experiences ("all six, and the Dome"); Contact as the brief's lines with placeholders:
+  WhatsApp [number], Phone [number], [Reservations email], [Address] (in place of WhatsApp Contact, Phone Contact,
+  Address Info).
+
+**Pages**
+- Home: the Dome block's first button is "Book the Frequency Experience" and leads to that page; the quote is the
+  brief's placeholder ("[One guest or facilitator quote]", [Name], [Role]) in place of the invented Robert Patterson
+  quote.
+- Where you sleep: the treehouse's and the tents' bathrooms "Private, [indoor or outdoor]".
+- The Villas, The Treehouse, Glamping Tents: the other rooms' cards show "From [rate] a night"; "See the villa" leads
+  to the villas. The treehouse's and the tents' facts and rate line follow their own text in the brief (sleeps [x];
+  view, outdoor, climate and wifi placeholders; the treehouse "[x] night minimum", the tents "Breakfast included.").
+  The extra facts the design carries (children, pets, minimum stay) keep their placeholders.
+- Rates and offers: Stay longer with both offers (four and seven nights), Green season "[offer]", Couples and
+  Last-minute as "[Offer]" with the brief's line under each.
+- Experiences: each card with its length and price from the brief.
+- The Day and the Half Day: the full day's card shows "[Price]".
+- For Two: the three facts in the brief's order (the Dome, dinner, then), the hours and days in place of the repeated
+  paragraph, the heading without its stray comma.
+- Horses and the River: "Minimum age [x]" at the end of the closing line (there is no fact tile for it).
+- The Harmonic Hearth: "The Hearth" in place of "The temazcal"; "3. Sound" and "4. The HydroChallenge".
+- Sound and movement: "Private movement or breath session".
+- The recording studio: without "and it can be tracked in", which the brief does not claim.
+- Moloka: the other room's first button "See El Rancho", leading there.
+- Retreats: the placeholder button next to the enquiry is "Download the retreat pack" (no pack yet, so no link).
+- Arenal: "What is on this page" with the brief's line under it (in place of the Rates paragraph); Liberia and San José
+  in hours.
+- Getting here: San José by road and its transfer price; the transfer's own line "Up to [x] people. Book it with your
+  room."
+
+**Not done in this step** (they need graphics, new blocks or pages, or data): the hero video on Home; the nine missing
+pages (When to come, About, Josh Stanley, The people here, Press, Gallery, FAQ, Contact, Policies) and so the links to
+them; the extra booking buttons (footer, Rates and offers); "Who has worked here" on the studio page; the two missing
+buyout items; links for the booking, enquiry and email buttons and for the press logos, which need addresses.

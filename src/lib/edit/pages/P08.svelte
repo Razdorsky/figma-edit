@@ -31,7 +31,7 @@
 <p data-node-id="I814:7293;757:1847;757:1837" data-part="paragraph">{tr(locale, "Runs [start] to [end]. It includes [inclusions] and lunch.")}</p>
 <div data-part="actions"><button data-name="Link arrow button" data-node-id="I814:7293;757:1847;757:1842" class="current-action" data-part="action" type="button" data-pending-link="" aria-label={tr(locale, "BOOK half DAY HERE — destination not supplied")}>{tr(locale, "BOOK half DAY HERE")}</button></div></div></article>
 <article data-part="card" data-name="50 card" data-node-id="I814:7293;757:1858"><figure data-part="media" data-aspect="landscape"><img src="{base}/media/f5ec5ec1897cef56ade3.webp" alt={tr(locale, "Full Day")} loading="lazy" decoding="async" width="1800" height="2400"></figure><div data-part="copy"><h3 data-node-id="I814:7293;757:1858;757:1836" class="c-heading" data-part="heading">{tr(locale, "Full Day")}</h3>
-<p data-node-id="I814:7293;757:1858;768:1436" data-part="highlight">{tr(locale, "[offer]")}</p>
+<p data-node-id="I814:7293;757:1858;768:1436" data-part="highlight">{tr(locale, "[Price]")}</p>
 <p data-node-id="I814:7293;757:1858;757:1837" data-part="paragraph">{tr(locale, "Runs [start] to [end]. It includes everything above plus [inclusions], and you can stay for dinner if you book a table.")}</p>
 <div data-part="actions"><button data-name="Link arrow button" data-node-id="I814:7293;757:1858;757:1842" class="current-action" data-part="action" type="button" data-pending-link="" aria-label={tr(locale, "BOOK a full DAY HERE — destination not supplied")}>{tr(locale, "BOOK a full DAY HERE")}</button></div></div></article></div></section>
 <Newsletter pageIndex={8} {locale} />

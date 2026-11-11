@@ -18,7 +18,7 @@
 >
   <div class="newsletter-inner">
     <div>
-      <p class="newsletter-eyebrow">{events ? tr(locale, 'Coming events') : tr(locale, 'Best time to visit us')}</p>
+      <p class="newsletter-eyebrow">{events ? tr(locale, 'Coming events') : tr(locale, 'Newsletter')}</p>
       <h2 id="newsletter-title">{events ? tr(locale, 'Tell me what is coming up') : tr(locale, 'Three or four emails a year')}</h2>
       <p>
         {events
@@ -29,7 +29,7 @@
     <form class="newsletter-form" onsubmit={submit}>
       <label class="sr-only" for="newsletter-email">{tr(locale, 'Email address')}</label>
       <input id="newsletter-email" type="email" autocomplete="email" placeholder="ronnie@aave.com" required />
-      <button type="submit">{tr(locale, 'SUBSCRIBE')}</button>
+      <button type="submit">{tr(locale, 'KEEP ME POSTED')}</button>
       <p class="newsletter-status" aria-live="polite">{status}</p>
     </form>
   </div>

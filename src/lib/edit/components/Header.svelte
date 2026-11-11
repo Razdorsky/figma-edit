@@ -55,18 +55,18 @@
       <span class="menu-lines" aria-hidden="true"><i></i><i></i><i></i></span>
       <span>{tr(locale, 'MENU')}</span>
     </button>
-    <a class="brand" href={route(edition, '', base, locale)} aria-label={tr(locale, 'Vessyl home')}>
+    <a class="brand" href={route(edition, '', base, locale)} aria-label={tr(locale, 'The Vessyl home')}>
       <img
         src={asset(`/brand/${page.photo || edition === 'blueprint' ? 'logo-white.svg' : 'logo-copper.svg'}`)}
         width="210"
         height="39"
-        alt="VESSYL"
+        alt="The Vessyl"
       />
     </a>
     <nav class="desktop-navigation" aria-label={tr(locale, 'Main navigation')}>
       {@render mega(pages.slice(1, 6), msg('Stay'))}
       {@render mega([pages[6], ...pages.slice(7, 13)], msg('Experiences'))}
-      <a href={route(edition, 'rates-and-offers', base, locale)}>{tr(locale, 'Rates & offers')}</a>
+      <a href={route(edition, 'offers', base, locale)}>{tr(locale, 'Rates & offers')}</a>
     </nav>
     <div class="header-actions">
       {@render languageButton()}
