@@ -30,8 +30,8 @@
     [msg('FAQ'), null],
     [msg('Policies'), null]
   ];
-  // The brief's contact lines: WhatsApp, phone, the reservations address and the address itself.
-  const contactLinks = [msg('WhatsApp [number]'), msg('Phone [number]'), msg('[Reservations email]'), msg('[Address]')];
+  // The designer's contact lines, and the brief's reservations address written the same way.
+  const contactLinks = [msg('WhatsApp Contact'), msg('Phone Contact'), msg('Reservations Email'), msg('Address Info')];
 </script>
 
 {#snippet languageButton()}

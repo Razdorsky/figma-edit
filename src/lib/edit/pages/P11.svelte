@@ -13,16 +13,16 @@
 <p data-part="paragraph">{tr(locale, "It is not a spa package and there are no rose petals. It is a few hours where nobody needs anything from you, in a place where the loudest thing is the forest.")}</p></div>
 <div data-part="rate"><p data-node-id="I814:7327;756:1469" data-part="eyebrow">{tr(locale, "price")}</p>
 <h2 data-node-id="I814:7327;756:1470" class="c-heading" data-part="heading">{tr(locale, "[Price] for two")}</h2>
-<p data-node-id="I814:7327;756:1493" data-part="paragraph">{tr(locale, "Dinner, the session and [inclusions] are included.")}</p>
+<p data-node-id="I814:7327;756:1493" data-part="paragraph">{tr(locale, "[x] hours, starting at [time]. [Days available.] Dinner, the session and [inclusions] are included.")}</p>
 <div data-part="actions"><button data-name="CTA" data-node-id="I814:7327;756:1490" class="current-action" data-part="action" type="button" data-pending-link="" aria-label={tr(locale, "book for two — destination not supplied")}>{tr(locale, "book for two")}</button></div></div></section>
-<section data-name="3 col info" data-node-id="803:3070" data-role="facts"><div data-part="facts"><div data-part="fact"><h3 data-node-id="803:3033" class="c-heading" data-part="heading">{tr(locale, "The Dome")}</h3>
-<p data-node-id="803:3036" data-part="paragraph" class="current-lede">{tr(locale, "A private session, just the two of you and whoever is running it.")}</p></div><div data-part="fact"><h3 data-node-id="803:3052" class="c-heading" data-part="heading">{tr(locale, "Dinner")}</h3>
-<p data-node-id="803:3053" data-part="paragraph" class="current-lede">{tr(locale, "[Where and how it is set].")}</p></div><div data-part="fact"><h3 data-node-id="803:3055" class="c-heading" data-part="heading">{tr(locale, "Then")}</h3>
-<p data-node-id="803:3056" data-part="paragraph" class="current-lede">{tr(locale, "[Inclusion].")}</p></div></div></section>
+<section data-name="3 col info" data-node-id="803:3070" data-role="facts"><div data-part="facts"><div data-part="fact"><h3 data-node-id="803:3033" class="c-heading" data-part="heading">{tr(locale, "Dusk")}</h3>
+<p data-node-id="803:3036" data-part="paragraph" class="current-lede">{tr(locale, "You arrive as the light goes.")}</p></div><div data-part="fact"><h3 data-node-id="803:3052" class="c-heading" data-part="heading">{tr(locale, "Dinner")}</h3>
+<p data-node-id="803:3053" data-part="paragraph" class="current-lede">{tr(locale, "Dinner is included.")}</p></div><div data-part="fact"><h3 data-node-id="803:3055" class="c-heading" data-part="heading">{tr(locale, "The Dome")}</h3>
+<p data-node-id="803:3056" data-part="paragraph" class="current-lede">{tr(locale, "A private session in the Dome, just the two of you.")}</p></div></div></section>
 <section data-name="Section - 50/50 image text" data-node-id="814:7329" data-role="split" data-layout="image-first" data-variant="editorial"><figure data-part="media" data-aspect="portrait"><img src="{base}/media/c9f36f747db728e9734c.webp" alt={tr(locale, "For Two")} loading="lazy" decoding="async" width="1600" height="2400"></figure>
 <div data-part="copy"><p data-node-id="I814:7329;750:1885;748:551" data-part="eyebrow">{tr(locale, "just for two")}</p>
 <h2 data-node-id="I814:7329;750:1885;748:552" class="c-heading" data-part="heading">{#if locale === 'es'}{tr(locale, "A private session in the Dome")}{:else}A private session{' '}<br data-frame-break>in the Dome{/if}</h2>
-<p data-part="paragraph">{tr(locale, "[x] hours, starting at [time]. [Days available.]")}</p></div></section>
+<p data-part="paragraph">{tr(locale, "A private session in the Dome, just the two of you and whoever is running it. Then dinner, [where and how it is set]. Then [inclusion].")}</p></div></section>
 <section data-name="Section - 50/50 text image" data-node-id="814:7330" data-role="split" data-layout="copy-first" data-variant="editorial"><div data-part="copy"><p data-node-id="I814:7330;748:575;748:551" data-part="eyebrow">{tr(locale, "the vessyl experience")}</p>
 <h2 data-node-id="I814:7330;748:575;748:552" class="c-heading" data-part="heading">{#if locale === 'es'}{tr(locale, "The loudest thing is the forest.")}{:else}The loudest thing{' '}<br data-frame-break>is the forest.{/if}</h2>
 <p data-node-id="I814:7330;748:575;748:553" data-part="paragraph">{tr(locale, "It is not a spa package and there are no rose petals. It is a few hours where nobody needs anything from you, in a place where the loudest thing is the forest.")}</p></div>

@@ -40,29 +40,25 @@ glossary: `tú`, placeholders in Spanish, the property's names in English).
   `/buyouts/`, `/groups/`, `/arenal/getting-here/`, `/arenal/things-to-do/`; the other nine kept their names
   (`site-data.json`, the page links and the components' routes). Spanish under `/figma-edit/es/…` the same way.
 - The logo is "The Vessyl" (alt text, and "The Vessyl home" for its link).
-- Newsletter: the label "Newsletter" in place of "Best time to visit us", the button "Keep me posted" (Spanish "Avísenme",
-  short enough for the phone layout).
-- Footer: The Dome added to Experiences ("all six, and the Dome"); Contact as the brief's lines with placeholders:
-  WhatsApp [number], Phone [number], [Reservations email], [Address] (in place of WhatsApp Contact, Phone Contact,
-  Address Info).
+- Newsletter: the button "Keep me posted" (Spanish "Avísenme", short enough for the phone layout).
+- Footer: The Dome added to Experiences ("all six, and the Dome"); in Contact, the brief's reservations address added in
+  the designer's style, "Reservations Email", beside the designer's WhatsApp Contact, Phone Contact and Address Info.
 
 **Pages**
 - Home: the Dome block's first button is "Book the Frequency Experience" and leads to that page.
-- Where you sleep: the treehouse's and the tents' bathrooms "Private, [indoor or outdoor]".
 - The Villas, The Treehouse, Glamping Tents: the other rooms' cards show "From [rate] a night"; "See the villa" leads
-  to the villas. The treehouse's and the tents' facts and rate line follow their own text in the brief (sleeps [x];
-  view, outdoor, climate and wifi placeholders; the treehouse "[x] night minimum", the tents "Breakfast included.").
-  The extra facts the design carries (children, pets, minimum stay) keep their placeholders.
+  to the villas. The treehouse's and the tents' placeholder facts follow their own text in the brief (sleeps [x]; view,
+  outdoor and climate placeholders); what the designer filled in (wifi "Throughout", the rate line, minimum stay,
+  children, pets) stays.
 - Rates and offers: Stay longer with both offers (four and seven nights), Green season "[offer]", Couples and
   Last-minute as "[Offer]" with the brief's line under each.
 - Experiences: each card with its length and price from the brief.
 - The Day and the Half Day: the full day's card shows "[Price]".
-- For Two: the three facts in the brief's order (the Dome, dinner, then), the hours and days in place of the repeated
-  paragraph, the heading without its stray comma.
+- For Two: the brief's hours and days at the head of the price line ("[x] hours, starting at [time]. [Days available.]
+  Dinner, the session and [inclusions] are included.", the brief's own sentence), the heading without its stray comma.
 - Horses and the River: "Minimum age [x]" at the end of the closing line (there is no fact tile for it).
 - The Harmonic Hearth: "The Hearth" in place of "The temazcal"; "3. Sound" and "4. The HydroChallenge".
 - Sound and movement: "Private movement or breath session".
-- The recording studio: without "and it can be tracked in", which the brief does not claim.
 - Moloka: the other room's first button "See El Rancho", leading there.
 - Retreats: the placeholder button next to the enquiry is "Download the retreat pack" (no pack yet, so no link).
 - Arenal: "What is on this page" with the brief's line under it (in place of the Rates paragraph); Liberia and San José
@@ -90,6 +86,15 @@ to Arenal, and it was put back on the owner's word.
 numbers, hours, terms); they replace what the design states as a fact, not a finished value the designer already put in.
 So the email field keeps an example address rather than "[Email address]", and the Home quote stays as the designer
 wrote it (Robert Patterson, Journalist), as in `/figma/`.
+
+**Designer's words restored** (owner, 2026-11-11: the brief is a guide, and the designer may already have filled things
+in). Where step 1 had put the brief's placeholder in place of something the designer had written, or cut it, the
+designer's text is back: the bathrooms "Private, indoors" on Where you sleep; wifi "Throughout" and the rate line "[x]
+night minimum in high season. Breakfast included, taxes shown at checkout." on the treehouse and tents pages (and the
+treehouse's "[x] night in high season"); For Two's three facts (Dusk, Dinner, The Dome) and its second paragraph; "and
+it can be tracked in" on the studio page (the brief's own description says "a dome you can track in"); the footer's
+contact lines; the newsletter's "Best time to visit us". Facts among them that the brief leaves open (the bathrooms,
+the wifi, arrival at dusk) are for the property to confirm, not for a placeholder.
 
 **Not done in this step** (they need graphics, new blocks or pages, or data): the hero video on Home; the nine missing
 pages (When to come, About, Josh Stanley, The people here, Press, Gallery, FAQ, Contact, Policies) and so the links to

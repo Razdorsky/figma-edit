@@ -18,7 +18,7 @@
 >
   <div class="newsletter-inner">
     <div>
-      <p class="newsletter-eyebrow">{events ? tr(locale, 'Coming events') : tr(locale, 'Newsletter')}</p>
+      <p class="newsletter-eyebrow">{events ? tr(locale, 'Coming events') : tr(locale, 'Best time to visit us')}</p>
       <h2 id="newsletter-title">{events ? tr(locale, 'Tell me what is coming up') : tr(locale, 'Three or four emails a year')}</h2>
       <p>
         {events
