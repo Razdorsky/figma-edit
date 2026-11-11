@@ -1,5 +1,5 @@
 {
- "villas": {
+ "stay/villas": {
   "sizes": "(max-width: 599px) 319vw, (max-width: 767px) 192vw, (max-width: 1023px) 122vw, 100vw",
   "set": [
    [
@@ -41,7 +41,7 @@
    ]
   ]
  },
- "eating-here": {
+ "dining": {
   "sizes": "(max-width: 599px) 378vw, (max-width: 767px) 227vw, (max-width: 1023px) 144vw, (max-width: 1279px) 108vw, 100vw",
   "set": [
    [
@@ -62,7 +62,7 @@
    ]
   ]
  },
- "moloka": {
+ "dining/moloka": {
   "sizes": "(max-width: 599px) 319vw, (max-width: 767px) 191vw, (max-width: 1023px) 121vw, 100vw",
   "set": [
    [
@@ -83,7 +83,7 @@
    ]
   ]
  },
- "groups-and-offsites": {
+ "groups": {
   "sizes": "(max-width: 599px) 284vw, (max-width: 767px) 170vw, (max-width: 1023px) 108vw, 100vw",
   "set": [
    [
@@ -125,7 +125,7 @@
    ]
   ]
  },
- "things-to-do-around-here": {
+ "arenal/things-to-do": {
   "sizes": "(max-width: 599px) 378vw, (max-width: 767px) 227vw, (max-width: 1023px) 144vw, (max-width: 1279px) 108vw, 100vw",
   "set": [
    [

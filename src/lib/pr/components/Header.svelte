@@ -65,7 +65,7 @@
           </div>
         </details>
       {/each}
-      <a class="pr-nav-link" href={route(edition, 'rates-and-offers', base, locale)}>{tr(locale, 'Rates & offers')}</a>
+      <a class="pr-nav-link" href={route(edition, 'offers', base, locale)}>{tr(locale, 'Rates & offers')}</a>
     </nav>
     <button type="button" class="pr-reserve" data-booking-open bind:this={reserve} aria-expanded={bookingOpen} aria-controls="pr-booking" onclick={() => (bookingOpen = !bookingOpen)}>{tr(locale, 'CHECK AVAILABILITY')}</button>
   </div>

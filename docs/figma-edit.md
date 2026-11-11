@@ -112,5 +112,6 @@ buyout items; links for the booking, enquiry and email buttons and for the press
 ## Carried over to Figma Enhanced and Figma PR (owner, 2026-11-11)
 
 The corrections above, with their Spanish, are in Figma Enhanced and Figma PR too (`docs/figma-enhanced-booking.md` and
-`docs/figma-pr-system.md`, "Content from the agency's brief"). Those editions keep their own page addresses.
+`docs/figma-pr-system.md`, "Content from the agency's brief"), and both are on the brief's page addresses, with their
+former addresses as permanent redirects.
 

@@ -10,35 +10,35 @@
     "index": 2,
     "id": "814:7234",
     "name": "Where you sleep",
-    "slug": "where-you-sleep",
+    "slug": "stay",
     "photo": false
   },
   {
     "index": 3,
     "id": "814:7245",
     "name": "The Villas",
-    "slug": "villas",
+    "slug": "stay/villas",
     "photo": true
   },
   {
     "index": 4,
     "id": "814:7255",
     "name": "The Treehouse",
-    "slug": "treehouse",
+    "slug": "stay/treehouse",
     "photo": true
   },
   {
     "index": 5,
     "id": "814:7265",
     "name": "Glamping Tents",
-    "slug": "glamping-tents",
+    "slug": "stay/glamping",
     "photo": true
   },
   {
     "index": 6,
     "id": "814:7335",
     "name": "Rates and offers",
-    "slug": "rates-and-offers",
+    "slug": "offers",
     "photo": false
   },
   {
@@ -52,7 +52,7 @@
     "index": 8,
     "id": "814:7286",
     "name": "The Day and the Half Day",
-    "slug": "day-and-half-day",
+    "slug": "experiences/day-pass",
     "photo": true
   },
   {
@@ -73,35 +73,35 @@
     "index": 11,
     "id": "814:7324",
     "name": "For Two",
-    "slug": "for-two",
+    "slug": "experiences/couples",
     "photo": true
   },
   {
     "index": 12,
     "id": "814:7305",
     "name": "Horses and the River",
-    "slug": "horses-and-the-river",
+    "slug": "experiences/horseback-river-ride",
     "photo": true
   },
   {
     "index": 13,
     "id": "814:9956",
     "name": "The Vessyl Presents",
-    "slug": "the-vessyl-presents",
+    "slug": "vessyl-presents",
     "photo": false
   },
   {
     "index": 14,
     "id": "862:15932",
     "name": "The Frequency Dome",
-    "slug": "the-frequency-dome",
+    "slug": "frequency-dome",
     "photo": true
   },
   {
     "index": 15,
     "id": "862:15944",
     "name": "The Harmonic Hearth",
-    "slug": "the-harmonic-hearth",
+    "slug": "harmonic-hearth",
     "photo": true
   },
   {
@@ -122,35 +122,35 @@
     "index": 18,
     "id": "862:15968",
     "name": "The recording studio",
-    "slug": "the-recording-studio",
+    "slug": "recording-studio",
     "photo": true
   },
   {
     "index": 19,
     "id": "882:8107",
     "name": "Eating here",
-    "slug": "eating-here",
+    "slug": "dining",
     "photo": true
   },
   {
     "index": 20,
     "id": "884:8330",
     "name": "El Rancho",
-    "slug": "el-rancho",
+    "slug": "dining/el-rancho",
     "photo": true
   },
   {
     "index": 21,
     "id": "884:8529",
     "name": "Moloka",
-    "slug": "moloka",
+    "slug": "dining/moloka",
     "photo": true
   },
   {
     "index": 22,
     "id": "884:8730",
     "name": "Take the whole property",
-    "slug": "take-the-whole-property",
+    "slug": "buyouts",
     "photo": true
   },
   {
@@ -164,7 +164,7 @@
     "index": 24,
     "id": "884:9222",
     "name": "Groups and offsites",
-    "slug": "groups-and-offsites",
+    "slug": "groups",
     "photo": true
   },
   {
@@ -185,14 +185,14 @@
     "index": 27,
     "id": "965:7503",
     "name": "Getting here",
-    "slug": "getting-here",
+    "slug": "arenal/getting-here",
     "photo": false
   },
   {
     "index": 28,
     "id": "965:7711",
     "name": "Things to do around here",
-    "slug": "things-to-do-around-here",
+    "slug": "arenal/things-to-do",
     "photo": true
   }
 ]

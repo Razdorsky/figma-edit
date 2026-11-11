@@ -17,19 +17,19 @@
 
   // Footer labels from the frames; the designer's pages 14–18 supply five of the six destinations.
   const propertyLinks: [string, string | null][] = [
-    [msg('The Dome'), 'the-frequency-dome'],
-    [msg('The Hearth'), 'the-harmonic-hearth'],
+    [msg('The Dome'), 'frequency-dome'],
+    [msg('The Hearth'), 'harmonic-hearth'],
     [msg('Sound and movement'), 'sound-and-movement'],
     [msg('Horses and land'), 'horses-and-the-land'],
-    [msg('The studio'), 'the-recording-studio'],
+    [msg('The studio'), 'recording-studio'],
     [msg('The gallery'), null]
   ];
   // The frames' footer writes one page name differently from the page itself.
-  const footerNames: Record<string, string> = { 'rates-and-offers': msg('Rates and Offers') };
+  const footerNames: Record<string, string> = { 'offers': msg('Rates and Offers') };
   // The designer's pages 27–28 supply the first two destinations.
   const visitLinks: [string, string | null][] = [
-    [msg('Getting here'), 'getting-here'],
-    [msg('Things to do in Arenal'), 'things-to-do-around-here'],
+    [msg('Getting here'), 'arenal/getting-here'],
+    [msg('Things to do in Arenal'), 'arenal/things-to-do'],
     [msg('When to visit'), null],
     [msg('FAQ'), null],
     [msg('Policies'), null]
@@ -47,7 +47,7 @@
   <div class="footer-inner">
     <div class="footer-columns">
       <section class="footer-group">
-        <h2><a href={route(edition, 'where-you-sleep', base, locale)}>{tr(locale, 'Stay')}</a></h2>
+        <h2><a href={route(edition, 'stay', base, locale)}>{tr(locale, 'Stay')}</a></h2>
         {#each pages.slice(2, 6) as item (item.index)}
           <a href={route(edition, item.slug, base, locale)}>{tr(locale, footerNames[item.slug] ?? item.name)}</a>
         {/each}
@@ -57,7 +57,7 @@
         {#each pages.slice(7, 13) as item (item.index)}
           <a href={route(edition, item.slug, base, locale)}>{tr(locale, item.name)}</a>
         {/each}
-        <a href={route(edition, 'the-frequency-dome', base, locale)}>{tr(locale, 'The Dome')}</a>
+        <a href={route(edition, 'frequency-dome', base, locale)}>{tr(locale, 'The Dome')}</a>
       </section>
       <section class="footer-group">
         <h2>{tr(locale, 'The Property')}</h2>

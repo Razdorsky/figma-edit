@@ -4,6 +4,29 @@ import media from './media.json';
 export type Edition = 'figma-enhanced';
 export type PageMeta = {index:number;id:string;name:string;slug:string;photo:boolean};
 export const pages:PageMeta[]=sourcePages;
+// The pages' former addresses (until 2026-11-11), now the content brief's (docs/figma-edit.md): each old address is a
+// permanent redirect to the new one, in English and under es/.
+export const formerSlugs: Record<string, string> = {
+  'where-you-sleep': 'stay',
+  'villas': 'stay/villas',
+  'treehouse': 'stay/treehouse',
+  'glamping-tents': 'stay/glamping',
+  'rates-and-offers': 'offers',
+  'day-and-half-day': 'experiences/day-pass',
+  'for-two': 'experiences/couples',
+  'horses-and-the-river': 'experiences/horseback-river-ride',
+  'the-vessyl-presents': 'vessyl-presents',
+  'the-frequency-dome': 'frequency-dome',
+  'the-harmonic-hearth': 'harmonic-hearth',
+  'the-recording-studio': 'recording-studio',
+  'eating-here': 'dining',
+  'el-rancho': 'dining/el-rancho',
+  'moloka': 'dining/moloka',
+  'take-the-whole-property': 'buyouts',
+  'groups-and-offsites': 'groups',
+  'getting-here': 'arenal/getting-here',
+  'things-to-do-around-here': 'arenal/things-to-do'
+};
 import type {Locale} from './i18n.ts';
 // Orbe's booking page in the reader's language (owner, 2026-11-09: the Spanish booking page is /es/).
 export const bookingFor=(locale:Locale='en')=>`https://reservations.orbebooking.com/Search/Init/PAS6c/${locale}/`;

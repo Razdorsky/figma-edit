@@ -283,5 +283,9 @@ the design or the order of the blocks changes.
   breath session"; El Rancho's outside reservations; "See El Rancho" on Moloka; "Download the retreat pack"; Arenal's
   "What is on this page" and airports in hours; San José by road and its transfer on Getting here.
 
-This edition keeps its own page addresses: Figma Edit's addresses from the brief (`/stay/villas/` and so on) are not
-carried over.
+**Page addresses** (owner, 2026-11-11): this edition is on the brief's addresses too, as Figma Edit (`/stay/`,
+`/stay/villas/`, `/offers/`, `/experiences/day-pass/`, `/dining/el-rancho/`, `/buyouts/`, `/arenal/getting-here/` and so
+on; `site-data.json`, the pages' links and the components' routes). The 19 former addresses, in English and under `es/`,
+are prerendered as permanent redirects to the new ones (`formerSlugs` in `site.ts`, the page route's `entries` and
+`load`), so links already shared keep working; GitHub Pages serves them as a page that moves on at once
+(`<meta http-equiv="refresh">` with a script). The openings' films and photographs are keyed by the new addresses (`heroes.json`, `hero-photos.json`).

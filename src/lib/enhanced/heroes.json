@@ -2,21 +2,21 @@
  "": [
   "/bp/video/loop-pool.webp"
  ],
- "where-you-sleep": [],
- "villas": [
+ "stay": [],
+ "stay/villas": [
   "/media/2b61d0b9909a48665218.webp"
  ],
- "treehouse": [
+ "stay/treehouse": [
   "/bp/video/loop-treehouse.webp"
  ],
- "glamping-tents": [
+ "stay/glamping": [
   "/bp/video/loop-tents.webp"
  ],
- "rates-and-offers": [],
+ "offers": [],
  "experiences": [
   "/bp/video/loop-experiences.webp"
  ],
- "day-and-half-day": [
+ "experiences/day-pass": [
   "/bp/video/loop-rancho-pool.webp"
  ],
  "frequency-experience": [
@@ -25,44 +25,44 @@
  "arenal-after-dark": [
   "/media/217d8eafeb5342a6cc73.webp"
  ],
- "for-two": [
+ "experiences/couples": [
   "/bp/video/loop-evening.webp"
  ],
- "horses-and-the-river": [
+ "experiences/horseback-river-ride": [
   "/bp/video/loop-river.webp"
  ],
- "the-vessyl-presents": [
+ "vessyl-presents": [
   "/bp/video/loop-presents.webp"
  ],
- "the-frequency-dome": [
+ "frequency-dome": [
   "/bp/video/loop-stars.webp"
  ],
- "the-harmonic-hearth": [
+ "harmonic-hearth": [
   "/bp/video/loop-hearth.webp"
  ],
  "sound-and-movement": [],
  "horses-and-the-land": [
   "/bp/video/loop-pasture.webp"
  ],
- "the-recording-studio": [
+ "recording-studio": [
   "/bp/video/loop-studio.webp"
  ],
- "eating-here": [
+ "dining": [
   "/media/fb2fb92538ca4c2ce0c1.webp"
  ],
- "el-rancho": [
+ "dining/el-rancho": [
   "/bp/video/loop-rancho.webp"
  ],
- "moloka": [
+ "dining/moloka": [
   "/media/9203238de1f599aa3053.webp"
  ],
- "take-the-whole-property": [
+ "buyouts": [
   "/bp/video/loop-estate.webp"
  ],
  "retreats": [
   "/bp/video/loop-retreat.webp"
  ],
- "groups-and-offsites": [
+ "groups": [
   "/media/698de65973782acf1018.webp"
  ],
  "weddings": [
@@ -71,8 +71,8 @@
  "arenal": [
   "/bp/video/loop-arenal.webp"
  ],
- "getting-here": [],
- "things-to-do-around-here": [
+ "arenal/getting-here": [],
+ "arenal/things-to-do": [
   "/media/c497476865b545968151.webp"
  ]
 }
