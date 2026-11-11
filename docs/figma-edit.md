@@ -74,7 +74,6 @@ glossary: `tú`, placeholders in Spanish, the property's names in English).
 
 **Found in the review of step 1** (2026-11-11, the same rules):
 - Newsletter: the email field's placeholder is the brief's "[Email address]" in place of the frames' "ronnie@aave.com".
-- Footer: "© The Vessyl 2026 • Arenal, Costa Rica" (the brief: "The Vessyl, Arenal, Costa Rica") in place of La Fortuna.
 - The Day and the Half Day: the prices are a person ("Half day [price] a person – Full day [price] a person", and
   "[Price] a person" on both cards).
 - The Frequency Experience: "[x] people at a time, no more" and "[x] minutes of tea, which most people use".
@@ -83,6 +82,10 @@ glossary: `tú`, placeholders in Spanish, the property's names in English).
 The review compared every visible line, link and alt text of all 28 pages, in both languages, between `/figma/` and
 `/figma-edit/` (every difference is one of the changes above), compared `/figma-edit/` with the brief again, and
 checked each page's title, description and address against the brief's table (all 28 match).
+
+**Canonical, not changed to the brief** (owner, 2026-11-11): the footer's line stays "© The Vessyl 2026 • La Fortuna,
+Costa Rica", as in the frames. The brief describes it as "The Vessyl, Arenal, Costa Rica"; the review briefly changed it
+to Arenal, and it was put back on the owner's word.
 
 **Not done in this step** (they need graphics, new blocks or pages, or data): the hero video on Home; the nine missing
 pages (When to come, About, Josh Stanley, The people here, Press, Gallery, FAQ, Contact, Policies) and so the links to

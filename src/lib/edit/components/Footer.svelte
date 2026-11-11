@@ -93,7 +93,8 @@
       </section>
     </div>
     <div class="footer-bottom">
-      <p>© The Vessyl 2026 • Arenal, Costa Rica</p>
+      <!-- Canonical footer line (owner, 2026-11-11): La Fortuna, as in the frames, not the brief's "Arenal". -->
+      <p>© The Vessyl 2026 • La Fortuna, Costa Rica</p>
       <p>{@render pending(msg('Privacy'))} • {@render pending(msg('Terms & Conditions'))}</p>
     </div>
   </div>
